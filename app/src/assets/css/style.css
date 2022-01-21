@@ -1837,7 +1837,7 @@ input::-webkit-inner-spin-button {
     opacity: 0.8;
 }
 
-.table-weekly-calendar .title-block button {
+.table-weekly-calendar .table-month  button {
     width: auto;
     margin: 0;
 }

@@ -9,6 +9,7 @@ import Paginate from "../../../components/Pagination/Pagination";
 import Select from "react-select";
 import EmptyData from "../../../components/EmptyData/EmptyData";
 import {customStyles} from "../../../components/Select/SelectStyle";
+import Loading from "../../../components/Loading/Loading";
 
 const statuses = {
     'IN': 'işləyir',
@@ -23,20 +24,21 @@ const jobStatusOptions = [
     {value: 'OUT', label: 'Çıxarılıb'},
 ]
 
-function EmployeeSchedule() {
+function ScheduleEmployee() {
     const history = useHistory();
     const [employee, setEmployee] = useState([])
     const token = localStorage.getItem('token');
     const [totalRecord, setTotalRecord] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [recordSize, setRecordSize] = useState(20);
+    const [loading, setLoading] = useState(false);
 
     /*filter*/
 
     const [department, setDepartment] = useState([]);
     const [selectedDepartment, setSelectedDepartment] = useState(null)
     const [subDepartment, setSubDepartment] = useState([]);
-    const [selectedSubDepartment, setSelectedSubDepartment] = useState( null)
+    const [selectedSubDepartment, setSelectedSubDepartment] = useState(null)
     const [position, setPosition] = useState([]);
     const [selectedPosition, setSelectedPosition] = useState(null)
     const [fullName, setFullName] = useState('');
@@ -44,7 +46,7 @@ function EmployeeSchedule() {
     const [showFilter, setShowFilter] = useState(false)
     const [emptyData, setEmptyData] = useState(false);
     let depart = selectedDepartment !== null ? selectedDepartment.id : null;
-    let subDepart = selectedDepartment !== null ? selectedDepartment.id : null;
+    let subDepart = selectedSubDepartment !== null ? selectedSubDepartment.id : null;
     let jobStatus = selectedJobStatus !== null ? selectedJobStatus.value : null;
     let positionId = selectedPosition !== null ? selectedPosition.id : null;
     let name = fullName !== '' ? fullName : null;
@@ -91,7 +93,7 @@ function EmployeeSchedule() {
             }).then((res) => {
                 setSubDepartment(res.data)
             }).catch((error) => {
-               setSubDepartment([])
+                setSubDepartment([])
             });
         }
     }
@@ -112,6 +114,7 @@ function EmployeeSchedule() {
     }
 
     const getEmployee = (page, departId, subDepartId, positionId, jobStatus, name) => {
+        setLoading(true);
         mainAxios({
             method: 'get',
             url: '/employees',
@@ -132,7 +135,8 @@ function EmployeeSchedule() {
             setEmployee(res.data.content)
             setCurrentPage(page);
             setTotalRecord(res.data.totalElements);
-            setEmptyData(true)
+            res.data.content.length > 0 ? setEmptyData(false) : setEmptyData(true);
+            setLoading(false);
         }).catch((error) => {
             setEmployee([])
         });
@@ -290,14 +294,8 @@ function EmployeeSchedule() {
                                                                       value={fullName}
                                                                       onChange={(e) => {
                                                                           setFullName(e.target.value)
-                                                                          //let name = e.target.value !== '' ? e.target.value : null;
-                                                                          //console.log(fullName)
-/*
-                                                                          const timer = setTimeout(() => {
-                                                                          }, 1000);
-                                                                          return () => clearTimeout(timer);*/
                                                                       }}
-                                                                      onKeyPress={(e)=> {
+                                                                      onKeyPress={(e) => {
                                                                           let departId = selectedDepartment !== null ? selectedDepartment.id : null;
                                                                           let subDepartId = selectedSubDepartment !== null ? selectedSubDepartment.id : null;
                                                                           let positionId = selectedPosition !== null ? selectedPosition.id : null;
@@ -382,9 +380,12 @@ function EmployeeSchedule() {
                     </Container>
                 </div>
             </div>
+            {
+                loading ? <Loading/> : null
+            }
         </Aux>
 
     );
 }
 
-export default EmployeeSchedule
+export default ScheduleEmployee

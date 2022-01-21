@@ -7,19 +7,22 @@ import {useHistory} from "react-router-dom";
 import Paginate from "../../../components/Pagination/Pagination";
 import Select from "react-select";
 import {customStyles} from "../../../components/Select/SelectStyle";
+import Loading from "../../../components/Loading/Loading";
+import EmptyData from "../../../components/EmptyData/EmptyData";
 
 const vacancyLimitOptions = [
     {value: 'EMPTY', label: 'Boş'},
     {value: 'FULL', label: 'Dolu'},
 ]
 
-function StaffSchedule() {
+function ScheduleStaff() {
     const history = useHistory();
     const [vacancy, setVacancy] = useState([]);
     const [position, setPosition] = useState([]);
     const [totalRecord, setTotalRecord] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [recordSize, setRecordSize] = useState(20);
+    const [loading, setLoading] = useState(false);
 
 
     /*filter*/
@@ -31,7 +34,6 @@ function StaffSchedule() {
     const [selectedPosition, setSelectedPosition] = useState(null);
     const [selectedLimit, setSelectedLimit] = useState(null);
     const [showFilter, setShowFilter] = useState(false);
-
     let depart = selectedDepartment !== null ? selectedDepartment.id : null;
     let subDepart = selectedDepartment !== null ? selectedDepartment.id : null;
     let positionId = selectedPosition !== null ? selectedPosition.id : null;
@@ -103,6 +105,7 @@ function StaffSchedule() {
     }
 
     const getVacancy = (page, depart, subDepart, position, limitVal) => {
+        setLoading(true);
         mainAxios({
             method: 'get',
             url: '/vacancies',
@@ -121,7 +124,8 @@ function StaffSchedule() {
         }).then((res) => {
             setCurrentPage(page);
             setVacancy(res.data.content);
-            setTotalRecord(res.data.totalElements)
+            setTotalRecord(res.data.totalElements);
+            setLoading(false);
         });
     }
 
@@ -263,39 +267,51 @@ function StaffSchedule() {
                             </div>
                             : null
                     }
-                    <div className="block">
-                        <Table responsive="sm" hover>
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Struktur vahidinin adı</th>
-                                <th>Struktur bölmənin adı</th>
-                                <th>Ştat vahidinin adı</th>
-                                <th>Ştat vahidinin sayı</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {
-                                vacancy.map((item, index) =>
-                                    <tr onClick={() => handleRowClick(item)} key={index}>
-                                        <td>{item.id}</td>
-                                        <td>{item.department !== null ? item.department.name : ''}</td>
-                                        <td>{item.subDepartment !== null ? item.subDepartment.name : ''}</td>
-                                        <td>{item.position !== null ? item.position.name : ''}</td>
-                                        <td>{item.count}</td>
-                                    </tr>
-                                )
-                            }
-                            </tbody>
-                        </Table>
-                    </div>
-                    <Paginate count={totalRecord} recordSize={recordSize} currentPage={currentPage}
-                              click={(page) => getVacancy(page, depart, subDepart, positionId, limit)}/>
+                    {
+                        loading ? <Loading/> :
+                            <>
+                                <div className="block">
+                                    {
+                                        vacancy.length > 0 ?
+                                            <Table responsive="sm" hover>
+                                                <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Struktur vahidinin adı</th>
+                                                    <th>Struktur bölmənin adı</th>
+                                                    <th>Ştat vahidinin adı</th>
+                                                    <th>Ştat vahidinin sayı</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {
+                                                    vacancy.map((item, index) =>
+                                                        <tr onClick={() => handleRowClick(item)} key={index}>
+                                                            <td>{item.id}</td>
+                                                            <td>{item.department !== null ? item.department.name : ''}</td>
+                                                            <td>{item.subDepartment !== null ? item.subDepartment.name : ''}</td>
+                                                            <td>{item.position !== null ? item.position.name : ''}</td>
+                                                            <td>{item.count}</td>
+                                                        </tr>
+                                                    )
+                                                }
+                                                </tbody>
+                                            </Table>
+                                            :
+                                            <EmptyData/>
+                                    }
+                                </div>
+                                <Paginate count={totalRecord} recordSize={recordSize} currentPage={currentPage}
+                                          click={(page) => getVacancy(page, depart, subDepart, positionId, limit)}/>
+                            </>
+                    }
+
                 </Container>
             </div>
+
         </Aux>
 
     );
 }
 
-export default StaffSchedule
+export default ScheduleStaff

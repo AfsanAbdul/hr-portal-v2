@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import Aux from "../../hoc/Auxiliary";
+import Aux from "../../../hoc/Auxiliary";
 import {Table, Container, Button, OverlayTrigger, Tooltip, Form} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import {mainAxios} from "../../components/Axios/axios";
-import Paginate from "../../components/Pagination/Pagination";
+import {mainAxios} from "../../../components/Axios/axios";
+import Paginate from "../../../components/Pagination/Pagination";
 import Swal from "sweetalert2";
 import Select from "react-select";
-import EmptyData from "../../components/EmptyData/EmptyData";
-import {customStyles} from "../../components/Select/SelectStyle";
+import EmptyData from "../../../components/EmptyData/EmptyData";
+import {customStyles} from "../../../components/Select/SelectStyle";
 
 
 function BusinessTripSchedule() {

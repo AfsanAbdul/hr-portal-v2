@@ -6,6 +6,7 @@ import Paginate from "../../../components/Pagination/Pagination";
 import Select, {components} from "react-select";
 import {customStyles} from "../../../components/Select/SelectStyle";
 import EmptyData from "../../../components/EmptyData/EmptyData";
+import Loading from "../../../components/Loading/Loading";
 
 
 const monthOptions = [
@@ -127,7 +128,6 @@ function SalaryEmployee() {
     const [selectedNet, setSelectedNet] = useState([]);
     const [selectedEmployer, setSelectedEmployer] = useState([]);
     const [tableCols, setTableCols] = useState(cols);
-
     const [selectedYear, setSelectedYear] = useState(currentYear);
 
     const [loading, setLoading] = useState(false);
@@ -142,7 +142,8 @@ function SalaryEmployee() {
                 {
                     props.isSelected ?
                         <span>
-                            <svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.8">
                                     <path
                                         d="M12.6778 0.253387C12.28 -0.108232 11.6613 -0.0798913 11.2978 0.319827L5.33596 6.88466L2.45572 3.95657C2.07552 3.57149 1.45786 3.56562 1.07376 3.94484C0.688684 4.32307 0.682818 4.94172 1.06203 5.3268L4.66743 8.99183C4.85216 9.17947 5.10234 9.28405 5.36425 9.28405C5.37012 9.28405 5.37697 9.28405 5.38283 9.28504C5.65258 9.27917 5.9067 9.16384 6.08749 8.96448L12.7441 1.63441C13.1068 1.23366 13.0775 0.615992 12.6778 0.253387Z"
@@ -159,6 +160,7 @@ function SalaryEmployee() {
     };
 
     const getSalary = (month, year, page) => {
+        setLoading(true)
         let params = {
             page: page - 1,
             size: recordSize,
@@ -400,63 +402,66 @@ function SalaryEmployee() {
 
                                 </div>
                             </div>
-                            {/*  <Button className="btn-main" onClick={() => getSalary(1)}>
-                                Hesabla
-                            </Button>*/}
                         </div>
                     </div>
-
-                    <div className="block">
-                        {
-                            salary.length > 0 ?
-                                <Table responsive="sm" hover className={["m-0", loading ? 'active' : ''].join(' ')}>
-                                    <thead>
-                                    <tr>
-                                        {
-                                            tableCols.map((item, index) =>
-                                            <th key={index}>
-                                                {
-                                                    item.label.length > 20 ?
-                                                        <OverlayTrigger placement="top-start" overlay={<Tooltip
-                                                            id="tooltip-disabled">{item.label}</Tooltip>}>
-                                                            <p className="m-0 operation-name">{item.label}</p>
-                                                        </OverlayTrigger>
-                                                        :
-                                                        <p className="m-0">{item.label}</p>
-
-                                                }
-                                            </th>
-                                            )
-                                        }
-                                    </tr>
-                                    </thead>
-                                    <tbody>
+                    {
+                        loading ? <Loading/> :
+                            <>
+                                <div className="block">
                                     {
-                                        salary.map((item, index) =>
-                                            <tr key={index}>
+                                        salary.length > 0 ?
+                                            <Table responsive="sm" hover
+                                                   className={["m-0", loading ? 'active' : ''].join(' ')}>
+                                                <thead>
+                                                <tr>
+                                                    {
+                                                        tableCols.map((item, index) =>
+                                                            <th key={index}>
+                                                                {
+                                                                    item.label.length > 20 ?
+                                                                        <OverlayTrigger placement="top-start"
+                                                                                        overlay={<Tooltip
+                                                                                            id="tooltip-disabled">{item.label}</Tooltip>}>
+                                                                            <p className="m-0 operation-name">{item.label}</p>
+                                                                        </OverlayTrigger>
+                                                                        :
+                                                                        <p className="m-0">{item.label}</p>
+
+                                                                }
+                                                            </th>
+                                                        )
+                                                    }
+                                                </tr>
+                                                </thead>
+                                                <tbody>
                                                 {
-                                                    tableCols.map((tdItem, index) =>
-                                                        <td key={index}>{
-                                                            tdItem.value == 'fullName' ?
-                                                                item[tdItem.value]
-                                                                :
-                                                                item.salaryDetails[tdItem.value]
-                                                        }</td>
+                                                    salary.map((item, index) =>
+                                                        <tr key={index}>
+                                                            {
+                                                                tableCols.map((tdItem, index) =>
+                                                                    <td key={index}>{
+                                                                        tdItem.value == 'fullName' ?
+                                                                            item[tdItem.value]
+                                                                            :
+                                                                            item.salaryDetails[tdItem.value]
+                                                                    }</td>
+                                                                )
+                                                            }
+                                                        </tr>
                                                     )
                                                 }
-                                            </tr>
-                                        )
+                                                </tbody>
+                                            </Table>
+                                            :
+                                            <EmptyData/>
+
                                     }
-                                    </tbody>
-                                </Table>
-                                :
-                                <EmptyData/>
 
-                        }
-
-                    </div>
-                    <Paginate count={totalRecord} recordSize={recordSize} currentPage={currentPage}
-                              click={(page) => getSalary(month, year, page)}/>
+                                </div>
+                                <Paginate count={totalRecord} recordSize={recordSize} currentPage={currentPage}
+                                          click={(page) => getSalary(month, year, page)}/>
+                            </>
+                    }
                 </Container>
             </div>
         </Aux>
