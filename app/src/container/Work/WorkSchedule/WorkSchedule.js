@@ -33,9 +33,11 @@ function WorkSchedule() {
     const [selectedDepartment, setSelectedDepartment] = useState(null)
     const [subDepartment, setSubDepartment] = useState([]);
     const [selectedSubDepartment, setSelectedSubDepartment] = useState(null);
+    const [fullName, setFullName] = useState('');
 
     let depart = selectedDepartment !== null ? selectedDepartment.id : null;
     let subDepart = selectedSubDepartment !== null ? selectedSubDepartment.id : null;
+    let name = fullName !== '' ? fullName : null;
 
 
     let today = moment(new Date()).format('YYYY-MM-DD')
@@ -134,7 +136,8 @@ function WorkSchedule() {
                     startDate: startDate.date,
                     size: recordSize,
                     departmentId: depart,
-                    subDepartmentId: subDepart
+                    subDepartmentId: subDepart,
+                    fullName: name,
                 }
             }).then((res) => {
                 setLoading(false);
@@ -197,6 +200,7 @@ function WorkSchedule() {
     const resetFilter = () => {
         setSelectedSubDepartment(null);
         setSelectedDepartment(null);
+        setFullName('');
         setDays(1)
     }
 
@@ -283,9 +287,10 @@ function WorkSchedule() {
                                                             setSelectedDepartment(val);
                                                             let id = val.id;
                                                             getSubDepartments(id);
-                                                            setSelectedSubDepartment(null)
+                                                            setSelectedSubDepartment(null);
+                                                            let name = fullName !== '' ? fullName : null
                                                             let subDepartId = selectedSubDepartment !== null ? selectedSubDepartment.id : null;
-                                                            setDays(1, id, subDepartId)
+                                                            setDays(1, id, subDepartId, name)
                                                         }}
                                                         isSearchable={department ? department.length > 5 ? true : false : false}
                                                         options={department}
@@ -305,7 +310,8 @@ function WorkSchedule() {
                                                             let id = val.id
                                                             setSelectedSubDepartment(val);
                                                             let departId = selectedDepartment !== null ? selectedDepartment.id : null;
-                                                            setDays(1, departId, id)
+                                                            let name = fullName !== '' ? fullName : null
+                                                            setDays(1, departId, id, name)
                                                         }}
                                                         isSearchable={subDepartment ? subDepartment.length > 5 ? true : false : false}
                                                         options={subDepartment}
@@ -313,6 +319,26 @@ function WorkSchedule() {
                                                         getOptionValue={(option) => (option.name)}
                                                         styles={customStyles}
                                                     />
+                                                </Form.Group>
+                                            </div>
+                                            <div className="filter-item">
+                                                <Form.Group className="form-group m-0">
+                                                    <span className="input-title">İşçinin adı</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İşçinin adı daxil edin"
+                                                                      value={fullName}
+                                                                      onChange={(e) => {
+                                                                          setFullName(e.target.value)
+                                                                      }}
+                                                                      onKeyPress={(e) => {
+                                                                          let departId = selectedDepartment !== null ? selectedDepartment.id : null;
+                                                                          let subDepartId = selectedSubDepartment !== null ? selectedSubDepartment.id : null;
+                                                                          if (e.key === 'Enter') {
+                                                                              setDays(1, departId, subDepartId, e.target.value)
+                                                                          }
+                                                                      }}
+                                                        />
+                                                    </Form.Label>
                                                 </Form.Group>
                                             </div>
                                         </div>
