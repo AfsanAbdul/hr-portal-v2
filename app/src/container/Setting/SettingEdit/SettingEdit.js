@@ -915,7 +915,7 @@ function SettingEdit() {
             data: data
         }).then((res) => {
             getDepartment();
-            senSubDepartment();
+            //senSubDepartment();
             setDepartment('');
             setActive(false);
         });
@@ -934,7 +934,7 @@ function SettingEdit() {
         });
     }
 
-    const getSubDepartments = () => {
+/*    const getSubDepartments = () => {
         mainAxios({
             method: 'get',
             url: '/sub-departments',
@@ -963,7 +963,7 @@ function SettingEdit() {
             getSubDepartments();
             setSubDepartment('');
         });
-    }
+    }*/
 
 
     const sendEvaluation = () => {
@@ -2542,7 +2542,7 @@ function SettingEdit() {
                     </Row>
                     {
                         showDepartment ?
-                            <div>
+                            /*<div>
                                 {
                                     departmentArr.length > 0 ?
                                         <div className="addition">
@@ -2653,12 +2653,45 @@ function SettingEdit() {
 
                                         : null
                                 }
+                            </div>*/
+                            <div className="addition">
+                                <Row className="flex-center">
+                                    <Col xs={6}>
+                                        <Form.Group className="m-0">
+                                            <Form.Label>
+                                                <Form.Control
+                                                    value={department}
+                                                    placeholder=" Struktur vahidinin adı  daxil edin"
+                                                    onChange={(e => setDepartment(e.target.value))}/>
+                                            </Form.Label>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col xs={4}>
+                                        <ul className="btn-block list-unstyled m-0 flex-start">
+                                            <li>
+                                                <button type="button" className="btn-transparent"
+                                                        onClick={() => sendDepartment()}>
+                                                    <svg width="16" height="12" viewBox="0 0 16 12"
+                                                         fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M15.3696 0.327361C14.8557 -0.139829 14.0564 -0.103215 13.5867 0.413197L5.88442 8.89458L2.16332 5.11165C1.67212 4.61415 0.874137 4.60658 0.37791 5.0965C-0.11959 5.58515 -0.127168 6.38441 0.362755 6.88191L5.02072 11.6169C5.25937 11.8593 5.58259 11.9945 5.92097 11.9945C5.92854 11.9945 5.9374 11.9945 5.94497 11.9957C6.29347 11.9881 6.62178 11.8391 6.85535 11.5816L15.4554 2.11156C15.9239 1.59381 15.886 0.795825 15.3696 0.327361Z"
+                                                            fill="#2ED06A"/>
+                                                    </svg>
+                                                    Yadda saxla
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </Col>
+                                </Row>
                             </div>
+
                             : null
 
                     }
                 </div>
 
+{/*
                 <div className="block-inn">
                     <Row>
                         <Col xs={6}>
@@ -2667,7 +2700,7 @@ function SettingEdit() {
                             </div>
                             <Dropdown autoClose="outside">
                                 <Dropdown.Toggle className={active ? 'active' : ''}>
-                                    Struktur vahidinin adı
+                                    Ezamiyyət ödənişi
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     {
@@ -2822,6 +2855,7 @@ function SettingEdit() {
 
                     }
                 </div>
+*/}
 
 
                 <div className="block-inn">
