@@ -135,12 +135,7 @@ function ViewEmployee() {
 
     /*Salary*/
 
-    const [salaryAcademic, setSalaryAcademic] = useState('');
-    const [salaryMain, setSalaryMain] = useState('');
-    const [salaryEndDate, setSalaryEndDate] = useState('');
-    const [salaryStartDate, setSalaryStartDate] = useState('');
-    const [salaryIndAdd, setSalaryIndAdd] = useState('');
-    const [salaryConAdd, setSalaryConAdd] = useState('');
+    const [salaryArr, setSalaryArr] = useState([]);
 
     const getEmployeeInfo = () => {
         mainAxios({
@@ -157,15 +152,7 @@ function ViewEmployee() {
                 setBankAccount(accountData.number)
             }
 
-            let salaryData = res.data.salaryInformation;
-            if (salaryData !== null) {
-                setSalaryAcademic(salaryData.academicAddition);
-                setSalaryConAdd(salaryData.conditionalAddition);
-                setSalaryEndDate(salaryData.endDate);
-                setSalaryIndAdd(salaryData.individualAddition);
-                setSalaryMain(salaryData.main);
-                setSalaryStartDate(salaryData.startDate);
-            }
+            setSalaryArr(res.data.salaryInformationList)
 
             let personalData = res.data.personalInformation;
             if (personalData !== null) {
@@ -2019,14 +2006,26 @@ function ViewEmployee() {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>{salaryMain}</td>
-                                            <td>{salaryConAdd}</td>
-                                            <td>{salaryIndAdd}</td>
-                                            <td>{salaryAcademic}</td>
-                                            <td>{salaryStartDate}</td>
-                                            <td>{salaryEndDate}</td>
-                                        </tr>
+                                        {
+                                            salaryArr.length > 0 ?
+                                               salaryArr.map((item,index) =>
+                                                   <tr>
+                                                       <td>{item.main}</td>
+                                                       <td>{item.conditionalAddition}</td>
+                                                       <td>{item.individualAddition}</td>
+                                                       <td>{item.academicAddition}</td>
+                                                       <td>{item.startDate}</td>
+                                                       <td>{item.endDate}</td>
+                                                   </tr>
+                                               )
+                                                :
+                                                <tr>
+                                                    <td colSpan={6}>
+                                                        <p className="text-center m-0">Məlumat
+                                                            yoxdur</p>
+                                                    </td>
+                                                </tr>
+                                        }
                                         </tbody>
                                     </Table>
                                 </div>
