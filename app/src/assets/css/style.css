@@ -1323,6 +1323,7 @@ td {
 
 .staff-salary .block {
     overflow-x: scroll;
+    padding: 0;
 }
 
 .staff-salary .table.active {
@@ -1714,9 +1715,9 @@ td {
 .inner-tab .nav-tabs .nav-link {
     border: none;
     margin: 0;
-    width: 150px;
+    min-width: 150px;
     color: #3083DC;
-    padding: 13px 10px;
+    padding: 13px 15px;
     font-size: 18px;
     font-weight: 500;
 }

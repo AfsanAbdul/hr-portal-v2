@@ -13,7 +13,7 @@ import ScheduleEmployee from "../../container/Employee/Schedule/ScheduleEmployee
 import EmployeeCreate from "../../container/Employee/Create/CreateEmployee";
 import ViewEmployee from "../../container/Employee/View/ViewEmployee";
 import EditEmployee from "../../container/Employee/Edit/EditEmployee";
-import SalaryEmployee from "../../container/Salary/SalaryEmployee/SalaryEmployee";
+import SalaryTab from "../../container/Salary/SalaryTab";
 import CreateOperation from "../../container/StaffOperation/Operation/Create/CreateOperation";
 import CreateSickness from "../../container/StaffOperation/Sickness/CreateSickness/CreateSickness";
 import EditSickness from "../../container/StaffOperation/Sickness/EditSickness/EditSickness";
@@ -42,7 +42,7 @@ function Other () {
                         <ProtectedRoute path="/employee/create" component={EmployeeCreate}/>
                         <ProtectedRoute  exact path="/employee/edit/:id" component={EditEmployee}/>
                         <ProtectedRoute exact path="/employee/view/:id" component={ViewEmployee}/>
-                        <ProtectedRoute path="/salaryEmployee" component={SalaryEmployee}/>
+                        <ProtectedRoute path="/salary" component={SalaryTab}/>
                         <ProtectedRoute exact path="/staff" component={ScheduleStaff}/>
                         <ProtectedRoute exact path="/staff/edit/:id" component={EditStaff}/>
                         <ProtectedRoute path="/staff/create" component={CreateStaff}/>
