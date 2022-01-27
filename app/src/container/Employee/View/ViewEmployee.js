@@ -127,9 +127,20 @@ function ViewEmployee() {
     const [currentPage, setCurrentPage] = useState(1);
     const [recordSize, setRecordSize] = useState(15);
 
+
     /*Vacation*/
 
-    const [vacation, setVacation] = useState([])
+    const [vacation, setVacation] = useState([]);
+
+
+    /*Salary*/
+
+    const [salaryAcademic, setSalaryAcademic] = useState('');
+    const [salaryMain, setSalaryMain] = useState('');
+    const [salaryEndDate, setSalaryEndDate] = useState('');
+    const [salaryStartDate, setSalaryStartDate] = useState('');
+    const [salaryIndAdd, setSalaryIndAdd] = useState('');
+    const [salaryConAdd, setSalaryConAdd] = useState('');
 
     const getEmployeeInfo = () => {
         mainAxios({
@@ -145,6 +156,17 @@ function ViewEmployee() {
             if (accountData !== null) {
                 setBankAccount(accountData.number)
             }
+
+            let salaryData = res.data.salaryInformation;
+            if (salaryData !== null) {
+                setSalaryAcademic(salaryData.academicAddition);
+                setSalaryConAdd(salaryData.conditionalAddition);
+                setSalaryEndDate(salaryData.endDate);
+                setSalaryIndAdd(salaryData.individualAddition);
+                setSalaryMain(salaryData.main);
+                setSalaryStartDate(salaryData.startDate);
+            }
+
             let personalData = res.data.personalInformation;
             if (personalData !== null) {
                 setStartBirthDate(personalData.birthday);
@@ -1984,6 +2006,30 @@ function ViewEmployee() {
                         </Tab>
                         <Tab eventKey="salary" title="Əmək haqqı">
                             <div className="block">
+                                <div className="table-striped">
+                                    <Table  responsive="sm">
+                                        <thead>
+                                        <tr>
+                                            <th>Ştat əmək haqqı</th>
+                                            <th>Əmək şəraitinə görə əlavə əmək haqqı</th>
+                                            <th>Fərdi əlavəsi</th>
+                                            <th>F.D elmi dərəcəsinə görə əlavə</th>
+                                            <th>Başlanğıc tarix</th>
+                                            <th>Son tarix</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{salaryMain}</td>
+                                            <td>{salaryConAdd}</td>
+                                            <td>{salaryIndAdd}</td>
+                                            <td>{salaryAcademic}</td>
+                                            <td>{salaryStartDate}</td>
+                                            <td>{salaryEndDate}</td>
+                                        </tr>
+                                        </tbody>
+                                    </Table>
+                                </div>
                             </div>
                         </Tab>
                     </Tabs>
