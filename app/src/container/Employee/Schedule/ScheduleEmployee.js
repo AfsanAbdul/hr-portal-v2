@@ -147,7 +147,8 @@ function ScheduleEmployee() {
         setSelectedPosition(null);
         setSelectedDepartment(null);
         setSelectedJobStatus(null);
-        setFullName('')
+        setFullName('');
+        getSubDepartments();
         getEmployee(1)
     }
 

@@ -103,7 +103,8 @@ function SalaryEmployeeData() {
     const resetFilter = () => {
         setSelectedSubDepartment(null);
         setSelectedDepartment(null);
-        setFullName('')
+        setFullName('');
+        getSubDepartments();
         getEmployeeData(1)
     }
 
