@@ -39,6 +39,7 @@ const calculationOptions = [
     {value: 'mainSalaryResult', label: 'Hesablanmış əmək haqqı (Tarif vəzifə maaşına görə)'},
     {value: 'individualAdditionResult', label: 'Fərdi əlavə (Fix məbləğ)'},
     {value: 'conditionalAdditionResult', label: 'Fərdi əlavə %'},
+    {value: 'conditionalAddition', label: 'İş şəraitinə görə əlavə'},
     {value: '', label: 'Orta aylıq əmək haqqın saxlanılması'},
     {value: 'educationVacationPay', label: 'Təhsil məzuniyyəti'},
     {value: '', label: 'Əmək məzuniyyəti'},
