@@ -47,31 +47,18 @@ function SalaryEmployeeData() {
     }
 
     const getSubDepartments = (id) => {
-        if (id !== undefined) {
-            mainAxios({
-                method: 'get',
-                url: `/departments/${id}/sub-departments`,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-            }).then((res) => {
-                setSubDepartment(res.data)
-            });
-        } else {
-            mainAxios({
-                method: 'get',
-                url: '/sub-departments',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-            }).then((res) => {
-                setSubDepartment(res.data)
-            }).catch((error) => {
-                setSubDepartment([])
-            });
-        }
+        mainAxios({
+            method: 'get',
+            url: id !== undefined ? `/departments/${id}/sub-departments` : '/sub-departments',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        }).then((res) => {
+            setSubDepartment(res.data)
+        }).catch((error) => {
+            setSubDepartment([])
+        });
     }
 
     const getEmployeeData = (page, departId, subDepartId, name) => {
@@ -241,13 +228,13 @@ function SalaryEmployeeData() {
                                                         <tr key={index}>
                                                             <td>{item.id}</td>
                                                             <td>{item.fullName}</td>
-                                                            <td>{item.department !== null ?  item.department.name : ''}</td>
-                                                            <td>{item.subDepartment !== null ?  item.subDepartment.name : ''}</td>
-                                                            <td>{item.position !== null ?  item.position.name : ''}</td>
-                                                            <td>{item.salaryInformation !== null ? item.salaryInformation.main : '' }</td>
-                                                            <td>{item.salaryInformation !== null ? item.salaryInformation.conditionalAddition : '' }</td>
-                                                            <td>{item.salaryInformation !== null ? item.salaryInformation.individualAddition : '' }</td>
-                                                            <td>{item.salaryInformation !== null ? item.salaryInformation.academicAddition : '' }</td>
+                                                            <td>{item.department !== null ? item.department.name : ''}</td>
+                                                            <td>{item.subDepartment !== null ? item.subDepartment.name : ''}</td>
+                                                            <td>{item.position !== null ? item.position.name : ''}</td>
+                                                            <td>{item.salaryInformation !== null ? item.salaryInformation.main : ''}</td>
+                                                            <td>{item.salaryInformation !== null ? item.salaryInformation.conditionalAddition : ''}</td>
+                                                            <td>{item.salaryInformation !== null ? item.salaryInformation.individualAddition : ''}</td>
+                                                            <td>{item.salaryInformation !== null ? item.salaryInformation.academicAddition : ''}</td>
                                                         </tr>
                                                     )
                                                 }

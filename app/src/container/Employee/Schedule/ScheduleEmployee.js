@@ -71,31 +71,18 @@ function ScheduleEmployee() {
     }
 
     const getSubDepartments = (id) => {
-        if (id !== undefined) {
-            mainAxios({
-                method: 'get',
-                url: `/departments/${id}/sub-departments`,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-            }).then((res) => {
-                setSubDepartment(res.data)
-            });
-        } else {
-            mainAxios({
-                method: 'get',
-                url: '/sub-departments',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-            }).then((res) => {
-                setSubDepartment(res.data)
-            }).catch((error) => {
-                setSubDepartment([])
-            });
-        }
+        mainAxios({
+            method: 'get',
+            url: id !== undefined ? `/departments/${id}/sub-departments` : '/sub-departments',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        }).then((res) => {
+            setSubDepartment(res.data)
+        }).catch((error) => {
+            setSubDepartment([])
+        })
     }
 
     const getPosition = () => {

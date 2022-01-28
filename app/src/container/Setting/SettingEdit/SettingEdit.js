@@ -7,8 +7,13 @@ import Select from "react-select";
 import {customStyles} from "../../../components/Select/SelectStyle";
 
 const cityTypeOption = [
-    { value : '', label: 'Ölkədaxili'},
-    { value : '', label: 'Ölkəxarici'}
+    {value: '', label: 'Ölkədaxili'},
+    {value: '', label: 'Ölkəxarici'}
+]
+
+const vacationPayOptions = [
+    {value: 1, label: 'Bəli'},
+    {value: 0, label: 'Xeyr'}
 ]
 
 function SettingEdit() {
@@ -97,6 +102,15 @@ function SettingEdit() {
     const [selectedMinGrade, setSelectedMinGrade] = useState(null);
     const [selectedMaxGrade, setSelectedMaxGrade] = useState(null);
     const [evaluation, setEvaluation] = useState('');
+
+    const [articleArr, setArticleArr] = useState([]);
+    const [article, setArticle] = useState('');
+    const [firingMultiply, setFiringMultiply] = useState('');
+    const [mainMultiply, setMainMultiply] = useState('');
+    const [title, setTitle] = useState('');
+    const [selectedVacationPay, setSelectedVacationPay] = useState(null);
+    const [warningMultiply, setWarningMultiply] = useState('');
+    const [showFiring, setShowFiring] = useState(false);
 
     const [selectedCity, setSelectedCity] = useState(null);
     const [amount, setAmount] = useState('');
@@ -934,43 +948,43 @@ function SettingEdit() {
         });
     }
 
-/*    const getSubDepartments = () => {
-        mainAxios({
-            method: 'get',
-            url: '/sub-departments',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-        }).then((res) => {
-            setSubDepartmentArr(res.data)
-        });
-    }
-
-    const senSubDepartment = () => {
-        let data = {
-            name: subDepartment
+    /*    const getSubDepartments = () => {
+            mainAxios({
+                method: 'get',
+                url: '/sub-departments',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+            }).then((res) => {
+                setSubDepartmentArr(res.data)
+            });
         }
-        mainAxios({
-            method: 'post',
-            url: '/sub-departments',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-            data: data
-        }).then((res) => {
-            getSubDepartments();
-            setSubDepartment('');
-        });
-    }*/
+
+        const senSubDepartment = () => {
+            let data = {
+                name: subDepartment
+            }
+            mainAxios({
+                method: 'post',
+                url: '/sub-departments',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+                data: data
+            }).then((res) => {
+                getSubDepartments();
+                setSubDepartment('');
+            });
+        }*/
 
 
     const sendEvaluation = () => {
         let data = {
             amount: evaluation !== '' ? parseFloat(evaluation) : null,
             gradeId: selectedMinGrade !== null ? selectedMinGrade.id : null,
-            subGradeId: selectedMaxGrade !== null ?  selectedMaxGrade.id : null
+            subGradeId: selectedMaxGrade !== null ? selectedMaxGrade.id : null
         }
         mainAxios({
             method: 'post',
@@ -987,8 +1001,8 @@ function SettingEdit() {
     const sendPayment = () => {
         setActive(true);
         let data = {
-            amount: amount !== '' ? parseFloat(amount) : null ,
-            cityId : selectedCity !== null ? selectedCity.id : null
+            amount: amount !== '' ? parseFloat(amount) : null,
+            cityId: selectedCity !== null ? selectedCity.id : null
         }
         mainAxios({
             method: 'post',
@@ -1003,6 +1017,54 @@ function SettingEdit() {
         });
     }
 
+    const getArticle = () => {
+        mainAxios({
+            method: 'get',
+            url: '/articles',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        }).then((res) => {
+            setArticleArr(res.data);
+        });
+    }
+
+    const sendArticle = () => {
+        setActive(true);
+        let data = {
+            "article": article !== '' ?  article : null,
+            "firingMultiply": firingMultiply !== '' ? parseFloat(firingMultiply) : null,
+            "mainMultiply": mainMultiply !== '' ?  parseFloat(mainMultiply) : null,
+            "title": title !== '' ? title : null,
+            "vacationPay": selectedVacationPay !== null ? selectedVacationPay.value : null,
+            "warningMultiply": warningMultiply !== '' ? parseFloat(warningMultiply) : null
+        }
+        mainAxios({
+            method: 'post',
+            url: '/articles',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            data: data
+        }).then((res) => {
+            getArticle()
+        });
+    }
+
+    const deleteArticle = (id) => {
+        mainAxios({
+            method: 'delete',
+            url: '/articles/' + id,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        }).then((res) => {
+            getArticle()
+        });
+    }
 
 
     useEffect(() => {
@@ -1024,6 +1086,7 @@ function SettingEdit() {
         getSubGrade();
         getDepartment();
         getCollectReason();
+        getArticle()
     }, []);
 
     return (
@@ -1151,7 +1214,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -1172,16 +1235,16 @@ function SettingEdit() {
                                     </Col>
                                     <Col xs={3}>
                                         <Form.Group className="m-0">
-                                                <Select
-                                                    placeholder="Şəhər seçin"
-                                                    value={selectedCityType}
-                                                    onChange={(val) => setSelectedCityType(val)}
-                                                    options={cityTypeOption}
-                                                    isSearchable={cityTypeOption ? cityTypeOption.length > 5 ? true : false : false}
-                                                    styles={customStyles}
-                                                    getOptionLabel={(option) => (option.label)}
-                                                    getOptionValue={(option) => (option.label)}
-                                                />
+                                            <Select
+                                                placeholder="Şəhər seçin"
+                                                value={selectedCityType}
+                                                onChange={(val) => setSelectedCityType(val)}
+                                                options={cityTypeOption}
+                                                isSearchable={cityTypeOption ? cityTypeOption.length > 5 ? true : false : false}
+                                                styles={customStyles}
+                                                getOptionLabel={(option) => (option.label)}
+                                                getOptionValue={(option) => (option.label)}
+                                            />
                                         </Form.Group>
                                     </Col>
                                     <Col xs={4}>
@@ -1246,7 +1309,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -1327,7 +1390,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -1408,7 +1471,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -1488,7 +1551,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -1569,7 +1632,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -1648,7 +1711,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -1728,7 +1791,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -1808,7 +1871,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -1887,7 +1950,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -1966,7 +2029,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -2046,7 +2109,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -2126,7 +2189,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -2207,7 +2270,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -2287,7 +2350,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -2370,7 +2433,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -2535,7 +2598,7 @@ function SettingEdit() {
                                             d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
                                             fill="#3083DC"/>
                                     </svg>
-                                     əlavə et
+                                    əlavə et
                                 </button>
                             </div>
                         </Col>
@@ -2691,7 +2754,7 @@ function SettingEdit() {
                     }
                 </div>
 
-{/*
+                {/*
                 <div className="block-inn">
                     <Row>
                         <Col xs={6}>
@@ -2888,7 +2951,7 @@ function SettingEdit() {
                         </Col>
                         <Col xs={1}>
                             <div className="btn-block">
-                                <button className="btn-green-border" onClick={()=> sendPayment()}>
+                                <button className="btn-green-border" onClick={() => sendPayment()}>
                                     Saxla
                                 </button>
                             </div>
@@ -2939,14 +3002,145 @@ function SettingEdit() {
                             </Form.Group>
                         </Col>
                         <Col xs={1}>
-                           <div className="btn-block">
-                               <button className="btn-green-border" onClick={()=> sendEvaluation()}>
-                                   Saxla
-                               </button>
-                           </div>
+                            <div className="btn-block">
+                                <button className="btn-green-border" onClick={() => sendEvaluation()}>
+                                    Saxla
+                                </button>
+                            </div>
                         </Col>
                     </div>
                 </div>
+
+                <div className="block-inn">
+                    <Row>
+                        <Col xs={6}>
+                            <div className="block-title flex">
+                                Xitamla bağlı maddələr
+                            </div>
+                            <Dropdown autoClose="outside">
+                                <Dropdown.Toggle className={active ? 'active' : ''}>
+                                    Xitamla bağlı maddələr
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    {
+                                        articleArr.map((item, index) =>
+                                            <Dropdown.Item key={index}>
+                                                {item.article}  - {item.title}
+                                                <button type="button" className="btn-transparent btn-delete"
+                                                        onClick={() => deleteArticle(item.id)}>
+                                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
+                                                            fill="#040647"/>
+                                                    </svg>
+                                                </button>
+                                            </Dropdown.Item>
+                                        )
+                                    }
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            <div className="flex-end">
+                                <button type="button" className="btn-color"
+                                        onClick={() => setShowFiring(true)}>
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M11.8346 6.83366H6.83464V11.8337H5.16797V6.83366H0.167969V5.16699H5.16797V0.166992H6.83464V5.16699H11.8346V6.83366Z"
+                                            fill="#3083DC"/>
+                                    </svg>
+                                    əlavə et
+                                </button>
+                            </div>
+                        </Col>
+                    </Row>
+                    {
+                        showFiring ?
+                            <div className="addition">
+                                <Row className="flex-center">
+                                    <Col xs={3}>
+                                        <Form.Group className="form-group">
+                                            <Form.Label>
+                                                <Form.Control
+                                                    value={article}
+                                                    placeholder="Xitam maddəsini daxil edin"
+                                                    onChange={e => setArticle(e.target.value)}/>
+                                            </Form.Label>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col xs={3}>
+                                        <Form.Group className="form-group">
+                                            <Form.Label>
+                                                <Form.Control
+                                                    value={title}
+                                                    placeholder="Xitam əsası daxil edin"
+                                                    onChange={e => setTitle(e.target.value)}/>
+                                            </Form.Label>
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
+                                <Row className="flex-center">
+                                    <Col xs={3}>
+                                        <Form.Group className="form-group">
+                                            <Select
+                                                placeholder="Məzuniyyət üçün kompensasiyanı seçin"
+                                                value={selectedVacationPay}
+                                                onChange={setSelectedVacationPay}
+                                                options={vacationPayOptions}
+                                                isSearchable={vacationPayOptions ? vacationPayOptions.length > 5 ? true : false : false}
+                                                styles={customStyles}
+                                                getOptionLabel={(option) => (option.label)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col xs={3}>
+                                        <Form.Group className="form-group">
+                                            <Form.Label>
+                                                <Form.Control
+                                                    value={mainMultiply}
+                                                    type="number"
+                                                    placeholder="Staja bağlı olmayan müavinətin məbləği daxil edin"
+                                                    onChange={e => setMainMultiply(e.target.value)}/>
+                                            </Form.Label>
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={3}>
+                                        <Form.Group className="form-group">
+                                            <Form.Label>
+                                                <Form.Control
+                                                    value={warningMultiply}
+                                                    type="number"
+                                                    placeholder="Xəbərdarlıq müddəti əvəzinə ödənilən müavinət daxil edin"
+                                                    onChange={e => setWarningMultiply(e.target.value)}/>
+                                            </Form.Label>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col xs={3}>
+                                        <Form.Group className="form-group">
+                                            <Form.Label>
+                                                <Form.Control
+                                                    value={firingMultiply}
+                                                    type="number"
+                                                    placeholder="İşdən çıxma müavinətin məbləği daxil edin"
+                                                    onChange={e => setFiringMultiply(e.target.value)}/>
+                                            </Form.Label>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col xs={1}>
+                                        <div className="btn-block">
+                                            <button className="btn-green-border" onClick={() => sendArticle()}>
+                                                Saxla
+                                            </button>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </div>
+                            : null
+                    }
+                </div>
+
             </div>
         </Aux>
     );
