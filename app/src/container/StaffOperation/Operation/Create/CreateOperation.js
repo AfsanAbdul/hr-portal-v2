@@ -1682,6 +1682,15 @@ function CreateOperation() {
                                                             </svg>
                                                         </Button>
                                                     </Form.Label>
+                                                    <div className="validation-block flex-start">
+                                                        {
+
+                                                            errors['firing.firingDate'] !== '' ?
+                                                                <span
+                                                                    className="text-validation">{errors['firing.firingDate']}</span>
+                                                                : null
+                                                        }
+                                                    </div>
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
