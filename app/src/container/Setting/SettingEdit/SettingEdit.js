@@ -5,6 +5,7 @@ import {Container, Row, Col, Form} from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Select from "react-select";
 import {customStyles} from "../../../components/Select/SelectStyle";
+import {Link} from "react-router-dom";
 
 const cityTypeOption = [
     {value: '', label: 'Ölkədaxili'},
@@ -1103,6 +1104,11 @@ function SettingEdit() {
 
     return (
         <Aux>
+            <div className="title-block flex">
+                <div className="title flex-center">
+                    Redaktə
+                </div>
+            </div>
             <div className="block">
                 <div className="block-inn">
                     <Row>

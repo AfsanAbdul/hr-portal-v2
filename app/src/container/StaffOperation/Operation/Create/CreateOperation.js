@@ -11,6 +11,8 @@ import {uid} from "react-uid";
 import Indicator from "../../../../components/Loading/Indicator";
 import {customStyles} from "../../../../components/Select/SelectStyle";
 import TimePicker from 'react-time-picker';
+import MultiDatePicker from "react-multi-date-picker";
+import DatePanel from "react-multi-date-picker/plugins/date_panel"
 
 
 const WorkModeOptions = [
@@ -79,7 +81,6 @@ function CreateOperation() {
     const [businessTripCheck, setBusinessTripCheck] = useState(true);
     const [businessPaymentCheck, setBusinessPaymentCheck] = useState(true);
     const [changeTempo, setChangeTempo] = useState(false);
-    const [note, setNote] = useState('');
     const [selectedAssignEmpId, setSelectedAssignEmpId] = useState(null);
     const [assignDepartment, setAssignDepartment] = useState('');
     const [assignSubDepartment, setAssignSubDepartment] = useState('');
@@ -135,6 +136,7 @@ function CreateOperation() {
     const [otherExpCheck, setOtherExpCheck] = useState(false);
     const [dailyExpCheck, setDailyExpCheck] = useState(false);
     const [hotelExpCheck, setHotelExpCheck] = useState(false);
+    const [multiDate, setMultiDate] = useState([])
 
 
     const [vacationArr, setVacationArr] = useState([{
@@ -578,14 +580,13 @@ function CreateOperation() {
         };
 
         let firing = {
-            "articleId": selectedArticle !== null ?  selectedArticle.id : null,
+            "articleId": selectedArticle !== null ? selectedArticle.id : null,
             "compensation": compensation !== null ? parseFloat(compensation) : null,
             "financialHelp": amount !== '' ? parseFloat(amount) : null,
-            "firingDate":  endDate !== null ? moment(endDate).format("YYYY-MM-DD") : null
+            "firingDate": endDate !== null ? moment(endDate).format("YYYY-MM-DD") : null
         };
 
-        let
-            educationVacation = {
+        let educationVacation = {
                 "day": vacationDay !== '' ? vacationDay : null,
                 "from": startDate !== null ? moment(startDate).format("YYYY-MM-DD") : null,
                 "startJob": jobDay !== '' ? jobDay : null,
@@ -759,6 +760,18 @@ function CreateOperation() {
             overtimeArr.push({employeeId: i.id, date: i.date, startTime: i.startTime, endTime: i.endTime})
         }
 
+        let multiDates = [];
+        for (let i of multiDate) {
+            multiDates.push(i?.format?.('YYYY-MM-DD'))
+        }
+
+        let holidayOvertime = {
+            "employees": employeeIds,
+            "holidays": multiDates
+        }
+
+
+
         let data = {
             "header": {
                 "department": "string",
@@ -799,6 +812,7 @@ function CreateOperation() {
             "businessTripDisable": tab == '32' ? businessTripDisable : null,
             "overtime": tab == '50' ? overtimeArr : null,
             "firing": tab == '8' ? firing : null,
+            "holidayOvertime": tab == '44' ? holidayOvertime : null,
         }
 
         mainAxios({
@@ -1603,8 +1617,8 @@ function CreateOperation() {
                                                         }}
                                                         isSearchable={articleArr ? articleArr.length > 5 ? true : false : false}
                                                         options={articleArr}
-                                                        getOptionLabel={(option) => (`${option.article} - ${option.title}` )}
-                                                        getOptionValue={(option) => (`${option.article} - ${option.title}` )}
+                                                        getOptionLabel={(option) => (`${option.article} - ${option.title}`)}
+                                                        getOptionValue={(option) => (`${option.article} - ${option.title}`)}
                                                         styles={customStyles}
                                                     />
                                                 </Form.Group>
@@ -8362,7 +8376,6 @@ function CreateOperation() {
                                             </Col>
                                         </Row>
                                     </Tab>
-
                                     <Tab eventKey="33" title="" disabled={tab !== "33"}>
                                         <Row>
                                             <Col xs={6}>
@@ -10159,29 +10172,12 @@ function CreateOperation() {
                                     </Tab>
 
 
-                                    {/*    <Tab eventKey="44" title="" disabled={tab !== "44"}>
+                                    <Tab eventKey="44" title="" disabled={tab !== "44"}>
                                         <Row>
-                                            <Col xs={12}>
-                                                <Form.Group className="form-group">
-                                                    <span
-                                                        className="input-title">İşə cəlb edilmə səbəbi </span>
-                                                    <Select
-                                                        placeholder="İşə cəlb edilmə səbəbini seçin"
-                                                        value={selectedReason}
-                                                        onChange={(val) => {
-                                                            setSelectedReason(val);
-                                                        }}
-                                                        isSearchable={reasonOptions ? reasonOptions.length > 5 ? true : false : false}
-                                                        options={reasonOptions}
-                                                        getOptionLabel={(option) => option.label}
-                                                        styles={customStyles}
-                                                    />
-                                                </Form.Group>
-                                            </Col>
                                             <Col xs={6}>
                                                 <Form.Group className="form-group">
                                                     <span
-                                                        className="input-title">İşə cəlb edilmə zərurəti  </span>
+                                                        className="input-title">Əmrin əsası </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
                                                                       value={mainOfOrder}
@@ -10191,81 +10187,145 @@ function CreateOperation() {
                                             </Col>
                                             <Col xs={6}>
                                                 <Form.Group className="form-group">
-                                                    <span
-                                                        className="input-title">İşə cəlb edilən işçinin və ya işçilərin soyadı, adı, atasının adı </span>
-                                                    <Select
-                                                        placeholder="İşçinin adı, soyadı, atasının adı"
-                                                        value={selectedStaff}
-                                                        onChange={(val) => {
-                                                            let id = val.id
-                                                            setEmployeeId(id)
-                                                            getEmployee(id)
-                                                            setSelectedStaff(val);
-                                                        }}
-                                                        isSearchable={staff ? staff.length > 5 ? true : false : false}
-                                                        options={staff}
-                                                        getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
-                                                        styles={customStyles}
+                                                    <span className="input-title">Bayram gününləri </span>
+                                                    <MultiDatePicker
+                                                        placeholder="Bayram günü seçin"
+                                                        value={multiDate}
+                                                        onChange={setMultiDate}
+                                                        multiple
+                                                        plugins={[
+                                                            <DatePanel/>
+                                                        ]}
                                                     />
                                                 </Form.Group>
                                             </Col>
-                                            <Col xs={6}>
-                                                <Form.Group className="form-group">
-                                                    <span
-                                                        className="input-title">İşə cəlb edilən işçi və ya işçilərin işlədiyi struktur bölmə</span>
-                                                    <Form.Label>
-                                                        <Form.Control
-                                                            placeholder="İşlədiyi struktur bölmə"
-                                                            value={department || ''} disabled={true}/>
-                                                    </Form.Label>
-                                                </Form.Group>
-                                            </Col>
-                                            <Col xs={6}>
-                                                <Form.Group className="form-group">
-                                                    <span
-                                                        className="input-title">İşə cəlb edilən işçi və ya işçilərin vəzifəsi </span>
-                                                    <Form.Label>
-                                                        <Form.Control placeholder="Vəzifəsi"
-                                                                      value={vacancyName || ''} disabled={true}/>
-                                                    </Form.Label>
-                                                </Form.Group>
-                                            </Col>
                                             <Col xs={12}>
-                                                <Form.Group className="form-group">
-                                                    <span className="input-title">Struktur bölmə rəhbərinin soyadı, adı, atasının adı  </span>
-                                                    <Form.Label>
-                                                        <Form.Control
-                                                            placeholder="Struktur bölmə rəhbərinin soyadı, adı, atasının adı"
-                                                            value={presentationFullName}
-                                                            onChange={(e) => setPresentationFullName(e.target.value)}
-                                                        />
-                                                    </Form.Label>
-                                                </Form.Group>
-                                            </Col>
-                                            <Col xs={6}>
-                                                <Form.Group className="form-group">
-                                                    <span className="input-title">Struktur bölmənin adı </span>
-                                                    <Form.Label>
-                                                        <Form.Control placeholder="Struktur bölmənin adı"
-                                                                      value={presentationDepartment}
-                                                                      onChange={(e) => setPresentationDepartment(e.target.value)}
-                                                        />
-                                                    </Form.Label>
-                                                </Form.Group>
-                                            </Col>
-                                            <Col xs={6}>
-                                                <Form.Group className="form-group">
-                                                    <span className="input-title">Vəzifəsi  </span>
-                                                    <Form.Label>
-                                                        <Form.Control placeholder="Vəzifəni  daxil edin"
-                                                                      value={presentationPosition}
-                                                                      onChange={(e) => setPresentationPosition(e.target.value)}
-                                                        />
-                                                    </Form.Label>
-                                                </Form.Group>
+                                                <div className="block-inn">
+                                                    <div className="block-title ">
+                                                        İstirahət və ya bayram günündə işə cəlb edilən işçi və ya
+                                                        işçilər
+                                                    </div>
+                                                    <div className="addition-content">
+                                                        {
+                                                            employeeInfoArr.map((item, index) =>
+                                                                <div key={uid(item, index)}
+                                                                     className={index === 0 ? '' : 'add-item'}>
+                                                                    {
+                                                                        index === 0 ? null :
+                                                                            <div className="add-item-top">
+                                                                                <p className="m-0"> #{index + 1}.
+                                                                                    Digər </p>
+                                                                                <Button
+                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    onClick={() => {
+                                                                                        employeeInfoArr.splice(index, 1);
+                                                                                        setEmployeeInfoArr([...employeeInfoArr], employeeInfoArr)
+                                                                                    }}>
+                                                                                    <svg width="14" height="14"
+                                                                                         viewBox="0 0 14 14" fill="none"
+                                                                                         xmlns="http://www.w3.org/2000/svg">
+                                                                                        <path
+                                                                                            d="M11.1665 2.69336L10.2739 12.8645H3.7302L2.8378 2.69336L1.70703 2.79248L2.61572 13.1481C2.66354 13.6254 3.07769 13.9997 3.5588 13.9997H10.4453C10.9262 13.9997 11.3405 13.6256 11.3892 13.1413L12.2973 2.79248L11.1665 2.69336Z"
+                                                                                            fill="#CF3131"/>
+                                                                                        <path
+                                                                                            d="M9.08077 0H4.91861C4.397 0 3.97266 0.424348 3.97266 0.945957V2.74326H5.10778V1.13512H8.89155V2.74323H10.0267V0.94593C10.0267 0.424348 9.60238 0 9.08077 0Z"
+                                                                                            fill="#CF3131"/>
+                                                                                        <path
+                                                                                            d="M13.0507 2.17578H0.942574C0.629078 2.17578 0.375 2.42986 0.375 2.74336C0.375 3.05685 0.629078 3.31093 0.942574 3.31093H13.0507C13.3642 3.31093 13.6183 3.05685 13.6183 2.74336C13.6183 2.42986 13.3642 2.17578 13.0507 2.17578Z"
+                                                                                            fill="#CF3131"/>
+                                                                                    </svg>
+                                                                                    <span>Sil</span>
+                                                                                </Button>
+                                                                            </div>
+                                                                    }
+                                                                    <Row>
+                                                                        <Col xs={3}>
+                                                                            <Form.Group className="form-group">
+                                                                                <span className="input-title">İşçinin soyadı, adı, atasının adı *</span>
+                                                                                <Form.Label>
+                                                                                    <Select
+                                                                                        placeholder="Adı seçin"
+                                                                                        isSearchable={employee ? employee.length > 5 ? true : false : false}
+                                                                                        options={employee}
+                                                                                        getOptionLabel={(option) => (option.name)}
+                                                                                        getOptionValue={(option) => (option.name)}
+                                                                                        styles={customStyles}
+                                                                                        onChange={(val) => {
+                                                                                            let id = val.id;
+                                                                                            getWarningDetail(id, index);
+                                                                                        }}
+                                                                                    />
+                                                                                </Form.Label>
+                                                                                <div
+                                                                                    className="validation-block flex-start">
+                                                                                    {
+
+                                                                                        errors[`workVacation.vacations[${index}].vacationType`] !== '' ?
+                                                                                            <span
+                                                                                                className="text-validation">{errors[`workVacation.vacations[${index}].vacationType`]}</span>
+                                                                                            : null
+                                                                                    }
+                                                                                </div>
+                                                                            </Form.Group>
+                                                                        </Col>
+                                                                        <Col xs={3}>
+                                                                            <Form.Group className="form-group">
+                                                                                <span className="input-title">İşlədiyi struktur bölmə </span>
+                                                                                <Form.Label>
+                                                                                    <Form.Control
+                                                                                        placeholder="İşlədiyi struktur bölmə"
+                                                                                        value={item.department || ''}
+                                                                                        disabled={true}/>
+                                                                                </Form.Label>
+                                                                            </Form.Group>
+                                                                        </Col>
+                                                                        <Col xs={3}>
+                                                                            <Form.Group className="form-group">
+                                                                                <span className="input-title">İşlədiyi alt struktur bölmə </span>
+                                                                                <Form.Label>
+                                                                                    <Form.Control
+                                                                                        placeholder="İşlədiyi struktur bölmə"
+                                                                                        value={item.subDepartment || ''}
+                                                                                        disabled={true}/>
+                                                                                </Form.Label>
+                                                                            </Form.Group>
+                                                                        </Col>
+                                                                        <Col xs={3}>
+                                                                            <Form.Group className="form-group">
+                                                                                <span
+                                                                                    className="input-title">Vəzifəsi </span>
+                                                                                <Form.Label>
+                                                                                    <Form.Control placeholder="Vəzifəsi"
+                                                                                                  value={item.position || ''}
+                                                                                                  disabled={true}/>
+                                                                                </Form.Label>
+                                                                            </Form.Group>
+                                                                        </Col>
+                                                                    </Row>
+
+                                                                </div>
+                                                            )
+                                                        }
+                                                        <div className="flex-end">
+                                                            <button type="button" className="btn-color"
+                                                                    onClick={() => addEmployeeInfoArr()}>
+                                                                <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none"
+                                                                     xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M0.667969 6.00033H11.3346M6.0013 0.666992V11.3337V0.666992Z"
+                                                                        stroke="#3083DC" strokeWidth="1.3"
+                                                                        strokeLinecap="round"
+                                                                        strokeLinejoin="round"/>
+                                                                </svg>
+                                                                <span>əlavə et</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </Col>
                                         </Row>
-                                    </Tab>*/}
+                                    </Tab>
 
                                     <Tab eventKey="45" title="" disabled={tab !== "45"}>
                                         <Row>

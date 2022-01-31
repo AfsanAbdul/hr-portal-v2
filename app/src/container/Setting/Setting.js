@@ -16,19 +16,21 @@ function Setting() {
         <Aux>
             <div className="setting">
                 <Container fluid>
-                    <div className="title-block flex">
-                        <div className="title">
-                            Tənzimləmə
-                        </div>
+                    <div className="inner-tab flex-vertical-center">
+                       {/* <div className="title-block flex">
+                            <div className="title">
+                                Tənzimləmə
+                            </div>
+                        </div>*/}
+                        <Tabs activeKey={key} onSelect={(k) => setKey(k)} >
+                            <Tab eventKey="calendar" title="Kalendar">
+                                <Calendar/>
+                            </Tab>
+                            <Tab eventKey="edit" title="Redaktə et" >
+                                <SettingEdit/>
+                            </Tab>
+                        </Tabs>
                     </div>
-                    <Tabs activeKey={key} onSelect={(k) => setKey(k)} >
-                        <Tab eventKey="calendar" title="Kalendar">
-                            <Calendar/>
-                        </Tab>
-                        <Tab eventKey="edit" title="Redaktə et" >
-                            <SettingEdit/>
-                        </Tab>
-                    </Tabs>
                 </Container>
             </div>
         </Aux>

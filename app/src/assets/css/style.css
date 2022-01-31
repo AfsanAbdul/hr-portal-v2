@@ -77,7 +77,7 @@ button:focus {
     position: relative;
 }
 
-label, .react-time-picker {
+label, .react-time-picker, .rmdp-container  {
     width: 100%;
 }
 
@@ -102,7 +102,7 @@ label, .react-time-picker {
     display: block;
 }
 
-.form-control, .form-control:focus, .react-datepicker__input-container input, .react-time-picker__wrapper, .input-file .upload-content {
+.form-control, .form-control:focus, .react-datepicker__input-container input, .react-time-picker__wrapper, .input-file .upload-content, .rmdp-input {
     background-color: #FAFCFF;
     border: 1px solid rgba(4, 6, 71, 0.1);
     box-sizing: border-box;
@@ -1534,9 +1534,9 @@ td {
     flex-wrap: nowrap;
 }
 
-.setting .nav-tabs .nav-link, .setting .nav-item {
+/*.setting .nav-tabs .nav-link, .setting .nav-item {
     width: 100%;
-}
+}*/
 
 .setting .nav-tabs .nav-link {
     margin-right: 0;
@@ -1947,6 +1947,11 @@ input::-webkit-inner-spin-button {
 
 .fileList-item .btn-transparent svg {
     margin: 0;
+}
+
+.rmdp-day.rmdp-today span, .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
+    background-color: #2a87d0;
+    border-radius: 0.3rem;
 }
 
 @media only screen and (min-width: 1600px) {
