@@ -1049,6 +1049,12 @@ function SettingEdit() {
             },
             data: data
         }).then((res) => {
+            setArticle('');
+            setTitle('');
+            setFiringMultiply('');
+            setMainMultiply('');
+            setSelectedVacationPay(null);
+            setWarningMultiply('');
             getArticle()
         });
     }
@@ -1062,7 +1068,13 @@ function SettingEdit() {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
         }).then((res) => {
-            getArticle()
+            setArticle('');
+            setTitle('');
+            setFiringMultiply('');
+            setMainMultiply('');
+            setSelectedVacationPay(null);
+            setWarningMultiply('');
+            getArticle();
         });
     }
 
