@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {Container, Row, Col, Tabs, Tab, Image, Table, Form, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
-import {Link, useLocation, useParams, useRouteMatch} from 'react-router-dom';
+import {Link, useLocation, useParams} from 'react-router-dom';
 import {mainAxios} from "../../../components/Axios/axios";
 import userImage from '../../../assets/img/user.png'
 
@@ -234,7 +234,7 @@ function ViewEmployee() {
 
             if (businessData.length > 0) {
                 for (let i of businessData) {
-                    i.businessStatus == 'Daxili' ? companyIntArr.push(i) : companyExtArr.push(i)
+                    i.businessStatus === 'Daxili' ? companyIntArr.push(i) : companyExtArr.push(i)
 
                 }
 
@@ -1276,7 +1276,7 @@ function ViewEmployee() {
 
                                         <div className="card inner-tab flex-vertical-center">
                                             {
-                                                companyExtArr.length == 0 && companyIntArr.length == 0 ?
+                                                companyExtArr.length === 0 && companyIntArr.length === 0 ?
                                                     <div className="card-in">
                                                         <div className="card-item flex-start">
                                                             <div className="card-title">

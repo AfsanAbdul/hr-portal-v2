@@ -2583,7 +2583,7 @@ function EditEmployee() {
                                                                 <Form.Label>
                                                                     <Form.Control
                                                                         type="number"
-                                                                        placeholder="Ev nömrəsi daxil edin"
+                                                                        placeholder="994XXXXXXXXX"
                                                                         value={phoneNumber || ''}
                                                                         onChange={(e => setPhoneNumber(e.target.value))}/>
                                                                 </Form.Label>
@@ -2595,7 +2595,7 @@ function EditEmployee() {
                                                                 <Form.Label>
                                                                     <Form.Control
                                                                         type="number"
-                                                                        placeholder="Mobil nömrəsi daxil edin"
+                                                                        placeholder="994XXXXXXXXX"
                                                                         value={mobileNumber1 || ''}
                                                                         onChange={(e => setMobileNumber1(e.target.value))}/>
                                                                 </Form.Label>
@@ -2615,7 +2615,7 @@ function EditEmployee() {
                                                                 <Form.Label>
                                                                     <Form.Control
                                                                         type="number"
-                                                                        placeholder="Mobil nömrəsi daxil edin"
+                                                                        placeholder="994XXXXXXXXX"
                                                                         value={mobileNumber2 || ''}
                                                                         onChange={(e => setMobileNumber2(e.target.value))}/>
                                                                 </Form.Label>
@@ -2627,7 +2627,7 @@ function EditEmployee() {
                                                                 <Form.Label>
                                                                     <Form.Control
                                                                         type="number"
-                                                                        placeholder="İş nömrəsi daxil edin"
+                                                                        placeholder="994XXXXXXXXX"
                                                                         value={businessPhone || ''}
                                                                         onChange={(e => setBusinessPhone(e.target.value))}/>
                                                                 </Form.Label>
@@ -2640,7 +2640,7 @@ function EditEmployee() {
                                                                 <Form.Label>
                                                                     <Form.Control
                                                                         type="number"
-                                                                        placeholder="İş nömrəsi daxil edin"
+                                                                        placeholder="994XXXXXXXXX"
                                                                         value={businessInternalPhone || ''}
                                                                         onChange={(e => setBusinessInternalPhone(e.target.value))}/>
                                                                 </Form.Label>

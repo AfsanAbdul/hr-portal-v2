@@ -55,8 +55,8 @@ function WorkSchedule() {
     }
 
     const setData = (day) => {
-        setModalData(day)
         setModalShow(true)
+        setModalData(day)
     }
 
     const getDepartment = () => {
@@ -383,7 +383,7 @@ function WorkSchedule() {
                                                             {
                                                                 weekdays.length > 0 ?
                                                                     weekdays.map((day, dayIndex) =>
-                                                                        <td className='td-weekday'
+                                                                        <td className={[employeeArr[item][day.date].shiftFrom !==null && employeeArr[item][day.date].shiftFrom2 !==null ? 'td-bottom' : '','td-weekday'].join(' ')}
                                                                             onClick={() => setData(Object.assign(employeeArr[item][day.date],
                                                                                 {startDate: weekdays[0]}, {endDate: weekdays[6]},
                                                                                 {name: item},

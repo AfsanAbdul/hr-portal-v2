@@ -1791,12 +1791,16 @@ input::-webkit-inner-spin-button {
     padding: 4px;
 }
 
-.table-weekly-calendar .td-weekday .flex {
+.table-weekly-calendar .td-weekday .flex:not(:last-child) {
     margin-bottom: 6px;
 }
 
 .table-weekly-calendar .table-striped .night {
     background-color: rgba(4, 95, 178, 0.16);
+}
+
+.table-weekly-calendar .table-striped td.td-bottom {
+    vertical-align: bottom;
 }
 
 .table-weekly-calendar .table-striped .evening {

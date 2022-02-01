@@ -2108,7 +2108,7 @@ function EmployeeCreate() {
                                                                 <Form.Label>
                                                                     <Form.Control
                                                                         type="number"
-                                                                        placeholder="Ev nömrəsi daxil edin"
+                                                                        placeholder="994XXXXXXXXX"
                                                                         value={phoneNumber}
                                                                         onChange={(e => setPhoneNumber(e.target.value))}/>
                                                                 </Form.Label>
@@ -2120,7 +2120,7 @@ function EmployeeCreate() {
                                                                 <Form.Label>
                                                                     <Form.Control
                                                                         type="number"
-                                                                        placeholder="Mobil nömrəsi daxil edin"
+                                                                        placeholder="994XXXXXXXXX"
                                                                         value={mobileNumber1}
                                                                         pattern="(^(\\+994)(50|51|55|60|70|77|99)\\d{7}$)|(^$)"
                                                                         onChange={(e => setMobileNumber1(e.target.value))}/>
@@ -2141,7 +2141,7 @@ function EmployeeCreate() {
                                                                 <Form.Label>
                                                                     <Form.Control
                                                                         type="number"
-                                                                        placeholder="Mobil nömrəsi daxil edin"
+                                                                        placeholder="994XXXXXXXXX"
                                                                         value={mobileNumber2}
                                                                         onChange={(e => setMobileNumber2(e.target.value))}/>
                                                                 </Form.Label>
@@ -2153,7 +2153,7 @@ function EmployeeCreate() {
                                                                 <Form.Label>
                                                                     <Form.Control
                                                                         type="number"
-                                                                        placeholder="İş nömrəsi daxil edin"
+                                                                        placeholder="994XXXXXXXXX"
                                                                         value={businessPhone}
                                                                         onChange={(e => setBusinessPhone(e.target.value))}/>
                                                                 </Form.Label>
@@ -2166,7 +2166,7 @@ function EmployeeCreate() {
                                                                 <Form.Label>
                                                                     <Form.Control
                                                                         type="number"
-                                                                        placeholder="İş nömrəsi daxil edin"
+                                                                        placeholder="994XXXXXXXXX"
                                                                         value={businessInternalPhone}
                                                                         onChange={(e => setBusinessInternalPhone(e.target.value))}/>
                                                                 </Form.Label>

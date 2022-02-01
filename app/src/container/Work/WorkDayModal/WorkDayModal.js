@@ -27,20 +27,24 @@ function WorkDayModal(props) {
 
 
     const setBreakHour = (checkBreak) => {
+        console.log('workHourSBReak', workHour)
         if (props.data.workHour !== 0) {
             checkChangeTime ?
                 checkBreak ? setWorkHour(workHour - 1) : setWorkHour(workHour + 1)
                 :
                 checkBreak ? setWorkHour(props.data.workHour - 1) : setWorkHour(props.data.workHour)
         }
+
+
     }
 
-    const setBreakHour2 =  (checkBreak2) => {
+    const setBreakHour2 = async (checkBreak2) => {
         if (props.data.workHour2 !== 0) {
             checkChangeTime2 ?
-                checkBreak2 ?  setWorkHour2(workHour2 - 1) :  setWorkHour2(workHour2 + 1)
+                checkBreak2 ? await setWorkHour2(workHour2 - 1) : await setWorkHour2(workHour2 + 1)
                 :
-                checkBreak2 ?  setWorkHour2(props.data.workHour2 - 1) :  setWorkHour2(props.data.workHour2)
+                checkBreak2 ? await setWorkHour2(props.data.workHour2 - 1) : await setWorkHour2(props.data.workHour2)
+
 
         }
     }
@@ -55,7 +59,6 @@ function WorkDayModal(props) {
         await setEndTime(props.data.shiftTo);
         await setWorkHour(props.data.workHour !== 0 ? props.data.workHour : '');
         await setBreakHour(props.data.breakHour);
-
         await setCheckBreak2(props.data.breakHour2);
         await setCheckOverTime2(props.data.jobOnOffDay2);
         await setStartTime2(props.data.shiftFrom2);
@@ -258,9 +261,9 @@ function WorkDayModal(props) {
                                                 <label className="check-button">
                                                     <input type="checkbox"
                                                            checked={checkBreak2}
-                                                           onChange={async (e) => {
+                                                           onChange={(e) => {
                                                                setCheckBreak2(e.target.checked);
-                                                               await setBreakHour2(e.target.checked);
+                                                               setBreakHour2(e.target.checked);
                                                            }}/>
                                                     <span className="checkmark"></span>
                                                 </label>
