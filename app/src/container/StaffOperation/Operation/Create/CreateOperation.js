@@ -1621,6 +1621,15 @@ function CreateOperation() {
                                                         getOptionValue={(option) => (`${option.article} - ${option.title}`)}
                                                         styles={customStyles}
                                                     />
+                                                    <div className="validation-block flex-start">
+                                                        {
+
+                                                            errors['firing.articleId'] !== '' ?
+                                                                <span
+                                                                    className="text-validation">{errors['firing.articleId']}</span>
+                                                                : null
+                                                        }
+                                                    </div>
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>

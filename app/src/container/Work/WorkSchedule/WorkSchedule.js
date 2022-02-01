@@ -40,8 +40,7 @@ function WorkSchedule() {
     let name = fullName !== '' ? fullName : null;
 
 
-    let today = moment(new Date()).format('YYYY-MM-DD')
-
+    let today = moment(new Date()).format('YYYY-MM-DD');
 
     const prevWeekDays = () => {
         let date = new Date(firstDay);
@@ -99,7 +98,6 @@ function WorkSchedule() {
                 day: date.getDate(),
                 month: date.getMonth(),
                 date: moment(date).format('YYYY-MM-DD'),
-                changeTime: false,
             }
         }
         setWeekdays(arr);
@@ -107,7 +105,7 @@ function WorkSchedule() {
     }
 
     const timeDiffer = (day, startTime, endTime) => {
-        if (startTime !== null && endTime !== null) {
+        if (startTime  && endTime ) {
             let startDate = new Date(day.concat(" , ", startTime));
             let endDate = new Date(day.concat(" , ", endTime));
             if (endDate.getTime() > startDate.getTime()) {
@@ -117,6 +115,8 @@ function WorkSchedule() {
                 return diffHour
             }
         }
+
+        return 0
 
     }
 
@@ -149,18 +149,22 @@ function WorkSchedule() {
         }
     }
 
-    const sendData = (breakHour, jobOnOffDay, offDay, shiftFrom, shiftTo, repeatFrom, propsData) => {
+    const sendData = (breakHour, jobOnOffDay, offDay, shiftFrom, shiftTo, repeatFrom, breakHour2, jobOnOffDay2, shiftFrom2, shiftTo2, propsData) => {
         setLoading(true);
         setModalShow(false);
         let data = {
             "breakHour": offDay ? null : breakHour,
+            "breakHour2": offDay ? null : breakHour2,
             "dayId": propsData.dayId,
             "employeeId": propsData.employeeId,
             "jobOnOffDay": offDay ? false : jobOnOffDay,
+            "jobOnOffDay2": offDay ? false : jobOnOffDay2,
             "offDay": offDay,
             "repeatFrom": parseFloat(repeatFrom),
             "shiftFrom": shiftFrom == '' || offDay ? null : shiftFrom,
+            "shiftFrom2": shiftFrom2 == '' || offDay ? null : shiftFrom2,
             "shiftTo": shiftTo == '' || offDay ? null : shiftTo,
+            "shiftTo2": shiftTo2 == '' || offDay ? null : shiftTo2,
         }
         mainAxios({
             method: propsData.id !== null ? 'put' : 'post',
@@ -361,13 +365,13 @@ function WorkSchedule() {
                                             <thead>
                                             <tr>
                                                 <th>İşçilər</th>
-                                                <th>B.e {weekdays[0].day}</th>
-                                                <th>Ç.a {weekdays[1].day}</th>
-                                                <th>Ç {weekdays[2].day}</th>
-                                                <th>C.a {weekdays[3].day}</th>
-                                                <th>C {weekdays[4].day}</th>
-                                                <th>Ş {weekdays[5].day}</th>
-                                                <th>B {weekdays[6].day}</th>
+                                                <th className={new Date(today).getDate() !== weekdays[0].day ? '' : 'td-today'}>B.e {weekdays[0].day}</th>
+                                                <th className={new Date(today).getDate() !== weekdays[1].day ? '' : 'td-today'}>Ç.a {weekdays[1].day}</th>
+                                                <th className={new Date(today).getDate() !== weekdays[2].day ? '' : 'td-today'}>Ç {weekdays[2].day}</th>
+                                                <th className={new Date(today).getDate() !== weekdays[3].day ? '' : 'td-today'}>C.a {weekdays[3].day}</th>
+                                                <th className={new Date(today).getDate() !== weekdays[4].day ? '' : 'td-today'}>C {weekdays[4].day}</th>
+                                                <th className={new Date(today).getDate() !== weekdays[5].day ? '' : 'td-today'}> Ş {weekdays[5].day}</th>
+                                                <th className={new Date(today).getDate() !== weekdays[6].day ? '' : 'td-today'}>B {weekdays[6].day}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -379,14 +383,14 @@ function WorkSchedule() {
                                                             {
                                                                 weekdays.length > 0 ?
                                                                     weekdays.map((day, dayIndex) =>
-                                                                        <td className={[today !== day.date ? '' : 'td-today', 'td-weekday'].join(' ')}
+                                                                        <td className='td-weekday'
                                                                             onClick={() => setData(Object.assign(employeeArr[item][day.date],
                                                                                 {startDate: weekdays[0]}, {endDate: weekdays[6]},
                                                                                 {name: item},
                                                                                 {today: `${day.date}`},
-                                                                                {changeTime: false},
                                                                                 {weekday: `${day.day} ${months[day.month]}`},
                                                                                 {workHour: timeDiffer(day.date, employeeArr[item][day.date].shiftFrom, employeeArr[item][day.date].shiftTo)},
+                                                                                {workHour2: timeDiffer(day.date, employeeArr[item][day.date].shiftFrom2, employeeArr[item][day.date].shiftTo2)}
                                                                             ))}
                                                                             key={dayIndex}>
                                                                             {
@@ -398,25 +402,51 @@ function WorkSchedule() {
                                                                                         <>
                                                                                             {
                                                                                                 employeeArr[item][day.date].shiftFrom !== null ?
-                                                                                                    <span
-                                                                                                        className="flex">{employeeArr[item][day.date].shiftFrom} - {employeeArr[item][day.date].shiftTo}</span>
-                                                                                                    : null
-                                                                                            }
-                                                                                            {
-                                                                                                timeDiffer(day.date, employeeArr[item][day.date].shiftFrom, employeeArr[item][day.date].shiftTo) > 0 ?
-                                                                                                    <span
-                                                                                                        className="td-hour">
-                                                                                              {timeDiffer(day.date, employeeArr[item][day.date].shiftFrom, employeeArr[item][day.date].shiftTo)} saat
-                                                                                        </span>
-                                                                                                    : null
-                                                                                            }
+                                                                                                    <>
+                                                                                                        <div
+                                                                                                            className={[employeeArr[item][day.date].shiftType !== null ? `${(employeeArr[item][day.date].shiftType).toLowerCase()}` : ' ', 'flex'].join(' ')}>
+                                                                                                            {
+                                                                                                                employeeArr[item][day.date].shiftType !== null ?
+                                                                                                                    <ReactSVG
+                                                                                                                        src={require(`../../../assets/img/${employeeArr[item][day.date].shiftType}.svg`).default}
+                                                                                                                        wrapper="span"
+                                                                                                                        className="wrapper-svg"/>
+                                                                                                                    : null
+                                                                                                            }
+                                                                                                            {employeeArr[item][day.date].shiftFrom} - {employeeArr[item][day.date].shiftTo}
+                                                                                                            {
+                                                                                                                timeDiffer(day.date, employeeArr[item][day.date].shiftFrom, employeeArr[item][day.date].shiftTo) > 0 ?
+                                                                                                                    <span
+                                                                                                                        className="td-hour flex-vertical-center">{timeDiffer(day.date, employeeArr[item][day.date].shiftFrom, employeeArr[item][day.date].shiftTo)}</span>
+                                                                                                                    : null
+                                                                                                            }
+                                                                                                        </div>
+                                                                                                    </>
 
+                                                                                                    : null
+                                                                                            }
                                                                                             {
-                                                                                                employeeArr[item][day.date].shiftType !== null ?
-                                                                                                    <ReactSVG
-                                                                                                        src={require(`../../../assets/img/${employeeArr[item][day.date].shiftType}.svg`).default}
-                                                                                                        wrapper="span"
-                                                                                                        className="wrapper-svg"/>
+                                                                                                employeeArr[item][day.date].shiftFrom2 !== null ?
+                                                                                                    <>
+                                                                                                        <div
+                                                                                                            className={[employeeArr[item][day.date].shiftType2 !== null ? `${(employeeArr[item][day.date].shiftType2).toLowerCase()}` : ' ', 'flex'].join(' ')}>
+                                                                                                            {
+                                                                                                                employeeArr[item][day.date].shiftType2 !== null ?
+                                                                                                                    <ReactSVG
+                                                                                                                        src={require(`../../../assets/img/${employeeArr[item][day.date].shiftType2}.svg`).default}
+                                                                                                                        wrapper="span"
+                                                                                                                        className="wrapper-svg"/>
+                                                                                                                    : null
+                                                                                                            }
+                                                                                                            {employeeArr[item][day.date].shiftFrom2} - {employeeArr[item][day.date].shiftTo2}
+                                                                                                            {
+                                                                                                                timeDiffer(day.date, employeeArr[item][day.date].shiftFrom2, employeeArr[item][day.date].shiftTo2) > 0 ?
+                                                                                                                    <span
+                                                                                                                        className="td-hour flex-vertical-center">{timeDiffer(day.date, employeeArr[item][day.date].shiftFrom2, employeeArr[item][day.date].shiftTo2)}</span>
+                                                                                                                    : null
+                                                                                                            }
+                                                                                                        </div>
+                                                                                                    </>
                                                                                                     : null
                                                                                             }
                                                                                         </>
@@ -437,8 +467,8 @@ function WorkSchedule() {
                                             show={modalShow}
                                             onHide={() => setModalShow(false)}
                                             data={modalData}
-                                            click={(breakHour, jobOnOffDay, offDay, shiftFrom, shiftTo, repeatFrom, propsData) => {
-                                                sendData(breakHour, jobOnOffDay, offDay, shiftFrom, shiftTo, repeatFrom, propsData)
+                                            click={(breakHour, jobOnOffDay, offDay, shiftFrom, shiftTo, repeatFrom, breakHour2, jobOnOffDay2, shiftFrom2, shiftTo2, propsData) => {
+                                                sendData(breakHour, jobOnOffDay, offDay, shiftFrom, shiftTo, repeatFrom, breakHour2, jobOnOffDay2, shiftFrom2, shiftTo2, propsData)
                                             }}
                                             delete={(propsData) => {
                                                 deleteDay(propsData)
