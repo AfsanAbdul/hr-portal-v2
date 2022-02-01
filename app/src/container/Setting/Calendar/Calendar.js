@@ -88,6 +88,9 @@ function Calendar() {
         }
     }
 
+    useEffect(() => {
+    }, []);
+
     return (
         <Aux>
             <div className="calendar">

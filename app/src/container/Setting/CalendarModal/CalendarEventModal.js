@@ -2,8 +2,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal'
 
 
-function CalendarDayModal(props) {
-
+function CalendarEventModal(props) {
     return (
         <Modal
             {...props}
@@ -33,4 +32,4 @@ function CalendarDayModal(props) {
     );
 }
 
-export default CalendarDayModal
+export default CalendarEventModal

@@ -59,6 +59,7 @@ function WorkDayModal(props) {
         await setEndTime(props.data.shiftTo);
         await setWorkHour(props.data.workHour !== 0 ? props.data.workHour : '');
         await setBreakHour(props.data.breakHour);
+
         await setCheckBreak2(props.data.breakHour2);
         await setCheckOverTime2(props.data.jobOnOffDay2);
         await setStartTime2(props.data.shiftFrom2);
