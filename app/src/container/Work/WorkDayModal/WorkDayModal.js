@@ -4,6 +4,7 @@ import {Col, Form} from "react-bootstrap";
 import TimePicker from "react-time-picker";
 
 function WorkDayModal(props) {
+    const {click, timeDiffer, deleteDay, ...others} = props
     /*----------general-----------*/
     const [checkHoliday, setCheckHoliday] = useState(false);
     const [day, setDay] = useState('');
@@ -71,7 +72,7 @@ function WorkDayModal(props) {
 
     return (
         <Modal
-            {...props}
+            {...others}
             size="md"
             aria-labelledby="contained-modal-title-vcenter"
             className="modal-work-schedule"

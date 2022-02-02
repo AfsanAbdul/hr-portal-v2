@@ -3,9 +3,10 @@ import Modal from 'react-bootstrap/Modal'
 
 
 function CalendarEventModal(props) {
+    const { click, ...others } = props
     return (
         <Modal
-            {...props}
+            {...others}
             size="md"
             aria-labelledby="contained-modal-title-vcenter"
             className="modal-sure"

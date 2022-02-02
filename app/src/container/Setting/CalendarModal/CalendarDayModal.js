@@ -4,10 +4,11 @@ import {Form} from "react-bootstrap";
 
 
 function CalendarDayModal(props) {
+    const { click, ...others } = props
     const [reason, setReason] = useState('');
     return (
         <Modal
-            {...props}
+            {...others}
             size="md"
             aria-labelledby="contained-modal-title-vcenter"
             className="modal-sure modal-calendar"

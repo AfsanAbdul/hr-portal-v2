@@ -1785,7 +1785,7 @@ input::-webkit-inner-spin-button {
     height: 100px;
 }
 
-.table-weekly-calendar .table-striped .day, .table-weekly-calendar .table-striped .night, .table-weekly-calendar .table-striped .evening {
+.table-weekly-calendar .table-striped .day, .table-weekly-calendar .table-striped .night, .table-weekly-calendar .table-striped .evening, .table-weekly-calendar .table-striped .td-holiday {
     background-color: rgba(239, 180, 15, 0.16);
     border-radius: 2px;
     padding: 4px;
@@ -1799,8 +1799,12 @@ input::-webkit-inner-spin-button {
     background-color: rgba(4, 95, 178, 0.16);
 }
 
-.table-weekly-calendar .table-striped td.td-bottom {
+/*.table-weekly-calendar .table-striped td.td-bottom {
     vertical-align: bottom;
+}*/
+
+.table-weekly-calendar .table-striped .td-holiday {
+    background-color: rgba(46, 208, 106, 0.16);
 }
 
 .table-weekly-calendar .table-striped .evening {
@@ -1827,10 +1831,6 @@ input::-webkit-inner-spin-button {
     font-size: 18px;
 }
 
-.table-weekly-calendar .td-holiday {
-    color: #2ED06A;
-}
-
 .table-weekly-calendar .table-striped .td-hour {
     font-size: 14px;
     background: rgba(239, 180, 15, 0.8);
@@ -1844,6 +1844,13 @@ input::-webkit-inner-spin-button {
     background-color: rgba(4, 95, 178, 0.8);
 }
 
+.table-weekly-calendar .table-striped .wrapper-svg {
+    margin-right: 8px;
+}
+
+.table-weekly-calendar .table-striped .wrapper-svg span {
+    display: flex;
+}
 
 .table-weekly-calendar .table-striped .evening .td-hour {
     background-color: rgba(229, 139, 73, 0.8);

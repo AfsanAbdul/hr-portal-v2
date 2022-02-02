@@ -105,17 +105,14 @@ function WorkSchedule() {
     const timeDiffer = (day, startTime, endTime) => {
         if (startTime  && endTime ) {
             let startDate = new Date(day.concat(" , ", startTime));
-            let endDate = new Date(day.concat(" , ", endTime));
+            let endDate = endTime === '00:00' ? new Date(day.concat(" , ", '24:00')) : new Date(day.concat(" , ", endTime));
             if (endDate.getTime() > startDate.getTime()) {
-                let timestampDiff = endDate.getTime() - startDate.getTime();
-                let diffHour = Math.floor(new Date(timestampDiff) / (60 * 60 * 1000));
-                let diffMinute = (new Date(timestampDiff) / (60000)) - diffHour * 60;
+                let timestampDiff = endDate-startDate;
+                let diffHour = Math.floor((timestampDiff % 86400000) / 3600000);
                 return diffHour
             }
         }
-
         return 0
-
     }
 
     const getShiftSchedule = (page, startDate, endDate, depart, subDepart) => {
@@ -394,8 +391,13 @@ function WorkSchedule() {
                                                                             {
                                                                                 employeeArr[item][day.date] !== undefined ?
                                                                                     employeeArr[item][day.date].offDay ?
-                                                                                        <span
-                                                                                            className="td-holiday">İstirahət <br/> günü </span>
+                                                                                        <div className="td-holiday flex-center">
+                                                                                            <ReactSVG
+                                                                                                src={require(`../../../assets/img/restDay.svg`).default}
+                                                                                                wrapper="span"
+                                                                                                className="wrapper-svg"/>
+                                                                                            <span>İstirahət günü </span>
+                                                                                        </div>
                                                                                         :
                                                                                         <>
                                                                                             {
@@ -468,10 +470,10 @@ function WorkSchedule() {
                                             click={(breakHour, jobOnOffDay, offDay, shiftFrom, shiftTo, repeatFrom, breakHour2, jobOnOffDay2, shiftFrom2, shiftTo2, propsData) => {
                                                 sendData(breakHour, jobOnOffDay, offDay, shiftFrom, shiftTo, repeatFrom, breakHour2, jobOnOffDay2, shiftFrom2, shiftTo2, propsData)
                                             }}
-                                            delete={(propsData) => {
+                                            deleteDay={(propsData) => {
                                                 deleteDay(propsData)
                                             }}
-                                            function={(day, startTime, endTime) => timeDiffer(day, startTime, endTime)}
+                                            timeDiffer={(day, startTime, endTime) => timeDiffer(day, startTime, endTime)}
                                             rand={Math.random()}
                                         />
                                     </div>
