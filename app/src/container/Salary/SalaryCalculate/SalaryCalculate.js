@@ -133,7 +133,6 @@ function SalaryCalculate() {
     const [selectedYear, setSelectedYear] = useState(currentYear);
 
 
-
     const [loading, setLoading] = useState(false);
 
     let year = selectedYear !== null ? selectedYear : currentYear;
@@ -173,7 +172,7 @@ function SalaryCalculate() {
         </div>);
     };
 
-    const getSalary = (page,month, year, departId, subDepartId, name ) => {
+    const getSalary = (page, month, year, departId, subDepartId, name) => {
         setLoading(true)
         let params = {
             page: page - 1,
@@ -263,11 +262,10 @@ function SalaryCalculate() {
     }
 
 
-
     useEffect(() => {
         getDepartment();
         getSubDepartments();
-        getSalary(1,selectedMonth, selectedYear);
+        getSalary(1, selectedMonth, selectedYear);
         for (let i = 2021; i <= currentYear; i++) {
             yearOptions.push({value: i, label: i});
         }
@@ -287,7 +285,7 @@ function SalaryCalculate() {
                             Əmək haqqı hesablama
                         </div>
                         <div className="btn-block flex-end">
-                              <button type="button" className="btn-border"  onClick={() => {
+                            <button type="button" className="btn-border" onClick={() => {
                                 setShowFilter(!showFilter)
                             }}>
                                 <svg width="16" height="18" viewBox="0 0 16 18" fill="none"
@@ -321,7 +319,7 @@ function SalaryCalculate() {
                                                         setSelectedSubDepartment(null)
                                                         let subDepartId = selectedSubDepartment !== null ? selectedSubDepartment.id : null;
                                                         let name = fullName !== '' ? fullName : null
-                                                        getSalary(1 ,month, year,id, subDepartId, name)
+                                                        getSalary(1, month, year, id, subDepartId, name)
                                                     }}
                                                     isSearchable={department ? department.length > 5 ? true : false : false}
                                                     options={department}
@@ -341,7 +339,7 @@ function SalaryCalculate() {
                                                         let id = val.id
                                                         let departId = selectedDepartment !== null ? selectedDepartment.id : null;
                                                         let name = fullName !== '' ? fullName : null
-                                                        getSalary(1 ,month, year,departId, id, name)
+                                                        getSalary(1, month, year, departId, id, name)
 
                                                     }}
                                                     isSearchable={subDepartment ? subDepartment.length > 5 ? true : false : false}
@@ -364,7 +362,7 @@ function SalaryCalculate() {
                                                                       let departId = selectedDepartment !== null ? selectedDepartment.id : null;
                                                                       let subDepartId = selectedSubDepartment !== null ? selectedSubDepartment.id : null;
                                                                       if (e.key === 'Enter') {
-                                                                          getSalary(1 ,month, year,departId, subDepartId, e.target.value)
+                                                                          getSalary(1, month, year, departId, subDepartId, e.target.value)
                                                                       }
                                                                   }}
                                                     />
@@ -392,7 +390,7 @@ function SalaryCalculate() {
                                                 val = val.value
                                                 setSelectedYear(val);
                                                 let month = selectedMonth !== null ? selectedMonth : currentMonth;
-                                                getSalary(month, val, 1)
+                                                getSalary(1,month, val )
                                             }}
                                             options={yearOptions}
                                             styles={customStyles}
@@ -409,7 +407,7 @@ function SalaryCalculate() {
                                                 val = val.value
                                                 setSelectedMonth(val);
                                                 let year = selectedYear !== null ? selectedYear : currentYear
-                                                getSalary(val, year, 1)
+                                                getSalary(1,val, year)
                                             }}
                                             options={monthOptions}
                                             styles={customStyles}
@@ -629,7 +627,7 @@ function SalaryCalculate() {
 
                                 </div>
                                 <Paginate count={totalRecord} recordSize={recordSize} currentPage={currentPage}
-                                          click={(page) => getSalary(page,month, year,depart, subDepart, name)}/>
+                                          click={(page) => getSalary(page, month, year, depart, subDepart, name)}/>
                             </>
                     }
                 </Container>
