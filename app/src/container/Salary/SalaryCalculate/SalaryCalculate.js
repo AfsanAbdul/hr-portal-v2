@@ -259,6 +259,7 @@ function SalaryCalculate() {
         setSelectedDepartment(null);
         setFullName('');
         getSubDepartments();
+        getSalary(1, selectedMonth, selectedYear)
     }
 
 
