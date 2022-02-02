@@ -132,13 +132,24 @@ function SalaryCalculate() {
     const [tableCols, setTableCols] = useState(cols);
     const [selectedYear, setSelectedYear] = useState(currentYear);
 
-    const [showFilter, setShowFilter] = useState(false)
 
 
     const [loading, setLoading] = useState(false);
 
     let year = selectedYear !== null ? selectedYear : currentYear;
     let month = selectedMonth !== null ? selectedMonth : currentMonth;
+
+    /*filter*/
+
+    const [department, setDepartment] = useState([]);
+    const [selectedDepartment, setSelectedDepartment] = useState(null)
+    const [subDepartment, setSubDepartment] = useState([]);
+    const [selectedSubDepartment, setSelectedSubDepartment] = useState(null)
+    const [fullName, setFullName] = useState('');
+    const [showFilter, setShowFilter] = useState(false)
+    let depart = selectedDepartment !== null ? selectedDepartment.id : null;
+    let subDepart = selectedSubDepartment !== null ? selectedSubDepartment.id : null;
+    let name = fullName !== '' ? fullName : null;
 
     const Option = props => {
         return (<div>
@@ -162,11 +173,14 @@ function SalaryCalculate() {
         </div>);
     };
 
-    const getSalary = (month, year, page) => {
+    const getSalary = (page,month, year, departId, subDepartId, name ) => {
         setLoading(true)
         let params = {
             page: page - 1,
             size: recordSize,
+            departmentId: departId,
+            subDepartmentId: subDepartId,
+            fullName: name,
         };
 
         if (month != currentMonth || year != currentYear) {
@@ -203,16 +217,56 @@ function SalaryCalculate() {
             const url = window.URL.createObjectURL(new Blob([res.data]));
             const link = window.document.createElement('a');
             link.href = url;
-            link.setAttribute('download', `${file}.csv`);
+            link.setAttribute('download', `${file}.xlsx`);
             window.document.body.appendChild(link);
             link.click();
         }).catch((error) => {
         });
     }
 
+    const getDepartment = () => {
+        mainAxios({
+            method: 'get',
+            url: '/departments',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        }).then((res) => {
+            setDepartment(res.data);
+        }).catch((error) => {
+            setDepartment([])
+        });
+    }
+
+    const getSubDepartments = (id) => {
+        mainAxios({
+            method: 'get',
+            url: id !== undefined ? `/departments/${id}/sub-departments` : '/sub-departments',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        }).then((res) => {
+            setSubDepartment(res.data)
+        }).catch((error) => {
+            setSubDepartment([])
+        });
+    }
+
+    const resetFilter = () => {
+        setSelectedSubDepartment(null);
+        setSelectedDepartment(null);
+        setFullName('');
+        getSubDepartments();
+    }
+
+
 
     useEffect(() => {
-        getSalary(selectedMonth, selectedYear, 1);
+        getDepartment();
+        getSubDepartments();
+        getSalary(1,selectedMonth, selectedYear);
         for (let i = 2021; i <= currentYear; i++) {
             yearOptions.push({value: i, label: i});
         }
@@ -232,7 +286,7 @@ function SalaryCalculate() {
                             Əmək haqqı hesablama
                         </div>
                         <div className="btn-block flex-end">
-                            {/*  <button type="button" className="btn-border"  onClick={() => {
+                              <button type="button" className="btn-border"  onClick={() => {
                                 setShowFilter(!showFilter)
                             }}>
                                 <svg width="16" height="18" viewBox="0 0 16 18" fill="none"
@@ -242,12 +296,88 @@ function SalaryCalculate() {
                                         fill="#040647"/>
                                 </svg>
                                 Filters
-                            </button>*/}
+                            </button>
                             <button onClick={() => getExport()} className="btn-main">
                                 Export file
                             </button>
                         </div>
                     </div>
+                    {
+                        showFilter ?
+                            <div className="filter-block">
+                                <div className="block flex">
+                                    <div className="filter-left">
+                                        <div className="filter-item">
+                                            <Form.Group className="form-group m-0">
+                                                <span className="input-title">Struktur vahidinin adı</span>
+                                                <Select
+                                                    placeholder="Struktur vahidini seçin"
+                                                    value={selectedDepartment}
+                                                    onChange={(val) => {
+                                                        setSelectedDepartment(val);
+                                                        let id = val.id;
+                                                        getSubDepartments(id);
+                                                        setSelectedSubDepartment(null)
+                                                        let subDepartId = selectedSubDepartment !== null ? selectedSubDepartment.id : null;
+                                                        let name = fullName !== '' ? fullName : null
+                                                        getSalary(1 ,month, year,id, subDepartId, name)
+                                                    }}
+                                                    isSearchable={department ? department.length > 5 ? true : false : false}
+                                                    options={department}
+                                                    getOptionLabel={(option) => (option.name)}
+                                                    styles={customStyles}
+                                                />
+                                            </Form.Group>
+                                        </div>
+                                        <div className="filter-item">
+                                            <Form.Group className="form-group m-0">
+                                                <span className="input-title">Struktur bölmənin adı</span>
+                                                <Select
+                                                    placeholder="Struktur bölməni seçin"
+                                                    value={selectedSubDepartment}
+                                                    onChange={(val) => {
+                                                        setSelectedSubDepartment(val);
+                                                        let id = val.id
+                                                        let departId = selectedDepartment !== null ? selectedDepartment.id : null;
+                                                        let name = fullName !== '' ? fullName : null
+                                                        getSalary(1 ,month, year,departId, id, name)
+
+                                                    }}
+                                                    isSearchable={subDepartment ? subDepartment.length > 5 ? true : false : false}
+                                                    options={subDepartment}
+                                                    getOptionLabel={(option) => (option.name)}
+                                                    styles={customStyles}
+                                                />
+                                            </Form.Group>
+                                        </div>
+                                        <div className="filter-item">
+                                            <Form.Group className="form-group m-0">
+                                                <span className="input-title">İşçinin adı</span>
+                                                <Form.Label>
+                                                    <Form.Control placeholder="İşçinin adı daxil edin"
+                                                                  value={fullName}
+                                                                  onChange={(e) => {
+                                                                      setFullName(e.target.value)
+                                                                  }}
+                                                                  onKeyPress={(e) => {
+                                                                      let departId = selectedDepartment !== null ? selectedDepartment.id : null;
+                                                                      let subDepartId = selectedSubDepartment !== null ? selectedSubDepartment.id : null;
+                                                                      if (e.key === 'Enter') {
+                                                                          getSalary(1 ,month, year,departId, subDepartId, e.target.value)
+                                                                      }
+                                                                  }}
+                                                    />
+                                                </Form.Label>
+                                            </Form.Group>
+                                        </div>
+                                    </div>
+                                    <Button className="btn-border" onClick={() => resetFilter()}>
+                                        Təmizlə
+                                    </Button>
+                                </div>
+                            </div>
+                            : null
+                    }
                     <div className="filter-block">
                         <div className="block flex">
                             <div className="filter-left">
@@ -498,7 +628,7 @@ function SalaryCalculate() {
 
                                 </div>
                                 <Paginate count={totalRecord} recordSize={recordSize} currentPage={currentPage}
-                                          click={(page) => getSalary(month, year, page)}/>
+                                          click={(page) => getSalary(page,month, year,depart, subDepart, name)}/>
                             </>
                     }
                 </Container>
