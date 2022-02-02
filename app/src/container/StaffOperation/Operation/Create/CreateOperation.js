@@ -160,6 +160,15 @@ function CreateOperation() {
         subDepartment: null,
         obeyDepartment: null,
         position: null,
+    }]);
+
+    const [businessTripArr, setBusinessTripArr] = useState([{
+        cityId : null,
+        payment: null,
+        fromCheckInHotel: false,
+        fromDate: null,
+        toCheckInHotel: false,
+        toDate: null,
     }])
 
     const [selectedStaff, setSelectedStaff] = useState(null);
@@ -202,6 +211,17 @@ function CreateOperation() {
             subDepartment: null,
             obeyDepartment: null,
             position: null,
+        }])
+    }
+
+    const addBusinessTripArr = () => {
+        setBusinessTripArr(businessTripArr => [...businessTripArr, {
+            cityId : null,
+            payment: null,
+            fromCheckInHotel: false,
+            fromDate: null,
+            toCheckInHotel: false,
+            toDate: null,
         }])
     }
 
@@ -469,7 +489,7 @@ function CreateOperation() {
         );
     }
 
-    const getPayment = (id) => {
+    const getPayment = (id, index) => {
         mainAxios({
             method: 'get',
             url: 'payments/' + id,
@@ -478,7 +498,14 @@ function CreateOperation() {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
         }).then((res) => {
-                setPaymentAmount(res.data);
+            let data = res.data;
+            businessTripArr[index].cityId = id;
+            businessTripArr[index].payment = data;
+            businessTripArr[index].fromCheckInHotel = false;
+            businessTripArr[index].fromDate = null;
+            businessTripArr[index].toCheckInHotel = false;
+            businessTripArr[index].toDate = null;
+            setBusinessTripArr([...businessTripArr], businessTripArr);
             }
         );
     }
@@ -7170,6 +7197,365 @@ function CreateOperation() {
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
+                                            <Col xs={12}>
+                                                <div className="block-inn relative">
+                                                   {/* <div className="block-title ">
+                                                        İş vaxtından artıq işə cəlb edilən işçi və ya işçilər
+                                                    </div>*/}
+                                                    <div className="addition-content">
+                                                        {
+                                                            businessTripArr.map((item, index) =>
+                                                                <div key={uid(item, index)}
+                                                                     className={index === 0 ? '' : 'add-item'}>
+                                                                    {
+                                                                        index === 0 ? null :
+                                                                            <div className="add-item-top">
+                                                                                <p className="m-0"> #{index + 1}.
+                                                                                    Digər </p>
+                                                                                <Button
+                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    onClick={() => {
+                                                                                        businessTripArr.splice(index, 1);
+                                                                                        setBusinessTripArr([...businessTripArr], businessTripArr)
+                                                                                    }}>
+                                                                                    <svg width="14" height="14"
+                                                                                         viewBox="0 0 14 14" fill="none"
+                                                                                         xmlns="http://www.w3.org/2000/svg">
+                                                                                        <path
+                                                                                            d="M11.1665 2.69336L10.2739 12.8645H3.7302L2.8378 2.69336L1.70703 2.79248L2.61572 13.1481C2.66354 13.6254 3.07769 13.9997 3.5588 13.9997H10.4453C10.9262 13.9997 11.3405 13.6256 11.3892 13.1413L12.2973 2.79248L11.1665 2.69336Z"
+                                                                                            fill="#CF3131"/>
+                                                                                        <path
+                                                                                            d="M9.08077 0H4.91861C4.397 0 3.97266 0.424348 3.97266 0.945957V2.74326H5.10778V1.13512H8.89155V2.74323H10.0267V0.94593C10.0267 0.424348 9.60238 0 9.08077 0Z"
+                                                                                            fill="#CF3131"/>
+                                                                                        <path
+                                                                                            d="M13.0507 2.17578H0.942574C0.629078 2.17578 0.375 2.42986 0.375 2.74336C0.375 3.05685 0.629078 3.31093 0.942574 3.31093H13.0507C13.3642 3.31093 13.6183 3.05685 13.6183 2.74336C13.6183 2.42986 13.3642 2.17578 13.0507 2.17578Z"
+                                                                                            fill="#CF3131"/>
+                                                                                    </svg>
+                                                                                    <span>Sil</span>
+                                                                                </Button>
+                                                                            </div>
+                                                                    }
+                                                                    <Row>
+                                                                        <Col xs={3}>
+                                                                            <Form.Group className="form-group">
+                                                                                <span className="input-title">Ezam olunduğu ölkə\şəhər\rayon</span>
+                                                                                <Form.Label>
+                                                                                    <Select
+                                                                                        placeholder="Şəhər seçin"
+                                                                                        onChange={(val) => {
+                                                                                            let id = val.id;
+                                                                                            getPayment(id, index)
+                                                                                        }}
+                                                                                        options={cityArr}
+                                                                                        isSearchable={cityArr ? cityArr.length > 5 ? true : false : false}
+                                                                                        styles={customStyles}
+                                                                                        getOptionLabel={(option) => (option.name)}
+                                                                                        getOptionValue={(option) => (option.name)}
+                                                                                    />
+                                                                                </Form.Label>
+                                                                            </Form.Group>
+                                                                        </Col>
+                                                                        <Col xs={3}>
+                                                                            <Form.Group className="form-group">
+                                                                                <span className="input-title">Ezamiyyət ödənişi </span>
+                                                                                <Form.Label>
+                                                                                    <Form.Control
+                                                                                        placeholder="Ezamiyyət ödənişi"
+                                                                                        value={item.payment || ''}
+                                                                                        disabled={true}/>
+                                                                                </Form.Label>
+                                                                            </Form.Group>
+                                                                        </Col>
+                                                                        <Col xs={3}>
+                                                                            <Form.Group className="form-group">
+                                                                                <div className="input-title flex-center">
+                                                                                    <div className="check-block">
+                                                                                        <label className="check-button">
+                                                                                            <input type="checkbox"
+                                                                                                   name="checkForeign"
+                                                                                                   checked={item.fromCheckInHotel}
+                                                                                                   onChange={(e) => {
+                                                                                                       businessTripArr[index].fromCheckInHotel = e.target.checked;
+                                                                                                       setBusinessTripArr([...businessTripArr], businessTripArr)
+                                                                                                   }}/>
+                                                                                            <span className="checkmark"></span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <span
+                                                                                        className="input-title m-0">Ezamiyyətin başladığı tarix / Otele giriş daxildir </span>
+                                                                                </div>
+                                                                                <Form.Label className="relative m-0">
+                                                                                    <DatePicker value={item.fromDate}
+                                                                                                dateFormat="dd-MM-yyyy"
+                                                                                                placeholderText="DD-MM-YYYY"
+                                                                                                showMonthDropdown
+                                                                                                showYearDropdown
+                                                                                                dropdownMode="select"
+                                                                                                selectsStart
+                                                                                                startDate={startDate}
+                                                                                                endDate={endDate}
+                                                                                                onChange={(date) => {
+                                                                                                    businessTripArr[index].fromDate = moment(date).format("YYYY-MM-DD");
+                                                                                                    setBusinessTripArr([...businessTripArr], businessTripArr)
+                                                                                                }}
+                                                                                                />
+                                                                                    <Button className="btn-transparent">
+                                                                                        <svg width="18" height="18"
+                                                                                             viewBox="0 0 18 18" fill="none"
+                                                                                             xmlns="http://www.w3.org/2000/svg">
+                                                                                            <g opacity="0.8"
+                                                                                               clipPath="url(#clip0)">
+                                                                                                <path
+                                                                                                    d="M5.34327 8.75391H4.25583C3.97432 8.75391 3.74609 8.99002 3.74609 9.28125C3.74609 9.57248 3.97432 9.80859 4.25583 9.80859H5.34327C5.62478 9.80859 5.853 9.57248 5.853 9.28125C5.853 8.99002 5.62478 8.75391 5.34327 8.75391Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M5.34327 11.0039H4.25583C3.97432 11.0039 3.74609 11.24 3.74609 11.5312C3.74609 11.8225 3.97432 12.0586 4.25583 12.0586H5.34327C5.62478 12.0586 5.853 11.8225 5.853 11.5312C5.853 11.24 5.62478 11.0039 5.34327 11.0039Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M5.34327 13.2539H4.25583C3.97432 13.2539 3.74609 13.49 3.74609 13.7812C3.74609 14.0725 3.97432 14.3086 4.25583 14.3086H5.34327C5.62478 14.3086 5.853 14.0725 5.853 13.7812C5.853 13.49 5.62478 13.2539 5.34327 13.2539Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M9.69092 8.75391H8.60349C8.32198 8.75391 8.09375 8.99002 8.09375 9.28125C8.09375 9.57248 8.32198 9.80859 8.60349 9.80859H9.69092C9.97243 9.80859 10.2007 9.57248 10.2007 9.28125C10.2007 8.99002 9.97243 8.75391 9.69092 8.75391Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M9.69092 11.0039H8.60349C8.32198 11.0039 8.09375 11.24 8.09375 11.5312C8.09375 11.8225 8.32198 12.0586 8.60349 12.0586H9.69092C9.97243 12.0586 10.2007 11.8225 10.2007 11.5312C10.2007 11.24 9.97243 11.0039 9.69092 11.0039Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M9.69092 13.2539H8.60349C8.32198 13.2539 8.09375 13.49 8.09375 13.7812C8.09375 14.0725 8.32198 14.3086 8.60349 14.3086H9.69092C9.97243 14.3086 10.2007 14.0725 10.2007 13.7812C10.2007 13.49 9.97243 13.2539 9.69092 13.2539Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M14.0425 8.75391H12.955C12.6735 8.75391 12.4453 8.99002 12.4453 9.28125C12.4453 9.57248 12.6735 9.80859 12.955 9.80859H14.0425C14.324 9.80859 14.5522 9.57248 14.5522 9.28125C14.5522 8.99002 14.324 8.75391 14.0425 8.75391Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M14.0425 11.0039H12.955C12.6735 11.0039 12.4453 11.24 12.4453 11.5312C12.4453 11.8225 12.6735 12.0586 12.955 12.0586H14.0425C14.324 12.0586 14.5522 11.8225 14.5522 11.5312C14.5522 11.24 14.324 11.0039 14.0425 11.0039Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M14.0425 13.2539H12.955C12.6735 13.2539 12.4453 13.49 12.4453 13.7812C12.4453 14.0725 12.6735 14.3086 12.955 14.3086H14.0425C14.324 14.3086 14.5522 14.0725 14.5522 13.7812C14.5522 13.49 14.324 13.2539 14.0425 13.2539Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M16.319 2.28516H15.0956V1.40625C15.0956 1.11502 14.8674 0.878906 14.5859 0.878906C14.3044 0.878906 14.0762 1.11502 14.0762 1.40625V2.28516H9.65845V1.40625C9.65845 1.11502 9.43023 0.878906 9.14872 0.878906C8.86721 0.878906 8.63898 1.11502 8.63898 1.40625V2.28516H4.22127V1.40625C4.22127 1.11502 3.99304 0.878906 3.71153 0.878906C3.43002 0.878906 3.20179 1.11502 3.20179 1.40625V2.28516H1.97843C1.13522 2.28516 0.449219 2.99486 0.449219 3.86719V15.5391C0.449219 16.4114 1.13522 17.1211 1.97843 17.1211H16.319C17.1622 17.1211 17.8482 16.4114 17.8482 15.5391C17.8482 15.1987 17.8482 4.16338 17.8482 3.86719C17.8482 2.99486 17.1622 2.28516 16.319 2.28516ZM1.46869 3.86719C1.46869 3.57641 1.69736 3.33984 1.97843 3.33984H3.20179V4.21875C3.20179 4.50998 3.43002 4.74609 3.71153 4.74609C3.99304 4.74609 4.22127 4.50998 4.22127 4.21875V3.33984H8.63898V4.21875C8.63898 4.50998 8.86721 4.74609 9.14872 4.74609C9.43023 4.74609 9.65845 4.50998 9.65845 4.21875V3.33984H14.0762V4.21875C14.0762 4.50998 14.3044 4.74609 14.5859 4.74609C14.8674 4.74609 15.0956 4.50998 15.0956 4.21875V3.33984H16.319C16.6001 3.33984 16.8287 3.57641 16.8287 3.86719V5.94141H1.46869V3.86719ZM16.319 16.0664H1.97843C1.69736 16.0664 1.46869 15.8298 1.46869 15.5391V6.99609H16.8287V15.5391C16.8287 15.8298 16.6001 16.0664 16.319 16.0664Z"
+                                                                                                    fill="#181818"/>
+                                                                                            </g>
+                                                                                            <defs>
+                                                                                                <clipPath id="clip0">
+                                                                                                    <rect width="17.399"
+                                                                                                          height="18"
+                                                                                                          fill="white"
+                                                                                                          transform="translate(0.449219)"/>
+                                                                                                </clipPath>
+                                                                                            </defs>
+                                                                                        </svg>
+                                                                                    </Button>
+                                                                                </Form.Label>
+                                                                                <div className="validation-block flex-start">
+                                                                                    {
+
+                                                                                        errors['businessTrip.from'] !== '' ?
+                                                                                            <span
+                                                                                                className="text-validation">{errors['businessTrip.from']}</span>
+                                                                                            : null
+                                                                                    }
+                                                                                </div>
+                                                                            </Form.Group>
+                                                                        </Col>
+                                                                        <Col xs={3}>
+                                                                            <Form.Group className="form-group">
+                                                                                <div className="input-title flex-center">
+                                                                                    <div className="check-block">
+                                                                                        <label className="check-button">
+                                                                                            <input type="checkbox"
+                                                                                                   name="checkForeign"
+                                                                                                   checked={checkOut}
+                                                                                                   onChange={(e) => {
+                                                                                                       setCheckOut(e.target.checked)
+                                                                                                   }}/>
+                                                                                            <span className="checkmark"></span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <span
+                                                                                        className="input-title m-0">Ezamiyyətin bitdiyi tarix / Oteldən çıxış daxildir </span>
+                                                                                </div>
+                                                                                <Form.Label className="relative m-0">
+                                                                                    <DatePicker
+                                                                                        dateFormat="dd-MM-yyyy"
+                                                                                        placeholderText="DD-MM-YYYY"
+                                                                                        showMonthDropdown
+                                                                                        showYearDropdown
+                                                                                        dropdownMode="select"
+                                                                                        selected={endDate}
+                                                                                        onChange={(date) => {
+                                                                                            setEndDate(date);
+                                                                                            let startDay = startDate !== null ? startDate : 0
+                                                                                            getDayCount(startDay, date);
+                                                                                            getBusinessTripDay(startDay, date);
+                                                                                            getBusinessTripSalary(date, selectedStaff);
+                                                                                            setBusinessTripCheck(true);
+                                                                                            setBusinessPaymentCheck(true);
+                                                                                            setTripSalary('')
+                                                                                        }}
+                                                                                        selectsEnd
+                                                                                        startDate={startDate}
+                                                                                        endDate={endDate}
+                                                                                        minDate={startDate}/>
+                                                                                    <Button className="btn-transparent">
+                                                                                        <svg width="18" height="18"
+                                                                                             viewBox="0 0 18 18" fill="none"
+                                                                                             xmlns="http://www.w3.org/2000/svg">
+                                                                                            <g opacity="0.8"
+                                                                                               clipPath="url(#clip0)">
+                                                                                                <path
+                                                                                                    d="M5.34327 8.75391H4.25583C3.97432 8.75391 3.74609 8.99002 3.74609 9.28125C3.74609 9.57248 3.97432 9.80859 4.25583 9.80859H5.34327C5.62478 9.80859 5.853 9.57248 5.853 9.28125C5.853 8.99002 5.62478 8.75391 5.34327 8.75391Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M5.34327 11.0039H4.25583C3.97432 11.0039 3.74609 11.24 3.74609 11.5312C3.74609 11.8225 3.97432 12.0586 4.25583 12.0586H5.34327C5.62478 12.0586 5.853 11.8225 5.853 11.5312C5.853 11.24 5.62478 11.0039 5.34327 11.0039Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M5.34327 13.2539H4.25583C3.97432 13.2539 3.74609 13.49 3.74609 13.7812C3.74609 14.0725 3.97432 14.3086 4.25583 14.3086H5.34327C5.62478 14.3086 5.853 14.0725 5.853 13.7812C5.853 13.49 5.62478 13.2539 5.34327 13.2539Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M9.69092 8.75391H8.60349C8.32198 8.75391 8.09375 8.99002 8.09375 9.28125C8.09375 9.57248 8.32198 9.80859 8.60349 9.80859H9.69092C9.97243 9.80859 10.2007 9.57248 10.2007 9.28125C10.2007 8.99002 9.97243 8.75391 9.69092 8.75391Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M9.69092 11.0039H8.60349C8.32198 11.0039 8.09375 11.24 8.09375 11.5312C8.09375 11.8225 8.32198 12.0586 8.60349 12.0586H9.69092C9.97243 12.0586 10.2007 11.8225 10.2007 11.5312C10.2007 11.24 9.97243 11.0039 9.69092 11.0039Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M9.69092 13.2539H8.60349C8.32198 13.2539 8.09375 13.49 8.09375 13.7812C8.09375 14.0725 8.32198 14.3086 8.60349 14.3086H9.69092C9.97243 14.3086 10.2007 14.0725 10.2007 13.7812C10.2007 13.49 9.97243 13.2539 9.69092 13.2539Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M14.0425 8.75391H12.955C12.6735 8.75391 12.4453 8.99002 12.4453 9.28125C12.4453 9.57248 12.6735 9.80859 12.955 9.80859H14.0425C14.324 9.80859 14.5522 9.57248 14.5522 9.28125C14.5522 8.99002 14.324 8.75391 14.0425 8.75391Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M14.0425 11.0039H12.955C12.6735 11.0039 12.4453 11.24 12.4453 11.5312C12.4453 11.8225 12.6735 12.0586 12.955 12.0586H14.0425C14.324 12.0586 14.5522 11.8225 14.5522 11.5312C14.5522 11.24 14.324 11.0039 14.0425 11.0039Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M14.0425 13.2539H12.955C12.6735 13.2539 12.4453 13.49 12.4453 13.7812C12.4453 14.0725 12.6735 14.3086 12.955 14.3086H14.0425C14.324 14.3086 14.5522 14.0725 14.5522 13.7812C14.5522 13.49 14.324 13.2539 14.0425 13.2539Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M16.319 2.28516H15.0956V1.40625C15.0956 1.11502 14.8674 0.878906 14.5859 0.878906C14.3044 0.878906 14.0762 1.11502 14.0762 1.40625V2.28516H9.65845V1.40625C9.65845 1.11502 9.43023 0.878906 9.14872 0.878906C8.86721 0.878906 8.63898 1.11502 8.63898 1.40625V2.28516H4.22127V1.40625C4.22127 1.11502 3.99304 0.878906 3.71153 0.878906C3.43002 0.878906 3.20179 1.11502 3.20179 1.40625V2.28516H1.97843C1.13522 2.28516 0.449219 2.99486 0.449219 3.86719V15.5391C0.449219 16.4114 1.13522 17.1211 1.97843 17.1211H16.319C17.1622 17.1211 17.8482 16.4114 17.8482 15.5391C17.8482 15.1987 17.8482 4.16338 17.8482 3.86719C17.8482 2.99486 17.1622 2.28516 16.319 2.28516ZM1.46869 3.86719C1.46869 3.57641 1.69736 3.33984 1.97843 3.33984H3.20179V4.21875C3.20179 4.50998 3.43002 4.74609 3.71153 4.74609C3.99304 4.74609 4.22127 4.50998 4.22127 4.21875V3.33984H8.63898V4.21875C8.63898 4.50998 8.86721 4.74609 9.14872 4.74609C9.43023 4.74609 9.65845 4.50998 9.65845 4.21875V3.33984H14.0762V4.21875C14.0762 4.50998 14.3044 4.74609 14.5859 4.74609C14.8674 4.74609 15.0956 4.50998 15.0956 4.21875V3.33984H16.319C16.6001 3.33984 16.8287 3.57641 16.8287 3.86719V5.94141H1.46869V3.86719ZM16.319 16.0664H1.97843C1.69736 16.0664 1.46869 15.8298 1.46869 15.5391V6.99609H16.8287V15.5391C16.8287 15.8298 16.6001 16.0664 16.319 16.0664Z"
+                                                                                                    fill="#181818"/>
+                                                                                            </g>
+                                                                                            <defs>
+                                                                                                <clipPath id="clip0">
+                                                                                                    <rect width="17.399"
+                                                                                                          height="18"
+                                                                                                          fill="white"
+                                                                                                          transform="translate(0.449219)"/>
+                                                                                                </clipPath>
+                                                                                            </defs>
+                                                                                        </svg>
+                                                                                    </Button>
+                                                                                </Form.Label>
+                                                                                <div className="validation-block flex-start">
+                                                                                    {
+
+                                                                                        errors['businessTrip.to'] !== '' ?
+                                                                                            <span
+                                                                                                className="text-validation">{errors['businessTrip.to']}</span>
+                                                                                            : null
+                                                                                    }
+                                                                                </div>
+                                                                            </Form.Group>
+                                                                        </Col>
+                                                                       {/* <Col xs={3}>
+                                                                            <Form.Group className="form-group">
+                                                                                <span className="input-title"> İşçinin işə başladığı</span>
+                                                                                <Form.Label className="relative m-0">
+                                                                                    <DatePicker
+                                                                                        value={item.date}
+                                                                                        dateFormat="dd-MM-yyyy"
+                                                                                        placeholderText="YYYY-MM-DD"
+                                                                                        showMonthDropdown
+                                                                                        showYearDropdown
+                                                                                        dropdownMode="select"
+                                                                                        onChange={(date) => {
+                                                                                            overtimeEmpArr[index].date = moment(date).format("YYYY-MM-DD");
+                                                                                            setOvertimeEmpArr([...overtimeEmpArr], overtimeEmpArr)
+                                                                                        }}/>
+                                                                                    <Button className="btn-transparent">
+                                                                                        <svg width="18" height="18"
+                                                                                             viewBox="0 0 18 18"
+                                                                                             fill="none"
+                                                                                             xmlns="http://www.w3.org/2000/svg">
+                                                                                            <g opacity="0.8"
+                                                                                               clipPath="url(#clip0)">
+                                                                                                <path
+                                                                                                    d="M5.34327 8.75391H4.25583C3.97432 8.75391 3.74609 8.99002 3.74609 9.28125C3.74609 9.57248 3.97432 9.80859 4.25583 9.80859H5.34327C5.62478 9.80859 5.853 9.57248 5.853 9.28125C5.853 8.99002 5.62478 8.75391 5.34327 8.75391Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M5.34327 11.0039H4.25583C3.97432 11.0039 3.74609 11.24 3.74609 11.5312C3.74609 11.8225 3.97432 12.0586 4.25583 12.0586H5.34327C5.62478 12.0586 5.853 11.8225 5.853 11.5312C5.853 11.24 5.62478 11.0039 5.34327 11.0039Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M5.34327 13.2539H4.25583C3.97432 13.2539 3.74609 13.49 3.74609 13.7812C3.74609 14.0725 3.97432 14.3086 4.25583 14.3086H5.34327C5.62478 14.3086 5.853 14.0725 5.853 13.7812C5.853 13.49 5.62478 13.2539 5.34327 13.2539Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M9.69092 8.75391H8.60349C8.32198 8.75391 8.09375 8.99002 8.09375 9.28125C8.09375 9.57248 8.32198 9.80859 8.60349 9.80859H9.69092C9.97243 9.80859 10.2007 9.57248 10.2007 9.28125C10.2007 8.99002 9.97243 8.75391 9.69092 8.75391Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M9.69092 11.0039H8.60349C8.32198 11.0039 8.09375 11.24 8.09375 11.5312C8.09375 11.8225 8.32198 12.0586 8.60349 12.0586H9.69092C9.97243 12.0586 10.2007 11.8225 10.2007 11.5312C10.2007 11.24 9.97243 11.0039 9.69092 11.0039Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M9.69092 13.2539H8.60349C8.32198 13.2539 8.09375 13.49 8.09375 13.7812C8.09375 14.0725 8.32198 14.3086 8.60349 14.3086H9.69092C9.97243 14.3086 10.2007 14.0725 10.2007 13.7812C10.2007 13.49 9.97243 13.2539 9.69092 13.2539Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M14.0425 8.75391H12.955C12.6735 8.75391 12.4453 8.99002 12.4453 9.28125C12.4453 9.57248 12.6735 9.80859 12.955 9.80859H14.0425C14.324 9.80859 14.5522 9.57248 14.5522 9.28125C14.5522 8.99002 14.324 8.75391 14.0425 8.75391Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M14.0425 11.0039H12.955C12.6735 11.0039 12.4453 11.24 12.4453 11.5312C12.4453 11.8225 12.6735 12.0586 12.955 12.0586H14.0425C14.324 12.0586 14.5522 11.8225 14.5522 11.5312C14.5522 11.24 14.324 11.0039 14.0425 11.0039Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M14.0425 13.2539H12.955C12.6735 13.2539 12.4453 13.49 12.4453 13.7812C12.4453 14.0725 12.6735 14.3086 12.955 14.3086H14.0425C14.324 14.3086 14.5522 14.0725 14.5522 13.7812C14.5522 13.49 14.324 13.2539 14.0425 13.2539Z"
+                                                                                                    fill="#181818"/>
+                                                                                                <path
+                                                                                                    d="M16.319 2.28516H15.0956V1.40625C15.0956 1.11502 14.8674 0.878906 14.5859 0.878906C14.3044 0.878906 14.0762 1.11502 14.0762 1.40625V2.28516H9.65845V1.40625C9.65845 1.11502 9.43023 0.878906 9.14872 0.878906C8.86721 0.878906 8.63898 1.11502 8.63898 1.40625V2.28516H4.22127V1.40625C4.22127 1.11502 3.99304 0.878906 3.71153 0.878906C3.43002 0.878906 3.20179 1.11502 3.20179 1.40625V2.28516H1.97843C1.13522 2.28516 0.449219 2.99486 0.449219 3.86719V15.5391C0.449219 16.4114 1.13522 17.1211 1.97843 17.1211H16.319C17.1622 17.1211 17.8482 16.4114 17.8482 15.5391C17.8482 15.1987 17.8482 4.16338 17.8482 3.86719C17.8482 2.99486 17.1622 2.28516 16.319 2.28516ZM1.46869 3.86719C1.46869 3.57641 1.69736 3.33984 1.97843 3.33984H3.20179V4.21875C3.20179 4.50998 3.43002 4.74609 3.71153 4.74609C3.99304 4.74609 4.22127 4.50998 4.22127 4.21875V3.33984H8.63898V4.21875C8.63898 4.50998 8.86721 4.74609 9.14872 4.74609C9.43023 4.74609 9.65845 4.50998 9.65845 4.21875V3.33984H14.0762V4.21875C14.0762 4.50998 14.3044 4.74609 14.5859 4.74609C14.8674 4.74609 15.0956 4.50998 15.0956 4.21875V3.33984H16.319C16.6001 3.33984 16.8287 3.57641 16.8287 3.86719V5.94141H1.46869V3.86719ZM16.319 16.0664H1.97843C1.69736 16.0664 1.46869 15.8298 1.46869 15.5391V6.99609H16.8287V15.5391C16.8287 15.8298 16.6001 16.0664 16.319 16.0664Z"
+                                                                                                    fill="#181818"/>
+                                                                                            </g>
+                                                                                            <defs>
+                                                                                                <clipPath id="clip0">
+                                                                                                    <rect width="17.399"
+                                                                                                          height="18"
+                                                                                                          fill="white"
+                                                                                                          transform="translate(0.449219)"/>
+                                                                                                </clipPath>
+                                                                                            </defs>
+                                                                                        </svg>
+                                                                                    </Button>
+                                                                                </Form.Label>
+                                                                                <div
+                                                                                    className="validation-block flex-start">
+                                                                                    {
+
+                                                                                        errors[`overtime[${index}].date`] !== '' ?
+                                                                                            <span
+                                                                                                className="text-validation">{errors[`overtime[${index}].date`]}</span>
+                                                                                            : null
+                                                                                    }
+                                                                                </div>
+                                                                            </Form.Group>
+                                                                        </Col>*/}
+                                                                    </Row>
+
+                                                                </div>
+                                                            )
+                                                        }
+                                                        <div className="flex-end">
+                                                            <button type="button" className="btn-color"
+                                                                    onClick={() => addBusinessTripArr()}>
+                                                                <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none"
+                                                                     xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M0.667969 6.00033H11.3346M6.0013 0.666992V11.3337V0.666992Z"
+                                                                        stroke="#3083DC" strokeWidth="1.3"
+                                                                        strokeLinecap="round"
+                                                                        strokeLinejoin="round"/>
+                                                                </svg>
+                                                                <span>əlavə et</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Col>
+{/*
                                             <Col xs={6}>
                                                 <Form.Group className="form-group">
                                                     <span className="input-title">Ezam olunduğu ölkə\şəhər\rayon </span>
@@ -7198,7 +7584,8 @@ function CreateOperation() {
                                                     </div>
                                                 </Form.Group>
                                             </Col>
-                                            <Col xs={6}>
+*/}
+                                          {/*  <Col xs={6}>
                                                 <Form.Group className="form-group">
                                                     <span className="input-title">Ezamiyyət ödənişi </span>
                                                     <Form.Label>
@@ -7209,200 +7596,7 @@ function CreateOperation() {
                                                             placeholder="Ezamiyyət ödənişi"/>
                                                     </Form.Label>
                                                 </Form.Group>
-                                            </Col>
-                                            <Col xs={4}>
-                                                <Form.Group className="form-group">
-                                                    <div className="input-title flex-center">
-                                                        <div className="check-block">
-                                                            <label className="check-button">
-                                                                <input type="checkbox"
-                                                                       name="checkForeign"
-                                                                       checked={checkIn}
-                                                                       onChange={(e) => {
-                                                                           setCheckIn(e.target.checked)
-                                                                       }}/>
-                                                                <span className="checkmark"></span>
-                                                            </label>
-                                                        </div>
-                                                        <span
-                                                            className="input-title m-0">Ezamiyyətin başladığı tarix / Otele giriş daxildir </span>
-                                                    </div>
-                                                    <Form.Label className="relative m-0">
-                                                        <DatePicker selected={startDate}
-                                                                    dateFormat="dd-MM-yyyy"
-                                                                    placeholderText="DD-MM-YYYY"
-                                                                    showMonthDropdown
-                                                                    showYearDropdown
-                                                                    dropdownMode="select"
-                                                                    selectsStart
-                                                                    startDate={startDate}
-                                                                    endDate={endDate}
-                                                                    onChange={(date) => {
-                                                                        setStartDate(date)
-                                                                        let endDay = endDate !== null ? endDate : 0
-                                                                        getDayCount(date, endDay);
-                                                                        getBusinessTripDay(date, endDay);
-                                                                        setBusinessTripCheck(true);
-                                                                        setBusinessPaymentCheck(true);
-                                                                        setTripSalary('')
-                                                                    }}/>
-                                                        <Button className="btn-transparent">
-                                                            <svg width="18" height="18"
-                                                                 viewBox="0 0 18 18" fill="none"
-                                                                 xmlns="http://www.w3.org/2000/svg">
-                                                                <g opacity="0.8"
-                                                                   clipPath="url(#clip0)">
-                                                                    <path
-                                                                        d="M5.34327 8.75391H4.25583C3.97432 8.75391 3.74609 8.99002 3.74609 9.28125C3.74609 9.57248 3.97432 9.80859 4.25583 9.80859H5.34327C5.62478 9.80859 5.853 9.57248 5.853 9.28125C5.853 8.99002 5.62478 8.75391 5.34327 8.75391Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M5.34327 11.0039H4.25583C3.97432 11.0039 3.74609 11.24 3.74609 11.5312C3.74609 11.8225 3.97432 12.0586 4.25583 12.0586H5.34327C5.62478 12.0586 5.853 11.8225 5.853 11.5312C5.853 11.24 5.62478 11.0039 5.34327 11.0039Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M5.34327 13.2539H4.25583C3.97432 13.2539 3.74609 13.49 3.74609 13.7812C3.74609 14.0725 3.97432 14.3086 4.25583 14.3086H5.34327C5.62478 14.3086 5.853 14.0725 5.853 13.7812C5.853 13.49 5.62478 13.2539 5.34327 13.2539Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M9.69092 8.75391H8.60349C8.32198 8.75391 8.09375 8.99002 8.09375 9.28125C8.09375 9.57248 8.32198 9.80859 8.60349 9.80859H9.69092C9.97243 9.80859 10.2007 9.57248 10.2007 9.28125C10.2007 8.99002 9.97243 8.75391 9.69092 8.75391Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M9.69092 11.0039H8.60349C8.32198 11.0039 8.09375 11.24 8.09375 11.5312C8.09375 11.8225 8.32198 12.0586 8.60349 12.0586H9.69092C9.97243 12.0586 10.2007 11.8225 10.2007 11.5312C10.2007 11.24 9.97243 11.0039 9.69092 11.0039Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M9.69092 13.2539H8.60349C8.32198 13.2539 8.09375 13.49 8.09375 13.7812C8.09375 14.0725 8.32198 14.3086 8.60349 14.3086H9.69092C9.97243 14.3086 10.2007 14.0725 10.2007 13.7812C10.2007 13.49 9.97243 13.2539 9.69092 13.2539Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M14.0425 8.75391H12.955C12.6735 8.75391 12.4453 8.99002 12.4453 9.28125C12.4453 9.57248 12.6735 9.80859 12.955 9.80859H14.0425C14.324 9.80859 14.5522 9.57248 14.5522 9.28125C14.5522 8.99002 14.324 8.75391 14.0425 8.75391Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M14.0425 11.0039H12.955C12.6735 11.0039 12.4453 11.24 12.4453 11.5312C12.4453 11.8225 12.6735 12.0586 12.955 12.0586H14.0425C14.324 12.0586 14.5522 11.8225 14.5522 11.5312C14.5522 11.24 14.324 11.0039 14.0425 11.0039Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M14.0425 13.2539H12.955C12.6735 13.2539 12.4453 13.49 12.4453 13.7812C12.4453 14.0725 12.6735 14.3086 12.955 14.3086H14.0425C14.324 14.3086 14.5522 14.0725 14.5522 13.7812C14.5522 13.49 14.324 13.2539 14.0425 13.2539Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M16.319 2.28516H15.0956V1.40625C15.0956 1.11502 14.8674 0.878906 14.5859 0.878906C14.3044 0.878906 14.0762 1.11502 14.0762 1.40625V2.28516H9.65845V1.40625C9.65845 1.11502 9.43023 0.878906 9.14872 0.878906C8.86721 0.878906 8.63898 1.11502 8.63898 1.40625V2.28516H4.22127V1.40625C4.22127 1.11502 3.99304 0.878906 3.71153 0.878906C3.43002 0.878906 3.20179 1.11502 3.20179 1.40625V2.28516H1.97843C1.13522 2.28516 0.449219 2.99486 0.449219 3.86719V15.5391C0.449219 16.4114 1.13522 17.1211 1.97843 17.1211H16.319C17.1622 17.1211 17.8482 16.4114 17.8482 15.5391C17.8482 15.1987 17.8482 4.16338 17.8482 3.86719C17.8482 2.99486 17.1622 2.28516 16.319 2.28516ZM1.46869 3.86719C1.46869 3.57641 1.69736 3.33984 1.97843 3.33984H3.20179V4.21875C3.20179 4.50998 3.43002 4.74609 3.71153 4.74609C3.99304 4.74609 4.22127 4.50998 4.22127 4.21875V3.33984H8.63898V4.21875C8.63898 4.50998 8.86721 4.74609 9.14872 4.74609C9.43023 4.74609 9.65845 4.50998 9.65845 4.21875V3.33984H14.0762V4.21875C14.0762 4.50998 14.3044 4.74609 14.5859 4.74609C14.8674 4.74609 15.0956 4.50998 15.0956 4.21875V3.33984H16.319C16.6001 3.33984 16.8287 3.57641 16.8287 3.86719V5.94141H1.46869V3.86719ZM16.319 16.0664H1.97843C1.69736 16.0664 1.46869 15.8298 1.46869 15.5391V6.99609H16.8287V15.5391C16.8287 15.8298 16.6001 16.0664 16.319 16.0664Z"
-                                                                        fill="#181818"/>
-                                                                </g>
-                                                                <defs>
-                                                                    <clipPath id="clip0">
-                                                                        <rect width="17.399"
-                                                                              height="18"
-                                                                              fill="white"
-                                                                              transform="translate(0.449219)"/>
-                                                                    </clipPath>
-                                                                </defs>
-                                                            </svg>
-                                                        </Button>
-                                                    </Form.Label>
-                                                    <div className="validation-block flex-start">
-                                                        {
-
-                                                            errors['businessTrip.from'] !== '' ?
-                                                                <span
-                                                                    className="text-validation">{errors['businessTrip.from']}</span>
-                                                                : null
-                                                        }
-                                                    </div>
-                                                </Form.Group>
-                                            </Col>
-                                            <Col xs={4}>
-                                                <Form.Group className="form-group">
-                                                    <div className="input-title flex-center">
-                                                        <div className="check-block">
-                                                            <label className="check-button">
-                                                                <input type="checkbox"
-                                                                       name="checkForeign"
-                                                                       checked={checkOut}
-                                                                       onChange={(e) => {
-                                                                           setCheckOut(e.target.checked)
-                                                                       }}/>
-                                                                <span className="checkmark"></span>
-                                                            </label>
-                                                        </div>
-                                                        <span
-                                                            className="input-title m-0">Ezamiyyətin bitdiyi tarix / Oteldən çıxış daxildir </span>
-                                                    </div>
-                                                    <Form.Label className="relative m-0">
-                                                        <DatePicker
-                                                            dateFormat="dd-MM-yyyy"
-                                                            placeholderText="DD-MM-YYYY"
-                                                            showMonthDropdown
-                                                            showYearDropdown
-                                                            dropdownMode="select"
-                                                            selected={endDate}
-                                                            onChange={(date) => {
-                                                                setEndDate(date);
-                                                                let startDay = startDate !== null ? startDate : 0
-                                                                getDayCount(startDay, date);
-                                                                getBusinessTripDay(startDay, date);
-                                                                getBusinessTripSalary(date, selectedStaff);
-                                                                setBusinessTripCheck(true);
-                                                                setBusinessPaymentCheck(true);
-                                                                setTripSalary('')
-                                                            }}
-                                                            selectsEnd
-                                                            startDate={startDate}
-                                                            endDate={endDate}
-                                                            minDate={startDate}/>
-                                                        <Button className="btn-transparent">
-                                                            <svg width="18" height="18"
-                                                                 viewBox="0 0 18 18" fill="none"
-                                                                 xmlns="http://www.w3.org/2000/svg">
-                                                                <g opacity="0.8"
-                                                                   clipPath="url(#clip0)">
-                                                                    <path
-                                                                        d="M5.34327 8.75391H4.25583C3.97432 8.75391 3.74609 8.99002 3.74609 9.28125C3.74609 9.57248 3.97432 9.80859 4.25583 9.80859H5.34327C5.62478 9.80859 5.853 9.57248 5.853 9.28125C5.853 8.99002 5.62478 8.75391 5.34327 8.75391Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M5.34327 11.0039H4.25583C3.97432 11.0039 3.74609 11.24 3.74609 11.5312C3.74609 11.8225 3.97432 12.0586 4.25583 12.0586H5.34327C5.62478 12.0586 5.853 11.8225 5.853 11.5312C5.853 11.24 5.62478 11.0039 5.34327 11.0039Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M5.34327 13.2539H4.25583C3.97432 13.2539 3.74609 13.49 3.74609 13.7812C3.74609 14.0725 3.97432 14.3086 4.25583 14.3086H5.34327C5.62478 14.3086 5.853 14.0725 5.853 13.7812C5.853 13.49 5.62478 13.2539 5.34327 13.2539Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M9.69092 8.75391H8.60349C8.32198 8.75391 8.09375 8.99002 8.09375 9.28125C8.09375 9.57248 8.32198 9.80859 8.60349 9.80859H9.69092C9.97243 9.80859 10.2007 9.57248 10.2007 9.28125C10.2007 8.99002 9.97243 8.75391 9.69092 8.75391Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M9.69092 11.0039H8.60349C8.32198 11.0039 8.09375 11.24 8.09375 11.5312C8.09375 11.8225 8.32198 12.0586 8.60349 12.0586H9.69092C9.97243 12.0586 10.2007 11.8225 10.2007 11.5312C10.2007 11.24 9.97243 11.0039 9.69092 11.0039Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M9.69092 13.2539H8.60349C8.32198 13.2539 8.09375 13.49 8.09375 13.7812C8.09375 14.0725 8.32198 14.3086 8.60349 14.3086H9.69092C9.97243 14.3086 10.2007 14.0725 10.2007 13.7812C10.2007 13.49 9.97243 13.2539 9.69092 13.2539Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M14.0425 8.75391H12.955C12.6735 8.75391 12.4453 8.99002 12.4453 9.28125C12.4453 9.57248 12.6735 9.80859 12.955 9.80859H14.0425C14.324 9.80859 14.5522 9.57248 14.5522 9.28125C14.5522 8.99002 14.324 8.75391 14.0425 8.75391Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M14.0425 11.0039H12.955C12.6735 11.0039 12.4453 11.24 12.4453 11.5312C12.4453 11.8225 12.6735 12.0586 12.955 12.0586H14.0425C14.324 12.0586 14.5522 11.8225 14.5522 11.5312C14.5522 11.24 14.324 11.0039 14.0425 11.0039Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M14.0425 13.2539H12.955C12.6735 13.2539 12.4453 13.49 12.4453 13.7812C12.4453 14.0725 12.6735 14.3086 12.955 14.3086H14.0425C14.324 14.3086 14.5522 14.0725 14.5522 13.7812C14.5522 13.49 14.324 13.2539 14.0425 13.2539Z"
-                                                                        fill="#181818"/>
-                                                                    <path
-                                                                        d="M16.319 2.28516H15.0956V1.40625C15.0956 1.11502 14.8674 0.878906 14.5859 0.878906C14.3044 0.878906 14.0762 1.11502 14.0762 1.40625V2.28516H9.65845V1.40625C9.65845 1.11502 9.43023 0.878906 9.14872 0.878906C8.86721 0.878906 8.63898 1.11502 8.63898 1.40625V2.28516H4.22127V1.40625C4.22127 1.11502 3.99304 0.878906 3.71153 0.878906C3.43002 0.878906 3.20179 1.11502 3.20179 1.40625V2.28516H1.97843C1.13522 2.28516 0.449219 2.99486 0.449219 3.86719V15.5391C0.449219 16.4114 1.13522 17.1211 1.97843 17.1211H16.319C17.1622 17.1211 17.8482 16.4114 17.8482 15.5391C17.8482 15.1987 17.8482 4.16338 17.8482 3.86719C17.8482 2.99486 17.1622 2.28516 16.319 2.28516ZM1.46869 3.86719C1.46869 3.57641 1.69736 3.33984 1.97843 3.33984H3.20179V4.21875C3.20179 4.50998 3.43002 4.74609 3.71153 4.74609C3.99304 4.74609 4.22127 4.50998 4.22127 4.21875V3.33984H8.63898V4.21875C8.63898 4.50998 8.86721 4.74609 9.14872 4.74609C9.43023 4.74609 9.65845 4.50998 9.65845 4.21875V3.33984H14.0762V4.21875C14.0762 4.50998 14.3044 4.74609 14.5859 4.74609C14.8674 4.74609 15.0956 4.50998 15.0956 4.21875V3.33984H16.319C16.6001 3.33984 16.8287 3.57641 16.8287 3.86719V5.94141H1.46869V3.86719ZM16.319 16.0664H1.97843C1.69736 16.0664 1.46869 15.8298 1.46869 15.5391V6.99609H16.8287V15.5391C16.8287 15.8298 16.6001 16.0664 16.319 16.0664Z"
-                                                                        fill="#181818"/>
-                                                                </g>
-                                                                <defs>
-                                                                    <clipPath id="clip0">
-                                                                        <rect width="17.399"
-                                                                              height="18"
-                                                                              fill="white"
-                                                                              transform="translate(0.449219)"/>
-                                                                    </clipPath>
-                                                                </defs>
-                                                            </svg>
-                                                        </Button>
-                                                    </Form.Label>
-                                                    <div className="validation-block flex-start">
-                                                        {
-
-                                                            errors['businessTrip.to'] !== '' ?
-                                                                <span
-                                                                    className="text-validation">{errors['businessTrip.to']}</span>
-                                                                : null
-                                                        }
-                                                    </div>
-                                                </Form.Group>
-                                            </Col>
+                                            </Col>*/}
                                             <Col xs={4}>
                                                 <Form.Group className="form-group">
                                                     <span className="input-title">Ezamiyyət müddəti </span>
@@ -7424,7 +7618,7 @@ function CreateOperation() {
                                                     </div>
                                                 </Form.Group>
                                             </Col>
-                                            <Col xs={6}>
+                                            <Col xs={4}>
                                                 <Form.Group className="form-group">
                                                     <span className="input-title">Ezamiyyə müddətində işçinin yolda keçirdiyi istirahət gününə təsadüf etdiyi tarix</span>
                                                     <Form.Label className="relative m-0">
@@ -7483,7 +7677,7 @@ function CreateOperation() {
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
-                                            <Col xs={6}>
+                                            <Col xs={4}>
                                                 <Form.Group className="form-group">
                                                     <span className="input-title">İşçinin işə başlama tarixi</span>
                                                     <Form.Label className="relative m-0">
