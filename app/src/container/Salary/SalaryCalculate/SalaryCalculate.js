@@ -208,6 +208,7 @@ function SalaryCalculate() {
         mainAxios({
             method: 'get',
             url: '/salaries/download',
+            responseType: 'arraybuffer',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
