@@ -42,7 +42,7 @@ function WorkDayModal(props) {
         if (props.data.workHour2 !== 0) {
             checkChangeTime2 ?
                 checkBreak2 ? await setWorkHour2(workHour2 - 1) : await setWorkHour2(workHour2 + 1)
-                :
+:
                 checkBreak2 ? await setWorkHour2(props.data.workHour2 - 1) : await setWorkHour2(props.data.workHour2)
 
 

@@ -7,8 +7,6 @@ import WorkDayModal from '../WorkDayModal/WorkDayModal'
 import moment from "moment";
 import Paginate from "../../../components/Pagination/Pagination";
 import Loading from "../../../components/Loading/Loading";
-import Indicator from "../../../components/Loading/Indicator";
-import {setDefaultLocale} from "react-datepicker";
 import Select from "react-select";
 import {customStyles} from "../../../components/Select/SelectStyle";
 
@@ -467,13 +465,13 @@ function WorkSchedule() {
                                             show={modalShow}
                                             onHide={() => setModalShow(false)}
                                             data={modalData}
-                                            click={(breakHour, jobOnOffDay, offDay, shiftFrom, shiftTo, repeatFrom, breakHour2, jobOnOffDay2, shiftFrom2, shiftTo2, propsData) => {
+                                          /*  click={(breakHour, jobOnOffDay, offDay, shiftFrom, shiftTo, repeatFrom, breakHour2, jobOnOffDay2, shiftFrom2, shiftTo2, propsData) => {
                                                 sendData(breakHour, jobOnOffDay, offDay, shiftFrom, shiftTo, repeatFrom, breakHour2, jobOnOffDay2, shiftFrom2, shiftTo2, propsData)
-                                            }}
+                                            }}*/
                                             delete={(propsData) => {
                                                 deleteDay(propsData)
                                             }}
-                                            function={(day, startTime, endTime) => timeDiffer(day, startTime, endTime)}
+                                            /*function={(day, startTime, endTime) => timeDiffer(day, startTime, endTime)}*/
                                             rand={Math.random()}
                                         />
                                     </div>
