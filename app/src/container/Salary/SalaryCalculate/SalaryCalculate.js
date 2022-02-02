@@ -391,7 +391,7 @@ function SalaryCalculate() {
                                                 val = val.value
                                                 setSelectedYear(val);
                                                 let month = selectedMonth !== null ? selectedMonth : currentMonth;
-                                                getSalary(1,month, val )
+                                                getSalary(1,month, val ,depart, subDepart, name )
                                             }}
                                             options={yearOptions}
                                             styles={customStyles}
@@ -408,7 +408,7 @@ function SalaryCalculate() {
                                                 val = val.value
                                                 setSelectedMonth(val);
                                                 let year = selectedYear !== null ? selectedYear : currentYear
-                                                getSalary(1,val, year)
+                                                getSalary(1,val, year, depart, subDepart, name)
                                             }}
                                             options={monthOptions}
                                             styles={customStyles}
