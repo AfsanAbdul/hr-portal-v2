@@ -5,9 +5,8 @@ import {Row, Col, Form, Tabs, Tab} from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Select from "react-select";
 import {customStyles} from "../../../components/Select/SelectStyle";
-import {setRef} from "@fullcalendar/react";
 
-const categoryOptions2 = [
+const categoryOptions = [
     {value: 'university', label: 'Təhsil müəssisələri'},
     {value: 'certificate', label: 'Sertifikatlar'},
     {value: 'vacancy', label: 'Vakansiyalar'},
@@ -933,8 +932,8 @@ function SettingEducation() {
                                         setView(false);
                                         setCheckClick(false)
                                     }}
-                                    options={categoryOptions2}
-                                    isSearchable={categoryOptions2 ? categoryOptions2.length > 5 ? true : false : false}
+                                    options={categoryOptions}
+                                    isSearchable={categoryOptions ? categoryOptions.length > 5 ? true : false : false}
                                     styles={customStyles}
                                     getOptionLabel={(option) => (option.label)}
                                     getOptionValue={(option) => (option.label)}
