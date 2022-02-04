@@ -76,6 +76,18 @@ function SettingEducation() {
     const [competence, setCompetence] = useState('');
     const [competenceId, setCompetenceId] = useState('');
 
+    const getCache = () => {
+        mainAxios({
+            method: 'post',
+            url: '/caches/evict',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        }).then((res) => {
+        });
+    }
+
     const getUniversity = () => {
         mainAxios({
             method: 'get',
@@ -244,6 +256,7 @@ function SettingEducation() {
             },
             data: data
         }).then((res) => {
+            getCache();
             getVacancy();
             setVacancy('');
             setActive(false);
@@ -263,6 +276,7 @@ function SettingEducation() {
             },
             data: data
         }).then((res) => {
+            getCache();
             getVacancy();
             setVacancy('');
             setActive(false);
@@ -277,6 +291,7 @@ function SettingEducation() {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
         }).then((res) => {
+            getCache();
             getVacancy()
         });
     }
@@ -312,6 +327,7 @@ function SettingEducation() {
             },
             data: data
         }).then((res) => {
+            getCache();
             getGrade();
             setGrade('');
             setActive(false);
@@ -331,6 +347,7 @@ function SettingEducation() {
             },
             data: data
         }).then((res) => {
+            getCache();
             getGrade();
             setGrade('');
             setActive(false);
@@ -345,7 +362,8 @@ function SettingEducation() {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
         }).then((res) => {
-            getGrade()
+            getCache();
+            getGrade();
         });
     }
 
@@ -380,6 +398,7 @@ function SettingEducation() {
             },
             data: data
         }).then((res) => {
+            getCache();
             getSubGrade();
             setSubGrade('');
             setActive(false);
@@ -399,6 +418,7 @@ function SettingEducation() {
             },
             data: data
         }).then((res) => {
+            getCache();
             getSubGrade();
             setSubGrade('');
             setActive(false);
@@ -652,6 +672,7 @@ function SettingEducation() {
             },
             data: data
         }).then((res) => {
+            getCache();
             getSpeciality();
             setSpeciality('');
             setActive(false);
@@ -671,6 +692,7 @@ function SettingEducation() {
             },
             data: data
         }).then((res) => {
+            getCache();
             getSpeciality();
             setSpeciality('');
             setActive(false);
@@ -907,6 +929,7 @@ function SettingEducation() {
         getCompetence();
         getGrade();
         getSubGrade();
+        getCache();
     }, []);
 
     return (
