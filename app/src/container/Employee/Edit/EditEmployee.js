@@ -3583,8 +3583,7 @@ function EditEmployee() {
                                                                                                                companyIntArr[index].mainJob = true;
                                                                                                                setCompanyIntArr([...companyIntArr], companyIntArr)
                                                                                                            }}/>
-                                                                                                    <span
-                                                                                                        className="radio-mark"></span>
+                                                                                                    <span className="radio-mark"></span>
                                                                                                 </label>
                                                                                                 <span
                                                                                                     className="radio-title">Əsas iş yeri</span>
@@ -3600,8 +3599,7 @@ function EditEmployee() {
                                                                                                                companyIntArr[index].mainJob = false;
                                                                                                                setCompanyIntArr([...companyIntArr], companyIntArr)
                                                                                                            }}/>
-                                                                                                    <span
-                                                                                                        className="radio-mark"></span>
+                                                                                                    <span className="radio-mark"></span>
                                                                                                 </label>
                                                                                                 <span
                                                                                                     className="radio-title">Əlavə iş yeri</span>

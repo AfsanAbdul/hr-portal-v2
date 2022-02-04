@@ -1044,7 +1044,7 @@ td {
 
 .operation-tab .nav-tabs {
     border: none;
-    display: none;
+    display: none !important;
     margin: 0;
 }
 
@@ -1534,6 +1534,13 @@ td {
     flex-wrap: nowrap;
 }
 
+.setting .dropdown-toggle:after {
+    content: url("../img/angle_down.svg");;
+    border: none;
+    position: absolute;
+    right: 18px;
+}
+
 /*.setting .nav-tabs .nav-link, .setting .nav-item {
     width: 100%;
 }*/
@@ -1577,13 +1584,12 @@ td {
     text-align: left;
     position: relative;
     color: #181818;
+    display: flex;
+    justify-content: space-between;
 }
 
-.setting .dropdown-item .btn-delete {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+.setting .dropdown-item ul > li:not(:last-child) {
+    margin-right: 35px;
 }
 
 .setting .dropdown-item .btn-delete svg {

@@ -139,6 +139,17 @@ function Sidebar(props) {
                         </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
+                        <Nav.Link to="/calendar" as={NavLink} className="flex-vertical-start">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.5 3.99967C1.5 3.0792 2.24619 2.33301 3.16667 2.33301H14.8333C15.7538 2.33301 16.5 3.0792 16.5 3.99967V15.6663C16.5 16.5868 15.7538 17.333 14.8333 17.333H3.16667C2.24619 17.333 1.5 16.5868 1.5 15.6663V3.99967Z" stroke="#193651" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M1.5 7.33301H16.5" stroke="#193651" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12.3359 0.666992V4.00033" stroke="#193651" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5.66406 0.666992V4.00033" stroke="#193651" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Kalendar</span>
+                        </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
                         <Nav.Link to="/setting" as={NavLink} className="flex-vertical-start">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">

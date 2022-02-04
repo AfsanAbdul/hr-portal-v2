@@ -126,7 +126,7 @@ function WorkDayModal(props) {
                                                         onChange={(val) => {
                                                             setStartTime(val);
                                                             setCheckChangeTime(true);
-                                                            setWorkHour(props.function(props.data.today, val, endTime));
+                                                            setWorkHour(props.timeDiffer(props.data.today, val, endTime));
                                                         }}
                                                         disableClock={true}
                                                         clearIcon={false}
@@ -143,7 +143,7 @@ function WorkDayModal(props) {
                                                         onChange={(val) => {
                                                             setEndTime(val);
                                                             setCheckChangeTime(true);
-                                                            setWorkHour(props.function(props.data.today, startTime, val));
+                                                            setWorkHour(props.timeDiffer(props.data.today, startTime, val));
                                                         }}
                                                         disableClock={true}
                                                         clearIcon={false}
@@ -215,7 +215,7 @@ function WorkDayModal(props) {
                                                         onChange={(val) => {
                                                             setStartTime2(val);
                                                             setCheckChangeTime2(true);
-                                                            setWorkHour2(props.function(props.data.today, val, endTime2));
+                                                            setWorkHour2(props.timeDiffer(props.data.today, val, endTime2));
                                                         }}
                                                         disableClock={true}
                                                         clearIcon={false}
@@ -232,7 +232,7 @@ function WorkDayModal(props) {
                                                         onChange={(val) => {
                                                             setEndTime2(val);
                                                             setCheckChangeTime2(true);
-                                                            setWorkHour2(props.function(props.data.today, startTime2, val));
+                                                            setWorkHour2(props.timeDiffer(props.data.today, startTime2, val));
                                                         }}
                                                         disableClock={true}
                                                         clearIcon={false}
@@ -334,7 +334,7 @@ function WorkDayModal(props) {
                     {
                         props.data.id !== null ?
                             <button type="button" className="btn btn-cancel" onClick={() => {
-                                props.delete(props.data)
+                                props.deleteDay(props.data)
                             }}>
                                 Sil
                             </button>

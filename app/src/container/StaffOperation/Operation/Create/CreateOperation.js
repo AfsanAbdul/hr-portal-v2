@@ -74,12 +74,12 @@ function CreateOperation() {
     const [employeeIndividualAdd, setEmployeeIndividualAdd] = useState('');
     const [employeeConditionalAdd, setEmployeeConditionalAdd] = useState('');
     const [cityArr, setCityArr] = useState([]);
-    const [selectedCity, setSelectedCity] = useState(null);
-    const [paymentAmount, setPaymentAmount] = useState(null);
     const [nonWorkDayArr, setNonWorkDayArr] = useState([]);
-    const [nonWorkDay, setNonWorkDay] = useState([]);
-    const [businessTripCheck, setBusinessTripCheck] = useState(true);
-    const [businessPaymentCheck, setBusinessPaymentCheck] = useState(true);
+    const [nonWorkDays, setNonWorkDays] = useState([]);
+    const [nonWorkStartDay, setNonWorkStartDay] = useState('');
+    const [nonWorkEndDay, setNonWorkEndDay] = useState('');
+    const [nonWorkDayCount, setNonWorkDayCount] = useState('');
+    const [nonWorkDayPayment, setNonWorkDayPayment] = useState('');
     const [changeTempo, setChangeTempo] = useState(false);
     const [selectedAssignEmpId, setSelectedAssignEmpId] = useState(null);
     const [assignDepartment, setAssignDepartment] = useState('');
@@ -127,8 +127,6 @@ function CreateOperation() {
     const [selectedVacOp, setSelectedVacOp] = useState(null);
     const [vacOperationOption, setVacOperationOption] = useState([]);
     const [debtCheck, setDebtCheck] = useState(false);
-    const [checkOut, setCheckOut] = useState(false);
-    const [checkIn, setCheckIn] = useState(false);
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
     const [newStartTime, setNewStartTime] = useState('');
@@ -163,7 +161,7 @@ function CreateOperation() {
     }]);
 
     const [businessTripArr, setBusinessTripArr] = useState([{
-        cityId : null,
+        cityId: null,
         payment: null,
         fromCheckInHotel: false,
         fromDate: null,
@@ -216,7 +214,7 @@ function CreateOperation() {
 
     const addBusinessTripArr = () => {
         setBusinessTripArr(businessTripArr => [...businessTripArr, {
-            cityId : null,
+            cityId: null,
             payment: null,
             fromCheckInHotel: false,
             fromDate: null,
@@ -498,14 +496,21 @@ function CreateOperation() {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
         }).then((res) => {
-            let data = res.data;
-            businessTripArr[index].cityId = id;
-            businessTripArr[index].payment = data;
-            businessTripArr[index].fromCheckInHotel = false;
-            businessTripArr[index].fromDate = null;
-            businessTripArr[index].toCheckInHotel = false;
-            businessTripArr[index].toDate = null;
-            setBusinessTripArr([...businessTripArr], businessTripArr);
+                let data = res.data;
+                businessTripArr[index].cityId = id;
+                businessTripArr[index].payment = data;
+                businessTripArr[index].fromCheckInHotel = false;
+                businessTripArr[index].fromDate = null;
+                businessTripArr[index].toCheckInHotel = false;
+                businessTripArr[index].toDate = null;
+                setBusinessTripArr([...businessTripArr], businessTripArr);
+                let totalPayment = 0;
+                for(let i of businessTripArr) {
+                    totalPayment+=i.payment;
+                    setNonWorkDayPayment(totalPayment)
+                }
+
+
             }
         );
     }
@@ -539,6 +544,109 @@ function CreateOperation() {
         }).then((res) => {
             setArticleArr(res.data);
         });
+    }
+
+
+    const getBusinessTripSalary = (date, staff) => {
+        if (date !== null && staff !== null) {
+            mainAxios({
+                method: 'get',
+                url: 'business-trips/salary',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+                params: {
+                    date: moment(date).format('YYYY-MM-DD'),
+                    employeeId: staff.id
+                }
+            }).then((res) => {
+                    setTripSalary(res.data)
+                }
+            );
+        }
+    }
+
+    const getCalculatedDate = (elem, setDate) => {
+        let vacArr = [];
+        if (Array.isArray(elem) && elem.some(item => item.day)) {
+            for (let i of vacationArr) {
+                if (i.day !== '') {
+                    vacArr.push(i.day)
+                }
+            }
+        }
+
+        if (setDate !== null) {
+            let getDate = setDate.getDate();
+            let getMonth = setDate.getMonth();
+            let getYear = setDate.getFullYear();
+            let x = new Date(getYear, getMonth, getDate);
+            let newDate = parseFloat(x.getDate());
+            let total = Array.isArray(elem) ? 0 : elem !== '' ? elem : 0;
+            if (vacArr.length > 0) {
+                for (let i of vacArr) {
+                    total += parseFloat(i)
+                }
+            }
+            let totalDate = parseFloat((parseFloat(total) + newDate) - 1);
+            x.setDate(totalDate);
+            let formatDate = moment(x).format("YYYY-MM-DD");
+            setVacationEndDate(formatDate)
+            getJobDay(formatDate, setDate)
+        }
+    }
+
+    const getBusinessTripDay = () => {
+        let arr = [];
+        for (let i of businessTripArr) {
+            arr.push({from: i.fromDate, to: i.toDate});
+        }
+
+        mainAxios({
+            method: 'post',
+            url: 'business-trips/days',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            data: arr
+        }).then((res) => {
+                let data = res.data;
+                let arr = [];
+                for (let i of data.dayOffList) {
+                    arr.push({day: i, check: true, payment: nonWorkDayPayment});
+                }
+                setBusinessTripPeriod(data.days)
+                setNonWorkDays(data.dayOffList);
+                setNonWorkDayArr(arr);
+                let nonWorkDayCount = data.dayOffList.length;
+                let nonWorkEndDay = data.dayOffList[data.dayOffList.length - 1];
+                let nonWorkStartDay = data.dayOffList[0];
+                setNonWorkStartDay(nonWorkStartDay);
+                setNonWorkEndDay(nonWorkEndDay);
+                setNonWorkDayCount(nonWorkDayCount);
+                getBusinessTripNumber(nonWorkDayCount, nonWorkEndDay)
+            }
+        );
+    }
+
+    const getBusinessTripNumber = (nonWorkDayCount, lastDay) => {
+        mainAxios({
+            method: 'get',
+            url: 'business-trips/number',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            params: {
+                number: nonWorkDayCount,
+                to: lastDay
+            }
+        }).then((res) => {
+                setJobDay(res.data);
+            }
+        );
     }
 
     const resetData = () => {
@@ -614,11 +722,11 @@ function CreateOperation() {
         };
 
         let educationVacation = {
-                "day": vacationDay !== '' ? vacationDay : null,
-                "from": startDate !== null ? moment(startDate).format("YYYY-MM-DD") : null,
-                "startJob": jobDay !== '' ? jobDay : null,
-                "to": vacationEndDate !== '' ? vacationEndDate : null
-            };
+            "day": vacationDay !== '' ? vacationDay : null,
+            "from": startDate !== null ? moment(startDate).format("YYYY-MM-DD") : null,
+            "startJob": jobDay !== '' ? jobDay : null,
+            "to": vacationEndDate !== '' ? vacationEndDate : null
+        };
 
         let socialVacation = {
             "day": vacationDay !== '' ? vacationDay : null,
@@ -754,25 +862,29 @@ function CreateOperation() {
             "newTo": newEndTime !== '' ? newEndTime : null
         };
 
-        let businessTripCount = Number(businessTripCheck) + (nonWorkDayArr.length > 1 ? Number(businessPaymentCheck) : 0);
+        let totalTripSalary =0;
 
-        let totalTripSalary = (businessTripCheck ? 0 : parseFloat(tripSalary)) + (businessPaymentCheck ? 0 : parseFloat(tripSalary));
+        for (let i of nonWorkDayArr) {
+            if (!i.check) {
+                totalTripSalary+= i.payment
+            }
+        }
+
+        for (let i of businessTripArr) {
+            delete i.payment
+        }
 
         let businessTrip = {
-            "cityId": selectedCity !== null ? selectedCity.id : null,
-            "count": businessTripCount,
+            "businessTrips": businessTripArr,
+            "count": nonWorkDayCount,
             "dailyEatPay": dailyExpCheck,
             "dailyHotelPay": hotelExpCheck,
             "day": businessTripPeriod !== '' ? parseFloat(businessTripPeriod) : null,
-            "dayOffDateFrom": nonWorkDayArr.length > 0 ? nonWorkDayArr[0] : null,
-            "dayOffDateTo": nonWorkDayArr.length > 1 ? nonWorkDayArr[1] : null,
-            "from": startDate !== null ? moment(startDate).format("YYYY-MM-DD") : null,
+            "dayOffDateFrom": nonWorkStartDay,
+            "dayOffDateTo": nonWorkEndDay,
             "insteadPayment": totalTripSalary,
-            "fromCheckInHotel": checkOut,
             "otherDailyPayment": amount !== '' ? parseFloat(amount) : 0,
             "startJob": jobDay !== '' ? jobDay : null,
-            "to": endDate !== null ? moment(endDate).format("YYYY-MM-DD") : null,
-            "toCheckInHotel": checkIn
         };
 
         let businessTripDisable = {
@@ -796,7 +908,6 @@ function CreateOperation() {
             "employees": employeeIds,
             "holidays": multiDates
         }
-
 
 
         let data = {
@@ -881,107 +992,6 @@ function CreateOperation() {
                 setErrors({})
             }
         });
-    }
-
-    const getBusinessTripSalary = (date, staff) => {
-        if (date !== null && staff !== null) {
-            mainAxios({
-                method: 'get',
-                url: 'business-trips/salary',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-                params: {
-                    date: moment(date).format('YYYY-MM-DD'),
-                    employeeId: staff.id
-                }
-            }).then((res) => {
-                    setTripSalary(res.data)
-                }
-            );
-        }
-    }
-
-    const getCalculatedDate = (elem, setDate) => {
-        let vacArr = [];
-        if (Array.isArray(elem) && elem.some(item => item.day)) {
-            for (let i of vacationArr) {
-                if (i.day !== '') {
-                    vacArr.push(i.day)
-                }
-            }
-        }
-
-        if (setDate !== null) {
-            let getDate = setDate.getDate();
-            let getMonth = setDate.getMonth();
-            let getYear = setDate.getFullYear();
-            let x = new Date(getYear, getMonth, getDate);
-            let newDate = parseFloat(x.getDate());
-            let total = Array.isArray(elem) ? 0 : elem !== '' ? elem : 0;
-            if (vacArr.length > 0) {
-                for (let i of vacArr) {
-                    total += parseFloat(i)
-                }
-            }
-            let totalDate = parseFloat((parseFloat(total) + newDate) - 1);
-            x.setDate(totalDate);
-            let formatDate = moment(x).format("YYYY-MM-DD");
-            setVacationEndDate(formatDate)
-            getJobDay(formatDate, setDate)
-        }
-    }
-
-    const getDayCount = (startDay, endDay) => {
-        let startD = startDay !== 0 ? parseFloat(startDay.getTime()) : 0;
-        let endD = endDay !== 0 ? parseFloat(endDay.getTime()) : 0;
-        if (endD > startD) {
-            let total = Math.abs((endDay - startD) / (1000 * 3600 * 24));
-            setBusinessTripPeriod(total + 1)
-        } else {
-            setBusinessTripPeriod('')
-        }
-    }
-
-    const getBusinessTripDay = () => {
-        console.log(businessTripArr);
-        let arr = [];
-        for (let i of businessTripArr) {
-            arr.push({from:i.fromDate, to: i.toDate})
-        }
-
-        mainAxios({
-            method: 'post',
-            url: 'business-trips/days',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-            data : arr
-        }).then((res) => {
-            console.log(res)
-            }
-        );
-    }
-
-    const getBusinessTripNumber = (nonWork, endDay) => {
-        mainAxios({
-            method: 'get',
-            url: 'business-trips/number',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-            params: {
-                number: nonWork,
-                to: moment(endDay).format('YYYY-MM-DD')
-            }
-        }).then((res) => {
-                setJobDay(res.data);
-                setNonWorkDay(nonWork)
-            }
-        );
     }
 
     useEffect(() => {
@@ -7197,7 +7207,7 @@ function CreateOperation() {
                                             </Col>
                                             <Col xs={12}>
                                                 <div className="block-inn relative">
-                                                   {/* <div className="block-title ">
+                                                    {/* <div className="block-title ">
                                                         İş vaxtından artıq işə cəlb edilən işçi və ya işçilər
                                                     </div>*/}
                                                     <div className="addition-content">
@@ -7266,7 +7276,8 @@ function CreateOperation() {
                                                                         </Col>
                                                                         <Col xs={3}>
                                                                             <Form.Group className="form-group">
-                                                                                <div className="input-title flex-center">
+                                                                                <div
+                                                                                    className="input-title flex-center">
                                                                                     <div className="check-block">
                                                                                         <label className="check-button">
                                                                                             <input type="checkbox"
@@ -7276,7 +7287,8 @@ function CreateOperation() {
                                                                                                        businessTripArr[index].fromCheckInHotel = e.target.checked;
                                                                                                        setBusinessTripArr([...businessTripArr], businessTripArr);
                                                                                                    }}/>
-                                                                                            <span className="checkmark"></span>
+                                                                                            <span
+                                                                                                className="checkmark"></span>
                                                                                         </label>
                                                                                     </div>
                                                                                     <span
@@ -7290,16 +7302,17 @@ function CreateOperation() {
                                                                                                 showYearDropdown
                                                                                                 dropdownMode="select"
                                                                                                 selectsStart
-                                                                                                startDate={item.fromDate !== null ? new Date (item.fromDate) : item.fromDate}
-                                                                                                endDate={item.toDate !== null ? new Date (item.toDate) : item.toDate}
+                                                                                                startDate={item.fromDate !== null ? new Date(item.fromDate) : item.fromDate}
+                                                                                                endDate={item.toDate !== null ? new Date(item.toDate) : item.toDate}
                                                                                                 onChange={(date) => {
                                                                                                     businessTripArr[index].fromDate = moment(date).format("YYYY-MM-DD");
                                                                                                     setBusinessTripArr([...businessTripArr], businessTripArr);
-                                                                                                    if(item.fromDate && item.toDate)  getBusinessTripDay();
+                                                                                                    if (item.fromDate && item.toDate) getBusinessTripDay();
                                                                                                 }}/>
                                                                                     <Button className="btn-transparent">
                                                                                         <svg width="18" height="18"
-                                                                                             viewBox="0 0 18 18" fill="none"
+                                                                                             viewBox="0 0 18 18"
+                                                                                             fill="none"
                                                                                              xmlns="http://www.w3.org/2000/svg">
                                                                                             <g opacity="0.8"
                                                                                                clipPath="url(#clip0)">
@@ -7349,7 +7362,8 @@ function CreateOperation() {
                                                                         </Col>
                                                                         <Col xs={3}>
                                                                             <Form.Group className="form-group">
-                                                                                <div className="input-title flex-center">
+                                                                                <div
+                                                                                    className="input-title flex-center">
                                                                                     <div className="check-block">
                                                                                         <label className="check-button">
                                                                                             <input type="checkbox"
@@ -7359,7 +7373,8 @@ function CreateOperation() {
                                                                                                        businessTripArr[index].toCheckInHotel = e.target.checked;
                                                                                                        setBusinessTripArr([...businessTripArr], businessTripArr)
                                                                                                    }}/>
-                                                                                            <span className="checkmark"></span>
+                                                                                            <span
+                                                                                                className="checkmark"></span>
                                                                                         </label>
                                                                                     </div>
                                                                                     <span
@@ -7377,15 +7392,16 @@ function CreateOperation() {
                                                                                         onChange={(date) => {
                                                                                             businessTripArr[index].toDate = moment(date).format("YYYY-MM-DD");
                                                                                             setBusinessTripArr([...businessTripArr], businessTripArr);
-                                                                                            if(item.fromDate && item.toDate)  getBusinessTripDay();
+                                                                                            if (item.fromDate && item.toDate) getBusinessTripDay();
                                                                                         }}
                                                                                         selectsEnd
-                                                                                        startDate={item.fromDate !== null ? new Date (item.fromDate) : item.fromDate}
-                                                                                        endDate={item.toDate !== null ? new Date (item.toDate) : item.toDate}
-                                                                                        minDate={item.fromDate !== null ? new Date (item.fromDate) : item.fromDate}/>
+                                                                                        startDate={item.fromDate !== null ? new Date(item.fromDate) : item.fromDate}
+                                                                                        endDate={item.toDate !== null ? new Date(item.toDate) : item.toDate}
+                                                                                        minDate={item.fromDate !== null ? new Date(item.fromDate) : item.fromDate}/>
                                                                                     <Button className="btn-transparent">
                                                                                         <svg width="18" height="18"
-                                                                                             viewBox="0 0 18 18" fill="none"
+                                                                                             viewBox="0 0 18 18"
+                                                                                             fill="none"
                                                                                              xmlns="http://www.w3.org/2000/svg">
                                                                                             <g opacity="0.8"
                                                                                                clipPath="url(#clip0)">
@@ -7431,7 +7447,8 @@ function CreateOperation() {
                                                                                         </svg>
                                                                                     </Button>
                                                                                 </Form.Label>
-                                                                                <div className="validation-block flex-start">
+                                                                                <div
+                                                                                    className="validation-block flex-start">
                                                                                     {
 
                                                                                         errors['businessTrip.to'] !== '' ?
@@ -7493,7 +7510,7 @@ function CreateOperation() {
                                                         <Form.Control
                                                             placeholder="Ezamiyyət müddəti"
                                                             disabled={true}
-                                                            value={nonWorkDayArr || ''}
+                                                            value={nonWorkDays || ''}
                                                         />
                                                         <Button className="btn-transparent">
                                                             <svg width="18" height="18"
@@ -7616,133 +7633,73 @@ function CreateOperation() {
                                         </Row>
                                         {
                                             nonWorkDayArr.length > 0 ?
-                                                <Row>
-                                                    <Col xs={12}>
-                                                        <div className="date-title">
-                                                            <span> 1. </span> {nonWorkDayArr[0]}
-                                                        </div>
-                                                    </Col>
-                                                    <Col xs={3}>
-                                                        <div className="block-title flex-center">
-                                                            <div className="radio-block">
-                                                                <label className="radio-label">
-                                                                    <input type="radio" name="business"
-                                                                           checked={!businessTripCheck}
-                                                                           onChange={(e) => {
-                                                                               setBusinessTripCheck(false);
-                                                                               let number = nonWorkDay !== 0 ? nonWorkDay - 1 : 0
-                                                                               getBusinessTripNumber(number, endDate)
-                                                                           }}/>
-                                                                    <span className="radio-mark"></span>
-                                                                </label>
-                                                                <span className="radio-title">Ödəniş ilə əvəz et</span>
+                                                nonWorkDayArr.map((item, index) =>
+                                                    <Row key={index}>
+                                                        <Col xs={12}>
+                                                            <div className="date-title">
+                                                                <span> {index + 1}. </span> {item.day}
                                                             </div>
-                                                        </div>
-                                                        {
-                                                            businessTripCheck ?
-                                                                null
-                                                                :
-                                                                <Row>
-                                                                    <Col xs={12}>
-                                                                        <Form.Group className="form-group">
+                                                        </Col>
+                                                        <Col xs={3}>
+                                                            <div className="block-title flex-center">
+                                                                <div className="radio-block">
+                                                                    <label className="radio-label">
+                                                                        <input type="radio"
+                                                                               name={`${index}radioCheck`}
+                                                                               checked={!item.check}
+                                                                               onChange={() => {
+                                                                                   nonWorkDayArr[index].check = false;
+                                                                                   setNonWorkDayArr([...nonWorkDayArr], nonWorkDayArr);
+                                                                                   setNonWorkDayCount(nonWorkDayCount - 1);
+                                                                                   getBusinessTripNumber((nonWorkDayCount - 1), nonWorkEndDay)
+                                                                               }}/>
+                                                                        <span className="radio-mark"></span>
+                                                                    </label>
+                                                                    <span
+                                                                        className="radio-title">Ödəniş ilə əvəz et</span>
+                                                                </div>
+                                                            </div>
+                                                            {
+                                                                item.check ?
+                                                                    null :
+                                                                    <Row>
+                                                                        <Col xs={12}>
+                                                                            <Form.Group className="form-group">
                                                                             <span
                                                                                 className="input-title">Əvəz edilən ödəniş </span>
-                                                                            <Form.Label className="relative m-0">
-                                                                                <Form.Control
-                                                                                    value={'' || tripSalary}
-                                                                                    placeholder="Əvəz edilən ödəniş "
-                                                                                    disabled={true}
-                                                                                />
-                                                                            </Form.Label>
-                                                                        </Form.Group>
-                                                                    </Col>
-                                                                </Row>
-                                                        }
-                                                    </Col>
-                                                    <Col xs={3}>
-                                                        <div className="block-title flex-center">
-                                                            <div className="radio-block">
-                                                                <label className="radio-label">
-                                                                    <input type="radio" name="business"
-                                                                           checked={businessTripCheck}
-                                                                           onChange={(e) => {
-                                                                               setBusinessTripCheck(true);
-                                                                               let number = nonWorkDay < 2 ? nonWorkDay + 1 : 2
-                                                                               getBusinessTripNumber(number, endDate)
-                                                                           }}/>
-                                                                    <span className="radio-mark"></span>
-                                                                </label>
-                                                                <span className="radio-title"> İstirahət günü ilə əvəz et</span>
+                                                                                <Form.Label className="relative m-0">
+                                                                                    <Form.Control
+                                                                                        value={item.payment || ''}
+                                                                                        placeholder="Əvəz edilən ödəniş "
+                                                                                        disabled={true}
+                                                                                    />
+                                                                                </Form.Label>
+                                                                            </Form.Group>
+                                                                        </Col>
+                                                                    </Row>
+                                                            }
+                                                        </Col>
+                                                        <Col xs={3}>
+                                                            <div className="block-title flex-center">
+                                                                <div className="radio-block">
+                                                                    <label className="radio-label">
+                                                                        <input type="radio"
+                                                                               checked={item.check}
+                                                                               name={`${index}radioCheck`}
+                                                                               onChange={() => {
+                                                                                   nonWorkDayArr[index].check = true;
+                                                                                   setNonWorkDayArr([...nonWorkDayArr], nonWorkDayArr);
+                                                                                   setNonWorkDayCount(nonWorkDayCount + 1);
+                                                                                   getBusinessTripNumber(nonWorkDayCount + 1, nonWorkEndDay)
+                                                                               }}/>
+                                                                        <span className="radio-mark"></span>
+                                                                    </label>
+                                                                    <span className="radio-title"> İstirahət günü ilə əvəz et</span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </Col>
-                                                    {
-                                                        nonWorkDayArr.length > 1 ?
-                                                            <>
-                                                                <Col xs={12}>
-                                                                    <div className="date-title">
-                                                                        <span>2. </span> {nonWorkDayArr[1]}
-                                                                    </div>
-                                                                </Col>
-                                                                <Col xs={3}>
-                                                                    <div className="block-title flex-center">
-                                                                        <div className="radio-block">
-                                                                            <label className="radio-label">
-                                                                                <input type="radio" name="businessTrip"
-                                                                                       checked={!businessPaymentCheck}
-                                                                                       onChange={(e) => {
-                                                                                           setBusinessPaymentCheck(false);
-                                                                                           let number = nonWorkDay !== 0 ? nonWorkDay - 1 : 0
-                                                                                           getBusinessTripNumber(number, endDate)
-                                                                                       }}/>
-                                                                                <span className="radio-mark"></span>
-                                                                            </label>
-                                                                            <span className="radio-title">Ödəniş ilə əvəz et</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    {
-                                                                        businessPaymentCheck ?
-                                                                            null
-                                                                            :
-                                                                            <Row>
-                                                                                <Col xs={12}>
-                                                                                    <Form.Group className="form-group">
-                                                                            <span
-                                                                                className="input-title">Əvəz edilən ödəniş </span>
-                                                                                        <Form.Label
-                                                                                            className="relative m-0">
-                                                                                            <Form.Control
-                                                                                                value={'' || tripSalary}
-                                                                                                placeholder="Əvəz edilən ödəniş "
-                                                                                                disabled={true}
-                                                                                            />
-                                                                                        </Form.Label>
-                                                                                    </Form.Group>
-                                                                                </Col>
-                                                                            </Row>
-                                                                    }
-                                                                </Col>
-                                                                <Col xs={3}>
-                                                                    <div className="block-title flex-center">
-                                                                        <div className="radio-block">
-                                                                            <label className="radio-label">
-                                                                                <input type="radio" name="businessTrip"
-                                                                                       checked={businessPaymentCheck}
-                                                                                       onChange={(e) => {
-                                                                                           setBusinessPaymentCheck(true);
-                                                                                           let number = nonWorkDay < 2 ? nonWorkDay + 1 : 2
-                                                                                           getBusinessTripNumber(number, endDate)
-                                                                                       }}/>
-                                                                                <span className="radio-mark"></span>
-                                                                            </label>
-                                                                            <span className="radio-title"> İstirahət günü ilə əvəz et</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </Col>
-                                                            </>
-                                                            : null
-                                                    }
-                                                </Row>
+                                                        </Col>
+                                                    </Row>
+                                                )
                                                 :
                                                 null
                                         }

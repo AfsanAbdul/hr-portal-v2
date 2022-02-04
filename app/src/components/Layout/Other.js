@@ -23,6 +23,7 @@ import WorkSchedule from "../../container/Work/WorkSchedule/WorkSchedule";
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import Setting from "../../container/Setting/Setting";
+import Calendar from "../../container/Calendar/Calendar";
 
 function Other () {
     const [toggle, setToggle] = useState(false);
@@ -53,6 +54,7 @@ function Other () {
                         <ProtectedRoute path="/operation/sickness/edit/:id" component={EditSickness}/>
                         <ProtectedRoute path="/businessTrip" component={BusinessTripSchedule}/>
                         <ProtectedRoute path="/workSchedule" component={WorkSchedule}/>
+                        <ProtectedRoute path="/calendar" component={Calendar}/>
                         <ProtectedRoute path="/setting" component={Setting}/>
                     </Switch>
                 </main>
