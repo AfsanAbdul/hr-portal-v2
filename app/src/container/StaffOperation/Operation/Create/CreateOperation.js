@@ -79,7 +79,6 @@ function CreateOperation() {
     const [nonWorkStartDay, setNonWorkStartDay] = useState('');
     const [nonWorkEndDay, setNonWorkEndDay] = useState('');
     const [nonWorkDayCount, setNonWorkDayCount] = useState('');
-    const [nonWorkDayPayment, setNonWorkDayPayment] = useState('');
     const [changeTempo, setChangeTempo] = useState(false);
     const [selectedAssignEmpId, setSelectedAssignEmpId] = useState(null);
     const [assignDepartment, setAssignDepartment] = useState('');
@@ -89,7 +88,6 @@ function CreateOperation() {
     const [assignWorkPlace, setAssignWorkPlace] = useState('');
     const [assignCheck, setAssignCheck] = useState('');
     const [selectedVacation, setSelectedVacation] = useState(null);
-    const [tripSalary, setTripSalary] = useState('');
     const [obeyDepartment, setObeyDepartment] = useState('');
 
 
@@ -134,7 +132,8 @@ function CreateOperation() {
     const [otherExpCheck, setOtherExpCheck] = useState(false);
     const [dailyExpCheck, setDailyExpCheck] = useState(false);
     const [hotelExpCheck, setHotelExpCheck] = useState(false);
-    const [multiDate, setMultiDate] = useState([])
+    const [multiDate, setMultiDate] = useState([]);
+    const [paymentArr, setPaymentArr] = useState([]);
 
 
     const [vacationArr, setVacationArr] = useState([{
@@ -162,7 +161,6 @@ function CreateOperation() {
 
     const [businessTripArr, setBusinessTripArr] = useState([{
         cityId: null,
-        payment: null,
         fromCheckInHotel: false,
         fromDate: null,
         toCheckInHotel: false,
@@ -215,7 +213,6 @@ function CreateOperation() {
     const addBusinessTripArr = () => {
         setBusinessTripArr(businessTripArr => [...businessTripArr, {
             cityId: null,
-            payment: null,
             fromCheckInHotel: false,
             fromDate: null,
             toCheckInHotel: false,
@@ -487,24 +484,27 @@ function CreateOperation() {
         );
     }
 
-    const getPayment = (id, index) => {
+    const getPayment = () => {
         mainAxios({
             method: 'get',
-            url: 'payments/' + id,
+            url: 'payments',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
         }).then((res) => {
                 let data = res.data;
-                businessTripArr[index].cityId = id;
-                businessTripArr[index].payment = data;
-                setBusinessTripArr([...businessTripArr], businessTripArr);
-                let totalPayment = 0;
-                for(let i of businessTripArr) {
-                    totalPayment+=i.payment;
-                    setNonWorkDayPayment(totalPayment);
-                }
+                let arr = [];
+                if (data.length > 0)
+                    data.forEach(function (elem) {
+                        arr.push({
+                            id: elem.id,
+                            amount: elem.amount !== null ? elem.amount : null,
+                            city: elem.city !== null ? elem.city.name : null,
+                            cityId: elem.city !== null ? elem.city.id : null,
+                        })
+                    });
+                setPaymentArr(arr)
             }
         );
     }
@@ -540,27 +540,6 @@ function CreateOperation() {
         });
     }
 
-
-    const getBusinessTripSalary = (date, staff) => {
-        if (date !== null && staff !== null) {
-            mainAxios({
-                method: 'get',
-                url: 'business-trips/salary',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-                params: {
-                    date: moment(date).format('YYYY-MM-DD'),
-                    employeeId: staff.id
-                }
-            }).then((res) => {
-                    setTripSalary(res.data)
-                }
-            );
-        }
-    }
-
     const getCalculatedDate = (elem, setDate) => {
         let vacArr = [];
         if (Array.isArray(elem) && elem.some(item => item.day)) {
@@ -593,7 +572,9 @@ function CreateOperation() {
 
     const getBusinessTripDay = () => {
         let arr = [];
+        let totalPayment = 0;
         for (let i of businessTripArr) {
+            totalPayment += i.cityId.amount;
             arr.push({from: i.fromDate, to: i.toDate});
         }
 
@@ -609,7 +590,7 @@ function CreateOperation() {
                 let data = res.data;
                 let arr = [];
                 for (let i of data.dayOffList) {
-                    arr.push({day: i, check: true, payment: nonWorkDayPayment});
+                    arr.push({day: i, check: true, payment:totalPayment});
                 }
                 setBusinessTripPeriod(data.days)
                 setNonWorkDays(data.dayOffList);
@@ -856,16 +837,18 @@ function CreateOperation() {
             "newTo": newEndTime !== '' ? newEndTime : null
         };
 
-        let totalTripSalary =0;
+        let totalTripSalary = 0;
 
         for (let i of nonWorkDayArr) {
             if (!i.check) {
-                totalTripSalary+= i.payment
+                totalTripSalary += i.payment
             }
         }
 
         for (let i of businessTripArr) {
-            delete i.payment
+            if (i.cityId !== null) {
+                i.cityId = i.cityId.cityId
+            }
         }
 
         let businessTrip = {
@@ -997,9 +980,8 @@ function CreateOperation() {
         getSubGrade();
         getCollectAgreement();
         getArticle();
-        console.log(nonWorkDayPayment);
-        setNonWorkDayPayment(nonWorkDayPayment)
-    }, [nonWorkDayPayment]);
+        getPayment();
+    }, []);
 
     return (
         <Aux>
@@ -7158,7 +7140,6 @@ function CreateOperation() {
                                                             setEmployeeId(id)
                                                             getEmployeeDetail(id)
                                                             setSelectedStaff(val);
-                                                            getBusinessTripSalary(endDate, val);
 
                                                         }}
                                                         isSearchable={employee ? employee.length > 5 ? true : false : false}
@@ -7240,37 +7221,27 @@ function CreateOperation() {
                                                                             </div>
                                                                     }
                                                                     <Row>
-                                                                        <Col xs={3}>
+                                                                        <Col xs={4}>
                                                                             <Form.Group className="form-group">
                                                                                 <span className="input-title">Ezam olunduğu ölkə\şəhər\rayon</span>
                                                                                 <Form.Label>
                                                                                     <Select
                                                                                         placeholder="Şəhər seçin"
                                                                                         onChange={(val) => {
-                                                                                            let id = val.id;
-                                                                                            getPayment(id, index)
+                                                                                            businessTripArr[index].cityId = val;
+                                                                                            setBusinessTripArr([...businessTripArr], businessTripArr);
+                                                                                            if (item.fromDate && item.toDate) getBusinessTripDay();
                                                                                         }}
-                                                                                        options={cityArr}
-                                                                                        isSearchable={cityArr ? cityArr.length > 5 ? true : false : false}
+                                                                                        options={paymentArr}
+                                                                                        isSearchable={paymentArr ? paymentArr.length > 5 ? true : false : false}
                                                                                         styles={customStyles}
-                                                                                        getOptionLabel={(option) => (option.name)}
-                                                                                        getOptionValue={(option) => (option.name)}
+                                                                                        getOptionLabel={(option) => `${option.city} - ${option.amount} Azn`}
+                                                                                        getOptionValue={(option) => `${option.city} - ${option.amount} Azn `}
                                                                                     />
                                                                                 </Form.Label>
                                                                             </Form.Group>
                                                                         </Col>
-                                                                        <Col xs={3}>
-                                                                            <Form.Group className="form-group">
-                                                                                <span className="input-title">Ezamiyyət ödənişi </span>
-                                                                                <Form.Label>
-                                                                                    <Form.Control
-                                                                                        placeholder="Ezamiyyət ödənişi"
-                                                                                        value={item.payment || ''}
-                                                                                        disabled={true}/>
-                                                                                </Form.Label>
-                                                                            </Form.Group>
-                                                                        </Col>
-                                                                        <Col xs={3}>
+                                                                        <Col xs={4}>
                                                                             <Form.Group className="form-group">
                                                                                 <div
                                                                                     className="input-title flex-center">
@@ -7354,7 +7325,7 @@ function CreateOperation() {
                                                                                 </Form.Label>
                                                                             </Form.Group>
                                                                         </Col>
-                                                                        <Col xs={3}>
+                                                                        <Col xs={4}>
                                                                             <Form.Group className="form-group">
                                                                                 <div
                                                                                     className="input-title flex-center">
@@ -7367,7 +7338,8 @@ function CreateOperation() {
                                                                                                        businessTripArr[index].toCheckInHotel = e.target.checked;
                                                                                                        setBusinessTripArr([...businessTripArr], businessTripArr)
                                                                                                    }}/>
-                                                                                            <span className="checkmark"></span>
+                                                                                            <span
+                                                                                                className="checkmark"></span>
                                                                                         </label>
                                                                                     </div>
                                                                                     <span

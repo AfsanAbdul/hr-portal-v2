@@ -21,7 +21,6 @@ const categoryOptions = [
 ]
 
 function SettingOther() {
-
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [tab, setTab] = useState('department');
     const [checkClick, setCheckClick] = useState(false);
@@ -44,6 +43,8 @@ function SettingOther() {
     const [restReasonId, setRestReasonId] = useState('');
 
     const [cityArr, setCityArr] = useState([]);
+    const [paymentCityArr, setPaymentCityArr] = useState([]);
+    const [paymentId, setPaymentId] = useState([]);
     const [selectedCity, setSelectedCity] = useState(null);
     const [amount, setAmount] = useState('');
 
@@ -279,6 +280,18 @@ function SettingOther() {
     const getBusinessCity = () => {
         mainAxios({
             method: 'get',
+            url: '/payments',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        }).then((res) => {
+            setPaymentCityArr(res.data)
+        });
+    }
+    const getCity = () => {
+        mainAxios({
+            method: 'get',
             url: '/cities',
             headers: {
                 'Content-Type': 'application/json',
@@ -289,8 +302,8 @@ function SettingOther() {
         });
     }
     const getDetailBusinessCity = (item) => {
-        setSelectedCity({id: item.id, name: item.name, cityType: item.cityType});
-        getBusinessPayment(item.id)
+        setPaymentId(item.id);
+        getBusinessPayment(item.city.id)
     }
     const getBusinessPayment = (id) => {
         mainAxios({
@@ -302,7 +315,6 @@ function SettingOther() {
             },
         }).then((res) => {
             setAmount(res.data);
-            console.log(res)
         });
     }
     const sendBusinessCity = () => {
@@ -327,24 +339,21 @@ function SettingOther() {
     }
     const editBusinessCity = () => {
         setActive(true);
-       if(selectedCity !==null ) {
-           let data = {
-               amount: amount !== '' ? parseFloat(amount) : null,
-           }
-           mainAxios({
-               method: 'put',
-               url: 'payments/city/' + selectedCity.id,
-               headers: {
-                   'Content-Type': 'application/json',
-                   'Authorization': 'Bearer ' + localStorage.getItem('token')
-               },
-               data: data
-           }).then((res) => {
-               getBusinessCity();
-               setSelectedCity(null);
-               setAmount('')
-           });
-       }
+        let data = {
+            amount: amount !== '' ? parseFloat(amount) : null,
+        }
+        mainAxios({
+            method: 'put',
+            url: 'payments/' + paymentId,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            data
+        }).then((res) => {
+            getBusinessCity();
+            setAmount('')
+        });
     }
     const deleteBusinessCity = (id) => {
         mainAxios({
@@ -565,6 +574,7 @@ function SettingOther() {
         getRestReason();
         getArticle();
         getEvaluation();
+        getCity();
     }, []);
 
     return (
@@ -1047,10 +1057,10 @@ function SettingOther() {
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 {
-                                                    cityArr ?
-                                                        cityArr.map((item, index) =>
+                                                    paymentCityArr ?
+                                                        paymentCityArr.map((item, index) =>
                                                             <Dropdown.Item key={index}>
-                                                                <span>{item.name}</span>
+                                                                <span>{item.city.name} - {item.amount}  {item.amount !== null ? `Azn` : ''}</span>
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
                                                                         <button type="button"
@@ -1104,7 +1114,8 @@ function SettingOther() {
                                             <button type="button" className="btn-color"
                                                     onClick={() => {
                                                         setView(true);
-                                                        setCheckClick(false)
+                                                        setCheckClick(false);
+                                                        setAmount('')
                                                     }}>
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -1122,22 +1133,26 @@ function SettingOther() {
                                     view ?
                                         <div className="addition">
                                             <Row className="flex-center">
-                                                <Col xs={6}>
-                                                    <Form.Group className="form-group">
-                                                        <span className="input-title">Şəhər seçin</span>
-                                                        <Select
-                                                            placeholder="Şəhər seçin"
-                                                            value={selectedCity}
-                                                            onChange={setSelectedCity}
-                                                            options={cityArr}
-                                                            isSearchable={cityArr ? cityArr.length > 5 ? true : false : false}
-                                                            styles={customStyles}
-                                                            getOptionLabel={(option) => (option.name)}
-                                                            getOptionValue={(option) => (option.name)}
-                                                        />
-                                                    </Form.Group>
-                                                </Col>
-                                                <Col xs={6}>
+                                                {
+                                                    checkClick ? null :
+                                                        <Col xs={6}>
+                                                            <Form.Group className="form-group">
+                                                                <span className="input-title">Şəhər seçin</span>
+                                                                <Select
+                                                                    placeholder="Şəhər seçin"
+                                                                    value={selectedCity}
+                                                                    onChange={setSelectedCity}
+                                                                    options={cityArr}
+                                                                    isSearchable={cityArr ? cityArr.length > 5 ? true : false : false}
+                                                                    styles={customStyles}
+                                                                    getOptionLabel={(option) => (option.name)}
+                                                                    getOptionValue={(option) => (option.name)}
+                                                                />
+                                                            </Form.Group>
+                                                        </Col>
+                                                }
+
+                                                <Col xs={checkClick ? 12 : 6}>
                                                     <Form.Group className="form-group">
                                                         <span className="input-title">Qiymətləndirmə</span>
                                                         <Form.Label>
