@@ -301,7 +301,8 @@ function SettingOther() {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
         }).then((res) => {
-            setAmount(res.data)
+            setAmount(res.data);
+            console.log(res)
         });
     }
     const sendBusinessCity = () => {
@@ -383,8 +384,9 @@ function SettingOther() {
         });
     }
     const getDetailEvaluation = (item) => {
+        console.log(item);
         setAmount(item.amount);
-        setSelectedMinGrade({})
+        //setSelectedMinGrade({})
         setEvaluationId(item.id)
     }
     const sendEvaluation = () => {
@@ -413,7 +415,7 @@ function SettingOther() {
         }
         mainAxios({
             method: 'put',
-            url: '/evaluations',
+            url: 'evaluations/' + evaluationId,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -603,7 +605,7 @@ function SettingOther() {
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
                                                                         <button type="button"
-                                                                                className="btn-transparent btn-delete"
+                                                                                className="btn-transparent btn-edit"
                                                                                 onClick={() => {
                                                                                     getDetailDepartment(item);
                                                                                     setCheckClick(true);
@@ -742,7 +744,7 @@ function SettingOther() {
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
                                                                         <button type="button"
-                                                                                className="btn-transparent btn-delete"
+                                                                                className="btn-transparent btn-edit"
                                                                                 onClick={() => {
                                                                                     getDetailSubDepartment(item);
                                                                                     setCheckClick(true);
@@ -899,7 +901,7 @@ function SettingOther() {
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
                                                                         <button type="button"
-                                                                                className="btn-transparent btn-delete"
+                                                                                className="btn-transparent btn-edit"
                                                                                 onClick={() => {
                                                                                     getDetailRestReason(item);
                                                                                     setCheckClick(true);
@@ -1037,7 +1039,7 @@ function SettingOther() {
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
                                                                         <button type="button"
-                                                                                className="btn-transparent btn-delete"
+                                                                                className="btn-transparent btn-edit"
                                                                                 onClick={() => {
                                                                                     getDetailBusinessCity(item);
                                                                                     setCheckClick(true);
@@ -1116,6 +1118,7 @@ function SettingOther() {
                                                             isSearchable={cityArr ? cityArr.length > 5 ? true : false : false}
                                                             styles={customStyles}
                                                             getOptionLabel={(option) => (option.name)}
+                                                            getOptionValue={(option) => (option.name)}
                                                         />
                                                     </Form.Group>
                                                 </Col>
@@ -1190,7 +1193,7 @@ function SettingOther() {
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
                                                                         <button type="button"
-                                                                                className="btn-transparent btn-delete"
+                                                                                className="btn-transparent btn-edit"
                                                                                 onClick={() => {
                                                                                     getDetailEvaluation(item);
                                                                                     setCheckClick(true);
@@ -1269,6 +1272,7 @@ function SettingOther() {
                                                             isSearchable={gradeArr ? gradeArr.length > 5 ? true : false : false}
                                                             styles={customStyles}
                                                             getOptionLabel={(option) => (option.grade)}
+                                                            getOptionValue={(option) => (option.grade)}
                                                         />
                                                     </Form.Group>
                                                 </Col>
@@ -1357,7 +1361,7 @@ function SettingOther() {
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
                                                                         <button type="button"
-                                                                                className="btn-transparent btn-delete"
+                                                                                className="btn-transparent btn-edit"
                                                                                 onClick={() => {
                                                                                     getDetailArticle(item);
                                                                                     setCheckClick(true);
@@ -1459,6 +1463,7 @@ function SettingOther() {
                                                             isSearchable={vacationPayOptions ? vacationPayOptions.length > 5 ? true : false : false}
                                                             styles={customStyles}
                                                             getOptionLabel={(option) => (option.label)}
+                                                            getOptionValue={(option) => (option.label)}
                                                         />
                                                     </Form.Group>
                                                 </Col>

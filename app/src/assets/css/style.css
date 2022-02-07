@@ -1588,6 +1588,19 @@ td {
     justify-content: space-between;
 }
 
+.setting .dropdown-item:hover {
+    background-color: transparent;
+    color: rgba(48, 131, 220, 1);
+}
+
+.setting .dropdown-item  .btn-delete:hover svg path {
+    fill: rgba(207, 49, 49, 1);
+}
+
+.setting .dropdown-item  .btn-edit:hover svg path {
+    stroke: rgba(48, 131, 220, 1);
+}
+
 .setting .dropdown-item ul > li:not(:last-child) {
     margin-right: 35px;
 }

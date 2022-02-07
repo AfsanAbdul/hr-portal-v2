@@ -3,15 +3,13 @@ import Aux from "../../hoc/Auxiliary";
 import {Nav, Button} from 'react-bootstrap';
 import {NavLink} from 'react-router-dom';
 
-
 function Sidebar(props) {
     const [active, setActive] = useState('default');
 
     return (
         <Aux>
             <div className={[props.toggle ? 'active' : '', 'sidebar relative'].join(' ')}>
-                <Nav variant="pills" defaultActiveKey={active}
-                     onSelect={(selectedKey) => setActive(selectedKey)}>
+                <Nav variant="pills" defaultActiveKey={active} onSelect={(selectedKey) => setActive(selectedKey)}>
                     <Nav.Item>
                         <Nav.Link to="/employee" as={NavLink} replace className="flex-vertical-start">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -140,11 +138,13 @@ function Sidebar(props) {
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link to="/calendar" as={NavLink} className="flex-vertical-start">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1.5 3.99967C1.5 3.0792 2.24619 2.33301 3.16667 2.33301H14.8333C15.7538 2.33301 16.5 3.0792 16.5 3.99967V15.6663C16.5 16.5868 15.7538 17.333 14.8333 17.333H3.16667C2.24619 17.333 1.5 16.5868 1.5 15.6663V3.99967Z" stroke="#193651" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M1.5 7.33301H16.5" stroke="#193651" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M12.3359 0.666992V4.00033" stroke="#193651" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M5.66406 0.666992V4.00033" stroke="#193651" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round"/>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.25 3.125H3.75C3.40482 3.125 3.125 3.40482 3.125 3.75V16.25C3.125 16.5952 3.40482 16.875 3.75 16.875H16.25C16.5952 16.875 16.875 16.5952 16.875 16.25V3.75C16.875 3.40482 16.5952 3.125 16.25 3.125Z" stroke="#193651" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path opacity="0.9" d="M13.75 1.875V4.375" stroke="#193651" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path opacity="0.9" d="M6.25 1.875V4.375" stroke="#193651" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M3.125 6.875H16.875" stroke="#193651" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path opacity="0.9" d="M7.1875 10H9.375L8.125 11.5625C8.33072 11.5621 8.53334 11.6126 8.7149 11.7093C8.89646 11.806 9.05133 11.9461 9.16579 12.117C9.28025 12.288 9.35075 12.4845 9.37104 12.6892C9.39133 12.8939 9.36078 13.1005 9.28211 13.2906C9.20343 13.4806 9.07906 13.6484 8.92002 13.7789C8.76098 13.9093 8.5722 13.9986 8.37041 14.0386C8.16863 14.0786 7.96008 14.0683 7.76327 14.0084C7.56646 13.9485 7.38748 13.841 7.24219 13.6953" stroke="#193651" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path opacity="0.9" d="M11.25 10.9375L12.5 10V14.0625" stroke="#193651" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                             <span>Kalendar</span>
                         </Nav.Link>
@@ -180,7 +180,6 @@ function Sidebar(props) {
                 </div>
             </div>
         </Aux>
-
     );
 }
 

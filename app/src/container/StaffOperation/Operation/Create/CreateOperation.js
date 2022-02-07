@@ -7287,8 +7287,7 @@ function CreateOperation() {
                                                                                                        businessTripArr[index].fromCheckInHotel = e.target.checked;
                                                                                                        setBusinessTripArr([...businessTripArr], businessTripArr);
                                                                                                    }}/>
-                                                                                            <span
-                                                                                                className="checkmark"></span>
+                                                                                            <span className="checkmark"></span>
                                                                                         </label>
                                                                                     </div>
                                                                                     <span
@@ -7373,8 +7372,7 @@ function CreateOperation() {
                                                                                                        businessTripArr[index].toCheckInHotel = e.target.checked;
                                                                                                        setBusinessTripArr([...businessTripArr], businessTripArr)
                                                                                                    }}/>
-                                                                                            <span
-                                                                                                className="checkmark"></span>
+                                                                                            <span className="checkmark"></span>
                                                                                         </label>
                                                                                     </div>
                                                                                     <span

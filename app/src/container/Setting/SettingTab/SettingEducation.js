@@ -986,7 +986,7 @@ function SettingEducation() {
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
                                                                             <button type="button"
-                                                                                    className="btn-transparent btn-delete"
+                                                                                    className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailUniversity(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
                                                                                      viewBox="0 0 16 17" fill="none"
@@ -1119,7 +1119,7 @@ function SettingEducation() {
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
                                                                             <button type="button"
-                                                                                    className="btn-transparent btn-delete"
+                                                                                    className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailCertificate(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
                                                                                      viewBox="0 0 16 17" fill="none"
@@ -1252,7 +1252,7 @@ function SettingEducation() {
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
                                                                             <button type="button"
-                                                                                    className="btn-transparent btn-delete"
+                                                                                    className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailVacancy(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
                                                                                      viewBox="0 0 16 17" fill="none"
@@ -1385,7 +1385,7 @@ function SettingEducation() {
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
                                                                             <button type="button"
-                                                                                    className="btn-transparent btn-delete"
+                                                                                    className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailGrade(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
                                                                                      viewBox="0 0 16 17" fill="none"
@@ -1519,7 +1519,7 @@ function SettingEducation() {
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
                                                                             <button type="button"
-                                                                                    className="btn-transparent btn-delete"
+                                                                                    className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailSubGrade(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
                                                                                      viewBox="0 0 16 17" fill="none"
@@ -1652,7 +1652,7 @@ function SettingEducation() {
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
                                                                             <button type="button"
-                                                                                    className="btn-transparent btn-delete"
+                                                                                    className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailLanguage(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
                                                                                      viewBox="0 0 16 17" fill="none"
@@ -1785,7 +1785,7 @@ function SettingEducation() {
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
                                                                             <button type="button"
-                                                                                    className="btn-transparent btn-delete"
+                                                                                    className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailComputer(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
                                                                                      viewBox="0 0 16 17" fill="none"
@@ -1918,7 +1918,7 @@ function SettingEducation() {
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
                                                                             <button type="button"
-                                                                                    className="btn-transparent btn-delete"
+                                                                                    className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailLegislation(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
                                                                                      viewBox="0 0 16 17" fill="none"
@@ -2051,7 +2051,7 @@ function SettingEducation() {
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
                                                                             <button type="button"
-                                                                                    className="btn-transparent btn-delete"
+                                                                                    className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailSpeciality(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
                                                                                      viewBox="0 0 16 17" fill="none"
@@ -2184,7 +2184,7 @@ function SettingEducation() {
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
                                                                             <button type="button"
-                                                                                    className="btn-transparent btn-delete"
+                                                                                    className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailEnterprise(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
                                                                                      viewBox="0 0 16 17" fill="none"
@@ -2318,7 +2318,7 @@ function SettingEducation() {
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
                                                                             <button type="button"
-                                                                                    className="btn-transparent btn-delete"
+                                                                                    className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailOrganization(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
                                                                                      viewBox="0 0 16 17" fill="none"
@@ -2451,7 +2451,7 @@ function SettingEducation() {
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
                                                                             <button type="button"
-                                                                                    className="btn-transparent btn-delete"
+                                                                                    className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailCompetence(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
                                                                                      viewBox="0 0 16 17" fill="none"

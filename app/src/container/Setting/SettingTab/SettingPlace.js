@@ -402,7 +402,7 @@ function SettingPlace() {
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
                                                                         <button type="button"
-                                                                                className="btn-transparent btn-delete"
+                                                                                className="btn-transparent btn-edit"
                                                                                 onClick={() => {getDetailCountry(item); setCheckClick(true)}}>
                                                                             <svg width="16" height="17"
                                                                                  viewBox="0 0 16 17" fill="none"
@@ -535,7 +535,7 @@ function SettingPlace() {
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
                                                                         <button type="button"
-                                                                                className="btn-transparent btn-delete"
+                                                                                className="btn-transparent btn-edit"
                                                                                 onClick={() => {getDetailCity(item); setCheckClick(true)}}>
                                                                             <svg width="16" height="17"
                                                                                  viewBox="0 0 16 17" fill="none"
@@ -684,7 +684,7 @@ function SettingPlace() {
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
                                                                         <button type="button"
-                                                                                className="btn-transparent btn-delete"
+                                                                                className="btn-transparent btn-edit"
                                                                                 onClick={() => {getDetailRegion(item); setCheckClick(true)}}>
                                                                             <svg width="16" height="17"
                                                                                  viewBox="0 0 16 17" fill="none"
@@ -814,7 +814,7 @@ function SettingPlace() {
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
                                                                         <button type="button"
-                                                                                className="btn-transparent btn-delete"
+                                                                                className="btn-transparent btn-edit"
                                                                                 onClick={() => {getDetailCitizenship(item); setCheckClick(true)}}>
                                                                             <svg width="16" height="17"
                                                                                  viewBox="0 0 16 17" fill="none"
