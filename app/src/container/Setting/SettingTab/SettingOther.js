@@ -50,8 +50,8 @@ function SettingOther() {
 
     const [evaluationId, setEvaluationId] = useState('');
     const [evaluationArr, setEvaluationArr] = useState([]);
-    const [selectedMinGrade, setSelectedMinGrade] = useState(null);
-    const [selectedMaxGrade, setSelectedMaxGrade] = useState(null);
+    const [selectedSubGrade, setSelectedSubGrade] = useState(null);
+    const [selectedGrade, setSelectedGrade] = useState(null);
     const [gradeArr, setGradeArr] = useState([]);
     const [subGradeArr, setSubGradeArr] = useState([]);
 
@@ -386,14 +386,15 @@ function SettingOther() {
     const getDetailEvaluation = (item) => {
         console.log(item);
         setAmount(item.amount);
-        //setSelectedMinGrade({})
+        setSelectedGrade(item.grade !== null ? {id: item.grade.id, grade: item.grade.grade} : null)
+        setSelectedSubGrade(item.subGrade !== null ? {id: item.subGrade.id, subGrade: item.subGrade.subGrade} : null)
         setEvaluationId(item.id)
     }
     const sendEvaluation = () => {
         let data = {
             amount: amount !== '' ? parseFloat(amount) : null,
-            gradeId: selectedMinGrade !== null ? selectedMinGrade.id : null,
-            subGradeId: selectedMaxGrade !== null ? selectedMaxGrade.id : null
+            gradeId: selectedGrade !== null ? selectedGrade.id : null,
+            subGradeId: selectedSubGrade !== null ? selectedSubGrade.id : null
         }
         mainAxios({
             method: 'post',
@@ -410,8 +411,8 @@ function SettingOther() {
     const editEvaluation = () => {
         let data = {
             amount: amount !== '' ? parseFloat(amount) : null,
-            gradeId: selectedMinGrade !== null ? selectedMinGrade.id : null,
-            subGradeId: selectedMaxGrade !== null ? selectedMaxGrade.id : null
+            gradeId: selectedSubGrade !== null ? selectedGrade.id : null,
+            subGradeId: selectedSubGrade !== null ? selectedSubGrade.id : null
         }
         mainAxios({
             method: 'put',
@@ -458,9 +459,9 @@ function SettingOther() {
         setTitle(item.title);
         setFiringMultiply(item.firingMultiply !== null ? parseFloat(item.firingMultiply) : 0);
         setMainMultiply(item.mainMultiply !== null ? parseFloat(item.mainMultiply) : 0);
-        setWarningMultiply(item.warningMultiply !== null ? parseFloat(item.warningMultiply) : 0) ;
-        for(let i of vacationPayOptions) {
-            if (i.value == item.vacationPay ) {
+        setWarningMultiply(item.warningMultiply !== null ? parseFloat(item.warningMultiply) : 0);
+        for (let i of vacationPayOptions) {
+            if (i.value == item.vacationPay) {
                 setSelectedVacationPay(i)
             }
         }
@@ -1266,8 +1267,8 @@ function SettingOther() {
                                                         <span className="input-title">Dərəcə seçin</span>
                                                         <Select
                                                             placeholder="Dərəcə"
-                                                            value={selectedMinGrade}
-                                                            onChange={setSelectedMinGrade}
+                                                            value={selectedGrade}
+                                                            onChange={setSelectedGrade}
                                                             options={gradeArr}
                                                             isSearchable={gradeArr ? gradeArr.length > 5 ? true : false : false}
                                                             styles={customStyles}
@@ -1281,12 +1282,13 @@ function SettingOther() {
                                                         <span className="input-title">Alt dərəcə seçin</span>
                                                         <Select
                                                             placeholder="Alt dərəcə"
-                                                            value={selectedMaxGrade}
-                                                            onChange={setSelectedMaxGrade}
+                                                            value={selectedSubGrade}
+                                                            onChange={setSelectedSubGrade}
                                                             options={subGradeArr}
                                                             isSearchable={subGradeArr ? subGradeArr.length > 5 ? true : false : false}
                                                             styles={customStyles}
                                                             getOptionLabel={(option) => (option.subGrade)}
+                                                            getOptionValue={(option) => (option.subGrade)}
                                                         />
                                                     </Form.Group>
                                                 </Col>

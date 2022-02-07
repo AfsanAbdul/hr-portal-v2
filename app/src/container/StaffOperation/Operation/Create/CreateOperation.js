@@ -499,18 +499,12 @@ function CreateOperation() {
                 let data = res.data;
                 businessTripArr[index].cityId = id;
                 businessTripArr[index].payment = data;
-                businessTripArr[index].fromCheckInHotel = false;
-                businessTripArr[index].fromDate = null;
-                businessTripArr[index].toCheckInHotel = false;
-                businessTripArr[index].toDate = null;
                 setBusinessTripArr([...businessTripArr], businessTripArr);
                 let totalPayment = 0;
                 for(let i of businessTripArr) {
                     totalPayment+=i.payment;
-                    setNonWorkDayPayment(totalPayment)
+                    setNonWorkDayPayment(totalPayment);
                 }
-
-
             }
         );
     }
@@ -1003,7 +997,9 @@ function CreateOperation() {
         getSubGrade();
         getCollectAgreement();
         getArticle();
-    }, []);
+        console.log(nonWorkDayPayment);
+        setNonWorkDayPayment(nonWorkDayPayment)
+    }, [nonWorkDayPayment]);
 
     return (
         <Aux>
@@ -7290,8 +7286,7 @@ function CreateOperation() {
                                                                                             <span className="checkmark"></span>
                                                                                         </label>
                                                                                     </div>
-                                                                                    <span
-                                                                                        className="input-title m-0">Ezamiyyətin başladığı tarix / Otele giriş daxildir </span>
+                                                                                    <span className="input-title m-0">Ezamiyyətin başladığı tarix / Otele giriş daxildir </span>
                                                                                 </div>
                                                                                 <Form.Label className="relative m-0">
                                                                                     <DatePicker value={item.fromDate}
@@ -7503,7 +7498,7 @@ function CreateOperation() {
                                             </Col>
                                             <Col xs={4}>
                                                 <Form.Group className="form-group">
-                                                    <span className="input-title">Ezamiyyə müddətində işçinin yolda keçirdiyi istirahət gününə təsadüf etdiyi tarix</span>
+                                                    <span className="input-title">Ezamiyyə müd. işçinin yolda keç. istirahət gün. təsadüf etdiyi tarix</span>
                                                     <Form.Label className="relative m-0">
                                                         <Form.Control
                                                             placeholder="Ezamiyyət müddəti"
