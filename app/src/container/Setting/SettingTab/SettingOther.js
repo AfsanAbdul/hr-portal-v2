@@ -327,18 +327,33 @@ function SettingOther() {
     }
     const editBusinessCity = () => {
         setActive(true);
-        let data = {
-            amount: amount !== '' ? parseFloat(amount) : null,
-            cityId: selectedCity !== null ? selectedCity.id : null
-        }
+       if(selectedCity !==null ) {
+           let data = {
+               amount: amount !== '' ? parseFloat(amount) : null,
+           }
+           mainAxios({
+               method: 'put',
+               url: 'payments/city/' + selectedCity.id,
+               headers: {
+                   'Content-Type': 'application/json',
+                   'Authorization': 'Bearer ' + localStorage.getItem('token')
+               },
+               data: data
+           }).then((res) => {
+               getBusinessCity();
+               setSelectedCity(null);
+               setAmount('')
+           });
+       }
+    }
+    const deleteBusinessCity = (id) => {
         mainAxios({
-            method: 'put',
-            url: '/payments',
+            method: 'delete',
+            url: 'payments/' + id,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
-            data: data
         }).then((res) => {
             getBusinessCity();
             setSelectedCity(null);
@@ -384,7 +399,6 @@ function SettingOther() {
         });
     }
     const getDetailEvaluation = (item) => {
-        console.log(item);
         setAmount(item.amount);
         setSelectedGrade(item.grade !== null ? {id: item.grade.id, grade: item.grade.grade} : null)
         setSelectedSubGrade(item.subGrade !== null ? {id: item.subGrade.id, subGrade: item.subGrade.subGrade} : null)
@@ -1069,7 +1083,7 @@ function SettingOther() {
                                                                     <li>
                                                                         <button type="button"
                                                                                 className="btn-transparent btn-delete"
-                                                                                onClick={() => deleteRestReason(item.id)}>
+                                                                                onClick={() => deleteBusinessCity(item.id)}>
                                                                             <svg width="12" height="12"
                                                                                  viewBox="0 0 12 12" fill="none"
                                                                                  xmlns="http://www.w3.org/2000/svg">
