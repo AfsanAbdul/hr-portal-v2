@@ -967,20 +967,6 @@ td {
     line-height: 0;
 }
 
-.btn-color, .btn-color:hover, .btn-color:active {
-    background: transparent;
-    border: none;
-    color: #3083DC;
-    font-size: 16px;
-    line-height: 0;
-    display: flex;
-    align-items: center;
-}
-
-.btn-remove svg, .btn-color svg {
-    margin-right: 5px;
-}
-
 .radio-content {
     padding: 0 0 60px;
 }
@@ -1594,11 +1580,6 @@ td {
     margin-top: 20px;
 }
 
-.setting .btn-color {
-    margin: 8px 0 0;
-    font-weight: 500;
-}
-
 .setting .addition .btn-transparent {
     font-size: 18px;
     line-height: 23px;
@@ -1871,7 +1852,7 @@ input::-webkit-inner-spin-button {
     box-shadow: none;
 }
 
-.btn-cancel svg {
+.btn-cancel svg, .btn-export svg, .btn-confirm svg {
     margin: 0;
 }
 
