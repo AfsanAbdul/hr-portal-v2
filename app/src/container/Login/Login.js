@@ -32,13 +32,8 @@ function Login() {
 
         mainAxios({
             method: 'post',
-            url: '/auth/login',
+            url: 'auth/login',
             responseType: 'json',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                "Accept-Language": "az"
-            },
             data: data
         }).then((res) => {
             setLoading(false);

@@ -7,40 +7,8 @@ import {mainAxios} from "../../../../components/Axios/axios";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import Swal from 'sweetalert2';
-import {uid} from "react-uid";
 import Indicator from "../../../../components/Loading/Indicator";
 import {customStyles} from "../../../../components/Select/SelectStyle";
-import TimePicker from 'react-time-picker';
-
-
-const WorkModeOptions = [
-    {value: 'DAILY', label: 'Gündəlik'},
-    {value: 'ALTERNATELY', label: 'Növbəli'},
-]
-
-const disciplineOptions = [
-    {value: "REPRIMAND", label: "Töhmət"},
-    {value: "SEVERE_REPRIMAND ", label: "Şiddətli töhmət"},
-];
-
-const jobTimeOptions = [
-    {value: 'PART_TIME', label: 'Tam'},
-    {value: 'FULL_TIME', label: 'Natamam'},
-]
-
-const vacationType = [
-    {value: 'MAIN', label: 'Əsas məzuniyyət'},
-    {value: 'EXPERIENCE', label: 'Staja görə əlavə məz.'},
-    {value: 'CONDITIONAL', label: ' Əmək şəraitinə görə əlavə məz.'},
-    {value: 'AGREEMENT', label: 'Kollektiv müqaviləyə əsasən məz.'},
-    {value: 'CHILD', label: 'Uşağa görə'},
-    {value: 'DEBT', label: 'Borc'},
-]
-
-const jobTypeOptions = [
-    {value: 'MAIN', label: 'Əsas iş yeri'},
-    {value: 'ADDITIONAL', label: 'Əlavə iş yeri'},
-]
 
 function CreateSickness() {
     let history = useHistory();
@@ -65,11 +33,7 @@ function CreateSickness() {
     const getEmployee = () => {
         mainAxios({
             method: 'get',
-            url: '/employees/all',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'employees/all',
         }).then((res) => {
             let data = res.data;
             let arr = [];
@@ -84,11 +48,7 @@ function CreateSickness() {
     const getEmployeeDetail = (id) => {
         mainAxios({
             method: 'get',
-            url: `/employees/${id}/operation-info`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `employees/${id}/operation-info`,
         }).then((res) => {
             let data = res.data
             setDepartment(data.department);
@@ -111,12 +71,8 @@ function CreateSickness() {
         }
         mainAxios({
             method: 'post',
-            url: '/sick',
+            url: 'sick',
             data: data,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
         }).then((res) => {
             setLoadingIndicator(false);
             sendSicknessFile(res.data)
@@ -154,12 +110,8 @@ function CreateSickness() {
         }
         mainAxios({
             method: 'post',
-            url: `/sick/${id}/attach`,
+            url: `sick/${id}/attach`,
             data: formData,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
         }).then((res) => {
             history.push({
                 pathname: `/operation`,
@@ -543,8 +495,7 @@ function CreateSickness() {
                                                     )
                                                 }
                                                 <div className="flex-end">
-                                                    <button type="button" className=" add-btn btn-color" onClick={()=> addSicknessFileArr()}
-                                                            >
+                                                    <Button type="button" className=" add-btn btn-main-text" onClick={()=> addSicknessFileArr()}>
                                                         <svg width="12" height="12" viewBox="0 0 12 12"
                                                              fill="none"
                                                              xmlns="http://www.w3.org/2000/svg">
@@ -555,7 +506,7 @@ function CreateSickness() {
                                                                 strokeLinejoin="round"/>
                                                         </svg>
                                                         <span>əlavə et</span>
-                                                    </button>
+                                                    </Button>
                                                 </div>
                                             </div>
                                         </div>
@@ -563,7 +514,7 @@ function CreateSickness() {
                                 </Row>
                             </div>
                             <div className="flex-vertical-center btn-block">
-                                <Button className="btn-effect" onClick={() => sendData()}>
+                                <Button className="btn-effect w-200" onClick={() => sendData()}>
                                     Yadda saxla
                                 </Button>
                             </div>

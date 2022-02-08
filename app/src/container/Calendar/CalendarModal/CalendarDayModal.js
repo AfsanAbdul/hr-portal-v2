@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import Modal from 'react-bootstrap/Modal'
-import {Form} from "react-bootstrap";
+import {Form, Button} from "react-bootstrap";
 
 
 function CalendarDayModal(props) {
-    const { click, ...others } = props
+    const {click, ...others} = props
     const [reason, setReason] = useState('');
     return (
         <Modal
@@ -25,16 +25,16 @@ function CalendarDayModal(props) {
                 </Form.Group>
                 <ul className="btn-block flex-end list-unstyled m-0">
                     <li>
-                        <button type="button" className="btn-main-border" onClick={props.onHide}>
+                        <Button type="button" className="btn-main-border" onClick={props.onHide}>
                             Bağla
-                        </button>
+                        </Button>
                     </li>
                     <li>
-                        <button type="button" className="btn-main" onClick={() => {
+                        <Button type="button" className="btn-main" onClick={() => {
                             props.click(props.data.id, reason, true, props.data.date)
                         }}>
                             Əlavə et
-                        </button>
+                        </Button>
                     </li>
                 </ul>
             </Modal.Body>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal'
+import {Button} from "react-bootstrap";
 
 
 function CalendarEventModal(props) {
@@ -16,16 +17,16 @@ function CalendarEventModal(props) {
                 <h4>Ləğv etmək istədiyinizə <br/> əminsinizmi? </h4>
                 <ul className="btn-block flex-end list-unstyled m-0">
                     <li>
-                        <button type="button" className="btn-main-border" onClick={props.onHide}>
+                        <Button type="button" className="btn-main-border" onClick={props.onHide}>
                             Xeyr
-                        </button>
+                        </Button>
                     </li>
                     <li>
-                        <button type="button" className="btn-main" onClick={() => {
+                        <Button type="button" className="btn-main" onClick={() => {
                             props.click(props.data.id, props.data.description, false, props.data.date)
                         }}>
                             Bəli
-                        </button>
+                        </Button>
                     </li>
                 </ul>
             </Modal.Body>

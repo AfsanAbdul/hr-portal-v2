@@ -223,11 +223,7 @@ function CreateOperation() {
     const getOperationName = () => {
         mainAxios({
             method: 'get',
-            url: '/operations/types',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'operations/types',
         }).then((res) => {
             setOperationTypeArr(res.data);
         });
@@ -236,11 +232,7 @@ function CreateOperation() {
     const getEmployee = () => {
         mainAxios({
             method: 'get',
-            url: '/employees/all',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'employees/all',
         }).then((res) => {
             let data = res.data;
             let arr = [];
@@ -255,11 +247,7 @@ function CreateOperation() {
     const getGrade = () => {
         mainAxios({
             method: 'get',
-            url: '/grades',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'grades',
         }).then((res) => {
             let data = res.data;
             setGrade(data);
@@ -269,11 +257,7 @@ function CreateOperation() {
     const getSubGrade = () => {
         mainAxios({
             method: 'get',
-            url: '/sub-grades',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'sub-grades',
         }).then((res) => {
             let data = res.data;
             setSubGrade(data);
@@ -283,11 +267,7 @@ function CreateOperation() {
     const getEmployeeDetail = (id) => {
         mainAxios({
             method: 'get',
-            url: `/employees/${id}/operation-info`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `employees/${id}/operation-info`,
         }).then((res) => {
             let data = res.data
             setDepartment(data.department);
@@ -311,11 +291,7 @@ function CreateOperation() {
     const getAssignEmpDetail = (id) => {
         mainAxios({
             method: 'get',
-            url: `/employees/${id}/operation-info`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `employees/${id}/operation-info`,
         }).then((res) => {
             let data = res.data
             setAssignDepartment(data.department);
@@ -332,11 +308,7 @@ function CreateOperation() {
     const getWarningDetail = (id, index) => {
         mainAxios({
             method: 'get',
-            url: `/employees/${id}/operation-info`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `employees/${id}/operation-info`,
         }).then((res) => {
             let data = res.data
             if (tab == '50') {
@@ -362,11 +334,7 @@ function CreateOperation() {
     const getVacancy = () => {
         mainAxios({
             method: 'get',
-            url: '/vacancies/all',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'vacancies/all',
         }).then((res) => {
                 let data = res.data;
                 let arr = [];
@@ -386,11 +354,7 @@ function CreateOperation() {
     const getVacancyData = (id) => {
         mainAxios({
             method: 'get',
-            url: '/vacancies/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `vacancies/${id}`,
         }).then((res) => {
             let generalData = res.data.generalInformation;
             if (generalData !== null) {
@@ -425,11 +389,7 @@ function CreateOperation() {
     const getVacation = (id) => {
         mainAxios({
             method: 'get',
-            url: '/vacations/period/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `vacations/period/${id}`,
         }).then((res) => {
                 setVacation(res.data)
             }
@@ -439,11 +399,7 @@ function CreateOperation() {
     const getJobDay = (to, from) => {
         mainAxios({
             method: 'get',
-            url: '/vacations/dates',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'vacations/dates',
             params: {
                 from: moment(from).format('YYYY-MM-DD'),
                 to: to,
@@ -460,11 +416,7 @@ function CreateOperation() {
     const getCity = () => {
         mainAxios({
             method: 'get',
-            url: '/cities',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'cities',
         }).then((res) => {
             setCityArr(res.data)
         });
@@ -473,11 +425,7 @@ function CreateOperation() {
     const getCollectAgreement = () => {
         mainAxios({
             method: 'get',
-            url: '/collective-agreements',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            }
+            url: 'collective-agreements',
         }).then((res) => {
                 setCollectiveAgreeOpt(res.data);
             }
@@ -488,10 +436,6 @@ function CreateOperation() {
         mainAxios({
             method: 'get',
             url: 'payments',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
         }).then((res) => {
                 let data = res.data;
                 let arr = [];
@@ -512,11 +456,7 @@ function CreateOperation() {
     const getVacationOperation = (id) => {
         mainAxios({
             method: 'get',
-            url: 'vacations/operations/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `vacations/operations/${id}`,
             params: {
                 operationType: operationType,
             }
@@ -530,11 +470,7 @@ function CreateOperation() {
     const getArticle = () => {
         mainAxios({
             method: 'get',
-            url: '/articles',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'articles',
         }).then((res) => {
             setArticleArr(res.data);
         });
@@ -581,10 +517,6 @@ function CreateOperation() {
         mainAxios({
             method: 'post',
             url: 'business-trips/days',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
             data: arr
         }).then((res) => {
                 let data = res.data;
@@ -610,10 +542,6 @@ function CreateOperation() {
         mainAxios({
             method: 'get',
             url: 'business-trips/number',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
             params: {
                 number: nonWorkDayCount,
                 to: lastDay
@@ -932,12 +860,8 @@ function CreateOperation() {
 
         mainAxios({
             method: 'post',
-            url: '/operations',
+            url: 'operations',
             data: data,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
         }).then((res) => {
             setLoadingIndicator(false);
             Swal.fire({
@@ -4203,7 +4127,7 @@ function CreateOperation() {
                                                                                         <p className="m-0"> #{index + 1}.
                                                                                             Digər </p>
                                                                                         <Button
-                                                                                            className="btn-transparent btn-remove flex-center"
+                                                                                            className="btn-remove flex-center"
                                                                                             onClick={() => {
                                                                                                 vacationArr.splice(index, 1);
                                                                                                 setVacationArr([...vacationArr], vacationArr)
@@ -4315,7 +4239,7 @@ function CreateOperation() {
                                                                     )
                                                                 }
                                                                 <div className="flex-end">
-                                                                    <button type="button" className="btn-color"
+                                                                    <Button type="button" className="btn-main-text"
                                                                             onClick={() => addVacationArr()}>
                                                                         <svg width="12" height="12" viewBox="0 0 12 12"
                                                                              fill="none"
@@ -4327,7 +4251,7 @@ function CreateOperation() {
                                                                                 strokeLinejoin="round"/>
                                                                         </svg>
                                                                         <span>əlavə et</span>
-                                                                    </button>
+                                                                    </Button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -7198,7 +7122,7 @@ function CreateOperation() {
                                                                                 <p className="m-0"> #{index + 1}.
                                                                                     Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         businessTripArr.splice(index, 1);
                                                                                         setBusinessTripArr([...businessTripArr], businessTripArr)
@@ -7430,7 +7354,7 @@ function CreateOperation() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addBusinessTripArr()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12"
                                                                      fill="none"
@@ -7442,7 +7366,7 @@ function CreateOperation() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8044,7 +7968,7 @@ function CreateOperation() {
                                                                                 <p className="m-0"> #{index + 1}.
                                                                                     Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         employeeInfoArr.splice(index, 1);
                                                                                         setEmployeeInfoArr([...employeeInfoArr], employeeInfoArr)
@@ -8135,7 +8059,7 @@ function CreateOperation() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addEmployeeInfoArr()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12"
                                                                      fill="none"
@@ -8147,7 +8071,7 @@ function CreateOperation() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9757,7 +9681,7 @@ function CreateOperation() {
                                                                                 <p className="m-0"> #{index + 1}.
                                                                                     Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         employeeInfoArr.splice(index, 1);
                                                                                         setEmployeeInfoArr([...employeeInfoArr], employeeInfoArr)
@@ -9848,7 +9772,7 @@ function CreateOperation() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addEmployeeInfoArr()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12"
                                                                      fill="none"
@@ -9860,7 +9784,7 @@ function CreateOperation() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9897,7 +9821,7 @@ function CreateOperation() {
                                                                                 <p className="m-0"> #{index + 1}.
                                                                                     Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         employeeInfoArr.splice(index, 1);
                                                                                         setEmployeeInfoArr([...employeeInfoArr], employeeInfoArr)
@@ -9988,7 +9912,7 @@ function CreateOperation() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addEmployeeInfoArr()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12"
                                                                      fill="none"
@@ -10000,7 +9924,7 @@ function CreateOperation() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10176,7 +10100,7 @@ function CreateOperation() {
                                                                                 <p className="m-0"> #{index + 1}.
                                                                                     Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         employeeInfoArr.splice(index, 1);
                                                                                         setEmployeeInfoArr([...employeeInfoArr], employeeInfoArr)
@@ -10267,7 +10191,7 @@ function CreateOperation() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addEmployeeInfoArr()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12"
                                                                      fill="none"
@@ -10279,7 +10203,7 @@ function CreateOperation() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10509,7 +10433,7 @@ function CreateOperation() {
                                                                                 <p className="m-0"> #{index + 1}.
                                                                                     Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         overtimeEmpArr.splice(index, 1);
                                                                                         setOvertimeEmpArr([...overtimeEmpArr], overtimeEmpArr)
@@ -10739,7 +10663,7 @@ function CreateOperation() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addOvertimeEmpArr()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12"
                                                                      fill="none"
@@ -10751,7 +10675,7 @@ function CreateOperation() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10764,7 +10688,7 @@ function CreateOperation() {
                             {
                                 save ?
                                     <div className="flex-vertical-center btn-block">
-                                        <Button className="btn-effect" onClick={() => senData()}>
+                                        <Button className="btn-effect w-200" onClick={() => senData()}>
                                             Yadda saxla
                                         </Button>
                                     </div>

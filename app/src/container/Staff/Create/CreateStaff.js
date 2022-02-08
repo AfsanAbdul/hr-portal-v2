@@ -127,13 +127,8 @@ function CreateStaff() {
     const getInstitution = () => {
         mainAxios({
             method: 'get',
-            url: '/work-institutions',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'work-institutions',
         }).then((res) => {
-            //arr.push({name: 'Digər'})
             setInstitution(res.data)
         });
     }
@@ -141,11 +136,7 @@ function CreateStaff() {
     const getDepartment = () => {
         mainAxios({
             method: 'get',
-            url: '/departments',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'departments',
         }).then((res) => {
             setDepartment(res.data);
         });
@@ -154,11 +145,7 @@ function CreateStaff() {
     const getSubDepartment = (id) => {
         mainAxios({
             method: 'get',
-            url: `/departments/${id}/sub-departments/`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `departments/${id}/sub-departments`,
         }).then((res) => {
             setSubDepartment(res.data);
 
@@ -168,11 +155,7 @@ function CreateStaff() {
     const getCurators = () => {
         mainAxios({
             method: 'get',
-            url: `/employees/curators`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `employees/curators`,
         }).then((res) => {
             setCurator(res.data);
 
@@ -182,27 +165,18 @@ function CreateStaff() {
     const getVacancy = () => {
         mainAxios({
             method: 'get',
-            url: '/positions',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'positions',
         }).then((res) => {
             let arr = res.data;
             //arr.push({name: 'Digər'})
             setVacancy(arr);
-
         });
     }
 
     const getGrade = () => {
         mainAxios({
             method: 'get',
-            url: '/grades',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'grades',
         }).then((res) => {
             let data = res.data;
             setGrade(data);
@@ -213,26 +187,16 @@ function CreateStaff() {
     const getFamilyJob = () => {
         mainAxios({
             method: 'get',
-            url: '/job-families',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'job-families',
         }).then((res) => {
-            //arr.push({name: 'Digər'})
             setFamilyJob(res.data);
-
         });
     }
 
     const getSpeciality = () => {
         mainAxios({
             method: 'get',
-            url: '/specialities',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'specialities',
         }).then((res) => {
             setSpeciality(res.data)
         });
@@ -241,11 +205,7 @@ function CreateStaff() {
     const getSkill = () => {
         mainAxios({
             method: 'get',
-            url: '/skills',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'skills',
         }).then((res) => {
             setSkill(res.data);
         });
@@ -254,11 +214,7 @@ function CreateStaff() {
     const getComputerSkill = () => {
         mainAxios({
             method: 'get',
-            url: '/computers',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'computers',
         }).then((res) => {
             setComputerSkill(res.data)
         });
@@ -267,11 +223,7 @@ function CreateStaff() {
     const getLanguageSkill = () => {
         mainAxios({
             method: 'get',
-            url: '/languages',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'languages',
         }).then((res) => {
             setLanguageSkill(res.data)
         });
@@ -280,11 +232,7 @@ function CreateStaff() {
     const getLegislationSkill = () => {
         mainAxios({
             method: 'get',
-            url: '/legislations',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'legislations',
         }).then((res) => {
             setLegislationSkill(res.data)
         });
@@ -361,12 +309,7 @@ function CreateStaff() {
         }
         mainAxios({
             method: 'post',
-            url: '/vacancies',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: 'vacancies',
             data: data
         }).then((res) => {
             setLoading(false);
@@ -442,12 +385,7 @@ function CreateStaff() {
         }
         mainAxios({
             method: 'put',
-            url: '/vacancies/' + dataVal,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: `vacancies/${dataVal}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -509,11 +447,7 @@ function CreateStaff() {
 
         mainAxios({
             method: 'put',
-            url: '/vacancies/' + dataVal,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `vacancies/${dataVal}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -589,6 +523,7 @@ function CreateStaff() {
                                                                     isSearchable={institution ? institution.length > 5 ? true : false : false}
                                                                     options={institution}
                                                                     getOptionLabel={(option) => (option.name)}
+                                                                    getOptionValue={option => option.name}
                                                                     styles={customStyles}
                                                                 />
                                                                 <div className="validation-block flex-start">
@@ -615,6 +550,7 @@ function CreateStaff() {
                                                                     isSearchable={department ? department.length > 5 ? true : false : false}
                                                                     options={department}
                                                                     getOptionLabel={(option) => (option.name)}
+                                                                    getOptionValue={option => option.name}
                                                                     styles={customStyles}
                                                                 />
                                                                 <div className="validation-block flex-start">
@@ -639,6 +575,7 @@ function CreateStaff() {
                                                                     isSearchable={subDepartment ? subDepartment.length > 5 ? true : false : false}
                                                                     options={subDepartment}
                                                                     getOptionLabel={(option) => (option.name)}
+                                                                    getOptionValue={option => option.name}
                                                                     styles={customStyles}
                                                                 />
                                                             </Form.Group>
@@ -667,6 +604,7 @@ function CreateStaff() {
                                                                     options={vacancy}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.name)}
+                                                                    getOptionValue={option => option.name}
                                                                 />
                                                                 <div className="validation-block flex-start">
                                                                     {
@@ -756,8 +694,7 @@ function CreateStaff() {
                                                                 <>
                                                                     <Col xs={6}>
                                                                         <Form.Group className="form-group">
-                                                                    <span
-                                                                        className="input-title">Əmək şəraiti dərəcəsi</span>
+                                                                <span className="input-title">Əmək şəraiti dərəcəsi</span>
                                                                             <Form.Control
                                                                                 value={workConditionPer || ''}
                                                                                 type="number"
@@ -767,7 +704,7 @@ function CreateStaff() {
                                                                     </Col>
                                                                     <Col xs={6}>
                                                                         <Form.Group className="form-group">
-                                                                            <span className="input-title">Əmək şəraitinə görə məzuniyyət</span>
+                                                                <span className="input-title">Əmək şəraitinə görə məzuniyyət</span>
                                                                             <Form.Control
                                                                                 value={workConditionVac || ''}
                                                                                 type="number"
@@ -813,6 +750,7 @@ function CreateStaff() {
                                                                     options={familyJob}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.name)}
+                                                                    getOptionValue={option => option.name}
                                                                 />
                                                             </Form.Group>
                                                         </Col>
@@ -849,6 +787,7 @@ function CreateStaff() {
                                                                     isSearchable={curator ? curator.length > 5 ? true : false : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.fullName)}
+                                                                    getOptionValue={option => option.fullName}
                                                                 />
                                                             </Form.Group>
                                                         </Col>
@@ -863,6 +802,7 @@ function CreateStaff() {
                                                                     isSearchable={grade ? grade.length > 5 ? true : false : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.grade)}
+                                                                    getOptionValue={option => option.grade}
                                                                 />
                                                                 <div className="validation-block flex-start">
                                                                     {
@@ -876,7 +816,7 @@ function CreateStaff() {
                                                         </Col>
                                                         <Col xs={6}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">Max dərəcə *</span>
+                                                                <span className="input-title">Max dərəcə </span>
                                                                 <Select
                                                                     placeholder="Max dərəcəni seçin"
                                                                     value={selectedMaxGrade}
@@ -885,6 +825,7 @@ function CreateStaff() {
                                                                     isSearchable={grade ? grade.length > 5 ? true : false : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.grade)}
+                                                                    getOptionValue={option => option.grade}
                                                                 />
                                                                 <div className="validation-block flex-start">
                                                                     {
@@ -912,7 +853,7 @@ function CreateStaff() {
                                                                             <div className="add-item-top">
                                                                                 <p className="m-0"> #{index + 1}. Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         skillLegalArr.splice(index, 1);
                                                                                         setSkillLegalArr([...skillLegalArr], skillLegalArr)
@@ -981,7 +922,7 @@ function CreateStaff() {
                                                         }
                                                     </div>
                                                     <div className="flex-end">
-                                                        <button className="btn-color" onClick={() => addLegalSkill()}
+                                                        <Button className="btn-main-text" onClick={() => addLegalSkill()}
                                                                 type="button">
                                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                  xmlns="http://www.w3.org/2000/svg">
@@ -991,7 +932,7 @@ function CreateStaff() {
                                                                     strokeLinejoin="round"/>
                                                             </svg>
                                                             <span>əlavə et</span>
-                                                        </button>
+                                                        </Button>
                                                     </div>
                                                 </div>
                                                 <div className="block-inn">
@@ -1140,7 +1081,7 @@ function CreateStaff() {
                                                                             <div className="add-item-top">
                                                                                 <p className="m-0"> #{index + 1}. Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         positionFunctionArr.splice(index, 1);
                                                                                         setPositionFunctionArr([...positionFunctionArr], positionFunctionArr)
@@ -1183,7 +1124,7 @@ function CreateStaff() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button className="btn-color"
+                                                            <Button className="btn-main-text"
                                                                     type="button"
                                                                     onClick={() => addPositionFunction()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
@@ -1194,7 +1135,7 @@ function CreateStaff() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1202,11 +1143,11 @@ function CreateStaff() {
                                             <div className="flex-vertical-center">
                                                 {
                                                     showButton ?
-                                                        <Button className="btn-effect" onClick={() => sendGeneralUpdate()}>
+                                                        <Button className="btn-effect w-200" onClick={() => sendGeneralUpdate()}>
                                                             Davam et
                                                         </Button>
                                                         :
-                                                        <Button className="btn-effect" onClick={() => sendGeneralData()}>
+                                                        <Button className="btn-effect w-200" onClick={() => sendGeneralData()}>
                                                             Davam et
                                                         </Button>
 
@@ -1233,7 +1174,7 @@ function CreateStaff() {
                                                                             <div className="add-item-top">
                                                                                 <p className="m-0"> #{index + 1}. Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         skillProgramArr.splice(index, 1);
                                                                                         setSkillProgramArr([...skillProgramArr], skillProgramArr)
@@ -1302,7 +1243,7 @@ function CreateStaff() {
                                                         }
                                                     </div>
                                                     <div className="flex-end">
-                                                        <button className="btn-color" onClick={() => addProgramSkill()}
+                                                        <Button className="btn-main-text" onClick={() => addProgramSkill()}
                                                                 type="button">
                                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                  xmlns="http://www.w3.org/2000/svg">
@@ -1312,7 +1253,7 @@ function CreateStaff() {
                                                                     strokeLinejoin="round"/>
                                                             </svg>
                                                             <span>əlavə et</span>
-                                                        </button>
+                                                        </Button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1331,7 +1272,7 @@ function CreateStaff() {
                                                                             <div className="add-item-top">
                                                                                 <p className="m-0"> #{index + 1}. Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         skillLanguageArr.splice(index, 1);
                                                                                         setSkillLanguageArr([...skillLanguageArr], skillLanguageArr)
@@ -1400,7 +1341,7 @@ function CreateStaff() {
                                                         }
                                                     </div>
                                                     <div className="flex-end">
-                                                        <button className="btn-color" onClick={() => addLanguageSkill()}
+                                                        <Button className="btn-main-text" onClick={() => addLanguageSkill()}
                                                                 type="button">
                                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                  xmlns="http://www.w3.org/2000/svg">
@@ -1410,7 +1351,7 @@ function CreateStaff() {
                                                                     strokeLinejoin="round"/>
                                                             </svg>
                                                             <span>əlavə et</span>
-                                                        </button>
+                                                        </Button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1429,7 +1370,7 @@ function CreateStaff() {
                                                                             <div className="add-item-top">
                                                                                 <p className="m-0"> #{index + 1}. Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         skillArr.splice(index, 1);
                                                                                         setSkillArr([...skillArr], skillArr)
@@ -1497,7 +1438,7 @@ function CreateStaff() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addSkill()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                      xmlns="http://www.w3.org/2000/svg">
@@ -1507,7 +1448,7 @@ function CreateStaff() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1516,7 +1457,7 @@ function CreateStaff() {
                                                 showButton ?
                                                     <ul className="flex-vertical-center btn-block list-unstyled">
                                                         <li>
-                                                            <Button className="btn-transparent btn-previous" onClick={() => {
+                                                            <Button className="btn-transparent" onClick={() => {
                                                                 setKey('general')
                                                             }}>
                                                                 <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
@@ -1529,7 +1470,7 @@ function CreateStaff() {
                                                             </Button>
                                                         </li>
                                                         <li>
-                                                            <Button className="btn-effect" onClick={() => sendDataKnowledge()}>
+                                                            <Button className="btn-effect w-200" onClick={() => sendDataKnowledge()}>
                                                                 Yadda saxla
                                                             </Button>
                                                         </li>

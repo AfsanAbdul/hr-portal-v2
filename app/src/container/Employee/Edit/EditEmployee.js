@@ -334,11 +334,7 @@ function EditEmployee() {
     const getCity = () => {
         mainAxios({
             method: 'get',
-            url: '/cities',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'cities',
         }).then((res) => {
             setCities(res.data)
         });
@@ -347,11 +343,7 @@ function EditEmployee() {
     const getCountry = () => {
         mainAxios({
             method: 'get',
-            url: '/countries',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'countries',
         }).then((res) => {
             setCountries(res.data)
         });
@@ -360,11 +352,7 @@ function EditEmployee() {
     const getRegion = () => {
         mainAxios({
             method: 'get',
-            url: '/districts',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'districts',
         }).then((res) => {
             setRegions(res.data)
         });
@@ -373,11 +361,7 @@ function EditEmployee() {
     const getUniversity = () => {
         mainAxios({
             method: 'get',
-            url: '/education-institutions',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'education-institutions',
         }).then((res) => {
             setUniversity(res.data)
         });
@@ -386,11 +370,7 @@ function EditEmployee() {
     const getReward = () => {
         mainAxios({
             method: 'get',
-            url: '/honorary-decrees',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'honorary-decrees',
         }).then((res) => {
             setReward(res.data)
         });
@@ -399,11 +379,7 @@ function EditEmployee() {
     const getCertificate = () => {
         mainAxios({
             method: 'get',
-            url: '/certificates',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'certificates',
         }).then((res) => {
             setCertificate(res.data)
         });
@@ -412,11 +388,7 @@ function EditEmployee() {
     const getCitizenControl = () => {
         mainAxios({
             method: 'get',
-            url: '/motherland',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'motherland',
         }).then((res) => {
             setCitizen(res.data)
         });
@@ -425,11 +397,7 @@ function EditEmployee() {
     const getRewardOrganization = () => {
         mainAxios({
             method: 'get',
-            url: '/organizations',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'organizations',
         }).then((res) => {
             setRewardOrganization(res.data)
         });
@@ -512,11 +480,7 @@ function EditEmployee() {
     const getEmployeeInfo = () => {
         mainAxios({
             method: 'get',
-            url: '/employees/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `employees/${id}`,
         }).then((res) => {
 
             let accountData = res.data.account;
@@ -794,11 +758,7 @@ function EditEmployee() {
     const getVacation = () => {
         mainAxios({
             method: 'get',
-            url: '/vacations/period/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `vacations/period/${id}`,
         }).then((res) => {
                 setVacation(res.data)
             }
@@ -848,12 +808,7 @@ function EditEmployee() {
         }
         mainAxios({
             method: 'put',
-            url: '/employees/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: `employees/${id}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -924,12 +879,7 @@ function EditEmployee() {
         }
         mainAxios({
             method: 'put',
-            url: '/employees/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: `employees/${id}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -1002,12 +952,7 @@ function EditEmployee() {
         }
         mainAxios({
             method: 'put',
-            url: '/employees/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: `employees/${id}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -1055,12 +1000,7 @@ function EditEmployee() {
         }
         mainAxios({
             method: 'put',
-            url: '/employees/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: `employees/${id}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -1132,12 +1072,7 @@ function EditEmployee() {
         }
         mainAxios({
             method: 'put',
-            url: '/employees/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: `employees/${id}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -1176,12 +1111,7 @@ function EditEmployee() {
         }
         mainAxios({
             method: 'put',
-            url: '/employees/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: `employees/${id}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -1214,11 +1144,7 @@ function EditEmployee() {
         formData.append("image", uploadFile);
         mainAxios({
             method: 'post',
-            url: `/employees/${id}/image/`,
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `employees/${id}/image`,
             data: formData
         }).then((res) => {
         });
@@ -1228,11 +1154,7 @@ function EditEmployee() {
     const getOperation = (page) => {
         mainAxios({
             method: 'get',
-            url: `/employees/${id}/operations`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `employees/${id}/operations`,
             params: {
                 page: page - 1,
                 size: recordSize,
@@ -1258,11 +1180,7 @@ function EditEmployee() {
             if (result.isConfirmed) {
                 mainAxios({
                     method: 'put',
-                    url: `/operations/${id}/status`,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    },
+                    url: `operations/${id}/status`,
                     params: {
                         status: status
                     }
@@ -1276,13 +1194,8 @@ function EditEmployee() {
     const getExportDocument = (id, operationName) => {
         mainAxios({
             method: 'get',
-            url: `/operations/${id}/export`,
+            url: `operations/${id}/export`,
             responseType: 'arraybuffer',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-
         }).then((res) => {
             const url = window.URL.createObjectURL(new Blob([res.data]));
             const link = window.document.createElement('a');
@@ -1342,17 +1255,22 @@ function EditEmployee() {
                                                         <div className="upload-img">
                                                             <Image src={photo ? photo : userImage}/>
                                                         </div>
-                                                        <div className="btn-block flex-center">
-                                                            <button className="btn-border add-img" type="button">
-                                                                Şəkil əlavə et
-                                                                <input type="file"
-                                                                       onChange={(event) => uploadImage(event)}/>
-                                                            </button>
-                                                            <button className="btn-border remove-img" type="button"
-                                                                    onClick={() => removeImage()}>
-                                                                Şəkli sil
-                                                            </button>
-                                                        </div>
+                                                        <ul className="btn-block flex-center list-unstyled">
+                                                            <li>
+                                                                <Button className="btn-main-border relative"
+                                                                        type="button">
+                                                                    Şəkil əlavə et
+                                                                    <input type="file"
+                                                                           onChange={(event) => uploadImage(event)}/>
+                                                                </Button>
+                                                            </li>
+                                                            <li>
+                                                                <Button className="btn-border relative" type="button"
+                                                                        onClick={() => removeImage()}>
+                                                                    Şəkli sil
+                                                                </Button>
+                                                            </li>
+                                                        </ul>
                                                     </div>
                                                     <Row>
                                                         <Col xs={4}>
@@ -2118,7 +2036,7 @@ function EditEmployee() {
                                                 </div>
                                             </div>
                                             <div className="flex-vertical-center">
-                                                <Button className="btn-effect" onClick={() => sendGeneralData()}>
+                                                <Button className="btn-effect w-200" onClick={() => sendGeneralData()}>
                                                     Yadda saxla
                                                 </Button>
                                             </div>
@@ -2673,7 +2591,7 @@ function EditEmployee() {
                                                 </div>
                                             </div>
                                             <ul className="flex-vertical-center btn-block list-unstyled">
-                                                <Button className="btn-effect" onClick={() => sendContactData()}>
+                                                <Button className="btn-effect w-200" onClick={() => sendContactData()}>
                                                     Yadda saxla
                                                 </Button>
                                             </ul>
@@ -2727,7 +2645,7 @@ function EditEmployee() {
                                                                                         <p className="m-0"> #{index + 1}.
                                                                                             Digər </p>
                                                                                         <Button
-                                                                                            className="btn-transparent btn-remove flex-center"
+                                                                                            className="btn-remove flex-center"
                                                                                             onClick={() => {
                                                                                                 educationArr.splice(index, 1);
                                                                                                 setEducationArr([...educationArr], educationArr)
@@ -3116,7 +3034,7 @@ function EditEmployee() {
                                                                     )
                                                                 }
                                                                 <div className="flex-end">
-                                                                    <button type="button" className="btn-color"
+                                                                    <Button type="button" className="btn-main-text"
                                                                             onClick={() => addEducation()}>
                                                                         <svg width="12" height="12" viewBox="0 0 12 12"
                                                                              fill="none"
@@ -3128,7 +3046,7 @@ function EditEmployee() {
                                                                                 strokeLinejoin="round"/>
                                                                         </svg>
                                                                         <span>əlavə et</span>
-                                                                    </button>
+                                                                    </Button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -3151,7 +3069,7 @@ function EditEmployee() {
                                                                                 <p className="m-0"> #{index + 1}.
                                                                                     Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         certificateArr.splice(index, 1);
                                                                                         setCertificateArr([...certificateArr], certificateArr)
@@ -3277,7 +3195,7 @@ function EditEmployee() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addCertificate()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12"
                                                                      fill="none"
@@ -3289,7 +3207,7 @@ function EditEmployee() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3513,7 +3431,8 @@ function EditEmployee() {
                                                 </div>
                                             </div>
                                             <div className="flex-vertical-center btn-block">
-                                                <Button className="btn-effect" onClick={() => sendEducationData()}>
+                                                <Button className="btn-effect w-200"
+                                                        onClick={() => sendEducationData()}>
                                                     Yadda saxla
                                                 </Button>
                                             </div>
@@ -3542,7 +3461,7 @@ function EditEmployee() {
                                                                                             <p className="m-0"> #{index + 1}.
                                                                                                 Digər </p>
                                                                                             <Button
-                                                                                                className="btn-transparent btn-remove flex-center"
+                                                                                                className="btn-remove flex-center"
                                                                                                 onClick={() => {
                                                                                                     companyIntArr.splice(index, 1);
                                                                                                     setCompanyIntArr([...companyIntArr], companyIntArr)
@@ -3583,7 +3502,8 @@ function EditEmployee() {
                                                                                                                companyIntArr[index].mainJob = true;
                                                                                                                setCompanyIntArr([...companyIntArr], companyIntArr)
                                                                                                            }}/>
-                                                                                                    <span className="radio-mark"></span>
+                                                                                                    <span
+                                                                                                        className="radio-mark"></span>
                                                                                                 </label>
                                                                                                 <span
                                                                                                     className="radio-title">Əsas iş yeri</span>
@@ -3599,7 +3519,8 @@ function EditEmployee() {
                                                                                                                companyIntArr[index].mainJob = false;
                                                                                                                setCompanyIntArr([...companyIntArr], companyIntArr)
                                                                                                            }}/>
-                                                                                                    <span className="radio-mark"></span>
+                                                                                                    <span
+                                                                                                        className="radio-mark"></span>
                                                                                                 </label>
                                                                                                 <span
                                                                                                     className="radio-title">Əlavə iş yeri</span>
@@ -3869,7 +3790,7 @@ function EditEmployee() {
                                                                         )
                                                                     }
                                                                     <div className="flex-end">
-                                                                        <button type="button" className="btn-color"
+                                                                        <Button type="button" className="btn-main-text"
                                                                                 onClick={() => addCompanyInt()}>
                                                                             <svg width="12" height="12"
                                                                                  viewBox="0 0 12 12"
@@ -3882,13 +3803,13 @@ function EditEmployee() {
                                                                                     strokeLinejoin="round"/>
                                                                             </svg>
                                                                             <span>əlavə et</span>
-                                                                        </button>
+                                                                        </Button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="flex-vertical-center btn-block">
-                                                            <Button className="btn-effect"
+                                                            <Button className="btn-effect w-200"
                                                                     onClick={() => sendCompanyData()}>
                                                                 Yadda saxla
                                                             </Button>
@@ -3913,7 +3834,7 @@ function EditEmployee() {
                                                                                             <p className="m-0"> #{index + 1}.
                                                                                                 Digər </p>
                                                                                             <Button
-                                                                                                className="btn-transparent btn-remove flex-center"
+                                                                                                className="btn-remove flex-center"
                                                                                                 onClick={() => {
                                                                                                     companyExtArr.splice(index, 1);
                                                                                                     setCompanyExtArr([...companyExtArr], companyExtArr)
@@ -4243,7 +4164,7 @@ function EditEmployee() {
                                                                         )
                                                                     }
                                                                     <div className="flex-end">
-                                                                        <button type="button" className="btn-color"
+                                                                        <Button type="button" className="btn-main-text"
                                                                                 onClick={() => addCompanyExt()}>
                                                                             <svg width="12" height="12"
                                                                                  viewBox="0 0 12 12"
@@ -4256,13 +4177,13 @@ function EditEmployee() {
                                                                                     strokeLinejoin="round"/>
                                                                             </svg>
                                                                             <span>əlavə et</span>
-                                                                        </button>
+                                                                        </Button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="flex-vertical-center btn-block">
-                                                            <Button className="btn-effect"
+                                                            <Button className="btn-effect w-200"
                                                                     onClick={() => sendCompanyData()}>
                                                                 Yadda saxla
                                                             </Button>
@@ -4298,7 +4219,7 @@ function EditEmployee() {
                                                 </div>
                                             </div>
                                             <div className="flex-vertical-center btn-block">
-                                                <Button className="btn-effect" onClick={() => sendBankData()}>
+                                                <Button className="btn-effect w-200" onClick={() => sendBankData()}>
                                                     Yadda saxla
                                                 </Button>
                                             </div>
@@ -4324,7 +4245,7 @@ function EditEmployee() {
                                                                                     <p className="m-0"> #{index + 1}.
                                                                                         Digər </p>
                                                                                     <Button
-                                                                                        className="btn-transparent btn-remove flex-center"
+                                                                                        className="btn-remove flex-center"
                                                                                         onClick={() => {
                                                                                             rewardArr.splice(index, 1);
                                                                                             setRewardArr([...rewardArr], rewardArr)
@@ -4481,7 +4402,7 @@ function EditEmployee() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addReward()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12"
                                                                      fill="none"
@@ -4493,7 +4414,7 @@ function EditEmployee() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4557,7 +4478,7 @@ function EditEmployee() {
                                                                                 <p className="m-0"> #{index + 1}.
                                                                                     Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         familyMemberArr.splice(index, 1);
                                                                                         setFamilyMemberArr([...familyMemberArr], familyMemberArr)
@@ -4747,7 +4668,7 @@ function EditEmployee() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addFamilyMember()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12"
                                                                      fill="none"
@@ -4759,7 +4680,7 @@ function EditEmployee() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4827,7 +4748,7 @@ function EditEmployee() {
                                                 </Row>
                                             </div>
                                             <div className="flex-vertical-center btn-block">
-                                                <Button className="btn-effect" onClick={() => sendOtherData()}>
+                                                <Button className="btn-effect w-200" onClick={() => sendOtherData()}>
                                                     Yadda saxla
                                                 </Button>
                                             </div>
@@ -4849,96 +4770,96 @@ function EditEmployee() {
                                             {
                                                 operation.length > 0 ?
                                                     operation.map((item, index) =>
-                                                            <tr key={index}>
-                                                                <td>{item.id}</td>
-                                                                <td>
-                                                                    {
-                                                                        item.type.length > 30 ?
-                                                                            <OverlayTrigger placement="top-start"
-                                                                                            overlay={<Tooltip
-                                                                                                id="tooltip-disabled">{item.type}</Tooltip>}>
-                                                                                <p className="m-0 operation-name">{item.type}</p>
-                                                                            </OverlayTrigger>
-                                                                            :
+                                                        <tr key={index}>
+                                                            <td>{item.id}</td>
+                                                            <td>
+                                                                {
+                                                                    item.type.length > 30 ?
+                                                                        <OverlayTrigger placement="top-start"
+                                                                                        overlay={<Tooltip
+                                                                                            id="tooltip-disabled">{item.type}</Tooltip>}>
                                                                             <p className="m-0 operation-name">{item.type}</p>
-                                                                    }
-                                                                </td>
-                                                                <td>{item.createdAt}</td>
-                                                                <td>
-                                                                    <div className="flex">
-                                                 <span className={statuses[item.statusAz]}>
-                                                     {item.statusAz}
-                                                 </span>
-                                                                        <ul className="btn-block list-unstyled flex m-0">
-                                                                            <li>
-                                                                                <Button className="btn-export"
-                                                                                        onClick={() => getExportDocument(item.id, item.type)}>
-                                                                                    <svg width="20" height="20"
-                                                                                         viewBox="0 0 22 22"
-                                                                                         fill="none"
-                                                                                         xmlns="http://www.w3.org/2000/svg">
-                                                                                        <path
-                                                                                            d="M17.1875 19.25H4.81247C4.63013 19.25 4.45527 19.1776 4.32635 19.0486C4.19742 18.9197 4.125 18.7448 4.125 18.5625V3.4375C4.125 3.25517 4.19742 3.0803 4.32635 2.95137C4.45527 2.82244 4.63013 2.75 4.81247 2.75H13.0627L17.875 7.5625V18.5625C17.875 18.7448 17.8026 18.9197 17.6737 19.0486C17.5447 19.1776 17.3699 19.25 17.1875 19.25V19.25Z"
-                                                                                            stroke="#040647"
-                                                                                            strokeLinecap="round"
-                                                                                            strokeLinejoin="round"/>
-                                                                                        <path
-                                                                                            d="M13.0625 2.75V7.5625H17.8757"
-                                                                                            stroke="#040647"
-                                                                                            strokeLinecap="round"
-                                                                                            strokeLinejoin="round"/>
-                                                                                        <path d="M8.25 11.6875H13.75"
-                                                                                              stroke="#040647"
-                                                                                              strokeLinecap="round"
-                                                                                              strokeLinejoin="round"/>
-                                                                                        <path d="M8.25 14.4375H13.75"
-                                                                                              stroke="#040647"
-                                                                                              strokeLinecap="round"
-                                                                                              strokeLinejoin="round"/>
-                                                                                    </svg>
+                                                                        </OverlayTrigger>
+                                                                        :
+                                                                        <p className="m-0 operation-name">{item.type}</p>
+                                                                }
+                                                            </td>
+                                                            <td>{item.createdAt}</td>
+                                                            <td>
+                                                                <div className="flex">
+                                                                         <span className={statuses[item.statusAz]}>
+                                                                             {item.statusAz}
+                                                                         </span>
+                                                                    <ul className="btn-block list-unstyled flex m-0">
+                                                                        <li>
+                                                                            <Button className="btn-export"
+                                                                                    onClick={() => getExportDocument(item.id, item.type)}>
+                                                                                <svg width="20" height="20"
+                                                                                     viewBox="0 0 22 22"
+                                                                                     fill="none"
+                                                                                     xmlns="http://www.w3.org/2000/svg">
+                                                                                    <path
+                                                                                        d="M17.1875 19.25H4.81247C4.63013 19.25 4.45527 19.1776 4.32635 19.0486C4.19742 18.9197 4.125 18.7448 4.125 18.5625V3.4375C4.125 3.25517 4.19742 3.0803 4.32635 2.95137C4.45527 2.82244 4.63013 2.75 4.81247 2.75H13.0627L17.875 7.5625V18.5625C17.875 18.7448 17.8026 18.9197 17.6737 19.0486C17.5447 19.1776 17.3699 19.25 17.1875 19.25V19.25Z"
+                                                                                        stroke="#040647"
+                                                                                        strokeLinecap="round"
+                                                                                        strokeLinejoin="round"/>
+                                                                                    <path
+                                                                                        d="M13.0625 2.75V7.5625H17.8757"
+                                                                                        stroke="#040647"
+                                                                                        strokeLinecap="round"
+                                                                                        strokeLinejoin="round"/>
+                                                                                    <path d="M8.25 11.6875H13.75"
+                                                                                          stroke="#040647"
+                                                                                          strokeLinecap="round"
+                                                                                          strokeLinejoin="round"/>
+                                                                                    <path d="M8.25 14.4375H13.75"
+                                                                                          stroke="#040647"
+                                                                                          strokeLinecap="round"
+                                                                                          strokeLinejoin="round"/>
+                                                                                </svg>
 
-                                                                                </Button>
-                                                                            </li>
-                                                                            {
-                                                                                item.statusAz === 'Təsdiq gözləyir' ?
-                                                                                    <li>
-                                                                                        <Button className="btn-cancel"
-                                                                                                onClick={() => changeStatus('REJECTED', item.id)}>
-                                                                                            <svg width="14" height="14"
-                                                                                                 viewBox="0 0 12 12"
-                                                                                                 fill="none"
-                                                                                                 xmlns="http://www.w3.org/2000/svg">
-                                                                                                <path
-                                                                                                    d="M5.99688 5.08435L11.0339 0.047383C11.0388 0.0422913 11.0438 0.0372908 11.0489 0.0323831C11.0489 0.0323654 11.0489 0.0323479 11.049 0.0323302L11.1531 0.140279C11.3516 -0.0514605 11.668 -0.0459554 11.8598 0.152578C12.0515 0.351111 12.046 0.667475 11.8475 0.859214L5.99688 5.08435ZM5.99688 5.08435L0.959034 0.0464826L0.95905 0.0464665L0.957171 0.0446523C0.69905 -0.204637 0.287728 -0.197483 0.038437 0.0606401C-0.20476 0.312441 -0.20476 0.711621 0.038437 0.963421L0.0384207 0.963437L0.0402643 0.965281L5.07811 6.00312L0.0402643 11.041L0.0402564 11.041C-0.213419 11.2947 -0.213419 11.706 0.0402564 11.9597L0.0402802 11.9597C0.293992 12.2134 0.705306 12.2134 0.959018 11.9597L0.959033 11.9597L5.99688 6.92189L11.0347 11.9597L11.0347 11.9597L11.0366 11.9616C11.2947 12.2109 11.706 12.2037 11.9553 11.9456L11.9553 11.9456C12.1985 11.6938 12.1985 11.2946 11.9553 11.0428L11.9553 11.0428L11.9535 11.041L6.91568 6.00312L11.9526 0.96616L5.99688 5.08435Z"
-                                                                                                    fill="#CF3131"
-                                                                                                    stroke="#CF3131"
-                                                                                                    strokeWidth="0.3"/>
-                                                                                            </svg>
-                                                                                        </Button>
-                                                                                    </li>
-                                                                                    : null
-                                                                            }
-                                                                            {
-                                                                                item.statusAz === 'Təsdiq gözləyir' ?
-                                                                                    <li>
-                                                                                        <Button className="btn-confirm"
-                                                                                                onClick={() => changeStatus('APPROVED', item.id)}>
-                                                                                            <svg width="16" height="12"
-                                                                                                 viewBox="0 0 16 12"
-                                                                                                 fill="none"
-                                                                                                 xmlns="http://www.w3.org/2000/svg">
-                                                                                                <path
-                                                                                                    d="M15.3696 0.327361C14.8557 -0.139829 14.0564 -0.103215 13.5867 0.413197L5.88442 8.89458L2.16332 5.11165C1.67212 4.61415 0.874137 4.60658 0.37791 5.0965C-0.11959 5.58515 -0.127168 6.38441 0.362755 6.88191L5.02072 11.6169C5.25937 11.8593 5.58259 11.9945 5.92097 11.9945C5.92854 11.9945 5.9374 11.9945 5.94497 11.9957C6.29347 11.9881 6.62178 11.8391 6.85535 11.5816L15.4554 2.11156C15.9239 1.59381 15.886 0.795825 15.3696 0.327361Z"
-                                                                                                    fill="#2ED06A"/>
-                                                                                            </svg>
-                                                                                        </Button>
-                                                                                    </li>
-                                                                                    : null
-                                                                            }
-                                                                        </ul>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                                            </Button>
+                                                                        </li>
+                                                                        {
+                                                                            item.statusAz === 'Təsdiq gözləyir' ?
+                                                                                <li>
+                                                                                    <Button className="btn-cancel"
+                                                                                            onClick={() => changeStatus('REJECTED', item.id)}>
+                                                                                        <svg width="14" height="14"
+                                                                                             viewBox="0 0 12 12"
+                                                                                             fill="none"
+                                                                                             xmlns="http://www.w3.org/2000/svg">
+                                                                                            <path
+                                                                                                d="M5.99688 5.08435L11.0339 0.047383C11.0388 0.0422913 11.0438 0.0372908 11.0489 0.0323831C11.0489 0.0323654 11.0489 0.0323479 11.049 0.0323302L11.1531 0.140279C11.3516 -0.0514605 11.668 -0.0459554 11.8598 0.152578C12.0515 0.351111 12.046 0.667475 11.8475 0.859214L5.99688 5.08435ZM5.99688 5.08435L0.959034 0.0464826L0.95905 0.0464665L0.957171 0.0446523C0.69905 -0.204637 0.287728 -0.197483 0.038437 0.0606401C-0.20476 0.312441 -0.20476 0.711621 0.038437 0.963421L0.0384207 0.963437L0.0402643 0.965281L5.07811 6.00312L0.0402643 11.041L0.0402564 11.041C-0.213419 11.2947 -0.213419 11.706 0.0402564 11.9597L0.0402802 11.9597C0.293992 12.2134 0.705306 12.2134 0.959018 11.9597L0.959033 11.9597L5.99688 6.92189L11.0347 11.9597L11.0347 11.9597L11.0366 11.9616C11.2947 12.2109 11.706 12.2037 11.9553 11.9456L11.9553 11.9456C12.1985 11.6938 12.1985 11.2946 11.9553 11.0428L11.9553 11.0428L11.9535 11.041L6.91568 6.00312L11.9526 0.96616L5.99688 5.08435Z"
+                                                                                                fill="#CF3131"
+                                                                                                stroke="#CF3131"
+                                                                                                strokeWidth="0.3"/>
+                                                                                        </svg>
+                                                                                    </Button>
+                                                                                </li>
+                                                                                : null
+                                                                        }
+                                                                        {
+                                                                            item.statusAz === 'Təsdiq gözləyir' ?
+                                                                                <li>
+                                                                                    <Button className="btn-confirm"
+                                                                                            onClick={() => changeStatus('APPROVED', item.id)}>
+                                                                                        <svg width="16" height="12"
+                                                                                             viewBox="0 0 16 12"
+                                                                                             fill="none"
+                                                                                             xmlns="http://www.w3.org/2000/svg">
+                                                                                            <path
+                                                                                                d="M15.3696 0.327361C14.8557 -0.139829 14.0564 -0.103215 13.5867 0.413197L5.88442 8.89458L2.16332 5.11165C1.67212 4.61415 0.874137 4.60658 0.37791 5.0965C-0.11959 5.58515 -0.127168 6.38441 0.362755 6.88191L5.02072 11.6169C5.25937 11.8593 5.58259 11.9945 5.92097 11.9945C5.92854 11.9945 5.9374 11.9945 5.94497 11.9957C6.29347 11.9881 6.62178 11.8391 6.85535 11.5816L15.4554 2.11156C15.9239 1.59381 15.886 0.795825 15.3696 0.327361Z"
+                                                                                                fill="#2ED06A"/>
+                                                                                        </svg>
+                                                                                    </Button>
+                                                                                </li>
+                                                                                : null
+                                                                        }
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
                                                     )
                                                     :
                                                     emptyData ?
@@ -4996,7 +4917,7 @@ function EditEmployee() {
                                 <Tab eventKey="salary" title="Əmək haqqı">
                                     <div className="block">
                                         <div className="table-striped">
-                                            <Table  responsive="sm">
+                                            <Table responsive="sm">
                                                 <thead>
                                                 <tr>
                                                     <th>Ştat əmək haqqı</th>
@@ -5010,7 +4931,7 @@ function EditEmployee() {
                                                 <tbody>
                                                 {
                                                     salaryArr.length > 0 ?
-                                                        salaryArr.map((item,index) =>
+                                                        salaryArr.map((item, index) =>
                                                             <tr>
                                                                 <td>{item.main}</td>
                                                                 <td>{item.conditionalAddition}</td>

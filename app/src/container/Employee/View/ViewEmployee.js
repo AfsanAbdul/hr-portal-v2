@@ -140,11 +140,7 @@ function ViewEmployee() {
     const getEmployeeInfo = () => {
         mainAxios({
             method: 'get',
-            url: '/employees/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `employees/${id}`,
         }).then((res) => {
 
             let accountData = res.data.account;
@@ -280,11 +276,7 @@ function ViewEmployee() {
     const getOperation = (page) => {
         mainAxios({
             method: 'get',
-            url: `/employees/${id}/operations`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `employees/${id}/operations`,
             params: {
                 page: page - 1,
                 size: recordSize,
@@ -310,11 +302,7 @@ function ViewEmployee() {
             if (result.isConfirmed) {
                 mainAxios({
                     method: 'put',
-                    url: `/operations/${id}/status`,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    },
+                    url: `operations/${id}/status`,
                     params: {
                         status: status
                     }
@@ -328,13 +316,8 @@ function ViewEmployee() {
     const getExportDocument = (id, operationName) => {
         mainAxios({
             method: 'get',
-            url: `/operations/${id}/export`,
+            url: `operations/${id}/export`,
             responseType: 'arraybuffer',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-
         }).then((res) => {
             const url = window.URL.createObjectURL(new Blob([res.data]));
             const link = window.document.createElement('a');
@@ -348,11 +331,7 @@ function ViewEmployee() {
     const getVacation = () => {
         mainAxios({
             method: 'get',
-            url: '/vacations/period/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `vacations/period/${id}`,
         }).then((res) => {
                 setVacation(res.data)
             }
@@ -399,7 +378,7 @@ function ViewEmployee() {
                                     <Link to={{
                                         pathname: `/employee/edit/${id}`,
                                         state: {key}
-                                    }} className="btn-border">
+                                    }} className="btn-main-border w-140">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <g opacity="0.8" clipPath="url(#clip0)">
@@ -647,7 +626,7 @@ function ViewEmployee() {
                                     <Link to={{
                                         pathname: `/employee/edit/${id}`,
                                         state: {key}
-                                    }} className="btn-border">
+                                    }} className="btn-main-border w-140">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <g opacity="0.8" clipPath="url(#clip0)">
@@ -938,7 +917,7 @@ function ViewEmployee() {
                                     <Link to={{
                                         pathname: `/employee/edit/${id}`,
                                         state: {key}
-                                    }} className="btn-border">
+                                    }} className="btn-main-border w-140">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <g opacity="0.8" clipPath="url(#clip0)">
@@ -1252,7 +1231,7 @@ function ViewEmployee() {
                                         <Link to={{
                                             pathname: `/employee/edit/${id}`,
                                             state: {key}
-                                        }} className="btn-border">
+                                        }} className="btn-main-border w-140">
                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <g opacity="0.8" clipPath="url(#clip0)">
@@ -1531,7 +1510,7 @@ function ViewEmployee() {
                                         <Link to={{
                                             pathname: `/employee/edit/${id}`,
                                             state: {key}
-                                        }} className="btn-border">
+                                        }} className="btn-main-border w-140">
                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <g opacity="0.8" clipPath="url(#clip0)">
@@ -1586,7 +1565,7 @@ function ViewEmployee() {
                                         <Link to={{
                                             pathname: `/employee/edit/${id}`,
                                             state: {key}
-                                        }} className="btn-border">
+                                        }} className="btn-main-border w-140">
                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <g opacity="0.8" clipPath="url(#clip0)">

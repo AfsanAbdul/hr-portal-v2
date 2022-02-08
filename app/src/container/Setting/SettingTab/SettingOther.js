@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {mainAxios} from "../../../components/Axios/axios";
-import {Container, Row, Col, Form, Tabs, Tab, Button, Table, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {Row, Col, Form, Tabs, Tab, Button} from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Select from "react-select";
 import {customStyles} from "../../../components/Select/SelectStyle";
@@ -69,11 +69,7 @@ function SettingOther() {
     const getCache = () => {
         mainAxios({
             method: 'post',
-            url: '/caches/evict',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'caches/evict',
         }).then((res) => {
         });
     }
@@ -81,11 +77,7 @@ function SettingOther() {
     const getDepartment = () => {
         mainAxios({
             method: 'get',
-            url: '/departments',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'departments',
         }).then((res) => {
             setDepartmentArr(res.data);
         });
@@ -102,11 +94,7 @@ function SettingOther() {
         }
         mainAxios({
             method: 'post',
-            url: '/departments',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'departments',
             data: data
         }).then((res) => {
             getDepartment();
@@ -122,11 +110,7 @@ function SettingOther() {
         }
         mainAxios({
             method: 'put',
-            url: '/departments/' + departmentId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `departments/${departmentId}`,
             data: data
         }).then((res) => {
             getDepartment();
@@ -137,11 +121,7 @@ function SettingOther() {
     const deleteDepartment = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/departments/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `departments/${id}`,
         }).then((res) => {
             getDepartment()
         });
@@ -150,11 +130,7 @@ function SettingOther() {
     const getSubDepartments = () => {
         mainAxios({
             method: 'get',
-            url: '/sub-departments',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'sub-departments',
         }).then((res) => {
             setSubDepartmentArr(res.data)
         });
@@ -174,11 +150,7 @@ function SettingOther() {
         }
         mainAxios({
             method: 'post',
-            url: '/sub-departments',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'sub-departments',
             data: data
         }).then((res) => {
             getCache();
@@ -194,11 +166,7 @@ function SettingOther() {
         }
         mainAxios({
             method: 'put',
-            url: '/sub-departments/' + subDepartmentId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `sub-departments/${subDepartmentId}`,
             data: data
         }).then((res) => {
             getCache();
@@ -212,11 +180,7 @@ function SettingOther() {
     const getRestReason = () => {
         mainAxios({
             method: 'get',
-            url: '/collective-agreements',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'collective-agreements',
         }).then((res) => {
             setRestReasonArr(res.data)
         });
@@ -233,11 +197,7 @@ function SettingOther() {
         }
         mainAxios({
             method: 'post',
-            url: '/collective-agreements',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'collective-agreements',
             data: data
         }).then((res) => {
             getRestReason();
@@ -252,11 +212,7 @@ function SettingOther() {
         }
         mainAxios({
             method: 'put',
-            url: '/collective-agreements/' + restReasonId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `collective-agreements/${restReasonId}`,
             data: data
         }).then((res) => {
             getRestReason();
@@ -267,11 +223,7 @@ function SettingOther() {
     const deleteRestReason = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/collective-agreements/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `collective-agreements/${id}`,
         }).then((res) => {
             getRestReason()
         });
@@ -280,11 +232,7 @@ function SettingOther() {
     const getBusinessCity = () => {
         mainAxios({
             method: 'get',
-            url: '/payments',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'payments',
         }).then((res) => {
             setPaymentCityArr(res.data)
         });
@@ -292,11 +240,7 @@ function SettingOther() {
     const getCity = () => {
         mainAxios({
             method: 'get',
-            url: '/cities',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'cities',
         }).then((res) => {
             setCityArr(res.data)
         });
@@ -308,11 +252,7 @@ function SettingOther() {
     const getBusinessPayment = (id) => {
         mainAxios({
             method: 'get',
-            url: 'payments/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `payments/${id}`,
         }).then((res) => {
             setAmount(res.data);
         });
@@ -325,11 +265,7 @@ function SettingOther() {
         }
         mainAxios({
             method: 'post',
-            url: '/payments',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'payments',
             data: data
         }).then((res) => {
             getBusinessCity();
@@ -344,11 +280,7 @@ function SettingOther() {
         }
         mainAxios({
             method: 'put',
-            url: 'payments/' + paymentId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `payments/${paymentId}`,
             data
         }).then((res) => {
             getBusinessCity();
@@ -358,11 +290,7 @@ function SettingOther() {
     const deleteBusinessCity = (id) => {
         mainAxios({
             method: 'delete',
-            url: 'payments/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `payments/${id}`,
         }).then((res) => {
             getBusinessCity();
             setSelectedCity(null);
@@ -370,15 +298,10 @@ function SettingOther() {
         });
     }
 
-
     const getGrade = () => {
         mainAxios({
             method: 'get',
-            url: '/grades',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'grades',
         }).then((res) => {
             setGradeArr(res.data)
         });
@@ -386,11 +309,7 @@ function SettingOther() {
     const getSubGrade = () => {
         mainAxios({
             method: 'get',
-            url: '/sub-grades',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'sub-grades',
         }).then((res) => {
             setSubGradeArr(res.data)
         });
@@ -398,11 +317,7 @@ function SettingOther() {
     const getEvaluation = () => {
         mainAxios({
             method: 'get',
-            url: '/evaluations',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'evaluations',
         }).then((res) => {
             setEvaluationArr(res.data)
         });
@@ -411,7 +326,7 @@ function SettingOther() {
         setAmount(item.amount);
         setSelectedGrade(item.grade !== null ? {id: item.grade.id, grade: item.grade.grade} : null)
         setSelectedSubGrade(item.subGrade !== null ? {id: item.subGrade.id, subGrade: item.subGrade.subGrade} : null)
-        setEvaluationId(item.id)
+        setEvaluationId(item.id);
     }
     const sendEvaluation = () => {
         let data = {
@@ -421,11 +336,7 @@ function SettingOther() {
         }
         mainAxios({
             method: 'post',
-            url: '/evaluations',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'evaluations',
             data: data
         }).then((res) => {
             getEvaluation();
@@ -439,24 +350,16 @@ function SettingOther() {
         }
         mainAxios({
             method: 'put',
-            url: 'evaluations/' + evaluationId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `evaluations/${evaluationId}`,
             data: data
         }).then((res) => {
             getEvaluation();
         });
     }
-    const deleteEvaluation = () => {
+    const deleteEvaluation = (id) => {
         mainAxios({
             method: 'delete',
-            url: 'evaluations/' + evaluationId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `evaluations/${id}`,
         }).then((res) => {
             setAmount('');
             getEvaluation();
@@ -467,11 +370,7 @@ function SettingOther() {
     const getArticle = () => {
         mainAxios({
             method: 'get',
-            url: '/articles',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'articles',
         }).then((res) => {
             setArticleArr(res.data);
         });
@@ -501,11 +400,7 @@ function SettingOther() {
         }
         mainAxios({
             method: 'post',
-            url: '/articles',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'articles',
             data: data
         }).then((res) => {
             setArticle('');
@@ -529,11 +424,7 @@ function SettingOther() {
         }
         mainAxios({
             method: 'put',
-            url: 'articles/' + articleId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `articles/${articleId}`,
             data: data
         }).then((res) => {
             setArticle('');
@@ -548,11 +439,7 @@ function SettingOther() {
     const deleteArticle = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/articles/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `articles/${id}`,
         }).then((res) => {
             setArticle('');
             setTitle('');
@@ -629,7 +516,7 @@ function SettingOther() {
                                                                 <span>{item.name}</span>
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-edit"
                                                                                 onClick={() => {
                                                                                     getDetailDepartment(item);
@@ -653,10 +540,10 @@ function SettingOther() {
                                                                                         strokeLinejoin="round"/>
                                                                                 </g>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-delete"
                                                                                 onClick={() => deleteDepartment(item.id)}>
                                                                             <svg width="12" height="12"
@@ -666,7 +553,7 @@ function SettingOther() {
                                                                                     d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                     fill="#040647"/>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                 </ul>
                                                             </Dropdown.Item>
@@ -676,7 +563,7 @@ function SettingOther() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <button type="button" className="btn-color"
+                                            <Button type="button" className="btn-color"
                                                     onClick={() => {
                                                         setView(true);
                                                         setCheckClick(false)
@@ -689,7 +576,7 @@ function SettingOther() {
                                                         strokeLinejoin="round"/>
                                                 </svg>
                                                 <span>əlavə et</span>
-                                            </button>
+                                            </Button>
                                         </div>
                                     </Col>
                                 </Row>
@@ -713,7 +600,7 @@ function SettingOther() {
                                                 <Col xs={12}>
                                                     <ul className="btn-block list-unstyled m-0 flex-end">
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => {
                                                                         setView(false);
                                                                         setDepartment('')
@@ -726,10 +613,10 @@ function SettingOther() {
                                                                         strokeWidth="0.3"/>
                                                                 </svg>
                                                                 Bağla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => checkClick ? editDepartment() : sendDepartment()}>
                                                                 <svg width="16" height="12" viewBox="0 0 16 12"
                                                                      fill="none"
@@ -739,7 +626,7 @@ function SettingOther() {
                                                                         fill="#2ED06A"/>
                                                                 </svg>
                                                                 Yadda saxla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                     </ul>
                                                 </Col>
@@ -768,7 +655,7 @@ function SettingOther() {
                                                                 <span>{item.name}</span>
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-edit"
                                                                                 onClick={() => {
                                                                                     getDetailSubDepartment(item);
@@ -793,10 +680,10 @@ function SettingOther() {
                                                                                         strokeLinejoin="round"/>
                                                                                 </g>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-delete"
                                                                                 onClick={() => deleteDepartment(item.id)}>
                                                                             <svg width="12" height="12"
@@ -806,7 +693,7 @@ function SettingOther() {
                                                                                     d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                     fill="#040647"/>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                 </ul>
                                                             </Dropdown.Item>
@@ -816,7 +703,7 @@ function SettingOther() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <button type="button" className="btn-color"
+                                            <Button type="button" className="btn-color"
                                                     onClick={() => {
                                                         setView(true);
                                                         setCheckClick(false)
@@ -829,7 +716,7 @@ function SettingOther() {
                                                         strokeLinejoin="round"/>
                                                 </svg>
                                                 <span>əlavə et</span>
-                                            </button>
+                                            </Button>
                                         </div>
                                     </Col>
                                 </Row>
@@ -870,7 +757,7 @@ function SettingOther() {
                                                 <Col xs={12}>
                                                     <ul className="btn-block list-unstyled m-0 flex-end">
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => {
                                                                         setView(false);
                                                                         setDepartment('')
@@ -883,10 +770,10 @@ function SettingOther() {
                                                                         strokeWidth="0.3"/>
                                                                 </svg>
                                                                 Bağla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => checkClick ? editSubDepartment() : sendSubDepartment()}>
                                                                 <svg width="16" height="12" viewBox="0 0 16 12"
                                                                      fill="none"
@@ -896,7 +783,7 @@ function SettingOther() {
                                                                         fill="#2ED06A"/>
                                                                 </svg>
                                                                 Yadda saxla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                     </ul>
                                                 </Col>
@@ -925,7 +812,7 @@ function SettingOther() {
                                                                 <span>{item.reason}</span>
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-edit"
                                                                                 onClick={() => {
                                                                                     getDetailRestReason(item);
@@ -950,10 +837,10 @@ function SettingOther() {
                                                                                         strokeLinejoin="round"/>
                                                                                 </g>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-delete"
                                                                                 onClick={() => deleteRestReason(item.id)}>
                                                                             <svg width="12" height="12"
@@ -963,7 +850,7 @@ function SettingOther() {
                                                                                     d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                     fill="#040647"/>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                 </ul>
                                                             </Dropdown.Item>
@@ -973,7 +860,7 @@ function SettingOther() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <button type="button" className="btn-color"
+                                            <Button type="button" className="btn-color"
                                                     onClick={() => {
                                                         setView(true);
                                                         setCheckClick(false)
@@ -986,7 +873,7 @@ function SettingOther() {
                                                         strokeLinejoin="round"/>
                                                 </svg>
                                                 <span>əlavə et</span>
-                                            </button>
+                                            </Button>
                                         </div>
                                     </Col>
                                 </Row>
@@ -1008,7 +895,7 @@ function SettingOther() {
                                                 <Col xs={12}>
                                                     <ul className="btn-block list-unstyled m-0 flex-end">
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => {
                                                                         setView(false);
                                                                         setRestReason('')
@@ -1021,10 +908,10 @@ function SettingOther() {
                                                                         strokeWidth="0.3"/>
                                                                 </svg>
                                                                 Bağla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => checkClick ? editRestReason() : sendRestReason()}>
                                                                 <svg width="16" height="12" viewBox="0 0 16 12"
                                                                      fill="none"
@@ -1034,7 +921,7 @@ function SettingOther() {
                                                                         fill="#2ED06A"/>
                                                                 </svg>
                                                                 Yadda saxla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                     </ul>
                                                 </Col>
@@ -1063,7 +950,7 @@ function SettingOther() {
                                                                 <span>{item.city.name} - {item.amount}  {item.amount !== null ? `Azn` : ''}</span>
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-edit"
                                                                                 onClick={() => {
                                                                                     getDetailBusinessCity(item);
@@ -1088,10 +975,10 @@ function SettingOther() {
                                                                                         strokeLinejoin="round"/>
                                                                                 </g>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-delete"
                                                                                 onClick={() => deleteBusinessCity(item.id)}>
                                                                             <svg width="12" height="12"
@@ -1101,7 +988,7 @@ function SettingOther() {
                                                                                     d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                     fill="#040647"/>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                 </ul>
                                                             </Dropdown.Item>
@@ -1111,7 +998,7 @@ function SettingOther() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <button type="button" className="btn-color"
+                                            <Button type="button" className="btn-color"
                                                     onClick={() => {
                                                         setView(true);
                                                         setCheckClick(false);
@@ -1125,7 +1012,7 @@ function SettingOther() {
                                                         strokeLinejoin="round"/>
                                                 </svg>
                                                 <span>əlavə et</span>
-                                            </button>
+                                            </Button>
                                         </div>
                                     </Col>
                                 </Row>
@@ -1167,7 +1054,7 @@ function SettingOther() {
                                                 <Col xs={12}>
                                                     <ul className="btn-block list-unstyled m-0 flex-end">
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => {
                                                                         setView(false);
                                                                         setRestReason('')
@@ -1180,10 +1067,10 @@ function SettingOther() {
                                                                         strokeWidth="0.3"/>
                                                                 </svg>
                                                                 Bağla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => checkClick ? editBusinessCity() : sendBusinessCity()}>
                                                                 <svg width="16" height="12" viewBox="0 0 16 12"
                                                                      fill="none"
@@ -1193,7 +1080,7 @@ function SettingOther() {
                                                                         fill="#2ED06A"/>
                                                                 </svg>
                                                                 Yadda saxla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                     </ul>
                                                 </Col>
@@ -1222,7 +1109,7 @@ function SettingOther() {
                                                                 <span>{item.amount}</span>
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-edit"
                                                                                 onClick={() => {
                                                                                     getDetailEvaluation(item);
@@ -1247,10 +1134,10 @@ function SettingOther() {
                                                                                         strokeLinejoin="round"/>
                                                                                 </g>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-delete"
                                                                                 onClick={() => deleteEvaluation(item.id)}>
                                                                             <svg width="12" height="12"
@@ -1260,7 +1147,7 @@ function SettingOther() {
                                                                                     d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                     fill="#040647"/>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                 </ul>
                                                             </Dropdown.Item>
@@ -1270,7 +1157,7 @@ function SettingOther() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <button type="button" className="btn-color"
+                                            <Button type="button" className="btn-color"
                                                     onClick={() => {
                                                         setView(true);
                                                         setCheckClick(false)
@@ -1283,7 +1170,7 @@ function SettingOther() {
                                                         strokeLinejoin="round"/>
                                                 </svg>
                                                 <span>əlavə et</span>
-                                            </button>
+                                            </Button>
                                         </div>
                                     </Col>
                                 </Row>
@@ -1336,7 +1223,7 @@ function SettingOther() {
                                                 <Col xs={12}>
                                                     <ul className="btn-block list-unstyled m-0 flex-end">
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => {
                                                                         setView(false);
                                                                         setRestReason('')
@@ -1349,10 +1236,10 @@ function SettingOther() {
                                                                         strokeWidth="0.3"/>
                                                                 </svg>
                                                                 Bağla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => checkClick ? editEvaluation() : sendEvaluation()}>
                                                                 <svg width="16" height="12" viewBox="0 0 16 12"
                                                                      fill="none"
@@ -1362,7 +1249,7 @@ function SettingOther() {
                                                                         fill="#2ED06A"/>
                                                                 </svg>
                                                                 Yadda saxla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                     </ul>
                                                 </Col>
@@ -1391,7 +1278,7 @@ function SettingOther() {
                                                                 <span> {item.article} - {item.title}</span>
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-edit"
                                                                                 onClick={() => {
                                                                                     getDetailArticle(item);
@@ -1416,10 +1303,10 @@ function SettingOther() {
                                                                                         strokeLinejoin="round"/>
                                                                                 </g>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-delete"
                                                                                 onClick={() => deleteArticle(item.id)}>
                                                                             <svg width="12" height="12"
@@ -1429,7 +1316,7 @@ function SettingOther() {
                                                                                     d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                     fill="#040647"/>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                 </ul>
                                                             </Dropdown.Item>
@@ -1439,7 +1326,7 @@ function SettingOther() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <button type="button" className="btn-color"
+                                            <Button type="button" className="btn-color"
                                                     onClick={() => {
                                                         setView(true);
                                                         setCheckClick(false)
@@ -1452,7 +1339,7 @@ function SettingOther() {
                                                         strokeLinejoin="round"/>
                                                 </svg>
                                                 <span>əlavə et</span>
-                                            </button>
+                                            </Button>
                                         </div>
                                     </Col>
                                 </Row>
@@ -1539,7 +1426,7 @@ function SettingOther() {
                                                 <Col xs={12}>
                                                     <ul className="btn-block list-unstyled m-0 flex-end">
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => {
                                                                         setView(false);
                                                                         setRestReason('')
@@ -1552,10 +1439,10 @@ function SettingOther() {
                                                                         strokeWidth="0.3"/>
                                                                 </svg>
                                                                 Bağla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => checkClick ? editArticle() : sendArticle()}>
                                                                 <svg width="16" height="12" viewBox="0 0 16 12"
                                                                      fill="none"
@@ -1565,7 +1452,7 @@ function SettingOther() {
                                                                         fill="#2ED06A"/>
                                                                 </svg>
                                                                 Yadda saxla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                     </ul>
                                                 </Col>

@@ -39,11 +39,7 @@ function EditSickness() {
     const getEmployee = () => {
         mainAxios({
             method: 'get',
-            url: '/employees/all',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'employees/all',
         }).then((res) => {
             let data = res.data;
             let arr = [];
@@ -58,11 +54,7 @@ function EditSickness() {
     const getEmployeeDetail = (id) => {
         mainAxios({
             method: 'get',
-            url: `/employees/${id}/operation-info`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `employees/${id}/operation-info`,
         }).then((res) => {
             let data = res.data
             setDepartment(data.department);
@@ -75,11 +67,7 @@ function EditSickness() {
     const getSicknessData = () => {
         mainAxios({
             method: 'get',
-            url: '/sick/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `sick/${id}`,
         }).then((res) => {
             let data = res.data;
             data.startDate !== null ? setStartDate(new Date(data.startDate)) : setStartDate(null);
@@ -113,12 +101,8 @@ function EditSickness() {
 
         mainAxios({
             method: 'put',
-            url: `/sick/${id}`,
+            url: `sick/${id}`,
             data: data,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
         }).then((res) => {
             setLoadingIndicator(false);
             sendSicknessFile();
@@ -152,11 +136,7 @@ function EditSickness() {
     const deleteSicknessFile = (fileName) => {
         mainAxios({
             method: 'delete',
-            url: `/sick/${id}/file/${fileName}`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `sick/${id}/file/${fileName}`,
         }).then((res) => {
             getSicknessData();
         });
@@ -173,12 +153,8 @@ function EditSickness() {
         }
         mainAxios({
             method: 'post',
-            url: `/sick/${id}/attach`,
+            url: `sick/${id}/attach`,
             data: formData,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
         }).then((res) => {
         });
     }
@@ -526,7 +502,7 @@ function EditSickness() {
                                                     sickFileNameArr.map((item, index) =>
                                                         <li className="fileList-item flex-center">
                                                             <span className="fileList-item-name" onClick={()=> openSickFile(item)}>{item}</span>
-                                                            <button className="btn-transparent" type="button" onClick={()=> deleteSicknessFile(item)}>
+                                                            <Button className="btn-transparent" type="button" onClick={()=> deleteSicknessFile(item)}>
                                                                 <svg width="14" height="14" viewBox="0 0 14 14"
                                                                      fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path
@@ -534,7 +510,7 @@ function EditSickness() {
                                                                         fill="#3083DC" stroke="#3083DC"
                                                                         strokeWidth="0.3"/>
                                                                 </svg>
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                     )
                                                 }
@@ -552,8 +528,8 @@ function EditSickness() {
 
                                                                     {
                                                                         index === 0 ? null :
-                                                                            <button
-                                                                                className=" btn-remove flex-center"
+                                                                            <Button
+                                                                                className="btn-remove flex-center"
                                                                                 onClick={() => {
                                                                                     sicknessFileArr.splice(index, 1);
                                                                                     setSicknessFileArr([...sicknessFileArr], sicknessFileArr)
@@ -572,7 +548,7 @@ function EditSickness() {
                                                                                         fill="#CF3131"/>
                                                                                 </svg>
                                                                                 <span>Sil</span>
-                                                                            </button>
+                                                                            </Button>
                                                                     }
                                                                 </div>
 
@@ -608,7 +584,7 @@ function EditSickness() {
                                                         )
                                                     }
                                                     <div className="flex-end">
-                                                        <button type="button" className=" add-btn btn-color"
+                                                        <Button type="button" className=" add-btn btn-main-text"
                                                                 onClick={() => addSicknessFileArr()}
                                                         >
                                                             <svg width="12" height="12" viewBox="0 0 12 12"
@@ -621,7 +597,7 @@ function EditSickness() {
                                                                     strokeLinejoin="round"/>
                                                             </svg>
                                                             <span>əlavə et</span>
-                                                        </button>
+                                                        </Button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -630,7 +606,7 @@ function EditSickness() {
                                 </Row>
                             </div>
                             <div className="flex-vertical-center btn-block">
-                                <Button className="btn-effect" onClick={() => updateData()}>
+                                <Button className="btn-effect w-200" onClick={() => updateData()}>
                                     Yadda saxla
                                 </Button>
                             </div>

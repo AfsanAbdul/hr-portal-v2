@@ -19,11 +19,7 @@ function Calendar() {
     const getDay = (year, month) => {
         mainAxios({
             method: 'get',
-            url: '/days',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'days',
             params: {
                 month: month,
                 year: year
@@ -57,11 +53,7 @@ function Calendar() {
         }
         mainAxios({
             method: 'put',
-            url: '/days/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `days/${id}`,
             data: data
         }).then((res) => {
             getDay(year, month)

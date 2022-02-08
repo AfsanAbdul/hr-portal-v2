@@ -5,7 +5,6 @@ import {Link, useLocation, useParams} from 'react-router-dom';
 import Select from 'react-select';
 import {mainAxios} from "../../../components/Axios/axios";
 import {uid} from "react-uid";
-import Indicator from "../../../components/Loading/Indicator";
 import Paginate from "../../../components/Pagination/Pagination";
 import {customStyles} from "../../../components/Select/SelectStyle";
 import Swal from "sweetalert2";
@@ -146,11 +145,7 @@ function EditStaff() {
     const getInstitution = () => {
         mainAxios({
             method: 'get',
-            url: '/work-institutions',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'work-institutions',
         }).then((res) => {
             //arr.push({name: 'Digər'})
             setInstitution(res.data)
@@ -160,11 +155,7 @@ function EditStaff() {
     const getDepartment = () => {
         mainAxios({
             method: 'get',
-            url: '/departments',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'departments',
         }).then((res) => {
             setDepartment(res.data);
         });
@@ -173,55 +164,35 @@ function EditStaff() {
     const getSubDepartment = (id) => {
         mainAxios({
             method: 'get',
-            url: `/departments/${id}/sub-departments/`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `departments/${id}/sub-departments/`,
         }).then((res) => {
             setSubDepartment(res.data);
-
         });
     }
 
     const getCurators = () => {
         mainAxios({
             method: 'get',
-            url: `/employees/curators`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `employees/curators`,
         }).then((res) => {
             setCurator(res.data);
-
         });
     }
 
     const getVacancy = () => {
         mainAxios({
             method: 'get',
-            url: '/positions',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'positions',
         }).then((res) => {
             let arr = res.data;
-            //arr.push({name: 'Digər'})
             setVacancy(arr);
-
         });
     }
 
     const getGrade = () => {
         mainAxios({
             method: 'get',
-            url: '/grades',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'grades',
         }).then((res) => {
             let data = res.data;
             setGrade(data);
@@ -231,26 +202,16 @@ function EditStaff() {
     const getFamilyJob = () => {
         mainAxios({
             method: 'get',
-            url: '/job-families',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'job-families',
         }).then((res) => {
-            //arr.push({name: 'Digər'})
             setFamilyJob(res.data);
-
         });
     }
 
     const getSpeciality = () => {
         mainAxios({
             method: 'get',
-            url: '/specialities',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `specialities`,
         }).then((res) => {
             setSpeciality(res.data)
         });
@@ -259,11 +220,7 @@ function EditStaff() {
     const getSkill = () => {
         mainAxios({
             method: 'get',
-            url: '/skills',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `skills`,
         }).then((res) => {
             setSkill(res.data);
         });
@@ -272,11 +229,7 @@ function EditStaff() {
     const getComputerSkill = () => {
         mainAxios({
             method: 'get',
-            url: '/computers',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `computers`,
         }).then((res) => {
             setComputerSkill(res.data)
         });
@@ -285,11 +238,7 @@ function EditStaff() {
     const getLanguageSkill = () => {
         mainAxios({
             method: 'get',
-            url: '/languages',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'languages',
         }).then((res) => {
             setLanguageSkill(res.data)
         });
@@ -298,11 +247,7 @@ function EditStaff() {
     const getLegislationSkill = () => {
         mainAxios({
             method: 'get',
-            url: '/legislations',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'legislations',
         }).then((res) => {
             setLegislationSkill(res.data)
         });
@@ -335,11 +280,7 @@ function EditStaff() {
     const getPositionInfo = () => {
         mainAxios({
             method: 'get',
-            url: '/vacancies/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `vacancies/${id}`,
         }).then((res) => {
             let data = res.data.generalInformation;
             if (data !== null) {
@@ -549,11 +490,7 @@ function EditStaff() {
         }
         mainAxios({
             method: 'put',
-            url: '/vacancies/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `vacancies/${id}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -645,11 +582,7 @@ function EditStaff() {
 
         mainAxios({
             method: 'put',
-            url: '/vacancies/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `vacancies/${id}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -677,11 +610,7 @@ function EditStaff() {
     const getOperation = (page) => {
         mainAxios({
             method: 'get',
-            url: `/vacancies/${id}/operations`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `vacancies/${id}/operations`,
             params: {
                 page: page - 1,
                 size: recordSize,
@@ -725,13 +654,8 @@ function EditStaff() {
     const getExportDocument = (id, operationName) => {
         mainAxios({
             method: 'get',
-            url: `/operations/${id}/export`,
+            url: `operations/${id}/export`,
             responseType: 'arraybuffer',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-
         }).then((res) => {
             const url = window.URL.createObjectURL(new Blob([res.data]));
             const link = window.document.createElement('a');
@@ -884,7 +808,6 @@ function EditStaff() {
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
-
                                                                 />
                                                                 <div className="validation-block flex-start">
                                                                     {
@@ -970,8 +893,7 @@ function EditStaff() {
                                                                 <>
                                                                     <Col xs={6}>
                                                                         <Form.Group className="form-group">
-                                                                <span
-                                                                    className="input-title">Əmək şəraiti dərəcəsi</span>
+                                                                <span className="input-title">Əmək şəraiti dərəcəsi</span>
                                                                             <Form.Control
                                                                                 value={workConditionPer || ''}
                                                                                 type="number"
@@ -981,8 +903,7 @@ function EditStaff() {
                                                                     </Col>
                                                                     <Col xs={6}>
                                                                         <Form.Group className="form-group">
-                                                                <span
-                                                                    className="input-title">Əmək şəraitinə görə məzuniyyət</span>
+                                                                <span className="input-title">Əmək şəraitinə görə məzuniyyət</span>
                                                                             <Form.Control
                                                                                 value={workConditionVac || ''}
                                                                                 type="number"
@@ -1132,7 +1053,7 @@ function EditStaff() {
                                                                                         <p className="m-0"> #{index + 1}.
                                                                                             Digər </p>
                                                                                         <Button
-                                                                                            className="btn-transparent btn-remove flex-center"
+                                                                                            className="btn-remove flex-center"
                                                                                             onClick={() => {
                                                                                                 skillLegalArr.splice(index, 1);
                                                                                                 setSkillLegalArr([...skillLegalArr], skillLegalArr)
@@ -1204,7 +1125,7 @@ function EditStaff() {
                                                                 }
                                                             </div>
                                                             <div className="flex-end">
-                                                                <button className="btn-color" onClick={() => addLegalSkill()}
+                                                                <Button className="btn-main-text" onClick={() => addLegalSkill()}
                                                                         type="button">
                                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1215,7 +1136,7 @@ function EditStaff() {
                                                                             strokeLinejoin="round"/>
                                                                     </svg>
                                                                     <span>əlavə et</span>
-                                                                </button>
+                                                                </Button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1370,7 +1291,7 @@ function EditStaff() {
                                                                             <div className="add-item-top">
                                                                                 <p className="m-0"> #{index + 1}. Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         positionFunctionArr.splice(index, 1);
                                                                                         setPositionFunctionArr([...positionFunctionArr], positionFunctionArr)
@@ -1413,7 +1334,7 @@ function EditStaff() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button className="btn-color"
+                                                            <Button className="btn-main-text"
                                                                     type="button"
                                                                     onClick={() => addPositionFunction()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
@@ -1424,13 +1345,13 @@ function EditStaff() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="flex-vertical-center">
-                                                <Button className="btn-effect" onClick={() => sendData()}>
+                                                <Button className="btn-effect w-200" onClick={() => sendData()}>
                                                     Yadda saxla
                                                 </Button>
                                             </div>
@@ -1455,7 +1376,7 @@ function EditStaff() {
                                                                             <div className="add-item-top">
                                                                                 <p className="m-0"> #{index + 1}. Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         skillProgramArr.splice(index, 1);
                                                                                         setSkillProgramArr([...skillProgramArr], skillProgramArr)
@@ -1526,7 +1447,7 @@ function EditStaff() {
                                                         }
                                                     </div>
                                                     <div className="flex-end">
-                                                        <button className="btn-color" onClick={() => addProgramSkill()}
+                                                        <Button className="btn-main-text" onClick={() => addProgramSkill()}
                                                                 type="button">
                                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                  xmlns="http://www.w3.org/2000/svg">
@@ -1536,7 +1457,7 @@ function EditStaff() {
                                                                     strokeLinejoin="round"/>
                                                             </svg>
                                                             <span>əlavə et</span>
-                                                        </button>
+                                                        </Button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1555,7 +1476,7 @@ function EditStaff() {
                                                                             <div className="add-item-top">
                                                                                 <p className="m-0"> #{index + 1}. Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         skillLanguageArr.splice(index, 1);
                                                                                         setSkillLanguageArr([...skillLanguageArr], skillLanguageArr)
@@ -1627,7 +1548,7 @@ function EditStaff() {
                                                         }
                                                     </div>
                                                     <div className="flex-end">
-                                                        <button className="btn-color" onClick={() => addLanguageSkill()}
+                                                        <Button className="btn-main-text" onClick={() => addLanguageSkill()}
                                                                 type="button">
                                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                  xmlns="http://www.w3.org/2000/svg">
@@ -1637,7 +1558,7 @@ function EditStaff() {
                                                                     strokeLinejoin="round"/>
                                                             </svg>
                                                             <span>əlavə et</span>
-                                                        </button>
+                                                        </Button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1656,7 +1577,7 @@ function EditStaff() {
                                                                             <div className="add-item-top">
                                                                                 <p className="m-0"> #{index + 1}. Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         skillArr.splice(index, 1);
                                                                                         setSkillArr([...skillArr], skillArr)
@@ -1727,7 +1648,7 @@ function EditStaff() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addSkill()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                      xmlns="http://www.w3.org/2000/svg">
@@ -1737,13 +1658,13 @@ function EditStaff() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="flex-vertical-center btn-block">
-                                                <Button className="btn-effect" onClick={() => sendDataKnowledge()}>
+                                                <Button className="btn-effect w-200" onClick={() => sendDataKnowledge()}>
                                                     Yadda saxla
                                                 </Button>
                                             </div>

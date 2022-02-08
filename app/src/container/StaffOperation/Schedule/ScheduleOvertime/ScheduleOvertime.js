@@ -27,11 +27,7 @@ function ScheduleOvertime() {
         setLoading(true);
         mainAxios({
             method: 'get',
-            url: '/overtime',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'overtime',
             params: {
                 page: page - 1,
                 size: recordSize,
@@ -57,11 +53,7 @@ function ScheduleOvertime() {
             if (result.isConfirmed) {
                 mainAxios({
                     method: 'put',
-                    url: `/overtime/${id}/change-status`,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    },
+                    url: `overtime/${id}/change-status`,
                     params: {
                         status: status
                     }

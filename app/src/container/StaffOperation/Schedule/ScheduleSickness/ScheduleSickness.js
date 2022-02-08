@@ -28,11 +28,7 @@ function ScheduleSickness() {
         setLoading(true);
         mainAxios({
             method: 'get',
-            url: '/sick',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'sick',
             params: {
                 page: page - 1,
                 size: recordSize,
@@ -47,7 +43,7 @@ function ScheduleSickness() {
 
     const changeStatus = (status, id) => {
         Swal.fire({
-            text: 'Ləğv etmək istədiyinizə əminsinizmi?',
+            text: 'Bağlamaq istədiyinizə əminsinizmi?',
             showCancelButton: true,
             confirmButtonText: 'Bəli',
             confirmButtonColor: '#2ed06a',
@@ -57,16 +53,12 @@ function ScheduleSickness() {
             if (result.isConfirmed) {
                 mainAxios({
                     method: 'put',
-                    url: `/sick/${id}/change-status`,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    },
+                    url: `sick/${id}/change-status`,
                     params: {
                         sickStatus: status
                     }
                 }).then((res) => {
-                    getSickness(1)
+                    getSickness(currentPage)
                 });
             }
         })

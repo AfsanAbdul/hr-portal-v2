@@ -1,9 +1,21 @@
 import axios from 'axios'
 
 const mainAxios = axios.create({
-    baseURL: 'https://hr-portal-api-v2.herokuapp.com'
-   /* baseURL: 'http://hr01.pob.portofbaku.com:8080/hrportal'*/
+    baseURL: 'https://hr-portal-api-v2.herokuapp.com',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        "Accept-Language": "az"
+    },
 });
+
+/*
+mainAxios.interceptors.request.use(function (config) {
+    const token = localStorage.getItem('token');
+    config.headers.Authorization =  token ? `Bearer ${token}` : '';
+    return config;
+});
+*/
 
 /*
 mainAxios.interceptors.response.use(

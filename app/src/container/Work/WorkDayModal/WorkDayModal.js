@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import Modal from 'react-bootstrap/Modal'
-import {Col, Form} from "react-bootstrap";
+import {Col, Form, Button} from "react-bootstrap";
 import TimePicker from "react-time-picker";
 
 function WorkDayModal(props) {
@@ -28,25 +28,20 @@ function WorkDayModal(props) {
 
 
     const setBreakHour = (checkBreak) => {
-        console.log('workHourSBReak', workHour)
         if (props.data.workHour !== 0) {
             checkChangeTime ?
                 checkBreak ? setWorkHour(workHour - 1) : setWorkHour(workHour + 1)
                 :
                 checkBreak ? setWorkHour(props.data.workHour - 1) : setWorkHour(props.data.workHour)
         }
-
-
     }
 
     const setBreakHour2 = async (checkBreak2) => {
         if (props.data.workHour2 !== 0) {
             checkChangeTime2 ?
                 checkBreak2 ? await setWorkHour2(workHour2 - 1) : await setWorkHour2(workHour2 + 1)
-:
+                :
                 checkBreak2 ? await setWorkHour2(props.data.workHour2 - 1) : await setWorkHour2(props.data.workHour2)
-
-
         }
     }
     useEffect(async () => {
@@ -333,27 +328,27 @@ function WorkDayModal(props) {
                 <div className={['btn-block', props.data.id !== null ? 'flex' : 'flex-end'].join(' ')}>
                     {
                         props.data.id !== null ?
-                            <button type="button" className="btn btn-cancel" onClick={() => {
+                            <Button type="button" className="btn-cancel" onClick={() => {
                                 props.deleteDay(props.data)
                             }}>
                                 Sil
-                            </button>
+                            </Button>
                             : null
                     }
                     <ul className="flex-end list-unstyled m-0">
                         <li>
-                            <button type="button" className="btn-main-border" onClick={() => {
+                            <Button type="button" className="btn-main-border" onClick={() => {
                                 props.onHide();
                             }}>
                                 Bağla
-                            </button>
+                            </Button>
                         </li>
                         <li>
-                            <button type="button" className="btn-main" onClick={() => {
+                            <Button type="button" className="btn-main" onClick={() => {
                                 props.click(checkBreak, checkOverTime, checkHoliday, startTime, endTime, day, checkBreak2, checkOverTime2, startTime2, endTime2, props.data)
                             }}>
                                 Əlavə et
-                            </button>
+                            </Button>
                         </li>
                     </ul>
                 </div>

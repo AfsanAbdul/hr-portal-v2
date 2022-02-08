@@ -281,11 +281,7 @@ function EmployeeCreate() {
     const getCity = () => {
         mainAxios({
             method: 'get',
-            url: '/cities',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'cities',
         }).then((res) => {
             setCities(res.data)
         });
@@ -294,11 +290,7 @@ function EmployeeCreate() {
     const getCountry = () => {
         mainAxios({
             method: 'get',
-            url: '/countries',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'countries',
         }).then((res) => {
             setCountries(res.data)
         });
@@ -307,11 +299,7 @@ function EmployeeCreate() {
     const getRegion = () => {
         mainAxios({
             method: 'get',
-            url: '/districts',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'districts',
         }).then((res) => {
             setRegions(res.data)
         });
@@ -320,11 +308,7 @@ function EmployeeCreate() {
     const getUniversity = () => {
         mainAxios({
             method: 'get',
-            url: '/education-institutions',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'education-institutions',
         }).then((res) => {
             setUniversity(res.data)
         });
@@ -333,11 +317,7 @@ function EmployeeCreate() {
     const getReward = () => {
         mainAxios({
             method: 'get',
-            url: '/honorary-decrees',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'honorary-decrees',
         }).then((res) => {
             setReward(res.data)
         });
@@ -346,11 +326,7 @@ function EmployeeCreate() {
     const getCertificate = () => {
         mainAxios({
             method: 'get',
-            url: '/certificates',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'certificates',
         }).then((res) => {
             setCertificate(res.data)
         });
@@ -359,11 +335,7 @@ function EmployeeCreate() {
     const getCitizenControl = () => {
         mainAxios({
             method: 'get',
-            url: '/motherland',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'motherland',
         }).then((res) => {
             setCitizen(res.data)
         });
@@ -372,11 +344,7 @@ function EmployeeCreate() {
     const getRewardOrganization = () => {
         mainAxios({
             method: 'get',
-            url: '/organizations',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'organizations',
         }).then((res) => {
             setRewardOrganization(res.data)
         });
@@ -485,12 +453,7 @@ function EmployeeCreate() {
         }
         mainAxios({
             method: 'post',
-            url: '/employees',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: 'employees',
             data: data
         }).then((res) => {
             setLoading(false);
@@ -563,12 +526,7 @@ function EmployeeCreate() {
         }
         mainAxios({
             method: 'put',
-            url: '/employees/' + dataVal,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: `employees/${dataVal}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -639,12 +597,7 @@ function EmployeeCreate() {
         }
         mainAxios({
             method: 'put',
-            url: '/employees/' + dataVal,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: `employees/${dataVal}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -698,12 +651,7 @@ function EmployeeCreate() {
         }
         mainAxios({
             method: 'put',
-            url: '/employees/' + dataVal,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: `employees/${dataVal}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -743,12 +691,7 @@ function EmployeeCreate() {
         }
         mainAxios({
             method: 'put',
-            url: '/employees/' + dataVal,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: `employees/${dataVal}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -794,12 +737,7 @@ function EmployeeCreate() {
         }
         mainAxios({
             method: 'put',
-            url: '/employees/' + dataVal,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: `employees/${dataVal}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -835,12 +773,7 @@ function EmployeeCreate() {
         }
         mainAxios({
             method: 'put',
-            url: '/employees/' + dataVal,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                "Accept-Language": "az"
-            },
+            url: `employees/${dataVal}`,
             data: data
         }).then((res) => {
             setLoading(false);
@@ -873,11 +806,7 @@ function EmployeeCreate() {
         formData.append("image", uploadFile);
         mainAxios({
             method: 'post',
-            url: `/employees/${id}/image/`,
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `employees/${id}/image`,
             data: formData
         }).then((res) => {
         });
@@ -925,17 +854,21 @@ function EmployeeCreate() {
                                                         <div className="upload-img">
                                                             <Image src={photo}/>
                                                         </div>
-                                                        <div className="btn-block flex-center">
-                                                            <button className="btn-border add-img" type="button">
-                                                                Şəkil əlavə et
-                                                                <input type="file"
-                                                                       onChange={(event) => uploadImage(event)}/>
-                                                            </button>
-                                                            <button className="btn-border remove-img" type="button"
-                                                                    onClick={() => removeImage()}>
-                                                                Şəkli sil
-                                                            </button>
-                                                        </div>
+                                                        <ul className="btn-block flex-center list-unstyled">
+                                                           <li>
+                                                               <Button className="btn-main-border relative" type="button">
+                                                                   Şəkil əlavə et
+                                                                   <input type="file"
+                                                                          onChange={(event) => uploadImage(event)}/>
+                                                               </Button>
+                                                           </li>
+                                                            <li>
+                                                                <Button className="btn-border relative" type="button"
+                                                                        onClick={() => removeImage()}>
+                                                                    Şəkli sil
+                                                                </Button>
+                                                            </li>
+                                                        </ul>
                                                     </div>
                                                     <Row>
                                                         <Col xs={4}>
@@ -1699,12 +1632,12 @@ function EmployeeCreate() {
                                             <div className="flex-vertical-center">
                                                 {
                                                     showButton ?
-                                                        <Button className="btn-effect"
+                                                        <Button className="btn-effect w-200"
                                                                 onClick={() => sendGeneralUpdate()}>
                                                             Davam et
                                                         </Button>
                                                         :
-                                                        <Button className="btn-effect"
+                                                        <Button className="btn-effect w-200"
                                                                 onClick={() => sendGeneralData()}>
                                                             Davam et
                                                         </Button>
@@ -2202,7 +2135,7 @@ function EmployeeCreate() {
                                                 showButton ?
                                                     <ul className="flex-vertical-center btn-block list-unstyled">
                                                         <li>
-                                                            <Button className="btn-transparent btn-previous"
+                                                            <Button className="btn-transparent"
                                                                     onClick={() => {
                                                                         setKey('general')
                                                                     }}>
@@ -2218,7 +2151,7 @@ function EmployeeCreate() {
                                                             </Button>
                                                         </li>
                                                         <li>
-                                                            <Button className="btn-effect"
+                                                            <Button className="btn-effect w-200"
                                                                     onClick={() => sendContactData()}>
                                                                 Davam et
                                                             </Button>
@@ -2276,7 +2209,7 @@ function EmployeeCreate() {
                                                                                         <p className="m-0"> #{index + 1}.
                                                                                             Digər </p>
                                                                                         <Button
-                                                                                            className="btn-transparent btn-remove flex-center"
+                                                                                            className="btn-remove flex-center"
                                                                                             onClick={() => {
                                                                                                 educationArr.splice(index, 1);
                                                                                                 setEducationArr([...educationArr], educationArr)
@@ -2632,8 +2565,7 @@ function EmployeeCreate() {
                                                                                                             educationArr[index].foreignOption = e.target.checked;
                                                                                                             setEducationArr([...educationArr], educationArr)
                                                                                                         }}/>
-                                                                                                    <span
-                                                                                                        className="checkmark"></span>
+                                                                                                    <span className="checkmark"></span>
                                                                                                 </label>
                                                                                             </div>
                                                                                             <span>Nostrifikasiya şəhadətnaməsinin nömrəsi</span>
@@ -2655,7 +2587,7 @@ function EmployeeCreate() {
                                                                     )
                                                                 }
                                                                 <div className="flex-end">
-                                                                    <button type="button" className="btn-color"
+                                                                    <Button type="button" className="btn-main-text"
                                                                             onClick={() => addEducation()}>
                                                                         <svg width="12" height="12" viewBox="0 0 12 12"
                                                                              fill="none"
@@ -2667,7 +2599,7 @@ function EmployeeCreate() {
                                                                                 strokeLinejoin="round"/>
                                                                         </svg>
                                                                         <span>əlavə et</span>
-                                                                    </button>
+                                                                    </Button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2690,7 +2622,7 @@ function EmployeeCreate() {
                                                                                 <p className="m-0"> #{index + 1}.
                                                                                     Digər </p>
                                                                                 <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                    className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         certificateArr.splice(index, 1);
                                                                                         setCertificateArr([...certificateArr], certificateArr)
@@ -2804,7 +2736,7 @@ function EmployeeCreate() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addCertificate()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12"
                                                                      fill="none"
@@ -2816,7 +2748,7 @@ function EmployeeCreate() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3041,7 +2973,7 @@ function EmployeeCreate() {
                                                 showButton ?
                                                     <ul className="flex-vertical-center btn-block list-unstyled">
                                                         <li>
-                                                            <Button className="btn-transparent btn-previous"
+                                                            <Button className="btn-transparent"
                                                                     onClick={() => {
                                                                         setKey('contact')
                                                                     }}>
@@ -3057,7 +2989,7 @@ function EmployeeCreate() {
                                                             </Button>
                                                         </li>
                                                         <li>
-                                                            <Button className="btn-effect"
+                                                            <Button className="btn-effect w-200"
                                                                     onClick={() => sendEducationData()}>
                                                                 Davam et
                                                             </Button>
@@ -3085,7 +3017,7 @@ function EmployeeCreate() {
                                                                         <div className="add-item-top">
                                                                             <p className="m-0"> #{index + 1}. Digər </p>
                                                                             <Button
-                                                                                className="btn-transparent btn-remove flex-center"
+                                                                                className="btn-remove flex-center"
                                                                                 onClick={() => {
                                                                                     companyArr.splice(index, 1);
                                                                                     setCompanyArr([...companyArr], companyArr)
@@ -3378,7 +3310,7 @@ function EmployeeCreate() {
                                                         )
                                                     }
                                                     <div className="flex-end">
-                                                        <button type="button" className="btn-color"
+                                                        <Button type="button" className="btn-main-text"
                                                                 onClick={() => addCompany()}>
                                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                  xmlns="http://www.w3.org/2000/svg">
@@ -3389,7 +3321,7 @@ function EmployeeCreate() {
                                                                     strokeLinejoin="round"/>
                                                             </svg>
                                                             <span>əlavə et</span>
-                                                        </button>
+                                                        </Button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -3397,7 +3329,7 @@ function EmployeeCreate() {
                                                 showButton ?
                                                     <ul className="flex-vertical-center btn-block list-unstyled">
                                                         <li>
-                                                            <Button className="btn-transparent btn-previous"
+                                                            <Button className="btn-transparent"
                                                                     onClick={() => {
                                                                         setKey('education')
                                                                     }}>
@@ -3413,7 +3345,7 @@ function EmployeeCreate() {
                                                             </Button>
                                                         </li>
                                                         <li>
-                                                            <Button className="btn-effect"
+                                                            <Button className="btn-effect w-200"
                                                                     onClick={() => sendCompanyData()}>
                                                                 Davam et
                                                             </Button>
@@ -3452,7 +3384,7 @@ function EmployeeCreate() {
                                                 showButton ?
                                                     <ul className="flex-vertical-center btn-block list-unstyled">
                                                         <li>
-                                                            <Button className="btn-transparent btn-previous"
+                                                            <Button className="btn-transparent"
                                                                     onClick={() => {
                                                                         setKey('education')
                                                                     }}>
@@ -3468,7 +3400,7 @@ function EmployeeCreate() {
                                                             </Button>
                                                         </li>
                                                         <li>
-                                                            <Button className="btn-effect"
+                                                            <Button className="btn-effect w-200"
                                                                     onClick={() => sendBankData()}>
                                                                 Davam et
                                                             </Button>
@@ -3498,7 +3430,7 @@ function EmployeeCreate() {
                                                                                     <p className="m-0"> #{index + 1}.
                                                                                         Digər </p>
                                                                                     <Button
-                                                                                        className="btn-transparent btn-remove flex-center"
+                                                                                        className="btn-remove flex-center"
                                                                                         onClick={() => {
                                                                                             rewardArr.splice(index, 1);
                                                                                             setRewardArr([...rewardArr], rewardArr)
@@ -3648,7 +3580,7 @@ function EmployeeCreate() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addReward()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12"
                                                                      fill="none"
@@ -3660,7 +3592,7 @@ function EmployeeCreate() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3724,8 +3656,7 @@ function EmployeeCreate() {
                                                                             <div className="add-item-top">
                                                                                 <p className="m-0"> #{index + 1}.
                                                                                     Digər </p>
-                                                                                <Button
-                                                                                    className="btn-transparent btn-remove flex-center"
+                                                                                <Button className="btn-remove flex-center"
                                                                                     onClick={() => {
                                                                                         familyMemberArr.splice(index, 1);
                                                                                         setFamilyMemberArr([...familyMemberArr], familyMemberArr)
@@ -3909,7 +3840,7 @@ function EmployeeCreate() {
                                                             )
                                                         }
                                                         <div className="flex-end">
-                                                            <button type="button" className="btn-color"
+                                                            <Button type="button" className="btn-main-text"
                                                                     onClick={() => addFamilyMember()}>
                                                                 <svg width="12" height="12" viewBox="0 0 12 12"
                                                                      fill="none"
@@ -3921,7 +3852,7 @@ function EmployeeCreate() {
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3992,7 +3923,7 @@ function EmployeeCreate() {
                                                 showButton ?
                                                     <ul className="flex-vertical-center btn-block list-unstyled">
                                                         <li>
-                                                            <Button className="btn-transparent btn-previous"
+                                                            <Button className="btn-transparent"
                                                                     onClick={() => {
                                                                         setKey('company')
                                                                     }}>
@@ -4008,7 +3939,7 @@ function EmployeeCreate() {
                                                             </Button>
                                                         </li>
                                                         <li>
-                                                            <Button className="btn-effect"
+                                                            <Button className="btn-effect w-200"
                                                                     onClick={() => sendOtherData()}>
                                                                 Yadda saxla
                                                             </Button>

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {mainAxios} from "../../../components/Axios/axios";
-import {Row, Col, Form, Tabs, Tab} from 'react-bootstrap';
+import {Row, Col, Form, Tabs, Tab, Button} from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Select from "react-select";
 import {customStyles} from "../../../components/Select/SelectStyle";
@@ -49,11 +49,7 @@ function SettingPlace() {
     const getCountry = () => {
         mainAxios({
             method: 'get',
-            url: '/countries',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'countries',
         }).then((res) => {
             setCountryArr(res.data);
         });
@@ -66,11 +62,7 @@ function SettingPlace() {
         }
         mainAxios({
             method: 'post',
-            url: '/countries',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'countries',
             data: data
         }).then((res) => {
             getCountry();
@@ -92,11 +84,7 @@ function SettingPlace() {
         }
         mainAxios({
             method: 'put',
-            url: '/countries/' + countryId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `countries/${countryId}`,
             data: data
         }).then((res) => {
             getCountry();
@@ -109,11 +97,7 @@ function SettingPlace() {
         setCountry('')
         mainAxios({
             method: 'delete',
-            url: '/countries/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `countries/${id}`,
         }).then((res) => {
             getCountry()
         });
@@ -122,11 +106,7 @@ function SettingPlace() {
     const getCity = () => {
         mainAxios({
             method: 'get',
-            url: '/cities',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'cities',
         }).then((res) => {
             setCityArr(res.data)
         });
@@ -151,11 +131,7 @@ function SettingPlace() {
         }
         mainAxios({
             method: 'post',
-            url: '/cities',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'cities',
             data: data
         }).then((res) => {
             getCity();
@@ -172,11 +148,7 @@ function SettingPlace() {
         }
         mainAxios({
             method: 'put',
-            url: '/cities/' + cityId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `cities/${cityId}`,
             data: data
         }).then((res) => {
             getCity();
@@ -189,11 +161,7 @@ function SettingPlace() {
     const deleteCity = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/cities/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `cities${id}`,
         }).then((res) => {
             getCity()
         });
@@ -202,11 +170,7 @@ function SettingPlace() {
     const getRegion = () => {
         mainAxios({
             method: 'get',
-            url: '/districts',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'districts',
         }).then((res) => {
             setRegionArr(res.data)
         });
@@ -225,11 +189,7 @@ function SettingPlace() {
         }
         mainAxios({
             method: 'post',
-            url: '/districts',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'districts',
             data: data
         }).then((res) => {
             getRegion();
@@ -245,11 +205,7 @@ function SettingPlace() {
         }
         mainAxios({
             method: 'put',
-            url: '/districts/' + regionId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `districts/${regionId}`,
             data: data
         }).then((res) => {
             getRegion();
@@ -261,11 +217,7 @@ function SettingPlace() {
     const deleteRegion = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/districts/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `districts/${id}`,
         }).then((res) => {
             getCountry()
         });
@@ -274,11 +226,7 @@ function SettingPlace() {
     const getCitizenCountry = () => {
         mainAxios({
             method: 'get',
-            url: '/motherland',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'motherland',
         }).then((res) => {
             setCitizenCountryArr(res.data)
         });
@@ -297,11 +245,7 @@ function SettingPlace() {
         }
         mainAxios({
             method: 'post',
-            url: '/motherland',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'motherland',
             data: data
         }).then((res) => {
             getCitizenCountry();
@@ -317,11 +261,7 @@ function SettingPlace() {
         }
         mainAxios({
             method: 'put',
-            url: '/motherland/' + citizenCountryId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `motherland/${citizenCountryId}`,
             data: data
         }).then((res) => {
             getCitizenCountry();
@@ -334,11 +274,7 @@ function SettingPlace() {
     const deleteCitizenCountry = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/motherland/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `motherland/${id}`,
         }).then((res) => {
             getCitizenCountry()
         });
@@ -401,7 +337,7 @@ function SettingPlace() {
                                                                 <span>{item.name}</span>
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-edit"
                                                                                 onClick={() => {getDetailCountry(item); setCheckClick(true)}}>
                                                                             <svg width="16" height="17"
@@ -422,10 +358,10 @@ function SettingPlace() {
                                                                                         strokeLinejoin="round"/>
                                                                                 </g>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-delete"
                                                                                 onClick={() => deleteCountry(item.id)}>
                                                                             <svg width="12" height="12"
@@ -435,7 +371,7 @@ function SettingPlace() {
                                                                                     d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                     fill="#040647"/>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                 </ul>
                                                             </Dropdown.Item>
@@ -445,7 +381,7 @@ function SettingPlace() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <button type="button" className="btn-color"
+                                            <Button type="button" className="btn-color"
                                                     onClick={() => {setView(true); setCheckClick(false)}}>
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -455,7 +391,7 @@ function SettingPlace() {
                                                         strokeLinejoin="round"/>
                                                 </svg>
                                                 <span>əlavə et</span>
-                                            </button>
+                                            </Button>
                                         </div>
                                     </Col>
                                 </Row>
@@ -479,7 +415,7 @@ function SettingPlace() {
                                                 <Col xs={12}>
                                                     <ul className="btn-block list-unstyled m-0 flex-end">
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => {
                                                                         setView(false);
                                                                         setCountry('')
@@ -492,10 +428,10 @@ function SettingPlace() {
                                                                         strokeWidth="0.3"/>
                                                                 </svg>
                                                                 Bağla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => checkClick ? editCountry() : sendCountry()}>
                                                                 <svg width="16" height="12" viewBox="0 0 16 12"
                                                                      fill="none"
@@ -505,7 +441,7 @@ function SettingPlace() {
                                                                         fill="#2ED06A"/>
                                                                 </svg>
                                                                 Yadda saxla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                     </ul>
                                                 </Col>
@@ -534,7 +470,7 @@ function SettingPlace() {
                                                                 <span>{item.name}</span>
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-edit"
                                                                                 onClick={() => {getDetailCity(item); setCheckClick(true)}}>
                                                                             <svg width="16" height="17"
@@ -555,10 +491,10 @@ function SettingPlace() {
                                                                                         strokeLinejoin="round"/>
                                                                                 </g>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-delete"
                                                                                 onClick={() => deleteCity(item.id)}>
                                                                             <svg width="12" height="12"
@@ -568,7 +504,7 @@ function SettingPlace() {
                                                                                     d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                     fill="#040647"/>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                 </ul>
                                                             </Dropdown.Item>
@@ -578,7 +514,7 @@ function SettingPlace() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <button type="button" className="btn-color"
+                                            <Button type="button" className="btn-color"
                                                     onClick={() => { setView(true); setCheckClick(false)}}>
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -587,7 +523,7 @@ function SettingPlace() {
                                                         fill="#3083DC"/>
                                                 </svg>
                                                 əlavə et
-                                            </button>
+                                            </Button>
                                         </div>
                                     </Col>
                                 </Row>
@@ -628,7 +564,7 @@ function SettingPlace() {
                                                 <Col xs={12}>
                                                     <ul className="btn-block list-unstyled m-0 flex-end">
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => {
                                                                         setView(false);
                                                                         setCity('')
@@ -641,10 +577,10 @@ function SettingPlace() {
                                                                         strokeWidth="0.3"/>
                                                                 </svg>
                                                                 Bağla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => checkClick ? editCity() : sendCity()}>
                                                                 <svg width="16" height="12" viewBox="0 0 16 12"
                                                                      fill="none"
@@ -654,7 +590,7 @@ function SettingPlace() {
                                                                         fill="#2ED06A"/>
                                                                 </svg>
                                                                 Yadda saxla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                     </ul>
                                                 </Col>
@@ -683,7 +619,7 @@ function SettingPlace() {
                                                                 {item.name}
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-edit"
                                                                                 onClick={() => {getDetailRegion(item); setCheckClick(true)}}>
                                                                             <svg width="16" height="17"
@@ -704,10 +640,10 @@ function SettingPlace() {
                                                                                         strokeLinejoin="round"/>
                                                                                 </g>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-delete"
                                                                                 onClick={() => deleteRegion(item.id)}>
                                                                             <svg width="12" height="12"
@@ -717,7 +653,7 @@ function SettingPlace() {
                                                                                     d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                     fill="#040647"/>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                 </ul>
                                                             </Dropdown.Item>
@@ -727,7 +663,7 @@ function SettingPlace() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <button type="button" className="btn-color"
+                                            <Button type="button" className="btn-color"
                                                     onClick={() => {setView(true); setCheckClick(false)}}>
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -736,7 +672,7 @@ function SettingPlace() {
                                                         fill="#3083DC"/>
                                                 </svg>
                                                 əlavə et
-                                            </button>
+                                            </Button>
                                         </div>
                                     </Col>
                                 </Row>
@@ -758,7 +694,7 @@ function SettingPlace() {
                                                 <Col xs={12}>
                                                     <ul className="btn-block list-unstyled m-0 flex-end">
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => {
                                                                         setView(false);
                                                                         setRegion('')
@@ -771,10 +707,10 @@ function SettingPlace() {
                                                                         strokeWidth="0.3"/>
                                                                 </svg>
                                                                 Bağla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => checkClick ? editRegion() : sendRegion()}>
                                                                 <svg width="16" height="12" viewBox="0 0 16 12"
                                                                      fill="none"
@@ -784,7 +720,7 @@ function SettingPlace() {
                                                                         fill="#2ED06A"/>
                                                                 </svg>
                                                                 Yadda saxla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                     </ul>
                                                 </Col>
@@ -813,7 +749,7 @@ function SettingPlace() {
                                                                 {item.name}
                                                                 <ul className="list-unstyled flex m-0">
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-edit"
                                                                                 onClick={() => {getDetailCitizenship(item); setCheckClick(true)}}>
                                                                             <svg width="16" height="17"
@@ -834,10 +770,10 @@ function SettingPlace() {
                                                                                         strokeLinejoin="round"/>
                                                                                 </g>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                     <li>
-                                                                        <button type="button"
+                                                                        <Button type="button"
                                                                                 className="btn-transparent btn-delete"
                                                                                 onClick={() => deleteCitizenCountry(item.id)}>
                                                                             <svg width="12" height="12"
@@ -847,7 +783,7 @@ function SettingPlace() {
                                                                                     d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                     fill="#040647"/>
                                                                             </svg>
-                                                                        </button>
+                                                                        </Button>
                                                                     </li>
                                                                 </ul>
                                                             </Dropdown.Item>
@@ -857,7 +793,7 @@ function SettingPlace() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <button type="button" className="btn-color"
+                                            <Button type="button" className="btn-color"
                                                     onClick={() => {setView(true); setCheckClick(false)}}>
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -866,7 +802,7 @@ function SettingPlace() {
                                                         fill="#3083DC"/>
                                                 </svg>
                                                 əlavə et
-                                            </button>
+                                            </Button>
                                         </div>
                                     </Col>
                                 </Row>
@@ -888,7 +824,7 @@ function SettingPlace() {
                                                 <Col xs={12}>
                                                     <ul className="btn-block list-unstyled m-0 flex-end">
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => {
                                                                         setView(false);
                                                                         setCitizenCountry('')
@@ -901,10 +837,10 @@ function SettingPlace() {
                                                                         strokeWidth="0.3"/>
                                                                 </svg>
                                                                 Bağla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                         <li>
-                                                            <button type="button" className="btn-transparent"
+                                                            <Button type="button" className="btn-transparent"
                                                                     onClick={() => checkClick ? editCitizenCountry() : sendCitizenCountry()}>
                                                                 <svg width="16" height="12" viewBox="0 0 16 12"
                                                                      fill="none"
@@ -914,7 +850,7 @@ function SettingPlace() {
                                                                         fill="#2ED06A"/>
                                                                 </svg>
                                                                 Yadda saxla
-                                                            </button>
+                                                            </Button>
                                                         </li>
                                                     </ul>
                                                 </Col>

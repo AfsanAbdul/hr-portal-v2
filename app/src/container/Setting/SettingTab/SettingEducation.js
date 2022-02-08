@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {mainAxios} from "../../../components/Axios/axios";
-import {Row, Col, Form, Tabs, Tab} from 'react-bootstrap';
+import {Row, Col, Form, Tabs, Tab, Button} from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Select from "react-select";
 import {customStyles} from "../../../components/Select/SelectStyle";
@@ -79,11 +79,7 @@ function SettingEducation() {
     const getCache = () => {
         mainAxios({
             method: 'post',
-            url: '/caches/evict',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'caches/evict',
         }).then((res) => {
         });
     }
@@ -91,11 +87,7 @@ function SettingEducation() {
     const getUniversity = () => {
         mainAxios({
             method: 'get',
-            url: '/education-institutions',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'education-institutions',
         }).then((res) => {
             setUniversityArr(res.data)
         });
@@ -112,11 +104,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'post',
-            url: '/education-institutions',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'education-institutions',
             data: data
         }).then((res) => {
             getUniversity();
@@ -131,11 +119,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'put',
-            url: '/education-institutions/'+ universityId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `education-institutions/${universityId}`,
             data: data
         }).then((res) => {
             getUniversity();
@@ -146,11 +130,7 @@ function SettingEducation() {
     const deleteUniversity = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/education-institutions/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `education-institutions/${id}`,
         }).then((res) => {
             getUniversity()
         });
@@ -160,11 +140,7 @@ function SettingEducation() {
     const getCertificate = () => {
         mainAxios({
             method: 'get',
-            url: '/certificates',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'certificates',
         }).then((res) => {
             setCertificateArr(res.data)
         });
@@ -181,11 +157,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'post',
-            url: '/certificates',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'certificates',
             data: data
         }).then((res) => {
             getCertificate();
@@ -200,11 +172,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'put',
-            url: '/certificates/' + certificateId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `certificates/${certificateId}`,
             data: data
         }).then((res) => {
             getCertificate();
@@ -215,11 +183,7 @@ function SettingEducation() {
     const deleteCertificate = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/certificates/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `certificates/${id}`,
         }).then((res) => {
             getCertificate()
         });
@@ -228,11 +192,7 @@ function SettingEducation() {
     const getVacancy = () => {
         mainAxios({
             method: 'get',
-            url: '/positions',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'positions',
         }).then((res) => {
             setVacancyArr(res.data)
         });
@@ -249,11 +209,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'post',
-            url: '/positions',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'positions',
             data: data
         }).then((res) => {
             getCache();
@@ -269,11 +225,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'put',
-            url: '/positions/' + vacancyId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `positions/${vacancyId}`,
             data: data
         }).then((res) => {
             getCache();
@@ -285,11 +237,7 @@ function SettingEducation() {
     const deleteVacancy = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/positions/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `positions/${id}`,
         }).then((res) => {
             getCache();
             getVacancy()
@@ -299,11 +247,7 @@ function SettingEducation() {
     const getGrade = () => {
         mainAxios({
             method: 'get',
-            url: '/grades',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'grades',
         }).then((res) => {
             setGradeArr(res.data)
         });
@@ -320,11 +264,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'post',
-            url: '/grades',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'grades',
             data: data
         }).then((res) => {
             getCache();
@@ -340,11 +280,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'put',
-            url: '/grades/' + gradeId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `grades/${gradeId}`,
             data: data
         }).then((res) => {
             getCache();
@@ -356,11 +292,7 @@ function SettingEducation() {
     const deleteGrade = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/grades/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `grades/${id}`,
         }).then((res) => {
             getCache();
             getGrade();
@@ -370,11 +302,7 @@ function SettingEducation() {
     const getSubGrade = () => {
         mainAxios({
             method: 'get',
-            url: '/sub-grades',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'sub-grades',
         }).then((res) => {
             setSubGradeArr(res.data)
         });
@@ -391,11 +319,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'post',
-            url: '/sub-grades',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'sub-grades',
             data: data
         }).then((res) => {
             getCache();
@@ -411,11 +335,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'put',
-            url: '/sub-grades/' + subGradeId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `sub-grades/${subGradeId}`,
             data: data
         }).then((res) => {
             getCache();
@@ -427,11 +347,7 @@ function SettingEducation() {
     const deleteSubGrade = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/sub-grades/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `sub-grades/${id}`,
         }).then((res) => {
             getSubGrade()
         });
@@ -440,11 +356,7 @@ function SettingEducation() {
     const getLanguage = () => {
         mainAxios({
             method: 'get',
-            url: '/languages',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'languages',
         }).then((res) => {
             setLanguageArr(res.data)
         });
@@ -461,11 +373,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'post',
-            url: '/languages',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'languages',
             data: data
         }).then((res) => {
             getLanguage();
@@ -480,11 +388,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'put',
-            url: '/languages/' + languageId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `languages/${languageId}`,
             data: data
         }).then((res) => {
             getLanguage();
@@ -495,11 +399,7 @@ function SettingEducation() {
     const deleteLanguage = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/languages/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `languages/${id}`,
         }).then((res) => {
             getLanguage()
         });
@@ -508,11 +408,7 @@ function SettingEducation() {
     const getComputer = () => {
         mainAxios({
             method: 'get',
-            url: '/computers',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'computers',
         }).then((res) => {
             setComputerArr(res.data)
         });
@@ -529,11 +425,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'post',
-            url: '/computers',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'computers',
             data: data
         }).then((res) => {
             getComputer();
@@ -548,11 +440,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'put',
-            url: '/computers/' + computerId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `computers/${computerId}`,
             data: data
         }).then((res) => {
             getComputer();
@@ -563,11 +451,7 @@ function SettingEducation() {
     const deleteComputer = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/computers/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `computers/${id}`,
         }).then((res) => {
             getComputer()
         });
@@ -576,11 +460,7 @@ function SettingEducation() {
     const getLegislation = () => {
         mainAxios({
             method: 'get',
-            url: '/legislations',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'legislations',
         }).then((res) => {
             setLegislationArr(res.data)
         });
@@ -597,11 +477,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'post',
-            url: '/legislations',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'legislations',
             data: data
         }).then((res) => {
             getLegislation();
@@ -616,11 +492,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'put',
-            url: '/legislations/' + legislationId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `legislations/${legislationId}`,
             data: data
         }).then((res) => {
             getLegislation();
@@ -631,11 +503,7 @@ function SettingEducation() {
     const deleteLegislation = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/legislations/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `legislations/${id}`,
         }).then((res) => {
             getLegislation()
         });
@@ -644,11 +512,7 @@ function SettingEducation() {
     const getSpeciality = () => {
         mainAxios({
             method: 'get',
-            url: '/specialities',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'specialities',
         }).then((res) => {
             setSpecialityArr(res.data)
         });
@@ -665,11 +529,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'post',
-            url: '/specialities',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'specialities',
             data: data
         }).then((res) => {
             getCache();
@@ -685,11 +545,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'put',
-            url: '/specialities/' + specialityId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `specialities/${specialityId}`,
             data: data
         }).then((res) => {
             getCache();
@@ -701,11 +557,7 @@ function SettingEducation() {
     const deleteSpeciality = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/specialities/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `specialities/${id}`,
         }).then((res) => {
             getSpeciality()
         });
@@ -714,11 +566,7 @@ function SettingEducation() {
     const getEnterprise = () => {
         mainAxios({
             method: 'get',
-            url: '/work-institutions',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'work-institutions',
         }).then((res) => {
             setEnterpriseArr(res.data)
         });
@@ -735,11 +583,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'post',
-            url: '/work-institutions',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'work-institutions',
             data: data
         }).then((res) => {
             getEnterprise();
@@ -754,11 +598,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'put',
-            url: '/work-institutions/' + enterpriseId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `work-institutions/${enterpriseId}`,
             data: data
         }).then((res) => {
             getEnterprise();
@@ -769,11 +609,7 @@ function SettingEducation() {
     const deleteEnterprise = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/work-institutions/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `work-institutions/${id}`,
         }).then((res) => {
             getEnterprise()
         });
@@ -782,11 +618,7 @@ function SettingEducation() {
     const getOrganization = () => {
         mainAxios({
             method: 'get',
-            url: '/organizations',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'organizations',
         }).then((res) => {
             setOrganizationArr(res.data)
         });
@@ -803,11 +635,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'post',
-            url: '/organizations',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'organizations',
             data: data
         }).then((res) => {
             getOrganization();
@@ -822,11 +650,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'put',
-            url: '/organizations/' + organizationId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `organizations/${organizationId}`,
             data: data
         }).then((res) => {
             getOrganization();
@@ -837,11 +661,7 @@ function SettingEducation() {
     const deleteOrganization = (id) => {
         mainAxios({
             method: 'delete',
-            url: '/organizations/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `organizations/${id}`,
         }).then((res) => {
             getOrganization()
         });
@@ -851,11 +671,7 @@ function SettingEducation() {
     const getCompetence = () => {
         mainAxios({
             method: 'get',
-            url: '/skills',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'skills',
         }).then((res) => {
             setCompetenceArr(res.data)
         });
@@ -872,11 +688,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'post',
-            url: '/skills',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: 'skills',
             data: data
         }).then((res) => {
             getCompetence();
@@ -891,11 +703,7 @@ function SettingEducation() {
         }
         mainAxios({
             method: 'put',
-            url: '/skills/' + competenceId,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `skills/${competenceId}`,
             data: data
         }).then((res) => {
             getCompetence();
@@ -906,11 +714,8 @@ function SettingEducation() {
     const deleteCompetence= (id) => {
         mainAxios({
             method: 'delete',
-            url: '/skills/' + id,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `skills/${id}`,
+
         }).then((res) => {
             getCompetence()
         });
@@ -985,7 +790,7 @@ function SettingEducation() {
                                                                     <span>{item.name}</span>
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailUniversity(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
@@ -1006,10 +811,10 @@ function SettingEducation() {
                                                                                             strokeLinejoin="round"/>
                                                                                     </g>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-delete"
                                                                                     onClick={() => deleteUniversity(item.id)}>
                                                                                 <svg width="12" height="12"
@@ -1019,7 +824,7 @@ function SettingEducation() {
                                                                                         d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                         fill="#040647"/>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                     </ul>
                                                                 </Dropdown.Item>
@@ -1029,7 +834,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <button type="button" className="btn-color"
+                                                <Button type="button" className="btn-color"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1039,7 +844,7 @@ function SettingEducation() {
                                                             strokeLinejoin="round"/>
                                                     </svg>
                                                     <span>əlavə et</span>
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Col>
                                     </Row>
@@ -1063,7 +868,7 @@ function SettingEducation() {
                                                     <Col xs={12}>
                                                         <ul className="btn-block list-unstyled m-0 flex-end">
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => {
                                                                             setView(false);
                                                                             setUniversity('')
@@ -1076,10 +881,10 @@ function SettingEducation() {
                                                                             strokeWidth="0.3"/>
                                                                     </svg>
                                                                     Bağla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => checkClick ? editUniversity() : sendUniversity()}>
                                                                     <svg width="16" height="12" viewBox="0 0 16 12"
                                                                          fill="none"
@@ -1089,7 +894,7 @@ function SettingEducation() {
                                                                             fill="#2ED06A"/>
                                                                     </svg>
                                                                     Yadda saxla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                         </ul>
                                                     </Col>
@@ -1118,7 +923,7 @@ function SettingEducation() {
                                                                     <span>{item.name}</span>
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailCertificate(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
@@ -1139,10 +944,10 @@ function SettingEducation() {
                                                                                             strokeLinejoin="round"/>
                                                                                     </g>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-delete"
                                                                                     onClick={() => deleteCertificate(item.id)}>
                                                                                 <svg width="12" height="12"
@@ -1152,7 +957,7 @@ function SettingEducation() {
                                                                                         d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                         fill="#040647"/>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                     </ul>
                                                                 </Dropdown.Item>
@@ -1162,7 +967,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <button type="button" className="btn-color"
+                                                <Button type="button" className="btn-color"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1172,7 +977,7 @@ function SettingEducation() {
                                                             strokeLinejoin="round"/>
                                                     </svg>
                                                     <span>əlavə et</span>
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Col>
                                     </Row>
@@ -1196,7 +1001,7 @@ function SettingEducation() {
                                                     <Col xs={12}>
                                                         <ul className="btn-block list-unstyled m-0 flex-end">
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => {
                                                                             setView(false);
                                                                             setCertificate('')
@@ -1209,10 +1014,10 @@ function SettingEducation() {
                                                                             strokeWidth="0.3"/>
                                                                     </svg>
                                                                     Bağla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => checkClick ? editCertificate() : sendCertificate()}>
                                                                     <svg width="16" height="12" viewBox="0 0 16 12"
                                                                          fill="none"
@@ -1222,7 +1027,7 @@ function SettingEducation() {
                                                                             fill="#2ED06A"/>
                                                                     </svg>
                                                                     Yadda saxla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                         </ul>
                                                     </Col>
@@ -1251,7 +1056,7 @@ function SettingEducation() {
                                                                     <span>{item.name}</span>
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailVacancy(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
@@ -1272,10 +1077,10 @@ function SettingEducation() {
                                                                                             strokeLinejoin="round"/>
                                                                                     </g>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-delete"
                                                                                     onClick={() => deleteVacancy(item.id)}>
                                                                                 <svg width="12" height="12"
@@ -1285,7 +1090,7 @@ function SettingEducation() {
                                                                                         d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                         fill="#040647"/>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                     </ul>
                                                                 </Dropdown.Item>
@@ -1295,7 +1100,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <button type="button" className="btn-color"
+                                                <Button type="button" className="btn-color"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1305,7 +1110,7 @@ function SettingEducation() {
                                                             strokeLinejoin="round"/>
                                                     </svg>
                                                     <span>əlavə et</span>
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Col>
                                     </Row>
@@ -1329,7 +1134,7 @@ function SettingEducation() {
                                                     <Col xs={12}>
                                                         <ul className="btn-block list-unstyled m-0 flex-end">
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => {
                                                                             setView(false);
                                                                             setVacancy('')
@@ -1342,10 +1147,10 @@ function SettingEducation() {
                                                                             strokeWidth="0.3"/>
                                                                     </svg>
                                                                     Bağla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => checkClick ? editVacancy() : sendVacancy()}>
                                                                     <svg width="16" height="12" viewBox="0 0 16 12"
                                                                          fill="none"
@@ -1355,7 +1160,7 @@ function SettingEducation() {
                                                                             fill="#2ED06A"/>
                                                                     </svg>
                                                                     Yadda saxla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                         </ul>
                                                     </Col>
@@ -1384,7 +1189,7 @@ function SettingEducation() {
                                                                     <span>{item.grade}</span>
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailGrade(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
@@ -1405,10 +1210,10 @@ function SettingEducation() {
                                                                                             strokeLinejoin="round"/>
                                                                                     </g>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-delete"
                                                                                     onClick={() => deleteGrade(item.id)}>
                                                                                 <svg width="12" height="12"
@@ -1418,7 +1223,7 @@ function SettingEducation() {
                                                                                         d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                         fill="#040647"/>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                     </ul>
                                                                 </Dropdown.Item>
@@ -1428,7 +1233,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <button type="button" className="btn-color"
+                                                <Button type="button" className="btn-color"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1438,7 +1243,7 @@ function SettingEducation() {
                                                             strokeLinejoin="round"/>
                                                     </svg>
                                                     <span>əlavə et</span>
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Col>
                                     </Row>
@@ -1463,7 +1268,7 @@ function SettingEducation() {
                                                     <Col xs={12}>
                                                         <ul className="btn-block list-unstyled m-0 flex-end">
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => {
                                                                             setView(false);
                                                                             setGrade('')
@@ -1476,10 +1281,10 @@ function SettingEducation() {
                                                                             strokeWidth="0.3"/>
                                                                     </svg>
                                                                     Bağla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => checkClick ? editGrade() : sendGrade()}>
                                                                     <svg width="16" height="12" viewBox="0 0 16 12"
                                                                          fill="none"
@@ -1489,7 +1294,7 @@ function SettingEducation() {
                                                                             fill="#2ED06A"/>
                                                                     </svg>
                                                                     Yadda saxla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                         </ul>
                                                     </Col>
@@ -1518,7 +1323,7 @@ function SettingEducation() {
                                                                     <span>{item.subGrade}</span>
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailSubGrade(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
@@ -1539,10 +1344,10 @@ function SettingEducation() {
                                                                                             strokeLinejoin="round"/>
                                                                                     </g>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-delete"
                                                                                     onClick={() => deleteSubGrade(item.id)}>
                                                                                 <svg width="12" height="12"
@@ -1552,7 +1357,7 @@ function SettingEducation() {
                                                                                         d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                         fill="#040647"/>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                     </ul>
                                                                 </Dropdown.Item>
@@ -1562,7 +1367,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <button type="button" className="btn-color"
+                                                <Button type="button" className="btn-color"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1572,7 +1377,7 @@ function SettingEducation() {
                                                             strokeLinejoin="round"/>
                                                     </svg>
                                                     <span>əlavə et</span>
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Col>
                                     </Row>
@@ -1596,7 +1401,7 @@ function SettingEducation() {
                                                     <Col xs={12}>
                                                         <ul className="btn-block list-unstyled m-0 flex-end">
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => {
                                                                             setView(false);
                                                                             setSubGrade('')
@@ -1609,10 +1414,10 @@ function SettingEducation() {
                                                                             strokeWidth="0.3"/>
                                                                     </svg>
                                                                     Bağla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => checkClick ? editSubGrade() : sendSubGrade()}>
                                                                     <svg width="16" height="12" viewBox="0 0 16 12"
                                                                          fill="none"
@@ -1622,7 +1427,7 @@ function SettingEducation() {
                                                                             fill="#2ED06A"/>
                                                                     </svg>
                                                                     Yadda saxla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                         </ul>
                                                     </Col>
@@ -1651,7 +1456,7 @@ function SettingEducation() {
                                                                     <span>{item.name}</span>
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailLanguage(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
@@ -1672,10 +1477,10 @@ function SettingEducation() {
                                                                                             strokeLinejoin="round"/>
                                                                                     </g>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-delete"
                                                                                     onClick={() => deleteLanguage(item.id)}>
                                                                                 <svg width="12" height="12"
@@ -1685,7 +1490,7 @@ function SettingEducation() {
                                                                                         d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                         fill="#040647"/>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                     </ul>
                                                                 </Dropdown.Item>
@@ -1695,7 +1500,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <button type="button" className="btn-color"
+                                                <Button type="button" className="btn-color"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1705,7 +1510,7 @@ function SettingEducation() {
                                                             strokeLinejoin="round"/>
                                                     </svg>
                                                     <span>əlavə et</span>
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Col>
                                     </Row>
@@ -1729,7 +1534,7 @@ function SettingEducation() {
                                                     <Col xs={12}>
                                                         <ul className="btn-block list-unstyled m-0 flex-end">
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => {
                                                                             setView(false);
                                                                             setLanguage('')
@@ -1742,10 +1547,10 @@ function SettingEducation() {
                                                                             strokeWidth="0.3"/>
                                                                     </svg>
                                                                     Bağla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => checkClick ? editLanguage() : sendLanguage()}>
                                                                     <svg width="16" height="12" viewBox="0 0 16 12"
                                                                          fill="none"
@@ -1755,7 +1560,7 @@ function SettingEducation() {
                                                                             fill="#2ED06A"/>
                                                                     </svg>
                                                                     Yadda saxla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                         </ul>
                                                     </Col>
@@ -1784,7 +1589,7 @@ function SettingEducation() {
                                                                     <span>{item.name}</span>
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailComputer(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
@@ -1805,10 +1610,10 @@ function SettingEducation() {
                                                                                             strokeLinejoin="round"/>
                                                                                     </g>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-delete"
                                                                                     onClick={() => deleteComputer(item.id)}>
                                                                                 <svg width="12" height="12"
@@ -1818,7 +1623,7 @@ function SettingEducation() {
                                                                                         d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                         fill="#040647"/>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                     </ul>
                                                                 </Dropdown.Item>
@@ -1828,7 +1633,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <button type="button" className="btn-color"
+                                                <Button type="button" className="btn-color"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1838,7 +1643,7 @@ function SettingEducation() {
                                                             strokeLinejoin="round"/>
                                                     </svg>
                                                     <span>əlavə et</span>
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Col>
                                     </Row>
@@ -1862,7 +1667,7 @@ function SettingEducation() {
                                                     <Col xs={12}>
                                                         <ul className="btn-block list-unstyled m-0 flex-end">
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => {
                                                                             setView(false);
                                                                             setComputer('')
@@ -1875,10 +1680,10 @@ function SettingEducation() {
                                                                             strokeWidth="0.3"/>
                                                                     </svg>
                                                                     Bağla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => checkClick ? editComputer() : sendComputer()}>
                                                                     <svg width="16" height="12" viewBox="0 0 16 12"
                                                                          fill="none"
@@ -1888,7 +1693,7 @@ function SettingEducation() {
                                                                             fill="#2ED06A"/>
                                                                     </svg>
                                                                     Yadda saxla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                         </ul>
                                                     </Col>
@@ -1917,7 +1722,7 @@ function SettingEducation() {
                                                                     <span>{item.name}</span>
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailLegislation(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
@@ -1938,10 +1743,10 @@ function SettingEducation() {
                                                                                             strokeLinejoin="round"/>
                                                                                     </g>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-delete"
                                                                                     onClick={() => deleteLegislation(item.id)}>
                                                                                 <svg width="12" height="12"
@@ -1951,7 +1756,7 @@ function SettingEducation() {
                                                                                         d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                         fill="#040647"/>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                     </ul>
                                                                 </Dropdown.Item>
@@ -1961,7 +1766,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <button type="button" className="btn-color"
+                                                <Button type="button" className="btn-color"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1971,7 +1776,7 @@ function SettingEducation() {
                                                             strokeLinejoin="round"/>
                                                     </svg>
                                                     <span>əlavə et</span>
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Col>
                                     </Row>
@@ -1995,7 +1800,7 @@ function SettingEducation() {
                                                     <Col xs={12}>
                                                         <ul className="btn-block list-unstyled m-0 flex-end">
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => {
                                                                             setView(false);
                                                                             setLegislation('')
@@ -2008,10 +1813,10 @@ function SettingEducation() {
                                                                             strokeWidth="0.3"/>
                                                                     </svg>
                                                                     Bağla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => checkClick ? editLegislation() : sendLegislation()}>
                                                                     <svg width="16" height="12" viewBox="0 0 16 12"
                                                                          fill="none"
@@ -2021,7 +1826,7 @@ function SettingEducation() {
                                                                             fill="#2ED06A"/>
                                                                     </svg>
                                                                     Yadda saxla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                         </ul>
                                                     </Col>
@@ -2050,7 +1855,7 @@ function SettingEducation() {
                                                                     <span>{item.name}</span>
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailSpeciality(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
@@ -2071,10 +1876,10 @@ function SettingEducation() {
                                                                                             strokeLinejoin="round"/>
                                                                                     </g>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-delete"
                                                                                     onClick={() => deleteSpeciality(item.id)}>
                                                                                 <svg width="12" height="12"
@@ -2084,7 +1889,7 @@ function SettingEducation() {
                                                                                         d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                         fill="#040647"/>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                     </ul>
                                                                 </Dropdown.Item>
@@ -2094,7 +1899,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <button type="button" className="btn-color"
+                                                <Button type="button" className="btn-color"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -2104,7 +1909,7 @@ function SettingEducation() {
                                                             strokeLinejoin="round"/>
                                                     </svg>
                                                     <span>əlavə et</span>
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Col>
                                     </Row>
@@ -2128,7 +1933,7 @@ function SettingEducation() {
                                                     <Col xs={12}>
                                                         <ul className="btn-block list-unstyled m-0 flex-end">
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => {
                                                                             setView(false);
                                                                             setSpeciality('')
@@ -2141,10 +1946,10 @@ function SettingEducation() {
                                                                             strokeWidth="0.3"/>
                                                                     </svg>
                                                                     Bağla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => checkClick ? editSpeciality() : sendSpeciality()}>
                                                                     <svg width="16" height="12" viewBox="0 0 16 12"
                                                                          fill="none"
@@ -2154,7 +1959,7 @@ function SettingEducation() {
                                                                             fill="#2ED06A"/>
                                                                     </svg>
                                                                     Yadda saxla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                         </ul>
                                                     </Col>
@@ -2183,7 +1988,7 @@ function SettingEducation() {
                                                                     <span>{item.name}</span>
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailEnterprise(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
@@ -2204,10 +2009,10 @@ function SettingEducation() {
                                                                                             strokeLinejoin="round"/>
                                                                                     </g>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-delete"
                                                                                     onClick={() => deleteEnterprise(item.id)}>
                                                                                 <svg width="12" height="12"
@@ -2217,7 +2022,7 @@ function SettingEducation() {
                                                                                         d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                         fill="#040647"/>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                     </ul>
                                                                 </Dropdown.Item>
@@ -2227,7 +2032,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <button type="button" className="btn-color"
+                                                <Button type="button" className="btn-color"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -2237,7 +2042,7 @@ function SettingEducation() {
                                                             strokeLinejoin="round"/>
                                                     </svg>
                                                     <span>əlavə et</span>
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Col>
                                     </Row>
@@ -2261,7 +2066,7 @@ function SettingEducation() {
                                                     <Col xs={12}>
                                                         <ul className="btn-block list-unstyled m-0 flex-end">
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => {
                                                                             setView(false);
                                                                             setEnterprise('')
@@ -2274,10 +2079,10 @@ function SettingEducation() {
                                                                             strokeWidth="0.3"/>
                                                                     </svg>
                                                                     Bağla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => checkClick ? editEnterprise() : sendEnterprise()}>
                                                                     <svg width="16" height="12" viewBox="0 0 16 12"
                                                                          fill="none"
@@ -2287,7 +2092,7 @@ function SettingEducation() {
                                                                             fill="#2ED06A"/>
                                                                     </svg>
                                                                     Yadda saxla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                         </ul>
                                                     </Col>
@@ -2317,7 +2122,7 @@ function SettingEducation() {
                                                                     <span>{item.name}</span>
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailOrganization(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
@@ -2338,10 +2143,10 @@ function SettingEducation() {
                                                                                             strokeLinejoin="round"/>
                                                                                     </g>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-delete"
                                                                                     onClick={() => deleteOrganization(item.id)}>
                                                                                 <svg width="12" height="12"
@@ -2351,7 +2156,7 @@ function SettingEducation() {
                                                                                         d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                         fill="#040647"/>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                     </ul>
                                                                 </Dropdown.Item>
@@ -2361,7 +2166,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <button type="button" className="btn-color"
+                                                <Button type="button" className="btn-color"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -2371,7 +2176,7 @@ function SettingEducation() {
                                                             strokeLinejoin="round"/>
                                                     </svg>
                                                     <span>əlavə et</span>
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Col>
                                     </Row>
@@ -2395,7 +2200,7 @@ function SettingEducation() {
                                                     <Col xs={12}>
                                                         <ul className="btn-block list-unstyled m-0 flex-end">
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => {
                                                                             setView(false);
                                                                             setOrganization('')
@@ -2408,10 +2213,10 @@ function SettingEducation() {
                                                                             strokeWidth="0.3"/>
                                                                     </svg>
                                                                     Bağla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => checkClick ? editOrganization() : sendOrganization()}>
                                                                     <svg width="16" height="12" viewBox="0 0 16 12"
                                                                          fill="none"
@@ -2421,7 +2226,7 @@ function SettingEducation() {
                                                                             fill="#2ED06A"/>
                                                                     </svg>
                                                                     Yadda saxla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                         </ul>
                                                     </Col>
@@ -2450,7 +2255,7 @@ function SettingEducation() {
                                                                     <span>{item.name}</span>
                                                                     <ul className="list-unstyled flex m-0">
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-edit"
                                                                                     onClick={() => {getDetailCompetence(item); setCheckClick(true)}}>
                                                                                 <svg width="16" height="17"
@@ -2471,10 +2276,10 @@ function SettingEducation() {
                                                                                             strokeLinejoin="round"/>
                                                                                     </g>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                         <li>
-                                                                            <button type="button"
+                                                                            <Button type="button"
                                                                                     className="btn-transparent btn-delete"
                                                                                     onClick={() => deleteCompetence(item.id)}>
                                                                                 <svg width="12" height="12"
@@ -2484,7 +2289,7 @@ function SettingEducation() {
                                                                                         d="M6.70355 6.00312L11.8475 0.859214C12.046 0.667475 12.0515 0.351111 11.8598 0.152578C11.668 -0.0459554 11.3517 -0.0514604 11.1531 0.140279C11.149 0.144291 11.1449 0.14839 11.1408 0.152578L5.99688 5.29648L0.852968 0.152548C0.654435 -0.0391912 0.33807 -0.0336862 0.14633 0.164847C-0.0407242 0.358519 -0.0407242 0.665542 0.14633 0.859214L5.29024 6.00312L0.14633 11.147C-0.0487768 11.3422 -0.0487768 11.6585 0.14633 11.8537C0.341467 12.0487 0.657831 12.0487 0.852968 11.8537L5.99688 6.70976L11.1408 11.8537C11.3393 12.0454 11.6557 12.0399 11.8474 11.8414C12.0345 11.6477 12.0345 11.3407 11.8474 11.147L6.70355 6.00312Z"
                                                                                         fill="#040647"/>
                                                                                 </svg>
-                                                                            </button>
+                                                                            </Button>
                                                                         </li>
                                                                     </ul>
                                                                 </Dropdown.Item>
@@ -2494,7 +2299,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <button type="button" className="btn-color"
+                                                <Button type="button" className="btn-color"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -2504,7 +2309,7 @@ function SettingEducation() {
                                                             strokeLinejoin="round"/>
                                                     </svg>
                                                     <span>əlavə et</span>
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Col>
                                     </Row>
@@ -2528,7 +2333,7 @@ function SettingEducation() {
                                                     <Col xs={12}>
                                                         <ul className="btn-block list-unstyled m-0 flex-end">
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => {
                                                                             setView(false);
                                                                             setCompetence('')
@@ -2541,10 +2346,10 @@ function SettingEducation() {
                                                                             strokeWidth="0.3"/>
                                                                     </svg>
                                                                     Bağla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                             <li>
-                                                                <button type="button" className="btn-transparent"
+                                                                <Button type="button" className="btn-transparent"
                                                                         onClick={() => checkClick ? editCompetence() : sendCompetence()}>
                                                                     <svg width="16" height="12" viewBox="0 0 16 12"
                                                                          fill="none"
@@ -2554,7 +2359,7 @@ function SettingEducation() {
                                                                             fill="#2ED06A"/>
                                                                     </svg>
                                                                     Yadda saxla
-                                                                </button>
+                                                                </Button>
                                                             </li>
                                                         </ul>
                                                     </Col>

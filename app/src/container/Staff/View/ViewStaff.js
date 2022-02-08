@@ -70,7 +70,7 @@ function ViewStaff() {
     const getStaffInfo = () => {
         mainAxios({
             method: 'get',
-            url: '/vacancies/' + id,
+            url: `vacancies/${id}`,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -125,11 +125,7 @@ function ViewStaff() {
     const getOperation = (page) => {
         mainAxios({
             method: 'get',
-            url: `/vacancies/${id}/operations`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
+            url: `vacancies/${id}/operations`,
             params: {
                 page: page - 1,
                 size: recordSize
@@ -173,13 +169,8 @@ function ViewStaff() {
     const getExportDocument = (id, operationName) => {
         mainAxios({
             method: 'get',
-            url: `/operations/${id}/export`,
+            url: `operations/${id}/export`,
             responseType: 'arraybuffer',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-
         }).then((res) => {
             const url = window.URL.createObjectURL(new Blob([res.data]));
             const link = window.document.createElement('a');
