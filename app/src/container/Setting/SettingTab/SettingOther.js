@@ -356,7 +356,7 @@ function SettingOther() {
             getEvaluation();
         });
     }
-    const deleteEvaluation = (id) => {
+   /* const deleteEvaluation = (id) => {
         mainAxios({
             method: 'delete',
             url: `evaluations/${id}`,
@@ -364,7 +364,7 @@ function SettingOther() {
             setAmount('');
             getEvaluation();
         });
-    }
+    }*/
 
 
     const getArticle = () => {
@@ -1136,7 +1136,7 @@ function SettingOther() {
                                                                             </svg>
                                                                         </Button>
                                                                     </li>
-                                                                    <li>
+                                                                   {/* <li>
                                                                         <Button type="button"
                                                                                 className="btn-transparent btn-delete"
                                                                                 onClick={() => deleteEvaluation(item.id)}>
@@ -1148,7 +1148,7 @@ function SettingOther() {
                                                                                     fill="#040647"/>
                                                                             </svg>
                                                                         </Button>
-                                                                    </li>
+                                                                    </li>*/}
                                                                 </ul>
                                                             </Dropdown.Item>
                                                         )
