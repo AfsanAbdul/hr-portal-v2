@@ -70,7 +70,7 @@ function SettingOther() {
         mainAxios({
             method: 'post',
             url: 'caches/evict',
-        }).then((res) => {
+        }).then(() => {
         });
     }
 
@@ -152,7 +152,7 @@ function SettingOther() {
             method: 'post',
             url: 'sub-departments',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCache();
             getSubDepartments();
             setSelectedDepartment(null)
@@ -168,7 +168,7 @@ function SettingOther() {
             method: 'put',
             url: `sub-departments/${subDepartmentId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCache();
             getSubDepartments();
             setSelectedDepartment(null)
@@ -199,7 +199,7 @@ function SettingOther() {
             method: 'post',
             url: 'collective-agreements',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getRestReason();
             setRestReason('');
             setActive(false);
@@ -282,7 +282,7 @@ function SettingOther() {
             method: 'put',
             url: `payments/${paymentId}`,
             data
-        }).then((res) => {
+        }).then(() => {
             getBusinessCity();
             setAmount('')
         });
@@ -291,7 +291,7 @@ function SettingOther() {
         mainAxios({
             method: 'delete',
             url: `payments/${id}`,
-        }).then((res) => {
+        }).then(() => {
             getBusinessCity();
             setSelectedCity(null);
             setAmount('')
@@ -352,7 +352,7 @@ function SettingOther() {
             method: 'put',
             url: `evaluations/${evaluationId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getEvaluation();
         });
     }
@@ -440,7 +440,7 @@ function SettingOther() {
         mainAxios({
             method: 'delete',
             url: `articles/${id}`,
-        }).then((res) => {
+        }).then(() => {
             setArticle('');
             setTitle('');
             setFiringMultiply('');
@@ -487,7 +487,7 @@ function SettingOther() {
                                     setCheckClick(false)
                                 }}
                                 options={categoryOptions}
-                                isSearchable={categoryOptions ? categoryOptions.length > 5 ? true : false : false}
+                                isSearchable={categoryOptions ? categoryOptions.length > 5  : false}
                                 styles={customStyles}
                                 getOptionLabel={(option) => (option.label)}
                                 getOptionValue={(option) => (option.label)}
@@ -735,7 +735,7 @@ function SettingOther() {
                                                                 setSelectedDepartment(val);
                                                             }}
                                                             options={departmentArr}
-                                                            isSearchable={departmentArr ? departmentArr.length > 5 ? true : false : false}
+                                                            isSearchable={departmentArr ? departmentArr.length > 5 : false}
                                                             styles={customStyles}
                                                             getOptionLabel={(option) => (option.name)}
                                                             getOptionValue={(option) => (option.name)}
@@ -1030,7 +1030,7 @@ function SettingOther() {
                                                                     value={selectedCity}
                                                                     onChange={setSelectedCity}
                                                                     options={cityArr}
-                                                                    isSearchable={cityArr ? cityArr.length > 5 ? true : false : false}
+                                                                    isSearchable={cityArr ? cityArr.length > 5 : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={(option) => (option.name)}
@@ -1186,7 +1186,7 @@ function SettingOther() {
                                                             value={selectedGrade}
                                                             onChange={setSelectedGrade}
                                                             options={gradeArr}
-                                                            isSearchable={gradeArr ? gradeArr.length > 5 ? true : false : false}
+                                                            isSearchable={gradeArr ? gradeArr.length > 5  : false}
                                                             styles={customStyles}
                                                             getOptionLabel={(option) => (option.grade)}
                                                             getOptionValue={(option) => (option.grade)}
@@ -1201,7 +1201,7 @@ function SettingOther() {
                                                             value={selectedSubGrade}
                                                             onChange={setSelectedSubGrade}
                                                             options={subGradeArr}
-                                                            isSearchable={subGradeArr ? subGradeArr.length > 5 ? true : false : false}
+                                                            isSearchable={subGradeArr ? subGradeArr.length > 5 : false}
                                                             styles={customStyles}
                                                             getOptionLabel={(option) => (option.subGrade)}
                                                             getOptionValue={(option) => (option.subGrade)}
@@ -1378,7 +1378,7 @@ function SettingOther() {
                                                             value={selectedVacationPay}
                                                             onChange={setSelectedVacationPay}
                                                             options={vacationPayOptions}
-                                                            isSearchable={vacationPayOptions ? vacationPayOptions.length > 5 ? true : false : false}
+                                                            isSearchable={vacationPayOptions ? vacationPayOptions.length > 5 : false}
                                                             styles={customStyles}
                                                             getOptionLabel={(option) => (option.label)}
                                                             getOptionValue={(option) => (option.label)}

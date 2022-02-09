@@ -60,6 +60,7 @@ function CreateStaff() {
         {value: 'WORK_PLACE_3', label: 'Dübəndi terminalı'},
         {value: 'WORK_PLACE_4', label: 'Qaradağ anbarı'},
         {value: 'WORK_PLACE_5', label: 'Ələt'},
+        {value: 'WORK_PLACE_6', label: 'Astara'},
     ]
 
     /*check&visibility*/
@@ -520,7 +521,7 @@ function CreateStaff() {
                                                                     onChange={(val) => {
                                                                         setSelectedInstitution(val);
                                                                     }}
-                                                                    isSearchable={institution ? institution.length > 5 ? true : false : false}
+                                                                    isSearchable={institution ? institution.length > 5  : false}
                                                                     options={institution}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -547,7 +548,7 @@ function CreateStaff() {
                                                                         getSubDepartment(val.id);
                                                                         setSelectedSubDepartment(null)
                                                                     }}
-                                                                    isSearchable={department ? department.length > 5 ? true : false : false}
+                                                                    isSearchable={department ? department.length > 5  : false}
                                                                     options={department}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -572,7 +573,7 @@ function CreateStaff() {
                                                                     onChange={(val) => {
                                                                         setSelectedSubDepartment(val);
                                                                     }}
-                                                                    isSearchable={subDepartment ? subDepartment.length > 5 ? true : false : false}
+                                                                    isSearchable={subDepartment ? subDepartment.length > 5 : false}
                                                                     options={subDepartment}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -600,7 +601,7 @@ function CreateStaff() {
                                                                     onChange={(val) => {
                                                                         setSelectedVacancy(val);
                                                                     }}
-                                                                    isSearchable={vacancy ? vacancy.length > 5 ? true : false : false}
+                                                                    isSearchable={vacancy ? vacancy.length > 5  : false}
                                                                     options={vacancy}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.name)}
@@ -653,7 +654,7 @@ function CreateStaff() {
                                                                         }
                                                                     }}
                                                                     options={workConditionOptions}
-                                                                    isSearchable={workConditionOptions ? workConditionOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={workConditionOptions ? workConditionOptions.length > 5 : false}
                                                                     styles={customStyles}
                                                                 />
                                                                 <div className="validation-block flex-start">
@@ -675,7 +676,7 @@ function CreateStaff() {
                                                                     placeholder="İş rejimini seçin"
                                                                     value={selectedWorkMode}
                                                                     onChange={setSelectedWorkMode}
-                                                                    isSearchable={WorkModeOptions ? WorkModeOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={WorkModeOptions ? WorkModeOptions.length > 5  : false}
                                                                     options={WorkModeOptions}
                                                                     styles={customStyles}
                                                                 />
@@ -723,7 +724,7 @@ function CreateStaff() {
                                                                     placeholder="Kateqoriyanı seçin"
                                                                     value={selectedVacancyCategory}
                                                                     onChange={setSelectedVacancyCategory}
-                                                                    isSearchable={vacancyCategoryOptions ? vacancyCategoryOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={vacancyCategoryOptions ? vacancyCategoryOptions.length > 5  : false}
                                                                     options={vacancyCategoryOptions}
                                                                     styles={customStyles}
                                                                 />
@@ -746,7 +747,7 @@ function CreateStaff() {
                                                                     onChange={(val) => {
                                                                         setSelectedFamilyJob(val);
                                                                     }}
-                                                                    isSearchable={familyJob ? familyJob.length > 5 ? true : false : false}
+                                                                    isSearchable={familyJob ? familyJob.length > 5  : false}
                                                                     options={familyJob}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.name)}
@@ -762,9 +763,10 @@ function CreateStaff() {
                                                                     value={selectedWorkAddress}
                                                                     onChange={setSelectedWorkAddress}
                                                                     options={workPlaceOptions}
-                                                                    isSearchable={workPlaceOptions ? workPlaceOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={workPlaceOptions ? workPlaceOptions.length > 5  : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.label)}
+                                                                    getOptionValue={(option) => (option.label)}
                                                                 />
                                                                 <div className="validation-block flex-start">
                                                                     {
@@ -784,7 +786,7 @@ function CreateStaff() {
                                                                     value={selectedCurator}
                                                                     onChange={(val) => setSelectedCurator(val)}
                                                                     options={curator}
-                                                                    isSearchable={curator ? curator.length > 5 ? true : false : false}
+                                                                    isSearchable={curator ? curator.length > 5 : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.fullName)}
                                                                     getOptionValue={option => option.fullName}
@@ -799,7 +801,7 @@ function CreateStaff() {
                                                                     value={selectedMinGrade}
                                                                     onChange={setSelectedMinGrade}
                                                                     options={grade}
-                                                                    isSearchable={grade ? grade.length > 5 ? true : false : false}
+                                                                    isSearchable={grade ? grade.length > 5  : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.grade)}
                                                                     getOptionValue={option => option.grade}
@@ -822,7 +824,7 @@ function CreateStaff() {
                                                                     value={selectedMaxGrade}
                                                                     onChange={setSelectedMaxGrade}
                                                                     options={grade}
-                                                                    isSearchable={grade ? grade.length > 5 ? true : false : false}
+                                                                    isSearchable={grade ? grade.length > 5  : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.grade)}
                                                                     getOptionValue={option => option.grade}
@@ -886,9 +888,10 @@ function CreateStaff() {
                                                                                         setSkillLegalArr([...skillLegalArr], skillLegalArr);
                                                                                     }}
                                                                                     placeholder="Qanunvericilik aktlarını seçin"
-                                                                                    isSearchable={legislationSkill ? legislationSkill.length > 5 ? true : false : false}
+                                                                                    isSearchable={legislationSkill ? legislationSkill.length > 5 : false}
                                                                                     options={legislationSkill}
                                                                                     getOptionLabel={(option) => (option.name)}
+                                                                                    getOptionValue={(option) => (option.name)}
                                                                                     styles={customStyles}/>
                                                                                 <div className="validation-block flex-start">
                                                                                     {
@@ -910,7 +913,7 @@ function CreateStaff() {
                                                                                         setSkillLegalArr([...skillLegalArr], skillLegalArr);
                                                                                     }}
                                                                                     placeholder="Bilik səviyyəsini seçin"
-                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 ? true : false : false}
+                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5  : false}
                                                                                     options={evaluationOptions}
                                                                                     styles={customStyles}
                                                                                 />
@@ -967,7 +970,7 @@ function CreateStaff() {
                                                                     placeholder="Təhsil pilləsini seçin"
                                                                     value={selectedEducationDegree}
                                                                     onChange={setSelectedEducationDegree}
-                                                                    isSearchable={educationDegreeOptions ? educationDegreeOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={educationDegreeOptions ? educationDegreeOptions.length > 5 : false}
                                                                     options={educationDegreeOptions}
                                                                     styles={customStyles}
                                                                 />
@@ -981,7 +984,7 @@ function CreateStaff() {
                                                                     placeholder="Təhsil pilləsini seçin"
                                                                     value={selectedSpeciality}
                                                                     onChange={(val) => setSelectedSpeciality(val)}
-                                                                    isSearchable={speciality ? speciality.length > 5 ? true : false : false}
+                                                                    isSearchable={speciality ? speciality.length > 5  : false}
                                                                     options={speciality}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     styles={customStyles}
@@ -995,7 +998,7 @@ function CreateStaff() {
                                                                     placeholder="Sertifikat tələbini seçin"
                                                                     value={selectedRequiredFile}
                                                                     onChange={setSelectedRequiredFile}
-                                                                    isSearchable={options ? options.length > 5 ? true : false : false}
+                                                                    isSearchable={options ? options.length > 5  : false}
                                                                     options={options}
                                                                     styles={customStyles}
                                                                 />
@@ -1011,7 +1014,7 @@ function CreateStaff() {
                                                                         setSelectedOption(val)
                                                                     }}
                                                                     placeholder="Boy tələbini seçin"
-                                                                    isSearchable={options ? options.length > 5 ? true : false : false}
+                                                                    isSearchable={options ? options.length > 5  : false}
                                                                     options={options}
                                                                     styles={customStyles}
                                                                 />
@@ -1025,7 +1028,7 @@ function CreateStaff() {
                                                                     placeholder="Hərbi mükəlləfiyyət tələbini seçin"
                                                                     value={selectedMilitaryAchieve}
                                                                     onChange={setSelectedMilitaryAchieve}
-                                                                    isSearchable={options ? options.length > 5 ? true : false : false}
+                                                                    isSearchable={options ? options.length > 5 : false}
                                                                     options={options}
                                                                     styles={customStyles}
                                                                 />
@@ -1052,7 +1055,7 @@ function CreateStaff() {
                                                                     placeholder="Sağlamlıq tələbini seçin"
                                                                     value={selectedHealth}
                                                                     onChange={setSelectedHealth}
-                                                                    isSearchable={options ? options.length > 5 ? true : false : false}
+                                                                    isSearchable={options ? options.length > 5  : false}
                                                                     options={options}
                                                                     styles={customStyles}
                                                                 />
@@ -1065,7 +1068,7 @@ function CreateStaff() {
                                                                     placeholder="Cinsiyyət tələbini seçin"
                                                                     value={selectedGender}
                                                                     onChange={setSelectedGender}
-                                                                    isSearchable={genderOptions ? genderOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={genderOptions ? genderOptions.length > 5 : false}
                                                                     options={genderOptions}
                                                                     styles={customStyles}
                                                                 />
@@ -1207,9 +1210,10 @@ function CreateStaff() {
                                                                                         skillProgramArr[index].computerId = val.id;
                                                                                         setSkillProgramArr([...skillProgramArr], skillProgramArr);
                                                                                     }}
-                                                                                    isSearchable={computerSkill ? computerSkill.length > 5 ? true : false : false}
+                                                                                    isSearchable={computerSkill ? computerSkill.length > 5 : false}
                                                                                     options={computerSkill}
                                                                                     getOptionLabel={(option) => (option.name)}
+                                                                                    getOptionValue={(option) => (option.name)}
                                                                                     styles={customStyles}/>
                                                                                 <div className="validation-block flex-start">
                                                                                     {
@@ -1231,7 +1235,7 @@ function CreateStaff() {
                                                                                         setSkillProgramArr([...skillProgramArr], skillProgramArr);
                                                                                     }}
                                                                                     placeholder="Bilik səviyyəsini seçin"
-                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 ? true : false : false}
+                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5  : false}
                                                                                     options={evaluationOptions}
                                                                                     styles={customStyles}
                                                                                 />
@@ -1305,9 +1309,10 @@ function CreateStaff() {
                                                                                         skillLanguageArr[index].languageId = val.id;
                                                                                         setSkillLanguageArr([...skillLanguageArr], skillLanguageArr);
                                                                                     }}
-                                                                                    isSearchable={languageSkill ? languageSkill.length > 5 ? true : false : false}
+                                                                                    isSearchable={languageSkill ? languageSkill.length > 5 : false}
                                                                                     options={languageSkill}
                                                                                     getOptionLabel={(option) => (option.name)}
+                                                                                    getOptionValue={(option) => (option.name)}
                                                                                     styles={customStyles}/>
                                                                                 <div className="validation-block flex-start">
                                                                                     {
@@ -1329,7 +1334,7 @@ function CreateStaff() {
                                                                                         setSkillLanguageArr([...skillLanguageArr], skillLanguageArr);
                                                                                     }}
                                                                                     placeholder="Bilik səviyyəsini seçin"
-                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 ? true : false : false}
+                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5  : false}
                                                                                     options={evaluationOptions}
                                                                                     styles={customStyles}
                                                                                 />
@@ -1403,10 +1408,11 @@ function CreateStaff() {
                                                                                         skillArr[index].requiredSkillId = val.id;
                                                                                         setSkillArr([...skillArr], skillArr);
                                                                                     }}
-                                                                                    isSearchable={skill ? skill.length > 5 ? true : false : false}
+                                                                                    isSearchable={skill ? skill.length > 5  : false}
                                                                                     options={skill}
                                                                                     styles={customStyles}
                                                                                     getOptionLabel={(option) => (option.name)}
+                                                                                    getOptionValue={(option) => (option.name)}
                                                                                 />
                                                                                 <div className="validation-block flex-start">
                                                                                     {
@@ -1426,7 +1432,7 @@ function CreateStaff() {
                                                                                         skillArr[index].level = val.value;
                                                                                         setSkillArr([...skillArr], skillArr);
                                                                                     }}
-                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 ? true : false : false}
+                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 : false}
                                                                                     placeholder="Səviyyəni seçin"
                                                                                     options={evaluationOptions}
                                                                                     styles={customStyles}

@@ -1284,9 +1284,10 @@ function EditEmployee() {
                                                                             onChange={(val) => {
                                                                                 setSelectedSerial(val);
                                                                             }}
-                                                                            isSearchable={serialNumberOptions ? serialNumberOptions.length > 5 ? true : false : false}
+                                                                            isSearchable={serialNumberOptions ? serialNumberOptions.length > 5 : false}
                                                                             options={serialNumberOptions}
                                                                             getOptionLabel={(option) => (option.label)}
+                                                                            getOptionValue={(option) => (option.label)}
                                                                             styles={customGroupStyles}
                                                                         />
                                                                     </div>
@@ -1332,9 +1333,10 @@ function EditEmployee() {
                                                                     onChange={(val) => {
                                                                         setSelectedFamilyCondition(val);
                                                                     }}
-                                                                    isSearchable={familyConditionOptions ? familyConditionOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={familyConditionOptions ? familyConditionOptions.length > 5 : false}
                                                                     options={familyConditionOptions}
                                                                     getOptionLabel={(option) => (option.label)}
+                                                                    getOptionValue={(option) => (option.label)}
                                                                     styles={customStyles}
                                                                 />
                                                                 <div className="validation-block flex-start">
@@ -1600,7 +1602,7 @@ function EditEmployee() {
                                                                         val.name !== 'Azərbaycan' ? setShowPermission(true) : setShowPermission(false)
                                                                         setSelectedCitizenControl(val)
                                                                     }}
-                                                                    isSearchable={citizen ? citizen.length > 5 ? true : false : false}
+                                                                    isSearchable={citizen ? citizen.length > 5 : false}
                                                                     options={citizen}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -1629,7 +1631,7 @@ function EditEmployee() {
                                                                             setSelectedMilitary(null)
                                                                         }
                                                                     }}
-                                                                    isSearchable={genderOptions ? genderOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={genderOptions ? genderOptions.length > 5 : false}
                                                                     options={genderOptions}
                                                                     styles={customStyles}
                                                                 />
@@ -1651,7 +1653,7 @@ function EditEmployee() {
                                                                     value={selectedBloodType}
                                                                     onChange={setSelectedBloodType}
                                                                     options={bloodTypeOptions}
-                                                                    isSearchable={bloodTypeOptions ? bloodTypeOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={bloodTypeOptions ? bloodTypeOptions.length > 5 : false}
                                                                     styles={customStyles}
                                                                 />
                                                             </Form.Group>
@@ -1683,7 +1685,7 @@ function EditEmployee() {
                                                                             value={selectedMilitary}
                                                                             onChange={setSelectedMilitary}
                                                                             options={militaryOptions}
-                                                                            isSearchable={militaryOptions ? militaryOptions.length > 5 ? true : false : false}
+                                                                            isSearchable={militaryOptions ? militaryOptions.length > 5: false}
                                                                             styles={customStyles}
                                                                         />
                                                                     </Form.Group>
@@ -2061,7 +2063,7 @@ function EditEmployee() {
                                                                     onChange={(val) => {
                                                                         setSelectedCountry(val);
                                                                     }}
-                                                                    isSearchable={countries ? countries.length > 5 ? true : false : false}
+                                                                    isSearchable={countries ? countries.length > 5 : false}
                                                                     options={countries}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -2087,7 +2089,7 @@ function EditEmployee() {
                                                                     onChange={(val) => {
                                                                         setSelectedCity(val);
                                                                     }}
-                                                                    isSearchable={cities ? cities.length > 5 ? true : false : false}
+                                                                    isSearchable={cities ? cities.length > 5 : false}
                                                                     options={cities}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -2113,7 +2115,7 @@ function EditEmployee() {
                                                                     onChange={(val) => {
                                                                         setSelectedRegion(val);
                                                                     }}
-                                                                    isSearchable={regions ? regions.length > 5 ? true : false : false}
+                                                                    isSearchable={regions ? regions.length > 5 : false}
                                                                     options={regions}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -2217,7 +2219,7 @@ function EditEmployee() {
                                                                             onChange={(val) => {
                                                                                 setSelectedCountry(val);
                                                                             }}
-                                                                            isSearchable={countries ? countries.length > 5 ? true : false : false}
+                                                                            isSearchable={countries ? countries.length > 5 : false}
                                                                             options={countries}
                                                                             getOptionLabel={(option) => (option.name)}
                                                                             getOptionValue={option => option.name}
@@ -2244,7 +2246,7 @@ function EditEmployee() {
                                                                             onChange={(val) => {
                                                                                 setSelectedCity(val);
                                                                             }}
-                                                                            isSearchable={cities ? cities.length > 5 ? true : false : false}
+                                                                            isSearchable={cities ? cities.length > 5 : false}
                                                                             options={cities}
                                                                             getOptionLabel={(option) => (option.name)}
                                                                             getOptionValue={option => option.name}
@@ -2271,7 +2273,7 @@ function EditEmployee() {
                                                                                 setSelectedRegion(val);
                                                                             }}
                                                                             isDisabled={true}
-                                                                            isSearchable={regions ? regions.length > 5 ? true : false : false}
+                                                                            isSearchable={regions ? regions.length > 5 : false}
                                                                             options={regions}
                                                                             getOptionLabel={(option) => (option.name)}
                                                                             getOptionValue={option => option.name}
@@ -2360,7 +2362,7 @@ function EditEmployee() {
                                                                             onChange={(val) => {
                                                                                 setSelectedRegCountry(val);
                                                                             }}
-                                                                            isSearchable={countries ? countries.length > 5 ? true : false : false}
+                                                                            isSearchable={countries ? countries.length > 5 : false}
                                                                             options={countries}
                                                                             getOptionLabel={(option) => (option.name)}
                                                                             getOptionValue={option => option.name}
@@ -2386,7 +2388,7 @@ function EditEmployee() {
                                                                             onChange={(val) => {
                                                                                 setSelectedRegCity(val);
                                                                             }}
-                                                                            isSearchable={cities ? cities.length > 5 ? true : false : false}
+                                                                            isSearchable={cities ? cities.length > 5 : false}
                                                                             options={cities}
                                                                             getOptionLabel={(option) => (option.name)}
                                                                             getOptionValue={option => option.name}
@@ -2412,7 +2414,7 @@ function EditEmployee() {
                                                                             onChange={(val) => {
                                                                                 setSelectedRegRegion(val);
                                                                             }}
-                                                                            isSearchable={regions ? regions.length > 5 ? true : false : false}
+                                                                            isSearchable={regions ? regions.length > 5 : false}
                                                                             options={regions}
                                                                             getOptionLabel={(option) => (option.name)}
                                                                             getOptionValue={option => option.name}
@@ -2679,9 +2681,10 @@ function EditEmployee() {
                                                                                                 educationArr[index].degree = val;
                                                                                                 setEducationArr([...educationArr], educationArr)
                                                                                             }}
-                                                                                            isSearchable={eduDegreeOptions ? eduDegreeOptions.length > 5 ? true : false : false}
+                                                                                            isSearchable={eduDegreeOptions ? eduDegreeOptions.length > 5 : false}
                                                                                             options={eduDegreeOptions}
                                                                                             getOptionLabel={(option) => (option.label)}
+                                                                                            getOptionValue={(option) => (option.label)}
                                                                                             styles={customStyles}
                                                                                         />
                                                                                     </Form.Group>
@@ -2696,7 +2699,7 @@ function EditEmployee() {
                                                                                                 educationArr[index].institutionId = val;
                                                                                                 setEducationArr([...educationArr], educationArr)
                                                                                             }}
-                                                                                            isSearchable={university ? university.length > 5 ? true : false : false}
+                                                                                            isSearchable={university ? university.length > 5 : false}
                                                                                             options={university}
                                                                                             getOptionLabel={(option) => (option.name)}
                                                                                             getOptionValue={option => option.name}
@@ -2987,7 +2990,7 @@ function EditEmployee() {
                                                                                                 educationArr[index].educationType = val;
                                                                                                 setEducationArr([...educationArr], educationArr)
                                                                                             }}
-                                                                                            isSearchable={educationTypeOptions ? educationTypeOptions.length > 5 ? true : false : false}
+                                                                                            isSearchable={educationTypeOptions ? educationTypeOptions.length > 5 : false}
                                                                                             options={educationTypeOptions}
                                                                                             getOptionLabel={(option) => (option.label)}
                                                                                             styles={customStyles}
@@ -3103,7 +3106,7 @@ function EditEmployee() {
                                                                                             certificateArr[index].certificateId = val;
                                                                                             setCertificateArr([...certificateArr], certificateArr)
                                                                                         }}
-                                                                                        isSearchable={certificate ? certificate.length > 5 ? true : false : false}
+                                                                                        isSearchable={certificate ? certificate.length > 5 : false}
                                                                                         options={certificate}
                                                                                         getOptionLabel={(option) => (option.name)}
                                                                                         getOptionValue={option => option.name}
@@ -3776,7 +3779,7 @@ function EditEmployee() {
                                                                                                         companyIntArr[index].businessStatus = val;
                                                                                                         setCompanyIntArr([...companyIntArr], companyIntArr)
                                                                                                     }}
-                                                                                                    isSearchable={businessOptions ? businessOptions.length > 5 ? true : false : false}
+                                                                                                    isSearchable={businessOptions ? businessOptions.length > 5 : false}
                                                                                                     options={businessOptions}
                                                                                                     getOptionLabel={(option) => (option.label)}
                                                                                                     getOptionValue={option => option.label}

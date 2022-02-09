@@ -160,9 +160,10 @@ function OperationSchedule() {
                                                                     let id = val.value;
                                                                     getOperation(1, id)
                                                                 }}
-                                                                isSearchable={statusOptions ? statusOptions.length > 5 ? true : false : false}
+                                                                isSearchable={statusOptions ? statusOptions.length > 5 : false}
                                                                 options={statusOptions}
                                                                 getOptionLabel={(option) => (option.label)}
+                                                                getOptionValue={(option) => (option.label)}
                                                                 styles={customStyles}
                                                             />
                                                         </Form.Group>

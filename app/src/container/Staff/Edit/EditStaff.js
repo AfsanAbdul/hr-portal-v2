@@ -75,6 +75,7 @@ function EditStaff() {
         {value: 'WORK_PLACE_3', label: 'Dübəndi terminalı'},
         {value: 'WORK_PLACE_4', label: 'Qaradağ anbarı'},
         {value: 'WORK_PLACE_5', label: 'Ələt'},
+        {value: 'WORK_PLACE_6', label: 'Astara'},
     ]
 
     /*check&visibility*/
@@ -722,7 +723,7 @@ function EditStaff() {
                                                                     onChange={(val) => {
                                                                         setSelectedInstitution(val);
                                                                     }}
-                                                                    isSearchable={institution ? institution.length > 5 ? true : false : false}
+                                                                    isSearchable={institution ? institution.length > 5  : false}
                                                                     options={institution}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -749,7 +750,7 @@ function EditStaff() {
                                                                         getSubDepartment(val.id);
                                                                         setSelectedSubDepartment(null)
                                                                     }}
-                                                                    isSearchable={department ? department.length > 5 ? true : false : false}
+                                                                    isSearchable={department ? department.length > 5  : false}
                                                                     options={department}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -774,7 +775,7 @@ function EditStaff() {
                                                                     onChange={(val) => {
                                                                         setSelectedSubDepartment(val);
                                                                     }}
-                                                                    isSearchable={subDepartment ? subDepartment.length > 5 ? true : false : false}
+                                                                    isSearchable={subDepartment ? subDepartment.length > 5 : false}
                                                                     options={subDepartment}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -803,7 +804,7 @@ function EditStaff() {
                                                                     onChange={(val) => {
                                                                         setSelectedVacancy(val);
                                                                     }}
-                                                                    isSearchable={vacancy ? vacancy.length > 5 ? true : false : false}
+                                                                    isSearchable={vacancy ? vacancy.length > 5  : false}
                                                                     options={vacancy}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.name)}
@@ -852,7 +853,7 @@ function EditStaff() {
                                                                         value !== 'HARMLESS' ? setCondition(true) : setCondition(false);
                                                                     }}
                                                                     options={workConditionOptions}
-                                                                    isSearchable={workConditionOptions ? workConditionOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={workConditionOptions ? workConditionOptions.length > 5  : false}
                                                                     styles={customStyles}
                                                                 />
                                                                 <div className="validation-block flex-start">
@@ -874,7 +875,7 @@ function EditStaff() {
                                                                     placeholder="İş rejimini seçin"
                                                                     value={selectedWorkMode}
                                                                     onChange={setSelectedWorkMode}
-                                                                    isSearchable={WorkModeOptions ? WorkModeOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={WorkModeOptions ? WorkModeOptions.length > 5 : false}
                                                                     options={WorkModeOptions}
                                                                     styles={customStyles}
                                                                 />
@@ -922,7 +923,7 @@ function EditStaff() {
                                                                     placeholder="Kateqoriyanı seçin"
                                                                     value={selectedVacancyCategory}
                                                                     onChange={setSelectedVacancyCategory}
-                                                                    isSearchable={vacancyCategoryOptions ? vacancyCategoryOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={vacancyCategoryOptions ? vacancyCategoryOptions.length > 5  : false}
                                                                     options={vacancyCategoryOptions}
                                                                     styles={customStyles}
                                                                 />
@@ -945,7 +946,7 @@ function EditStaff() {
                                                                     onChange={(val) => {
                                                                         setSelectedFamilyJob(val);
                                                                     }}
-                                                                    isSearchable={familyJob ? familyJob.length > 5 ? true : false : false}
+                                                                    isSearchable={familyJob ? familyJob.length > 5 : false}
                                                                     options={familyJob}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.name)}
@@ -961,7 +962,7 @@ function EditStaff() {
                                                                     value={selectedWorkAddress}
                                                                     onChange={setSelectedWorkAddress}
                                                                     options={workPlaceOptions}
-                                                                    isSearchable={workPlaceOptions ? workPlaceOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={workPlaceOptions ? workPlaceOptions.length > 5 : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.label)}
                                                                 />
@@ -983,7 +984,7 @@ function EditStaff() {
                                                                     value={selectedCurator}
                                                                     onChange={(val) => setSelectedCurator(val)}
                                                                     options={curator}
-                                                                    isSearchable={curator ? curator.length > 5 ? true : false : false}
+                                                                    isSearchable={curator ? curator.length > 5  : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.fullName)}
                                                                     getOptionValue={option => option.fullName}
@@ -998,7 +999,7 @@ function EditStaff() {
                                                                     value={selectedMinGrade}
                                                                     onChange={setSelectedMinGrade}
                                                                     options={grade}
-                                                                    isSearchable={grade ? grade.length > 5 ? true : false : false}
+                                                                    isSearchable={grade ? grade.length > 5 : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.grade)}
                                                                     getOptionValue={option => option.grade}
@@ -1021,7 +1022,7 @@ function EditStaff() {
                                                                     value={selectedMaxGrade}
                                                                     onChange={setSelectedMaxGrade}
                                                                     options={grade}
-                                                                    isSearchable={grade ? grade.length > 5 ? true : false : false}
+                                                                    isSearchable={grade ? grade.length > 5 : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.grade)}
                                                                     getOptionValue={option => option.grade}
@@ -1086,7 +1087,7 @@ function EditStaff() {
                                                                                                 setSkillLegalArr([...skillLegalArr], skillLegalArr);
                                                                                             }}
                                                                                             placeholder="Qanunvericilik aktlarını seçin"
-                                                                                            isSearchable={legislationSkill ? legislationSkill.length > 5 ? true : false : false}
+                                                                                            isSearchable={legislationSkill ? legislationSkill.length > 5  : false}
                                                                                             options={legislationSkill}
                                                                                             getOptionLabel={(option) => (option.name)}
                                                                                             getOptionValue={option => option.name}

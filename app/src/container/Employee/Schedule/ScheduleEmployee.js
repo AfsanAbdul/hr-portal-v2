@@ -184,9 +184,10 @@ function ScheduleEmployee() {
                                                             let name = fullName !== '' ? fullName : null
                                                             getEmployee(1, id, subDepartId, positionId, jobStatus, name)
                                                         }}
-                                                        isSearchable={department ? department.length > 5 ? true : false : false}
+                                                        isSearchable={department ? department.length > 5 : false}
                                                         options={department}
                                                         getOptionLabel={(option) => (option.name)}
+                                                        getOptionValue={(option) => (option.name)}
                                                         styles={customStyles}
                                                     />
                                                 </Form.Group>
@@ -207,9 +208,10 @@ function ScheduleEmployee() {
                                                             getEmployee(1, departId, id, positionId, jobStatus, name)
 
                                                         }}
-                                                        isSearchable={subDepartment ? subDepartment.length > 5 ? true : false : false}
+                                                        isSearchable={subDepartment ? subDepartment.length > 5  : false}
                                                         options={subDepartment}
                                                         getOptionLabel={(option) => (option.name)}
+                                                        getOptionValue={(option) => (option.name)}
                                                         styles={customStyles}
                                                     />
                                                 </Form.Group>
@@ -229,9 +231,10 @@ function ScheduleEmployee() {
                                                             let name = fullName !== '' ? fullName : null
                                                             getEmployee(1, departId, subDepartId, id, jobStatus, name)
                                                         }}
-                                                        isSearchable={position ? position.length > 5 ? true : false : false}
+                                                        isSearchable={position ? position.length > 5 : false}
                                                         options={position}
                                                         getOptionLabel={(option) => (option.name)}
+                                                        getOptionValue={(option) => (option.name)}
                                                         styles={customStyles}
                                                     />
                                                 </Form.Group>
@@ -251,9 +254,10 @@ function ScheduleEmployee() {
                                                             let name = fullName !== '' ? fullName : null
                                                             getEmployee(1, departId, subDepartId, positionId, id, name)
                                                         }}
-                                                        isSearchable={jobStatusOptions ? jobStatusOptions.length > 5 ? true : false : false}
+                                                        isSearchable={jobStatusOptions ? jobStatusOptions.length > 5 : false}
                                                         options={jobStatusOptions}
                                                         getOptionLabel={(option) => (option.label)}
+                                                        getOptionValue={(option) => (option.label)}
                                                         styles={customStyles}
                                                     />
                                                 </Form.Group>

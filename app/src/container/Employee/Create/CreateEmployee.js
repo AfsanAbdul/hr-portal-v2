@@ -882,9 +882,10 @@ function EmployeeCreate() {
                                                                             onChange={(val) => {
                                                                                 setSelectedSerial(val);
                                                                             }}
-                                                                            isSearchable={serialNumberOptions ? serialNumberOptions.length > 5 ? true : false : false}
+                                                                            isSearchable={serialNumberOptions ? serialNumberOptions.length > 5 : false}
                                                                             options={serialNumberOptions}
                                                                             getOptionLabel={(option) => (option.label)}
+                                                                            getOptionValue={(option) => (option.label)}
                                                                             styles={customGroupStyles}
                                                                         />
                                                                     </div>
@@ -930,9 +931,10 @@ function EmployeeCreate() {
                                                                     onChange={(val) => {
                                                                         setSelectedFamilyCondition(val);
                                                                     }}
-                                                                    isSearchable={familyConditionOptions ? familyConditionOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={familyConditionOptions ? familyConditionOptions.length > 5 : false}
                                                                     options={familyConditionOptions}
                                                                     getOptionLabel={(option) => (option.label)}
+                                                                    getOptionValue={(option) => (option.label)}
                                                                     styles={customStyles}
                                                                 />
                                                                 <div className="validation-block flex-start">
@@ -1198,9 +1200,10 @@ function EmployeeCreate() {
                                                                         val.name !== 'Azərbaycan' ? setShowPermission(true) : setShowPermission(false)
                                                                         setSelectedCitizenControl(val)
                                                                     }}
-                                                                    isSearchable={citizen ? citizen.length > 5 ? true : false : false}
+                                                                    isSearchable={citizen ? citizen.length > 5 : false}
                                                                     options={citizen}
                                                                     getOptionLabel={(option) => (option.name)}
+                                                                    getOptionValue={(option) => (option.name)}
                                                                     styles={customStyles}
                                                                 />
                                                                 <div className="validation-block flex-start">
@@ -1223,7 +1226,7 @@ function EmployeeCreate() {
                                                                         setSelectedGender(val);
                                                                         val.value === 'MALE' ? setShowMilitary(true) : setShowMilitary(false)
                                                                     }}
-                                                                    isSearchable={genderOptions ? genderOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={genderOptions ? genderOptions.length > 5: false}
                                                                     options={genderOptions}
                                                                     styles={customStyles}
                                                                 />
@@ -1245,7 +1248,7 @@ function EmployeeCreate() {
                                                                     value={selectedBloodType}
                                                                     onChange={setSelectedBloodType}
                                                                     options={bloodTypeOptions}
-                                                                    isSearchable={bloodTypeOptions ? bloodTypeOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={bloodTypeOptions ? bloodTypeOptions.length > 5  : false}
                                                                     styles={customStyles}
                                                                 />
                                                             </Form.Group>
@@ -1277,7 +1280,7 @@ function EmployeeCreate() {
                                                                             value={selectedMilitary}
                                                                             onChange={setSelectedMilitary}
                                                                             options={militaryOptions}
-                                                                            isSearchable={militaryOptions ? militaryOptions.length > 5 ? true : false : false}
+                                                                            isSearchable={militaryOptions ? militaryOptions.length > 5 : false}
                                                                             styles={customStyles}
                                                                         />
                                                                     </Form.Group>
@@ -1665,9 +1668,10 @@ function EmployeeCreate() {
                                                                     onChange={(val) => {
                                                                         setSelectedCountry(val);
                                                                     }}
-                                                                    isSearchable={countries ? countries.length > 5 ? true : false : false}
+                                                                    isSearchable={countries ? countries.length > 5 : false}
                                                                     options={countries}
                                                                     getOptionLabel={(option) => (option.name)}
+                                                                    getOptionValue={(option) => (option.name)}
                                                                     styles={customStyles}
                                                                 />
                                                             </Form.Group>
@@ -1681,9 +1685,10 @@ function EmployeeCreate() {
                                                                     onChange={(val) => {
                                                                         setSelectedCity(val);
                                                                     }}
-                                                                    isSearchable={cities ? cities.length > 5 ? true : false : false}
+                                                                    isSearchable={cities ? cities.length > 5  : false}
                                                                     options={cities}
                                                                     getOptionLabel={(option) => (option.name)}
+                                                                    getOptionValue={(option) => (option.name)}
                                                                     styles={customStyles}
                                                                 />
                                                             </Form.Group>
@@ -1697,9 +1702,10 @@ function EmployeeCreate() {
                                                                     onChange={(val) => {
                                                                         setSelectedRegion(val);
                                                                     }}
-                                                                    isSearchable={regions ? regions.length > 5 ? true : false : false}
+                                                                    isSearchable={regions ? regions.length > 5 : false}
                                                                     options={regions}
                                                                     getOptionLabel={(option) => (option.name)}
+                                                                    getOptionValue={(option) => (option.name)}
                                                                     styles={customStyles}
                                                                 />
                                                             </Form.Group>
@@ -1790,9 +1796,10 @@ function EmployeeCreate() {
                                                                             onChange={(val) => {
                                                                                 setSelectedCountry(val);
                                                                             }}
-                                                                            isSearchable={countries ? countries.length > 5 ? true : false : false}
+                                                                            isSearchable={countries ? countries.length > 5 : false}
                                                                             options={countries}
                                                                             getOptionLabel={(option) => (option.name)}
+                                                                            getOptionValue={(option) => (option.name)}
                                                                             styles={customStyles}
                                                                         />
                                                                     </Form.Group>
@@ -1807,9 +1814,10 @@ function EmployeeCreate() {
                                                                             onChange={(val) => {
                                                                                 setSelectedCity(val);
                                                                             }}
-                                                                            isSearchable={cities ? cities.length > 5 ? true : false : false}
+                                                                            isSearchable={cities ? cities.length > 5 : false}
                                                                             options={cities}
                                                                             getOptionLabel={(option) => (option.name)}
+                                                                            getOption={(option) => (option.name)}
                                                                             styles={customStyles}
                                                                         />
                                                                     </Form.Group>
@@ -1824,9 +1832,10 @@ function EmployeeCreate() {
                                                                                 setSelectedRegion(val);
                                                                             }}
                                                                             isDisabled={true}
-                                                                            isSearchable={regions ? regions.length > 5 ? true : false : false}
+                                                                            isSearchable={regions ? regions.length > 5 : false}
                                                                             options={regions}
                                                                             getOptionLabel={(option) => (option.name)}
+                                                                            getOptionValue={(option) => (option.name)}
                                                                             styles={customStyles}
                                                                         />
                                                                     </Form.Group>
@@ -1903,9 +1912,10 @@ function EmployeeCreate() {
                                                                             onChange={(val) => {
                                                                                 setSelectedRegCountry(val);
                                                                             }}
-                                                                            isSearchable={countries ? countries.length > 5 ? true : false : false}
+                                                                            isSearchable={countries ? countries.length > 5 : false}
                                                                             options={countries}
                                                                             getOptionLabel={(option) => (option.name)}
+                                                                            getOptionValue={(option) => (option.name)}
                                                                             styles={customStyles}
                                                                         />
                                                                         <div className="validation-block flex-start">
@@ -1928,9 +1938,10 @@ function EmployeeCreate() {
                                                                             onChange={(val) => {
                                                                                 setSelectedRegCity(val);
                                                                             }}
-                                                                            isSearchable={cities ? cities.length > 5 ? true : false : false}
+                                                                            isSearchable={cities ? cities.length > 5  : false}
                                                                             options={cities}
                                                                             getOptionLabel={(option) => (option.name)}
+                                                                            getOptionValue={(option) => (option.name)}
                                                                             styles={customStyles}
                                                                         />
                                                                         <div className="validation-block flex-start">
@@ -1953,9 +1964,10 @@ function EmployeeCreate() {
                                                                             onChange={(val) => {
                                                                                 setSelectedRegRegion(val);
                                                                             }}
-                                                                            isSearchable={regions ? regions.length > 5 ? true : false : false}
+                                                                            isSearchable={regions ? regions.length > 5  : false}
                                                                             options={regions}
                                                                             getOptionLabel={(option) => (option.name)}
+                                                                            getOptionValue={(option) => (option.name)}
                                                                             styles={customStyles}
                                                                         />
                                                                         <div className="validation-block flex-start">
@@ -2242,9 +2254,10 @@ function EmployeeCreate() {
                                                                                                 educationArr[index].degree = val.value;
                                                                                                 setEducationArr([...educationArr], educationArr)
                                                                                             }}
-                                                                                            isSearchable={eduDegreeOptions ? eduDegreeOptions.length > 5 ? true : false : false}
+                                                                                            isSearchable={eduDegreeOptions ? eduDegreeOptions.length > 5 : false}
                                                                                             options={eduDegreeOptions}
                                                                                             getOptionLabel={(option) => (option.label)}
+                                                                                            getOptionValue={(option) => (option.label)}
                                                                                             styles={customStyles}
                                                                                         />
                                                                                     </Form.Group>
@@ -2258,9 +2271,10 @@ function EmployeeCreate() {
                                                                                                 educationArr[index].institutionId = val.id;
                                                                                                 setEducationArr([...educationArr], educationArr)
                                                                                             }}
-                                                                                            isSearchable={university ? university.length > 5 ? true : false : false}
+                                                                                            isSearchable={university ? university.length > 5  : false}
                                                                                             options={university}
                                                                                             getOptionLabel={(option) => (option.name)}
+                                                                                            getOptionValue={(option) => (option.name)}
                                                                                             styles={customStyles}
                                                                                         />
                                                                                     </Form.Group>
@@ -2543,9 +2557,10 @@ function EmployeeCreate() {
                                                                                                 educationArr[index].educationType = val.value;
                                                                                                 setEducationArr([...educationArr], educationArr)
                                                                                             }}
-                                                                                            isSearchable={educationTypeOptions ? educationTypeOptions.length > 5 ? true : false : false}
+                                                                                            isSearchable={educationTypeOptions ? educationTypeOptions.length > 5 : false}
                                                                                             options={educationTypeOptions}
                                                                                             getOptionLabel={(option) => (option.label)}
+                                                                                            getOptionValue={(option) => (option.label)}
                                                                                             styles={customStyles}
                                                                                         />
                                                                                     </Form.Group>
@@ -2655,9 +2670,10 @@ function EmployeeCreate() {
                                                                                             certificateArr[index].certificateId = val.id;
                                                                                             setCertificateArr([...certificateArr], certificateArr)
                                                                                         }}
-                                                                                        isSearchable={certificate ? certificate.length > 5 ? true : false : false}
+                                                                                        isSearchable={certificate ? certificate.length > 5  : false}
                                                                                         options={certificate}
                                                                                         getOptionLabel={(option) => (option.name)}
+                                                                                        getOptionValue={(option) => (option.name)}
                                                                                         styles={customStyles}
                                                                                     />
                                                                                 </Form.Label>
@@ -2891,9 +2907,10 @@ function EmployeeCreate() {
                                                                                     onChange={(val) => {
                                                                                         setSelectedDriverLicence(val)
                                                                                     }}
-                                                                                    isSearchable={driverLicenceOptions ? driverLicenceOptions.length > 5 ? true : false : false}
+                                                                                    isSearchable={driverLicenceOptions ? driverLicenceOptions.length > 5 : false}
                                                                                     options={driverLicenceOptions}
                                                                                     getOptionLabel={(option) => (option.label)}
+                                                                                    getOptionValue={(option) => (option.label)}
                                                                                     styles={customStyles}
                                                                                 />
                                                                             </Form.Label>
@@ -3296,7 +3313,7 @@ function EmployeeCreate() {
                                                                                         companyArr[index].businessStatus = val;
                                                                                         setCompanyArr([...companyArr], companyArr)
                                                                                     }}
-                                                                                    isSearchable={businessOptions ? businessOptions.length > 5 ? true : false : false}
+                                                                                    isSearchable={businessOptions ? businessOptions.length > 5  : false}
                                                                                     options={businessOptions}
                                                                                     getOptionLabel={(option) => (option.label)}
                                                                                     getOptionValue={option => option.label}
@@ -3464,9 +3481,10 @@ function EmployeeCreate() {
                                                                                                 rewardArr[index].honoraryDecreeId = val.id;
                                                                                                 setRewardArr([...rewardArr], rewardArr)
                                                                                             }}
-                                                                                            isSearchable={reward ? reward.length > 5 ? true : false : false}
+                                                                                            isSearchable={reward ? reward.length > 5 : false}
                                                                                             options={reward}
                                                                                             getOptionLabel={(option) => (option.name)}
+                                                                                            getOptionValue={(option) => (option.name)}
                                                                                             styles={customStyles}
                                                                                         />
                                                                                     </Form.Label>
@@ -3492,9 +3510,10 @@ function EmployeeCreate() {
                                                                                                 rewardArr[index].organizationId = val.id;
                                                                                                 setRewardArr([...rewardArr], rewardArr)
                                                                                             }}
-                                                                                            isSearchable={rewardOrganization ? rewardOrganization.length > 5 ? true : false : false}
+                                                                                            isSearchable={rewardOrganization ? rewardOrganization.length > 5  : false}
                                                                                             options={rewardOrganization}
                                                                                             getOptionLabel={(option) => (option.name)}
+                                                                                            getOptionValue={(option) => (option.name)}
                                                                                             styles={customStyles}
                                                                                         />
                                                                                     </Form.Label>
@@ -3628,10 +3647,11 @@ function EmployeeCreate() {
                                                                             setSelectedQuota(val);
                                                                             setQuotaArr(val)
                                                                         }}
-                                                                        isSearchable={quota ? quota.length > 5 ? true : false : false}
+                                                                        isSearchable={quota ? quota.length > 5 : false}
                                                                         isMulti
                                                                         options={quota}
                                                                         getOptionLabel={(option) => (option.label)}
+                                                                        getOptionValue={(option) => (option.label)}
                                                                         styles={customStyles}
                                                                     />
                                                                 </Form.Label>
@@ -3690,9 +3710,10 @@ function EmployeeCreate() {
                                                                                             familyMemberArr[index].relationType = val.value;
                                                                                             setFamilyMemberArr([...familyMemberArr], familyMemberArr)
                                                                                         }}
-                                                                                        isSearchable={relationTypeOptions ? relationTypeOptions.length > 5 ? true : false : false}
+                                                                                        isSearchable={relationTypeOptions ? relationTypeOptions.length > 5 : false}
                                                                                         options={relationTypeOptions}
                                                                                         getOptionLabel={(option) => (option.label)}
+                                                                                        getOptionValue={(option) => (option.label)}
                                                                                         styles={customStyles}
                                                                                     />
                                                                                 </Form.Label>

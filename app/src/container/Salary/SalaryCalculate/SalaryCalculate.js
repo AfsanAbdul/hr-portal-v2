@@ -304,9 +304,10 @@ function SalaryCalculate() {
                                                         let name = fullName !== '' ? fullName : null
                                                         getSalary(1, month, year, id, subDepartId, name)
                                                     }}
-                                                    isSearchable={department ? department.length > 5 ? true : false : false}
+                                                    isSearchable={department ? department.length > 5  : false}
                                                     options={department}
                                                     getOptionLabel={(option) => (option.name)}
+                                                    getOptionValue={(option) => (option.name)}
                                                     styles={customStyles}
                                                 />
                                             </Form.Group>
@@ -325,9 +326,10 @@ function SalaryCalculate() {
                                                         getSalary(1, month, year, departId, id, name)
 
                                                     }}
-                                                    isSearchable={subDepartment ? subDepartment.length > 5 ? true : false : false}
+                                                    isSearchable={subDepartment ? subDepartment.length > 5  : false}
                                                     options={subDepartment}
                                                     getOptionLabel={(option) => (option.name)}
+                                                    getOptionValue={(option) => (option.name)}
                                                     styles={customStyles}
                                                 />
                                             </Form.Group>
@@ -395,7 +397,6 @@ function SalaryCalculate() {
                                             options={monthOptions}
                                             styles={customStyles}
                                             isSearchable={false}
-
                                         />
                                     </Form.Group>
 

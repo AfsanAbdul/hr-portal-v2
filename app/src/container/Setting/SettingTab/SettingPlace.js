@@ -308,7 +308,7 @@ function SettingPlace() {
                                     setTab(val.value)
                                 }}
                                 options={categoryOptions}
-                                isSearchable={categoryOptions ? categoryOptions.length > 5 ? true : false : false}
+                                isSearchable={categoryOptions ? categoryOptions.length > 5  : false}
                                 styles={customStyles}
                                 getOptionLabel={(option) => (option.label)}
                                 getOptionValue={(option) => (option.label)}
@@ -554,7 +554,7 @@ function SettingPlace() {
                                                             value={selectedCityType}
                                                             onChange={(val) => setSelectedCityType(val)}
                                                             options={cityTypeOptions}
-                                                            isSearchable={cityTypeOptions ? cityTypeOptions.length > 5 ? true : false : false}
+                                                            isSearchable={cityTypeOptions ? cityTypeOptions.length > 5  : false}
                                                             styles={customStyles}
                                                             getOptionLabel={(option) => (option.label)}
                                                             getOptionValue={(option) => (option.label)}

@@ -761,7 +761,7 @@ function SettingEducation() {
                                         setCheckClick(false)
                                     }}
                                     options={categoryOptions}
-                                    isSearchable={categoryOptions ? categoryOptions.length > 5 ? true : false : false}
+                                    isSearchable={categoryOptions ? categoryOptions.length > 5  : false}
                                     styles={customStyles}
                                     getOptionLabel={(option) => (option.label)}
                                     getOptionValue={(option) => (option.label)}
