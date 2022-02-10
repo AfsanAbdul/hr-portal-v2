@@ -163,6 +163,15 @@ button:focus {
     width: 100%;
 }
 
+.react-datepicker__input-container:after {
+    content: url("../img/calendar.svg");
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 0;
+}
+
 .form-control:disabled, .form-control[readonly], .react-datepicker-wrapper input[type="text"]:disabled {
     background-color: rgba(233, 236, 239, .66);
     opacity: 1;

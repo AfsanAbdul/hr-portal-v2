@@ -6,14 +6,7 @@ import Paginate from "../../../../components/Pagination/Pagination";
 import EmptyData from "../../../../components/EmptyData/EmptyData";
 import Swal from "sweetalert2";
 import Loading from "../../../../components/Loading/Loading";
-
-const statuses = {
-    'Təsdiq gözləyir': 'pending',
-    'Təsdiqlənib': 'confirmed',
-    'Ləğv edildi': 'cancelled',
-    'Hesablandı': 'done'
-};
-
+import {statuses} from "../../../../components/Select/SelectOptions";
 
 function ScheduleOvertime() {
     const [totalRecord, setTotalRecord] = useState('');

@@ -11,20 +11,7 @@ import {customStyles} from "../../../../components/Select/SelectStyle";
 import ScheduleSickness from "../ScheduleSickness/ScheduleSickness";
 import ScheduleOvertime from "../ScheduleOvertime/ScheduleOvertime";
 import Loading from "../../../../components/Loading/Loading";
-
-const statuses = {
-    'Təsdiq gözləyir': 'pending',
-    'Təsdiqlənib': 'confirmed',
-    'Ləğv edildi': 'cancelled',
-    'Hesablandı': 'done'
-};
-
-const statusOptions = [
-    {value: 'PENDING', label: "Təsdiq gözləyir"},
-    {value: 'APPROVED', label: "Təsdiqlənib"},
-    {value: 'DONE', label: "Hesablandı"},
-    {value: 'REJECTED', label: "Ləğv edildi"},
-];
+import {statusOptions, statuses} from "../../../../components/Select/SelectOptions";
 
 function OperationSchedule() {
     let location = useLocation();

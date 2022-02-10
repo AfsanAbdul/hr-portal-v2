@@ -7,16 +7,20 @@ import {mainAxios} from "../../../components/Axios/axios";
 import {uid} from "react-uid";
 import Paginate from "../../../components/Pagination/Pagination";
 import {customStyles} from "../../../components/Select/SelectStyle";
+import {
+    genderOptions,
+    evaluationOptions,
+    educationDegreeOptions,
+    options,
+    workConditionOptions,
+    workModeOptions,
+    vacancyCategoryOptions,
+    workPlaceOptions,
+    statuses
+} from "../../../components/Select/SelectOptions";
 import Swal from "sweetalert2";
 import EmptyData from "../../../components/EmptyData/EmptyData";
 import Loading from "../../../components/Loading/Loading";
-
-const statuses = {
-    'Təsdiq gözləyir': 'pending',
-    'Təsdiqlənib': 'confirmed',
-    'Ləğv edildi': 'cancelled',
-    'Hesablandı': 'done'
-};
 
 function EditStaff() {
     let params = useParams();
@@ -24,59 +28,6 @@ function EditStaff() {
     let id = params.id;
     let activeKey = location.state !== undefined ? location.state.key : undefined;
     const [emptyData, setEmptyData] = useState(false);
-
-
-    const evaluationOptions = [
-        {value: 'BEST', label: 'Əla'},
-        {value: 'MIDDLE', label: 'Orta'},
-        {value: 'GOOD', label: 'Yaxşı'}
-    ];
-
-    const genderOptions = [
-        {value: 'MALE', label: "Kişi"},
-        {value: 'FEMALE', label: "Qadın"},
-        {value: 'NON', label: "Tələb yoxdur"},
-    ]
-
-    const educationDegreeOptions = [
-        {value: 'MIDDLE', label: "Orta təhsil"},
-        {value: 'MIDDLE_SPECIAL', label: "Orta ixtisas təhsili"},
-        {value: 'PROFESSION', label: "Peşə təhsili"},
-        {value: 'BACHELOR', label: "Bakalavr təhsili"},
-        {value: 'MASTER', label: "Magistratura təhsili"},
-        {value: 'DOCTORAL', label: "Doktorantura təhsili"},
-    ]
-
-    const options = [
-        {value: 1, label: 'Bəli'},
-        {value: 0, label: 'Xeyr'}
-    ];
-
-    const workConditionOptions = [
-        {value: 'HARMFUL', label: 'Zərərli'},
-        {value: 'HARMLESS', label: 'Zərərsiz'}
-    ];
-
-    const WorkModeOptions = [
-        {value: 'DAILY', label: 'Gündəlik'},
-        {value: 'ALTERNATELY', label: 'Növbəli'},
-    ]
-
-    const vacancyCategoryOptions = [
-        {value: 'LEADER', label: 'Rəhbər'},
-        {value: 'ENGINEER', label: 'Mütəxəssis'},
-        {value: 'TECHNICAL_EXECUTOR', label: 'Texniki icraçı'},
-        {value: 'WORKER', label: 'Fəhlə'},
-    ]
-
-    const workPlaceOptions = [
-        {value: 'WORK_PLACE_1', label: 'Bakı inzibati bina'},
-        {value: 'WORK_PLACE_2', label: 'Dəniz vağzalı'},
-        {value: 'WORK_PLACE_3', label: 'Dübəndi terminalı'},
-        {value: 'WORK_PLACE_4', label: 'Qaradağ anbarı'},
-        {value: 'WORK_PLACE_5', label: 'Ələt'},
-        {value: 'WORK_PLACE_6', label: 'Astara'},
-    ]
 
     /*check&visibility*/
     const [key, setKey] = useState(activeKey !== '' ? activeKey : 'general');
@@ -346,7 +297,7 @@ function EditStaff() {
                     }
                 }
 
-                for (let i of WorkModeOptions) {
+                for (let i of workModeOptions) {
                     if (i.label === data.workMode) {
                         setSelectedWorkMode(i)
                     }
@@ -723,7 +674,7 @@ function EditStaff() {
                                                                     onChange={(val) => {
                                                                         setSelectedInstitution(val);
                                                                     }}
-                                                                    isSearchable={institution ? institution.length > 5  : false}
+                                                                    isSearchable={institution ? institution.length > 5 : false}
                                                                     options={institution}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -741,7 +692,8 @@ function EditStaff() {
                                                         </Col>
                                                         <Col xs={4}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">Struktur vahidinin adı *</span>
+                                                                <span
+                                                                    className="input-title">Struktur vahidinin adı *</span>
                                                                 <Select
                                                                     placeholder="Struktur vahidinin adını seçin"
                                                                     value={selectedDepartment}
@@ -750,7 +702,7 @@ function EditStaff() {
                                                                         getSubDepartment(val.id);
                                                                         setSelectedSubDepartment(null)
                                                                     }}
-                                                                    isSearchable={department ? department.length > 5  : false}
+                                                                    isSearchable={department ? department.length > 5 : false}
                                                                     options={department}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -768,7 +720,8 @@ function EditStaff() {
                                                         </Col>
                                                         <Col xs={4}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">Struktur bölmənin adı</span>
+                                                                <span
+                                                                    className="input-title">Struktur bölmənin adı</span>
                                                                 <Select
                                                                     placeholder="Struktur bölmənin adını seçin"
                                                                     value={selectedSubDepartment}
@@ -797,14 +750,15 @@ function EditStaff() {
                                                         </Col>
                                                         <Col xs={4}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">Ştat vahidinin adı *</span>
+                                                                <span
+                                                                    className="input-title">Ştat vahidinin adı *</span>
                                                                 <Select
                                                                     placeholder="Ştat vahidin adını seçin"
                                                                     value={selectedVacancy}
                                                                     onChange={(val) => {
                                                                         setSelectedVacancy(val);
                                                                     }}
-                                                                    isSearchable={vacancy ? vacancy.length > 5  : false}
+                                                                    isSearchable={vacancy ? vacancy.length > 5 : false}
                                                                     options={vacancy}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.name)}
@@ -822,7 +776,8 @@ function EditStaff() {
                                                         </Col>
                                                         <Col xs={4}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">Ştat vahidinin sayı *</span>
+                                                                <span
+                                                                    className="input-title">Ştat vahidinin sayı *</span>
                                                                 <Form.Label>
                                                                     <Form.Control type="number"
                                                                                   value={vacancyCount || ''}
@@ -853,7 +808,7 @@ function EditStaff() {
                                                                         value !== 'HARMLESS' ? setCondition(true) : setCondition(false);
                                                                     }}
                                                                     options={workConditionOptions}
-                                                                    isSearchable={workConditionOptions ? workConditionOptions.length > 5  : false}
+                                                                    isSearchable={workConditionOptions ? workConditionOptions.length > 5 : false}
                                                                     styles={customStyles}
                                                                 />
                                                                 <div className="validation-block flex-start">
@@ -875,8 +830,8 @@ function EditStaff() {
                                                                     placeholder="İş rejimini seçin"
                                                                     value={selectedWorkMode}
                                                                     onChange={setSelectedWorkMode}
-                                                                    isSearchable={WorkModeOptions ? WorkModeOptions.length > 5 : false}
-                                                                    options={WorkModeOptions}
+                                                                    isSearchable={workModeOptions ? workModeOptions.length > 5 : false}
+                                                                    options={workModeOptions}
                                                                     styles={customStyles}
                                                                 />
                                                                 <div className="validation-block flex-start">
@@ -894,7 +849,7 @@ function EditStaff() {
                                                                 <>
                                                                     <Col xs={6}>
                                                                         <Form.Group className="form-group">
-                                                                <span className="input-title">Əmək şəraiti dərəcəsi</span>
+                                                                            <span className="input-title">Əmək şəraiti dərəcəsi</span>
                                                                             <Form.Control
                                                                                 value={workConditionPer || ''}
                                                                                 type="number"
@@ -904,7 +859,7 @@ function EditStaff() {
                                                                     </Col>
                                                                     <Col xs={6}>
                                                                         <Form.Group className="form-group">
-                                                                <span className="input-title">Əmək şəraitinə görə məzuniyyət</span>
+                                                                            <span className="input-title">Əmək şəraitinə görə məzuniyyət</span>
                                                                             <Form.Control
                                                                                 value={workConditionVac || ''}
                                                                                 type="number"
@@ -923,7 +878,7 @@ function EditStaff() {
                                                                     placeholder="Kateqoriyanı seçin"
                                                                     value={selectedVacancyCategory}
                                                                     onChange={setSelectedVacancyCategory}
-                                                                    isSearchable={vacancyCategoryOptions ? vacancyCategoryOptions.length > 5  : false}
+                                                                    isSearchable={vacancyCategoryOptions ? vacancyCategoryOptions.length > 5 : false}
                                                                     options={vacancyCategoryOptions}
                                                                     styles={customStyles}
                                                                 />
@@ -956,7 +911,8 @@ function EditStaff() {
                                                         </Col>
                                                         <Col xs={6}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">İş yerinin ünvanı * </span>
+                                                                <span
+                                                                    className="input-title">İş yerinin ünvanı * </span>
                                                                 <Select
                                                                     placeholder="İş yerinin ünvanını seçin"
                                                                     value={selectedWorkAddress}
@@ -984,7 +940,7 @@ function EditStaff() {
                                                                     value={selectedCurator}
                                                                     onChange={(val) => setSelectedCurator(val)}
                                                                     options={curator}
-                                                                    isSearchable={curator ? curator.length > 5  : false}
+                                                                    isSearchable={curator ? curator.length > 5 : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.fullName)}
                                                                     getOptionValue={option => option.fullName}
@@ -1060,7 +1016,8 @@ function EditStaff() {
                                                                                                 setSkillLegalArr([...skillLegalArr], skillLegalArr)
                                                                                             }}>
                                                                                             <svg width="14" height="14"
-                                                                                                 viewBox="0 0 14 14" fill="none"
+                                                                                                 viewBox="0 0 14 14"
+                                                                                                 fill="none"
                                                                                                  xmlns="http://www.w3.org/2000/svg">
                                                                                                 <path
                                                                                                     d="M11.1665 2.69336L10.2739 12.8645H3.7302L2.8378 2.69336L1.70703 2.79248L2.61572 13.1481C2.66354 13.6254 3.07769 13.9997 3.5588 13.9997H10.4453C10.9262 13.9997 11.3405 13.6256 11.3892 13.1413L12.2973 2.79248L11.1665 2.69336Z"
@@ -1087,7 +1044,7 @@ function EditStaff() {
                                                                                                 setSkillLegalArr([...skillLegalArr], skillLegalArr);
                                                                                             }}
                                                                                             placeholder="Qanunvericilik aktlarını seçin"
-                                                                                            isSearchable={legislationSkill ? legislationSkill.length > 5  : false}
+                                                                                            isSearchable={legislationSkill ? legislationSkill.length > 5 : false}
                                                                                             options={legislationSkill}
                                                                                             getOptionLabel={(option) => (option.name)}
                                                                                             getOptionValue={option => option.name}
@@ -1114,7 +1071,7 @@ function EditStaff() {
                                                                                                 setSkillLegalArr([...skillLegalArr], skillLegalArr);
                                                                                             }}
                                                                                             placeholder="Bilik səviyyəsini seçin"
-                                                                                            isSearchable={evaluationOptions ? evaluationOptions.length > 5 ? true : false : false}
+                                                                                            isSearchable={evaluationOptions ? evaluationOptions.length > 5 : false}
                                                                                             options={evaluationOptions}
                                                                                             styles={customStyles}
                                                                                         />
@@ -1126,9 +1083,11 @@ function EditStaff() {
                                                                 }
                                                             </div>
                                                             <div className="flex-end">
-                                                                <Button className="btn-main-text" onClick={() => addLegalSkill()}
+                                                                <Button className="btn-main-text"
+                                                                        onClick={() => addLegalSkill()}
                                                                         type="button">
-                                                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                                    <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                         fill="none"
                                                                          xmlns="http://www.w3.org/2000/svg">
                                                                         <path
                                                                             d="M0.667969 6.00033H11.3346M6.0013 0.666992V11.3337V0.666992Z"
@@ -1149,7 +1108,8 @@ function EditStaff() {
                                                     <Row>
                                                         <Col xs={6}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">Rəhbər üzrə staj tələbi</span>
+                                                                <span
+                                                                    className="input-title">Rəhbər üzrə staj tələbi</span>
                                                                 <Form.Label>
                                                                     <Form.Control type="number"
                                                                                   value={leaderExperience || ''}
@@ -1160,7 +1120,8 @@ function EditStaff() {
                                                         </Col>
                                                         <Col xs={6}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">Sahə üzrə staj tələbi</span>
+                                                                <span
+                                                                    className="input-title">Sahə üzrə staj tələbi</span>
                                                                 <Form.Label>
                                                                     <Form.Control type="number"
                                                                                   value={areaExperience || ''}
@@ -1176,7 +1137,7 @@ function EditStaff() {
                                                                     placeholder="Təhsil pilləsini seçin"
                                                                     value={selectedEducationDegree}
                                                                     onChange={setSelectedEducationDegree}
-                                                                    isSearchable={educationDegreeOptions ? educationDegreeOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={educationDegreeOptions ? educationDegreeOptions.length > 5 : false}
                                                                     options={educationDegreeOptions}
                                                                     styles={customStyles}
                                                                 />
@@ -1190,7 +1151,7 @@ function EditStaff() {
                                                                     placeholder="Təhsil pilləsini seçin"
                                                                     value={selectedSpeciality}
                                                                     onChange={(val) => setSelectedSpeciality(val)}
-                                                                    isSearchable={speciality ? speciality.length > 5 ? true : false : false}
+                                                                    isSearchable={speciality ? speciality.length > 5 : false}
                                                                     options={speciality}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -1205,7 +1166,7 @@ function EditStaff() {
                                                                     placeholder="Sertifikat tələbini seçin"
                                                                     value={selectedRequiredFile}
                                                                     onChange={setSelectedRequiredFile}
-                                                                    isSearchable={options ? options.length > 5 ? true : false : false}
+                                                                    isSearchable={options ? options.length > 5 : false}
                                                                     options={options}
                                                                     styles={customStyles}
                                                                 />
@@ -1221,7 +1182,7 @@ function EditStaff() {
                                                                         setSelectedOption(val)
                                                                     }}
                                                                     placeholder="Boy tələbini seçin"
-                                                                    isSearchable={options ? options.length > 5 ? true : false : false}
+                                                                    isSearchable={options ? options.length > 5 : false}
                                                                     options={options}
                                                                     styles={customStyles}
                                                                 />
@@ -1235,7 +1196,7 @@ function EditStaff() {
                                                                     placeholder="Hərbi mükəlləfiyyət tələbini seçin"
                                                                     value={selectedMilitaryAchieve}
                                                                     onChange={setSelectedMilitaryAchieve}
-                                                                    isSearchable={options ? options.length > 5 ? true : false : false}
+                                                                    isSearchable={options ? options.length > 5 : false}
                                                                     options={options}
                                                                     styles={customStyles}
                                                                 />
@@ -1263,7 +1224,7 @@ function EditStaff() {
                                                                     placeholder="Sağlamlıq tələbini seçin"
                                                                     value={selectedHealth}
                                                                     onChange={setSelectedHealth}
-                                                                    isSearchable={options ? options.length > 5 ? true : false : false}
+                                                                    isSearchable={options ? options.length > 5 : false}
                                                                     options={options}
                                                                     styles={customStyles}
                                                                 />
@@ -1276,7 +1237,7 @@ function EditStaff() {
                                                                     placeholder="Cinsiyyət tələbini seçin"
                                                                     value={selectedGender}
                                                                     onChange={setSelectedGender}
-                                                                    isSearchable={genderOptions ? genderOptions.length > 5 ? true : false : false}
+                                                                    isSearchable={genderOptions ? genderOptions.length > 5 : false}
                                                                     options={genderOptions}
                                                                     styles={customStyles}
                                                                 />
@@ -1286,11 +1247,13 @@ function EditStaff() {
                                                     <div className="addition-content">
                                                         {
                                                             positionFunctionArr.map((item, index) =>
-                                                                <div key={index} className={index === 0 ? '' : 'add-item'}>
+                                                                <div key={index}
+                                                                     className={index === 0 ? '' : 'add-item'}>
                                                                     {
                                                                         index === 0 ? null :
                                                                             <div className="add-item-top">
-                                                                                <p className="m-0"> #{index + 1}. Digər </p>
+                                                                                <p className="m-0"> #{index + 1}.
+                                                                                    Digər </p>
                                                                                 <Button
                                                                                     className="btn-remove flex-center"
                                                                                     onClick={() => {
@@ -1338,11 +1301,13 @@ function EditStaff() {
                                                             <Button className="btn-main-text"
                                                                     type="button"
                                                                     onClick={() => addPositionFunction()}>
-                                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                                <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none"
                                                                      xmlns="http://www.w3.org/2000/svg">
                                                                     <path
                                                                         d="M0.667969 6.00033H11.3346M6.0013 0.666992V11.3337V0.666992Z"
-                                                                        stroke="#3083DC" strokeWidth="1.3" strokeLinecap="round"
+                                                                        stroke="#3083DC" strokeWidth="1.3"
+                                                                        strokeLinecap="round"
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
@@ -1375,7 +1340,8 @@ function EditStaff() {
                                                                     {
                                                                         index === 0 ? null :
                                                                             <div className="add-item-top">
-                                                                                <p className="m-0"> #{index + 1}. Digər </p>
+                                                                                <p className="m-0"> #{index + 1}.
+                                                                                    Digər </p>
                                                                                 <Button
                                                                                     className="btn-remove flex-center"
                                                                                     onClick={() => {
@@ -1411,7 +1377,7 @@ function EditStaff() {
                                                                                         skillProgramArr[index].computerId = val;
                                                                                         setSkillProgramArr([...skillProgramArr], skillProgramArr);
                                                                                     }}
-                                                                                    isSearchable={computerSkill ? computerSkill.length > 5 ? true : false : false}
+                                                                                    isSearchable={computerSkill ? computerSkill.length > 5 : false}
                                                                                     options={computerSkill}
                                                                                     getOptionLabel={(option) => (option.name)}
                                                                                     styles={customStyles}/>
@@ -1436,7 +1402,7 @@ function EditStaff() {
                                                                                         setSkillProgramArr([...skillProgramArr], skillProgramArr);
                                                                                     }}
                                                                                     placeholder="Bilik səviyyəsini seçin"
-                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 ? true : false : false}
+                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 : false}
                                                                                     options={evaluationOptions}
                                                                                     styles={customStyles}
                                                                                 />
@@ -1448,13 +1414,15 @@ function EditStaff() {
                                                         }
                                                     </div>
                                                     <div className="flex-end">
-                                                        <Button className="btn-main-text" onClick={() => addProgramSkill()}
+                                                        <Button className="btn-main-text"
+                                                                onClick={() => addProgramSkill()}
                                                                 type="button">
                                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                  xmlns="http://www.w3.org/2000/svg">
                                                                 <path
                                                                     d="M0.667969 6.00033H11.3346M6.0013 0.666992V11.3337V0.666992Z"
-                                                                    stroke="#3083DC" strokeWidth="1.3" strokeLinecap="round"
+                                                                    stroke="#3083DC" strokeWidth="1.3"
+                                                                    strokeLinecap="round"
                                                                     strokeLinejoin="round"/>
                                                             </svg>
                                                             <span>əlavə et</span>
@@ -1475,7 +1443,8 @@ function EditStaff() {
                                                                     {
                                                                         index === 0 ? null :
                                                                             <div className="add-item-top">
-                                                                                <p className="m-0"> #{index + 1}. Digər </p>
+                                                                                <p className="m-0"> #{index + 1}.
+                                                                                    Digər </p>
                                                                                 <Button
                                                                                     className="btn-remove flex-center"
                                                                                     onClick={() => {
@@ -1511,7 +1480,7 @@ function EditStaff() {
                                                                                         skillLanguageArr[index].languageId = val;
                                                                                         setSkillLanguageArr([...skillLanguageArr], skillLanguageArr);
                                                                                     }}
-                                                                                    isSearchable={languageSkill ? languageSkill.length > 5 ? true : false : false}
+                                                                                    isSearchable={languageSkill ? languageSkill.length > 5 : false}
                                                                                     options={languageSkill}
                                                                                     getOptionLabel={(option) => (option.name)}
                                                                                     getOptionValue={option => option.name}
@@ -1537,7 +1506,7 @@ function EditStaff() {
                                                                                         setSkillLanguageArr([...skillLanguageArr], skillLanguageArr);
                                                                                     }}
                                                                                     placeholder="Bilik səviyyəsini seçin"
-                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 ? true : false : false}
+                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 : false}
                                                                                     options={evaluationOptions}
                                                                                     styles={customStyles}
                                                                                 />
@@ -1549,13 +1518,15 @@ function EditStaff() {
                                                         }
                                                     </div>
                                                     <div className="flex-end">
-                                                        <Button className="btn-main-text" onClick={() => addLanguageSkill()}
+                                                        <Button className="btn-main-text"
+                                                                onClick={() => addLanguageSkill()}
                                                                 type="button">
                                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                  xmlns="http://www.w3.org/2000/svg">
                                                                 <path
                                                                     d="M0.667969 6.00033H11.3346M6.0013 0.666992V11.3337V0.666992Z"
-                                                                    stroke="#3083DC" strokeWidth="1.3" strokeLinecap="round"
+                                                                    stroke="#3083DC" strokeWidth="1.3"
+                                                                    strokeLinecap="round"
                                                                     strokeLinejoin="round"/>
                                                             </svg>
                                                             <span>əlavə et</span>
@@ -1576,7 +1547,8 @@ function EditStaff() {
                                                                     {
                                                                         index === 0 ? null :
                                                                             <div className="add-item-top">
-                                                                                <p className="m-0"> #{index + 1}. Digər </p>
+                                                                                <p className="m-0"> #{index + 1}.
+                                                                                    Digər </p>
                                                                                 <Button
                                                                                     className="btn-remove flex-center"
                                                                                     onClick={() => {
@@ -1612,7 +1584,7 @@ function EditStaff() {
                                                                                         skillArr[index].requiredSkillId = val;
                                                                                         setSkillArr([...skillArr], skillArr);
                                                                                     }}
-                                                                                    isSearchable={skill ? skill.length > 5 ? true : false : false}
+                                                                                    isSearchable={skill ? skill.length > 5 : false}
                                                                                     options={skill}
                                                                                     styles={customStyles}
                                                                                     getOptionLabel={(option) => (option.name)}
@@ -1637,7 +1609,7 @@ function EditStaff() {
                                                                                         skillArr[index].level = val;
                                                                                         setSkillArr([...skillArr], skillArr);
                                                                                     }}
-                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 ? true : false : false}
+                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 : false}
                                                                                     placeholder="Səviyyəni seçin"
                                                                                     options={evaluationOptions}
                                                                                     styles={customStyles}
@@ -1651,11 +1623,13 @@ function EditStaff() {
                                                         <div className="flex-end">
                                                             <Button type="button" className="btn-main-text"
                                                                     onClick={() => addSkill()}>
-                                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                                <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none"
                                                                      xmlns="http://www.w3.org/2000/svg">
                                                                     <path
                                                                         d="M0.667969 6.00033H11.3346M6.0013 0.666992V11.3337V0.666992Z"
-                                                                        stroke="#3083DC" strokeWidth="1.3" strokeLinecap="round"
+                                                                        stroke="#3083DC" strokeWidth="1.3"
+                                                                        strokeLinecap="round"
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
@@ -1665,7 +1639,8 @@ function EditStaff() {
                                                 </div>
                                             </div>
                                             <div className="flex-vertical-center btn-block">
-                                                <Button className="btn-effect w-200" onClick={() => sendDataKnowledge()}>
+                                                <Button className="btn-effect w-200"
+                                                        onClick={() => sendDataKnowledge()}>
                                                     Yadda saxla
                                                 </Button>
                                             </div>
@@ -1687,84 +1662,96 @@ function EditStaff() {
                                             {
                                                 operation.length > 0 ?
                                                     operation.map((item, index) =>
-                                                            <tr key={index}>
-                                                                <td>{item.id}</td>
-                                                                <td>
-                                                                    {
-                                                                        item.type.length > 30 ?
-                                                                            <OverlayTrigger placement="top-start" overlay={<Tooltip
-                                                                                id="tooltip-disabled">{item.type}</Tooltip>}>
-                                                                                <p className="m-0 operation-name">{item.type}</p>
-                                                                            </OverlayTrigger>
-                                                                            :
+                                                        <tr key={index}>
+                                                            <td>{item.id}</td>
+                                                            <td>
+                                                                {
+                                                                    item.type.length > 30 ?
+                                                                        <OverlayTrigger placement="top-start"
+                                                                                        overlay={<Tooltip
+                                                                                            id="tooltip-disabled">{item.type}</Tooltip>}>
                                                                             <p className="m-0 operation-name">{item.type}</p>
-                                                                    }
-                                                                </td>
-                                                                <td>{item.createdAt}</td>
-                                                                <td>
-                                                                    <div className="flex">
-                                                 <span className={statuses[item.statusAz]}>
-                                                     {item.statusAz}
-                                                 </span>
-                                                                        <ul className="btn-block list-unstyled flex m-0">
-                                                                            <li>
-                                                                                <Button className="btn-export"
-                                                                                        onClick={() => getExportDocument(item.id, item.type)}>
-                                                                                    <svg width="20" height="20" viewBox="0 0 22 22"
-                                                                                         fill="none"
-                                                                                         xmlns="http://www.w3.org/2000/svg">
-                                                                                        <path
-                                                                                            d="M17.1875 19.25H4.81247C4.63013 19.25 4.45527 19.1776 4.32635 19.0486C4.19742 18.9197 4.125 18.7448 4.125 18.5625V3.4375C4.125 3.25517 4.19742 3.0803 4.32635 2.95137C4.45527 2.82244 4.63013 2.75 4.81247 2.75H13.0627L17.875 7.5625V18.5625C17.875 18.7448 17.8026 18.9197 17.6737 19.0486C17.5447 19.1776 17.3699 19.25 17.1875 19.25V19.25Z"
-                                                                                            stroke="#040647" strokeLinecap="round"
-                                                                                            strokeLinejoin="round"/>
-                                                                                        <path d="M13.0625 2.75V7.5625H17.8757"
-                                                                                              stroke="#040647"
-                                                                                              strokeLinecap="round" strokeLinejoin="round"/>
-                                                                                        <path d="M8.25 11.6875H13.75" stroke="#040647"
-                                                                                              strokeLinecap="round" strokeLinejoin="round"/>
-                                                                                        <path d="M8.25 14.4375H13.75" stroke="#040647"
-                                                                                              strokeLinecap="round" strokeLinejoin="round"/>
-                                                                                    </svg>
+                                                                        </OverlayTrigger>
+                                                                        :
+                                                                        <p className="m-0 operation-name">{item.type}</p>
+                                                                }
+                                                            </td>
+                                                            <td>{item.createdAt}</td>
+                                                            <td>
+                                                                <div className="flex">
+                                                                     <span className={statuses[item.statusAz]}>
+                                                                         {item.statusAz}
+                                                                     </span>
+                                                                    <ul className="btn-block list-unstyled flex m-0">
+                                                                        <li>
+                                                                            <Button className="btn-export"
+                                                                                    onClick={() => getExportDocument(item.id, item.type)}>
+                                                                                <svg width="20" height="20"
+                                                                                     viewBox="0 0 22 22"
+                                                                                     fill="none"
+                                                                                     xmlns="http://www.w3.org/2000/svg">
+                                                                                    <path
+                                                                                        d="M17.1875 19.25H4.81247C4.63013 19.25 4.45527 19.1776 4.32635 19.0486C4.19742 18.9197 4.125 18.7448 4.125 18.5625V3.4375C4.125 3.25517 4.19742 3.0803 4.32635 2.95137C4.45527 2.82244 4.63013 2.75 4.81247 2.75H13.0627L17.875 7.5625V18.5625C17.875 18.7448 17.8026 18.9197 17.6737 19.0486C17.5447 19.1776 17.3699 19.25 17.1875 19.25V19.25Z"
+                                                                                        stroke="#040647"
+                                                                                        strokeLinecap="round"
+                                                                                        strokeLinejoin="round"/>
+                                                                                    <path
+                                                                                        d="M13.0625 2.75V7.5625H17.8757"
+                                                                                        stroke="#040647"
+                                                                                        strokeLinecap="round"
+                                                                                        strokeLinejoin="round"/>
+                                                                                    <path d="M8.25 11.6875H13.75"
+                                                                                          stroke="#040647"
+                                                                                          strokeLinecap="round"
+                                                                                          strokeLinejoin="round"/>
+                                                                                    <path d="M8.25 14.4375H13.75"
+                                                                                          stroke="#040647"
+                                                                                          strokeLinecap="round"
+                                                                                          strokeLinejoin="round"/>
+                                                                                </svg>
 
-                                                                                </Button>
-                                                                            </li>
-                                                                            {
-                                                                                item.statusAz === 'Təsdiq gözləyir' ?
-                                                                                    <li>
-                                                                                        <Button className="btn-cancel"
-                                                                                                onClick={() => changeStatus('REJECTED', item.id)}>
-                                                                                            <svg width="14" height="14" viewBox="0 0 12 12"
-                                                                                                 fill="none"
-                                                                                                 xmlns="http://www.w3.org/2000/svg">
-                                                                                                <path
-                                                                                                    d="M5.99688 5.08435L11.0339 0.047383C11.0388 0.0422913 11.0438 0.0372908 11.0489 0.0323831C11.0489 0.0323654 11.0489 0.0323479 11.049 0.0323302L11.1531 0.140279C11.3516 -0.0514605 11.668 -0.0459554 11.8598 0.152578C12.0515 0.351111 12.046 0.667475 11.8475 0.859214L5.99688 5.08435ZM5.99688 5.08435L0.959034 0.0464826L0.95905 0.0464665L0.957171 0.0446523C0.69905 -0.204637 0.287728 -0.197483 0.038437 0.0606401C-0.20476 0.312441 -0.20476 0.711621 0.038437 0.963421L0.0384207 0.963437L0.0402643 0.965281L5.07811 6.00312L0.0402643 11.041L0.0402564 11.041C-0.213419 11.2947 -0.213419 11.706 0.0402564 11.9597L0.0402802 11.9597C0.293992 12.2134 0.705306 12.2134 0.959018 11.9597L0.959033 11.9597L5.99688 6.92189L11.0347 11.9597L11.0347 11.9597L11.0366 11.9616C11.2947 12.2109 11.706 12.2037 11.9553 11.9456L11.9553 11.9456C12.1985 11.6938 12.1985 11.2946 11.9553 11.0428L11.9553 11.0428L11.9535 11.041L6.91568 6.00312L11.9526 0.96616L5.99688 5.08435Z"
-                                                                                                    fill="#CF3131" stroke="#CF3131"
-                                                                                                    strokeWidth="0.3"/>
-                                                                                            </svg>
-                                                                                        </Button>
-                                                                                    </li>
-                                                                                    : null
-                                                                            }
-                                                                            {
-                                                                                item.statusAz === 'Təsdiq gözləyir' ?
-                                                                                    <li>
-                                                                                        <Button className="btn-confirm"
-                                                                                                onClick={() => changeStatus('APPROVED', item.id)}>
-                                                                                            <svg width="16" height="12" viewBox="0 0 16 12"
-                                                                                                 fill="none"
-                                                                                                 xmlns="http://www.w3.org/2000/svg">
-                                                                                                <path
-                                                                                                    d="M15.3696 0.327361C14.8557 -0.139829 14.0564 -0.103215 13.5867 0.413197L5.88442 8.89458L2.16332 5.11165C1.67212 4.61415 0.874137 4.60658 0.37791 5.0965C-0.11959 5.58515 -0.127168 6.38441 0.362755 6.88191L5.02072 11.6169C5.25937 11.8593 5.58259 11.9945 5.92097 11.9945C5.92854 11.9945 5.9374 11.9945 5.94497 11.9957C6.29347 11.9881 6.62178 11.8391 6.85535 11.5816L15.4554 2.11156C15.9239 1.59381 15.886 0.795825 15.3696 0.327361Z"
-                                                                                                    fill="#2ED06A"/>
-                                                                                            </svg>
-                                                                                        </Button>
-                                                                                    </li>
-                                                                                    : null
-                                                                            }
-                                                                        </ul>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                                            </Button>
+                                                                        </li>
+                                                                        {
+                                                                            item.statusAz === 'Təsdiq gözləyir' ?
+                                                                                <li>
+                                                                                    <Button className="btn-cancel"
+                                                                                            onClick={() => changeStatus('REJECTED', item.id)}>
+                                                                                        <svg width="14" height="14"
+                                                                                             viewBox="0 0 12 12"
+                                                                                             fill="none"
+                                                                                             xmlns="http://www.w3.org/2000/svg">
+                                                                                            <path
+                                                                                                d="M5.99688 5.08435L11.0339 0.047383C11.0388 0.0422913 11.0438 0.0372908 11.0489 0.0323831C11.0489 0.0323654 11.0489 0.0323479 11.049 0.0323302L11.1531 0.140279C11.3516 -0.0514605 11.668 -0.0459554 11.8598 0.152578C12.0515 0.351111 12.046 0.667475 11.8475 0.859214L5.99688 5.08435ZM5.99688 5.08435L0.959034 0.0464826L0.95905 0.0464665L0.957171 0.0446523C0.69905 -0.204637 0.287728 -0.197483 0.038437 0.0606401C-0.20476 0.312441 -0.20476 0.711621 0.038437 0.963421L0.0384207 0.963437L0.0402643 0.965281L5.07811 6.00312L0.0402643 11.041L0.0402564 11.041C-0.213419 11.2947 -0.213419 11.706 0.0402564 11.9597L0.0402802 11.9597C0.293992 12.2134 0.705306 12.2134 0.959018 11.9597L0.959033 11.9597L5.99688 6.92189L11.0347 11.9597L11.0347 11.9597L11.0366 11.9616C11.2947 12.2109 11.706 12.2037 11.9553 11.9456L11.9553 11.9456C12.1985 11.6938 12.1985 11.2946 11.9553 11.0428L11.9553 11.0428L11.9535 11.041L6.91568 6.00312L11.9526 0.96616L5.99688 5.08435Z"
+                                                                                                fill="#CF3131"
+                                                                                                stroke="#CF3131"
+                                                                                                strokeWidth="0.3"/>
+                                                                                        </svg>
+                                                                                    </Button>
+                                                                                </li>
+                                                                                : null
+                                                                        }
+                                                                        {
+                                                                            item.statusAz === 'Təsdiq gözləyir' ?
+                                                                                <li>
+                                                                                    <Button className="btn-confirm"
+                                                                                            onClick={() => changeStatus('APPROVED', item.id)}>
+                                                                                        <svg width="16" height="12"
+                                                                                             viewBox="0 0 16 12"
+                                                                                             fill="none"
+                                                                                             xmlns="http://www.w3.org/2000/svg">
+                                                                                            <path
+                                                                                                d="M15.3696 0.327361C14.8557 -0.139829 14.0564 -0.103215 13.5867 0.413197L5.88442 8.89458L2.16332 5.11165C1.67212 4.61415 0.874137 4.60658 0.37791 5.0965C-0.11959 5.58515 -0.127168 6.38441 0.362755 6.88191L5.02072 11.6169C5.25937 11.8593 5.58259 11.9945 5.92097 11.9945C5.92854 11.9945 5.9374 11.9945 5.94497 11.9957C6.29347 11.9881 6.62178 11.8391 6.85535 11.5816L15.4554 2.11156C15.9239 1.59381 15.886 0.795825 15.3696 0.327361Z"
+                                                                                                fill="#2ED06A"/>
+                                                                                        </svg>
+                                                                                    </Button>
+                                                                                </li>
+                                                                                : null
+                                                                        }
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
                                                     )
                                                     :
                                                     emptyData ?

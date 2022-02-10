@@ -10,19 +10,10 @@ import Select from "react-select";
 import EmptyData from "../../../components/EmptyData/EmptyData";
 import {customStyles} from "../../../components/Select/SelectStyle";
 import Loading from "../../../components/Loading/Loading";
+import {
+    jobStatusOptions, jobStatuses
+} from '../../../components/Select/SelectOptions';
 
-const statuses = {
-    'IN': 'işləyir',
-    'OUT': 'çıxarılıb',
-    'NEW': 'yeni işçi'
-};
-
-
-const jobStatusOptions = [
-    {value: 'NEW', label: 'Yeni işçi'},
-    {value: 'IN', label: 'İşləyir'},
-    {value: 'OUT', label: 'Çıxarılıb'},
-]
 
 function ScheduleEmployee() {
     const history = useHistory();
@@ -334,7 +325,7 @@ function ScheduleEmployee() {
                                                     {item.fullName}
                                                 </span>
                                                     <span className={item.jobStatus.toLowerCase()}>
-                                                    {statuses[item.jobStatus]}
+                                                    {jobStatuses[item.jobStatus]}
                                                  </span>
                                                 </div>
                                                 <div className="profession">

@@ -4,18 +4,13 @@ import {Container, Row, Col, Tabs, Tab, Image, Table, Form, Button, OverlayTrigg
 import {Link, useLocation, useParams} from 'react-router-dom';
 import {mainAxios} from "../../../components/Axios/axios";
 import userImage from '../../../assets/img/user.png'
-
+import {
+    statuses
+} from '../../../components/Select/SelectOptions';
 import "react-datepicker/dist/react-datepicker.css";
 import Paginate from "../../../components/Pagination/Pagination";
 import EmptyData from "../../../components/EmptyData/EmptyData";
 import Swal from "sweetalert2";
-
-const statuses = {
-    'Təsdiq gözləyir': 'pending',
-    'Təsdiqlənib': 'confirmed',
-    'Ləğv edildi': 'cancelled',
-    'Hesablandı': 'done'
-};
 
 function ViewEmployee() {
     let params = useParams();

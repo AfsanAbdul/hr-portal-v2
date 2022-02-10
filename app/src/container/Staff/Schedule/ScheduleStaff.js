@@ -7,13 +7,9 @@ import {useHistory} from "react-router-dom";
 import Paginate from "../../../components/Pagination/Pagination";
 import Select from "react-select";
 import {customStyles} from "../../../components/Select/SelectStyle";
+import {vacancyLimitOptions} from "../../../components/Select/SelectOptions";
 import Loading from "../../../components/Loading/Loading";
 import EmptyData from "../../../components/EmptyData/EmptyData";
-
-const vacancyLimitOptions = [
-    {value: 'EMPTY', label: 'Boş'},
-    {value: 'FULL', label: 'Dolu'},
-]
 
 function ScheduleStaff() {
     const history = useHistory();
@@ -169,9 +165,10 @@ function ScheduleStaff() {
                                                         let limitVal = selectedLimit !== null ? selectedLimit.value : null;
                                                         getVacancy(1, id, subDepartId, positionId, limitVal)
                                                     }}
-                                                    isSearchable={department ? department.length > 5 ? true : false : false}
+                                                    isSearchable={department ? department.length > 5 : false}
                                                     options={department}
                                                     getOptionLabel={(option) => (option.name)}
+                                                    getOptionValue={(option) => (option.name)}
                                                     styles={customStyles}
                                                 />
                                             </Form.Group>
@@ -190,9 +187,10 @@ function ScheduleStaff() {
                                                         let limitVal = selectedLimit !== null ? selectedLimit.value : null;
                                                         getVacancy(1, departId, id, positionId, limitVal)
                                                     }}
-                                                    isSearchable={subDepartment ? subDepartment.length > 5 ? true : false : false}
+                                                    isSearchable={subDepartment ? subDepartment.length > 5 : false}
                                                     options={subDepartment}
                                                     getOptionLabel={(option) => (option.name)}
+                                                    getOptionValue={(option) => (option.name)}
                                                     styles={customStyles}
                                                 />
                                             </Form.Group>
@@ -211,9 +209,10 @@ function ScheduleStaff() {
                                                         let limitVal = selectedLimit !== null ? selectedLimit.value : null;
                                                         getVacancy(1, departId, subDepartId, id, limitVal)
                                                     }}
-                                                    isSearchable={position ? position.length > 5 ? true : false : false}
+                                                    isSearchable={position ? position.length > 5 : false}
                                                     options={position}
                                                     getOptionLabel={(option) => (option.name)}
+                                                    getOptionValue={(option) => (option.name)}
                                                     styles={customStyles}
                                                 />
                                             </Form.Group>
@@ -232,9 +231,10 @@ function ScheduleStaff() {
                                                         let positionId = selectedPosition !== null ? selectedPosition.id : null;
                                                         getVacancy(1, departId, subDepartId, positionId, id)
                                                     }}
-                                                    isSearchable={vacancyLimitOptions ? vacancyLimitOptions.length > 5 ? true : false : false}
+                                                    isSearchable={vacancyLimitOptions ? vacancyLimitOptions.length > 5 : false}
                                                     options={vacancyLimitOptions}
                                                     getOptionLabel={(option) => (option.label)}
+                                                    getOptionValue={(option) => (option.label)}
                                                     styles={customStyles}
                                                 />
                                             </Form.Group>

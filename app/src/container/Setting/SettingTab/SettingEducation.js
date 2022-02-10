@@ -106,7 +106,7 @@ function SettingEducation() {
             method: 'post',
             url: 'education-institutions',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getUniversity();
             setUniversity('');
             setActive(false);
@@ -121,7 +121,7 @@ function SettingEducation() {
             method: 'put',
             url: `education-institutions/${universityId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getUniversity();
             setUniversity('');
             setActive(false);
@@ -131,7 +131,7 @@ function SettingEducation() {
         mainAxios({
             method: 'delete',
             url: `education-institutions/${id}`,
-        }).then((res) => {
+        }).then(() => {
             getUniversity()
         });
     }
@@ -159,7 +159,7 @@ function SettingEducation() {
             method: 'post',
             url: 'certificates',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCertificate();
             setCertificate('');
             setActive(false);
@@ -174,7 +174,7 @@ function SettingEducation() {
             method: 'put',
             url: `certificates/${certificateId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCertificate();
             setCertificate('');
             setActive(false);
@@ -184,7 +184,7 @@ function SettingEducation() {
         mainAxios({
             method: 'delete',
             url: `certificates/${id}`,
-        }).then((res) => {
+        }).then(() => {
             getCertificate()
         });
     }
@@ -211,7 +211,7 @@ function SettingEducation() {
             method: 'post',
             url: 'positions',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCache();
             getVacancy();
             setVacancy('');
@@ -227,7 +227,7 @@ function SettingEducation() {
             method: 'put',
             url: `positions/${vacancyId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCache();
             getVacancy();
             setVacancy('');
@@ -238,7 +238,7 @@ function SettingEducation() {
         mainAxios({
             method: 'delete',
             url: `positions/${id}`,
-        }).then((res) => {
+        }).then(() => {
             getCache();
             getVacancy()
         });
@@ -266,7 +266,7 @@ function SettingEducation() {
             method: 'post',
             url: 'grades',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCache();
             getGrade();
             setGrade('');
@@ -282,7 +282,7 @@ function SettingEducation() {
             method: 'put',
             url: `grades/${gradeId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCache();
             getGrade();
             setGrade('');
@@ -293,7 +293,7 @@ function SettingEducation() {
         mainAxios({
             method: 'delete',
             url: `grades/${id}`,
-        }).then((res) => {
+        }).then(() => {
             getCache();
             getGrade();
         });
@@ -321,7 +321,7 @@ function SettingEducation() {
             method: 'post',
             url: 'sub-grades',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCache();
             getSubGrade();
             setSubGrade('');
@@ -337,7 +337,7 @@ function SettingEducation() {
             method: 'put',
             url: `sub-grades/${subGradeId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCache();
             getSubGrade();
             setSubGrade('');
@@ -348,7 +348,7 @@ function SettingEducation() {
         mainAxios({
             method: 'delete',
             url: `sub-grades/${id}`,
-        }).then((res) => {
+        }).then(() => {
             getSubGrade()
         });
     }
@@ -375,7 +375,7 @@ function SettingEducation() {
             method: 'post',
             url: 'languages',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getLanguage();
             setLanguage('');
             setActive(false);
@@ -390,7 +390,7 @@ function SettingEducation() {
             method: 'put',
             url: `languages/${languageId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getLanguage();
             setLanguage('');
             setActive(false);
@@ -400,7 +400,7 @@ function SettingEducation() {
         mainAxios({
             method: 'delete',
             url: `languages/${id}`,
-        }).then((res) => {
+        }).then(() => {
             getLanguage()
         });
     }
@@ -427,7 +427,7 @@ function SettingEducation() {
             method: 'post',
             url: 'computers',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getComputer();
             setComputer('');
             setActive(false);
@@ -442,7 +442,7 @@ function SettingEducation() {
             method: 'put',
             url: `computers/${computerId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getComputer();
             setComputer('');
             setActive(false);
@@ -452,7 +452,7 @@ function SettingEducation() {
         mainAxios({
             method: 'delete',
             url: `computers/${id}`,
-        }).then((res) => {
+        }).then(() => {
             getComputer()
         });
     }
@@ -479,7 +479,7 @@ function SettingEducation() {
             method: 'post',
             url: 'legislations',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getLegislation();
             setLegislation('');
             setActive(false);
@@ -494,7 +494,7 @@ function SettingEducation() {
             method: 'put',
             url: `legislations/${legislationId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getLegislation();
             setLegislation('');
             setActive(false);
@@ -504,7 +504,7 @@ function SettingEducation() {
         mainAxios({
             method: 'delete',
             url: `legislations/${id}`,
-        }).then((res) => {
+        }).then(() => {
             getLegislation()
         });
     }
@@ -531,7 +531,7 @@ function SettingEducation() {
             method: 'post',
             url: 'specialities',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCache();
             getSpeciality();
             setSpeciality('');
@@ -547,7 +547,7 @@ function SettingEducation() {
             method: 'put',
             url: `specialities/${specialityId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCache();
             getSpeciality();
             setSpeciality('');
@@ -558,7 +558,7 @@ function SettingEducation() {
         mainAxios({
             method: 'delete',
             url: `specialities/${id}`,
-        }).then((res) => {
+        }).then(() => {
             getSpeciality()
         });
     }
@@ -585,7 +585,7 @@ function SettingEducation() {
             method: 'post',
             url: 'work-institutions',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getEnterprise();
             setEnterprise('');
             setActive(false);
@@ -600,7 +600,7 @@ function SettingEducation() {
             method: 'put',
             url: `work-institutions/${enterpriseId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getEnterprise();
             setEnterprise('');
             setActive(false);
@@ -610,7 +610,7 @@ function SettingEducation() {
         mainAxios({
             method: 'delete',
             url: `work-institutions/${id}`,
-        }).then((res) => {
+        }).then(() => {
             getEnterprise()
         });
     }
@@ -637,7 +637,7 @@ function SettingEducation() {
             method: 'post',
             url: 'organizations',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getOrganization();
             setOrganization('');
             setActive(false);
@@ -652,7 +652,7 @@ function SettingEducation() {
             method: 'put',
             url: `organizations/${organizationId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getOrganization();
             setOrganization('');
             setActive(false);
@@ -662,7 +662,7 @@ function SettingEducation() {
         mainAxios({
             method: 'delete',
             url: `organizations/${id}`,
-        }).then((res) => {
+        }).then(() => {
             getOrganization()
         });
     }
@@ -690,7 +690,7 @@ function SettingEducation() {
             method: 'post',
             url: 'skills',
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCompetence();
             setCompetence('');
             setActive(false);
@@ -705,7 +705,7 @@ function SettingEducation() {
             method: 'put',
             url: `skills/${competenceId}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getCompetence();
             setCompetence('');
             setActive(false);
@@ -715,8 +715,7 @@ function SettingEducation() {
         mainAxios({
             method: 'delete',
             url: `skills/${id}`,
-
-        }).then((res) => {
+        }).then(() => {
             getCompetence()
         });
     }

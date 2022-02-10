@@ -6,14 +6,7 @@ import {mainAxios} from "../../../components/Axios/axios";
 import Paginate from "../../../components/Pagination/Pagination";
 import Swal from "sweetalert2";
 import EmptyData from "../../../components/EmptyData/EmptyData";
-
-const statuses = {
-    'Təsdiq gözləyir': 'pending',
-    'Təsdiqlənib': 'confirmed',
-    'Ləğv edildi': 'cancelled',
-    'Hesablandı': 'done'
-};
-
+import {statuses} from "../../../components/Select/SelectOptions";
 
 function ViewStaff() {
     let params = useParams();

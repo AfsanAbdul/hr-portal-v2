@@ -5,11 +5,7 @@ import {Row, Col, Form, Tabs, Tab, Button} from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Select from "react-select";
 import {customStyles} from "../../../components/Select/SelectStyle";
-
-const cityTypeOptions = [
-    {value: 'DOMESTIC', label: 'Ölkədaxili'},
-    {value: 'ABROAD', label: 'Ölkəxarici'}
-]
+import {cityTypeOptions} from "../../../components/Select/SelectOptions";
 
 const categoryOptions = [
     {value: 'country', label: 'Ölkələr'},
@@ -25,8 +21,6 @@ function SettingPlace() {
     const [checkClick, setCheckClick] = useState(false);
     const [view, setView] = useState(false);
     const [active, setActive] = useState(false)
-
-
 
     const [countryArr, setCountryArr] = useState([]);
     const [country, setCountry] = useState('');

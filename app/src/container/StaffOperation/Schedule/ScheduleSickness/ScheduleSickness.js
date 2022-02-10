@@ -7,12 +7,7 @@ import Paginate from "../../../../components/Pagination/Pagination";
 import EmptyData from "../../../../components/EmptyData/EmptyData";
 import Swal from "sweetalert2";
 import Loading from "../../../../components/Loading/Loading";
-
-const statuses = {
-    'Açıq': 'OPEN',
-    'Bağlı': 'CLOSE',
-};
-
+import {sicknessStatuses} from "../../../../components/Select/SelectOptions";
 
 function ScheduleSickness() {
     const history = useHistory();
@@ -20,7 +15,6 @@ function ScheduleSickness() {
     const [currentPage, setCurrentPage] = useState(1);
     const [recordSize, setRecordSize] = useState(20);
     const [loading, setLoading] = useState(false);
-
 
     const [sicknessArr, setSicknessArr] = useState([]);
 
@@ -123,9 +117,9 @@ function ScheduleSickness() {
                                                         <td>
                                                             <div className="flex">
                                                          <span
-                                                             className={statuses[item.sickStatus].toLowerCase()}>
-                                                     {item.sickStatus}
-                                                 </span>
+                                                             className={sicknessStatuses[item.sickStatus].toLowerCase()}>
+                                                             {item.sickStatus}
+                                                         </span>
                                                                 <ul className="btn-block list-unstyled flex m-0">
                                                                     {
                                                                         item.sickStatus === 'Açıq' ?

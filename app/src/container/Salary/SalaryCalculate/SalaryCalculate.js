@@ -7,109 +7,17 @@ import Select, {components} from "react-select";
 import {customStyles} from "../../../components/Select/SelectStyle";
 import EmptyData from "../../../components/EmptyData/EmptyData";
 import Loading from "../../../components/Loading/Loading";
-
-const monthOptions = [
-    {value: 1, label: 'January'},
-    {value: 2, label: 'February'},
-    {value: 3, label: 'March'},
-    {value: 4, label: 'April'},
-    {value: 5, label: 'May'},
-    {value: 6, label: 'June'},
-    {value: 7, label: 'July'},
-    {value: 8, label: 'August'},
-    {value: 9, label: 'September'},
-    {value: 10, label: 'October'},
-    {value: 11, label: 'November'},
-    {value: 12, label: 'December'},
-]
-
-const vacancyOptions = [
-    {value: 'mainSalary', label: 'Vəzifə maaşı'},
-    {value: 'individualAddition', label: 'Fərdi əlavə'},
-    {value: 'conditionalAddition', label: 'Fərdi əlavə %'},
-]
-
-const productionOptions = [
-    {value: 'jobDayCount', label: 'Norma iş gün'},
-    {value: '', label: 'Norma iş saatı'},
-]
-
-const calculationOptions = [
-    {value: 'mainSalaryResult', label: 'Hesablanmış əmək haqqı (Tarif vəzifə maaşına görə)'},
-    {value: 'individualAdditionResult', label: 'Fərdi əlavə (Fix məbləğ)'},
-    {value: 'conditionalAdditionResult', label: 'Fərdi əlavə %'},
-    {value: 'conditionalAddition', label: 'İş şəraitinə görə əlavə'},
-    {value: '', label: 'Orta aylıq əmək haqqın saxlanılması'},
-    {value: 'educationVacationPay', label: 'Təhsil məzuniyyəti'},
-    {value: '', label: 'Əmək məzuniyyəti'},
-    {value: 'overtimeHours', label: 'Normadan artıq saatların sayı'},
-    {value: 'overtimeAmount', label: 'Normadan artıq saat'},
-    {value: 'nightHours', label: 'Gecə saatların sayı'},
-    {value: 'nightAmount', label: 'Gecə saatı'},
-    {value: 'eveningHours', label: 'Axşam saatı sayı'},
-    {value: '', label: 'Axşam saatı '},
-    {value: 'overtimeHolidayHours', label: 'Bayram saatı (Normadan artıq) sayı'},
-    {value: 'overtimeHolidayAmount', label: 'Bayram saatı (Normadan artıq)'},
-    {value: 'holidayHours', label: 'Bayram saatı (Norma daxili) sayı'},
-    {value: 'holidayAmount', label: 'Bayram saatı (Norma daxili)'},
-    {value: 'offDayCount', label: 'Bayram və istirahət günü işə çıxma (Günlərin sayı)'},
-    {value: 'offDayAmount', label: 'Bayram və istirahət günü işə çıxma'},
-    {value: '', label: 'Müvəqqəti həvalə(Maaş fərqi)'},
-    {value: '', label: 'İstifadə edilməmiş məzuniyyət günlərinə görə kompensasiya'},
-    {value: '', label: 'Müvəqqəti həvalə(%)'},
-    {value: '', label: 'İxtisara salınmaya görə ödənişlər'},
-    {value: '', label: 'Maddi yardım '},
-    {value: '', label: 'Maddi yardım (ölümlə əlaqədar) '},
-    {value: '', label: 'Maddi yardım (Təqaüdə gedənlər) '},
-    {value: '', label: 'Mükafat'},
-    {value: '', label: 'Mükafat Bayram günü ilə əlaqdəar'},
-    {value: '', label: 'Yemək pulu'},
-    {value: '', label: 'Xəstəlik vərəqəsi(DSMF tərəfindən)'},
-    {value: '', label: 'Xəstəlik vərəqəsi(Liman tərəfindən)'},
-    {value: 'totalResult', label: 'Cəmi  hesablanıb'},
-]
-
-const taxOptions = [
-    {value: 'discountAmount', label: 'Güzəşt Məbləği'},
-    {value: 'hysPASA', label: 'PAŞA HYS'},
-    {value: 'forIncomingTax', label: 'Gəlir vergisinə cəlb olunan hissəsi'},
-]
-
-const exemptionOptions = [
-    {value: 'incomingTax', label: 'Gəlir vergisi'},
-    {value: 'dsmfTax', label: 'M.D.S.S 3%'},
-    {value: 'unemploymentTax', label: 'İşsizlik 0,5%'},
-    {value: 'medicalInsuranceTax', label: 'İTS 2%'},
-    {value: 'hysTax', label: 'Limançı 2%'},
-    {value: '', label: 'Paşa HYS'},
-    {value: 'totalTax', label: 'Cəmi tutulub'},
-]
-
-const netExemptionOptions = [
-    {value: '', label: 'Aliment (Fix)'},
-    {value: '', label: 'Aliment %'},
-    {value: '', label: 'Kredit %'},
-    {value: '', label: 'Şəxsi borc (Fix)'},
-    {value: '', label: 'Cərimə %'},
-    {value: '', label: 'Yap (Fix)'},
-    {value: '', label: 'Ödənilmiş məz'},
-    {value: '', label: 'Ödənilmiş avans'},
-    {value: '', label: 'Dsmf tərəfindən ödənilmiş XV'},
-]
-
-const employerPayOptions = [
-    {value: '', label: 'M.D.S.S 22%'},
-    {value: '', label: 'İşsizlik 0,5%'},
-    {value: '', label: 'İTS 2%'},
-    {value: '', label: 'Limançı 1%'},
-]
-
-const cols = [
-    {value: 'fullName', label: 'S.A.A'},
-    {value: 'workedDayCount', label: 'Faktiki iş günü'},
-    {value: 'net', label: 'Net'},
-    {value: 'xsa', label: 'Plastik Karta köçürülən məbləğ'},
-]
+import {
+    monthOptions,
+    vacancyOptions,
+    productionOptions,
+    calculationOptions,
+    taxOptions,
+    exemptionOptions,
+    netExemptionOptions,
+    employerPayOptions,
+    cols
+} from "../../../components/Select/SelectOptions"
 
 function SalaryCalculate() {
     let currentMonth = (new Date().getMonth() + 1);
@@ -304,7 +212,7 @@ function SalaryCalculate() {
                                                         let name = fullName !== '' ? fullName : null
                                                         getSalary(1, month, year, id, subDepartId, name)
                                                     }}
-                                                    isSearchable={department ? department.length > 5  : false}
+                                                    isSearchable={department ? department.length > 5 : false}
                                                     options={department}
                                                     getOptionLabel={(option) => (option.name)}
                                                     getOptionValue={(option) => (option.name)}
@@ -326,7 +234,7 @@ function SalaryCalculate() {
                                                         getSalary(1, month, year, departId, id, name)
 
                                                     }}
-                                                    isSearchable={subDepartment ? subDepartment.length > 5  : false}
+                                                    isSearchable={subDepartment ? subDepartment.length > 5 : false}
                                                     options={subDepartment}
                                                     getOptionLabel={(option) => (option.name)}
                                                     getOptionValue={(option) => (option.name)}
@@ -375,7 +283,7 @@ function SalaryCalculate() {
                                                 val = val.value
                                                 setSelectedYear(val);
                                                 let month = selectedMonth !== null ? selectedMonth : currentMonth;
-                                                getSalary(1,month, val ,depart, subDepart, name )
+                                                getSalary(1, month, val, depart, subDepart, name)
                                             }}
                                             options={yearOptions}
                                             styles={customStyles}
@@ -392,7 +300,7 @@ function SalaryCalculate() {
                                                 val = val.value
                                                 setSelectedMonth(val);
                                                 let year = selectedYear !== null ? selectedYear : currentYear
-                                                getSalary(1,val, year, depart, subDepart, name)
+                                                getSalary(1, val, year, depart, subDepart, name)
                                             }}
                                             options={monthOptions}
                                             styles={customStyles}

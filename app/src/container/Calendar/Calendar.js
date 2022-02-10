@@ -55,7 +55,7 @@ function Calendar() {
             method: 'put',
             url: `days/${id}`,
             data: data
-        }).then((res) => {
+        }).then(() => {
             getDay(year, month)
             setModalShow(false);
             setModalEventShow(false)

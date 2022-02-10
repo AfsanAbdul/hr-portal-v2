@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Aux from "../../hoc/Auxiliary";
 import {Container,Tabs, Tab} from 'react-bootstrap';
 import {useLocation} from 'react-router-dom';

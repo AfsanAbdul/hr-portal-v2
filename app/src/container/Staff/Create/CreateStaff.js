@@ -6,62 +6,20 @@ import Select from 'react-select';
 import {mainAxios} from "../../../components/Axios/axios";
 import {uid} from "react-uid";
 import {customStyles} from "../../../components/Select/SelectStyle";
+import {
+    genderOptions,
+    evaluationOptions,
+    educationDegreeOptions,
+    options,
+    workConditionOptions,
+    workModeOptions,
+    vacancyCategoryOptions,
+    workPlaceOptions
+} from "../../../components/Select/SelectOptions";
 import Swal from "sweetalert2";
 import Loading from "../../../components/Loading/Loading";
 
 function CreateStaff() {
-
-    const evaluationOptions = [
-        {value: 'BEST', label: 'Əla'},
-        {value: 'MIDDLE', label: 'Orta'},
-        {value: 'GOOD', label: 'Yaxşı'}
-    ];
-
-    const genderOptions = [
-        {value: 'MALE', label: "Kişi"},
-        {value: 'FEMALE', label: "Qadın"},
-        {value: 'NON', label: "Tələb yoxdur"},
-    ]
-
-    const educationDegreeOptions = [
-        {value: 'MIDDLE', label: "Orta təhsil"},
-        {value: 'MIDDLE_SPECIAL', label: "Orta ixtisas təhsili"},
-        {value: 'PROFESSION', label: "Peşə təhsili"},
-        {value: 'BACHELOR', label: "Bakalavr təhsili"},
-        {value: 'MASTER', label: "Magistratura təhsili"},
-        {value: 'DOCTORAL', label: "Doktorantura təhsili"},
-    ]
-
-    const options = [
-        {value: 1, label: 'Bəli'},
-        {value: 0, label: 'Xeyr'}
-    ];
-
-    const workConditionOptions = [
-        {value: 'HARMFUL', label: 'Zərərli'},
-        {value: 'HARMLESS', label: 'Zərərsiz'}
-    ];
-
-    const WorkModeOptions = [
-        {value: 'DAILY', label: 'Gündəlik'},
-        {value: 'ALTERNATELY', label: 'Növbəli'},
-    ]
-
-    const vacancyCategoryOptions = [
-        {value: 'LEADER', label: 'Rəhbər'},
-        {value: 'ENGINEER', label: 'Mütəxəssis'},
-        {value: 'TECHNICAL_EXECUTOR', label: 'Texniki icraçı'},
-        {value: 'WORKER', label: 'Fəhlə'},
-    ]
-
-    const workPlaceOptions = [
-        {value: 'WORK_PLACE_1', label: 'Bakı inzibati bina'},
-        {value: 'WORK_PLACE_2', label: 'Dəniz vağzalı'},
-        {value: 'WORK_PLACE_3', label: 'Dübəndi terminalı'},
-        {value: 'WORK_PLACE_4', label: 'Qaradağ anbarı'},
-        {value: 'WORK_PLACE_5', label: 'Ələt'},
-        {value: 'WORK_PLACE_6', label: 'Astara'},
-    ]
 
     /*check&visibility*/
     const [key, setKey] = useState('general');
@@ -521,7 +479,7 @@ function CreateStaff() {
                                                                     onChange={(val) => {
                                                                         setSelectedInstitution(val);
                                                                     }}
-                                                                    isSearchable={institution ? institution.length > 5  : false}
+                                                                    isSearchable={institution ? institution.length > 5 : false}
                                                                     options={institution}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -539,7 +497,8 @@ function CreateStaff() {
                                                         </Col>
                                                         <Col xs={4}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">Struktur vahidinin adı *</span>
+                                                                <span
+                                                                    className="input-title">Struktur vahidinin adı *</span>
                                                                 <Select
                                                                     placeholder="Struktur vahidinin adını seçin"
                                                                     value={selectedDepartment}
@@ -548,7 +507,7 @@ function CreateStaff() {
                                                                         getSubDepartment(val.id);
                                                                         setSelectedSubDepartment(null)
                                                                     }}
-                                                                    isSearchable={department ? department.length > 5  : false}
+                                                                    isSearchable={department ? department.length > 5 : false}
                                                                     options={department}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     getOptionValue={option => option.name}
@@ -566,7 +525,8 @@ function CreateStaff() {
                                                         </Col>
                                                         <Col xs={4}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">Struktur bölmənin adı</span>
+                                                                <span
+                                                                    className="input-title">Struktur bölmənin adı</span>
                                                                 <Select
                                                                     placeholder="Struktur bölmənin adını seçin"
                                                                     value={selectedSubDepartment}
@@ -594,14 +554,15 @@ function CreateStaff() {
                                                         </Col>
                                                         <Col xs={4}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">Ştat vahidinin adı *</span>
+                                                                <span
+                                                                    className="input-title">Ştat vahidinin adı *</span>
                                                                 <Select
                                                                     placeholder="Ştat vahidin adını seçin"
                                                                     value={selectedVacancy}
                                                                     onChange={(val) => {
                                                                         setSelectedVacancy(val);
                                                                     }}
-                                                                    isSearchable={vacancy ? vacancy.length > 5  : false}
+                                                                    isSearchable={vacancy ? vacancy.length > 5 : false}
                                                                     options={vacancy}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.name)}
@@ -619,7 +580,8 @@ function CreateStaff() {
                                                         </Col>
                                                         <Col xs={4}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">Ştat vahidinin sayı *</span>
+                                                                <span
+                                                                    className="input-title">Ştat vahidinin sayı *</span>
                                                                 <Form.Label>
                                                                     <Form.Control type="number"
                                                                                   placeholder="Ştat vahidinin saynı daxil edin"
@@ -676,8 +638,8 @@ function CreateStaff() {
                                                                     placeholder="İş rejimini seçin"
                                                                     value={selectedWorkMode}
                                                                     onChange={setSelectedWorkMode}
-                                                                    isSearchable={WorkModeOptions ? WorkModeOptions.length > 5  : false}
-                                                                    options={WorkModeOptions}
+                                                                    isSearchable={workModeOptions ? workModeOptions.length > 5 : false}
+                                                                    options={workModeOptions}
                                                                     styles={customStyles}
                                                                 />
                                                                 <div className="validation-block flex-start">
@@ -695,7 +657,7 @@ function CreateStaff() {
                                                                 <>
                                                                     <Col xs={6}>
                                                                         <Form.Group className="form-group">
-                                                                <span className="input-title">Əmək şəraiti dərəcəsi</span>
+                                                                            <span className="input-title">Əmək şəraiti dərəcəsi</span>
                                                                             <Form.Control
                                                                                 value={workConditionPer || ''}
                                                                                 type="number"
@@ -705,7 +667,7 @@ function CreateStaff() {
                                                                     </Col>
                                                                     <Col xs={6}>
                                                                         <Form.Group className="form-group">
-                                                                <span className="input-title">Əmək şəraitinə görə məzuniyyət</span>
+                                                                            <span className="input-title">Əmək şəraitinə görə məzuniyyət</span>
                                                                             <Form.Control
                                                                                 value={workConditionVac || ''}
                                                                                 type="number"
@@ -724,7 +686,7 @@ function CreateStaff() {
                                                                     placeholder="Kateqoriyanı seçin"
                                                                     value={selectedVacancyCategory}
                                                                     onChange={setSelectedVacancyCategory}
-                                                                    isSearchable={vacancyCategoryOptions ? vacancyCategoryOptions.length > 5  : false}
+                                                                    isSearchable={vacancyCategoryOptions ? vacancyCategoryOptions.length > 5 : false}
                                                                     options={vacancyCategoryOptions}
                                                                     styles={customStyles}
                                                                 />
@@ -747,7 +709,7 @@ function CreateStaff() {
                                                                     onChange={(val) => {
                                                                         setSelectedFamilyJob(val);
                                                                     }}
-                                                                    isSearchable={familyJob ? familyJob.length > 5  : false}
+                                                                    isSearchable={familyJob ? familyJob.length > 5 : false}
                                                                     options={familyJob}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.name)}
@@ -757,13 +719,14 @@ function CreateStaff() {
                                                         </Col>
                                                         <Col xs={6}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">İş yerinin ünvanı * </span>
+                                                                <span
+                                                                    className="input-title">İş yerinin ünvanı * </span>
                                                                 <Select
                                                                     placeholder="İş yerinin ünvanını seçin"
                                                                     value={selectedWorkAddress}
                                                                     onChange={setSelectedWorkAddress}
                                                                     options={workPlaceOptions}
-                                                                    isSearchable={workPlaceOptions ? workPlaceOptions.length > 5  : false}
+                                                                    isSearchable={workPlaceOptions ? workPlaceOptions.length > 5 : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.label)}
                                                                     getOptionValue={(option) => (option.label)}
@@ -801,7 +764,7 @@ function CreateStaff() {
                                                                     value={selectedMinGrade}
                                                                     onChange={setSelectedMinGrade}
                                                                     options={grade}
-                                                                    isSearchable={grade ? grade.length > 5  : false}
+                                                                    isSearchable={grade ? grade.length > 5 : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.grade)}
                                                                     getOptionValue={option => option.grade}
@@ -824,7 +787,7 @@ function CreateStaff() {
                                                                     value={selectedMaxGrade}
                                                                     onChange={setSelectedMaxGrade}
                                                                     options={grade}
-                                                                    isSearchable={grade ? grade.length > 5  : false}
+                                                                    isSearchable={grade ? grade.length > 5 : false}
                                                                     styles={customStyles}
                                                                     getOptionLabel={(option) => (option.grade)}
                                                                     getOptionValue={option => option.grade}
@@ -853,7 +816,8 @@ function CreateStaff() {
                                                                     {
                                                                         index === 0 ? null :
                                                                             <div className="add-item-top">
-                                                                                <p className="m-0"> #{index + 1}. Digər </p>
+                                                                                <p className="m-0"> #{index + 1}.
+                                                                                    Digər </p>
                                                                                 <Button
                                                                                     className="btn-remove flex-center"
                                                                                     onClick={() => {
@@ -893,7 +857,8 @@ function CreateStaff() {
                                                                                     getOptionLabel={(option) => (option.name)}
                                                                                     getOptionValue={(option) => (option.name)}
                                                                                     styles={customStyles}/>
-                                                                                <div className="validation-block flex-start">
+                                                                                <div
+                                                                                    className="validation-block flex-start">
                                                                                     {
                                                                                         errors['generalInformation.legislationStatementSet[].legislationId'] !== '' ?
                                                                                             <span
@@ -913,7 +878,7 @@ function CreateStaff() {
                                                                                         setSkillLegalArr([...skillLegalArr], skillLegalArr);
                                                                                     }}
                                                                                     placeholder="Bilik səviyyəsini seçin"
-                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5  : false}
+                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 : false}
                                                                                     options={evaluationOptions}
                                                                                     styles={customStyles}
                                                                                 />
@@ -925,13 +890,15 @@ function CreateStaff() {
                                                         }
                                                     </div>
                                                     <div className="flex-end">
-                                                        <Button className="btn-main-text" onClick={() => addLegalSkill()}
+                                                        <Button className="btn-main-text"
+                                                                onClick={() => addLegalSkill()}
                                                                 type="button">
                                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                  xmlns="http://www.w3.org/2000/svg">
                                                                 <path
                                                                     d="M0.667969 6.00033H11.3346M6.0013 0.666992V11.3337V0.666992Z"
-                                                                    stroke="#3083DC" strokeWidth="1.3" strokeLinecap="round"
+                                                                    stroke="#3083DC" strokeWidth="1.3"
+                                                                    strokeLinecap="round"
                                                                     strokeLinejoin="round"/>
                                                             </svg>
                                                             <span>əlavə et</span>
@@ -945,7 +912,8 @@ function CreateStaff() {
                                                     <Row>
                                                         <Col xs={6}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">Rəhbər üzrə staj tələbi</span>
+                                                                <span
+                                                                    className="input-title">Rəhbər üzrə staj tələbi</span>
                                                                 <Form.Label>
                                                                     <Form.Control type="number"
                                                                                   placeholder="Rəhbər üzrə staj tələbini daxil edin"
@@ -955,7 +923,8 @@ function CreateStaff() {
                                                         </Col>
                                                         <Col xs={6}>
                                                             <Form.Group className="form-group">
-                                                                <span className="input-title">Sahə üzrə staj tələbi</span>
+                                                                <span
+                                                                    className="input-title">Sahə üzrə staj tələbi</span>
                                                                 <Form.Label>
                                                                     <Form.Control type="number"
                                                                                   placeholder="Sahə üzrə staj tələbini daxil edin"
@@ -984,7 +953,7 @@ function CreateStaff() {
                                                                     placeholder="Təhsil pilləsini seçin"
                                                                     value={selectedSpeciality}
                                                                     onChange={(val) => setSelectedSpeciality(val)}
-                                                                    isSearchable={speciality ? speciality.length > 5  : false}
+                                                                    isSearchable={speciality ? speciality.length > 5 : false}
                                                                     options={speciality}
                                                                     getOptionLabel={(option) => (option.name)}
                                                                     styles={customStyles}
@@ -998,7 +967,7 @@ function CreateStaff() {
                                                                     placeholder="Sertifikat tələbini seçin"
                                                                     value={selectedRequiredFile}
                                                                     onChange={setSelectedRequiredFile}
-                                                                    isSearchable={options ? options.length > 5  : false}
+                                                                    isSearchable={options ? options.length > 5 : false}
                                                                     options={options}
                                                                     styles={customStyles}
                                                                 />
@@ -1014,7 +983,7 @@ function CreateStaff() {
                                                                         setSelectedOption(val)
                                                                     }}
                                                                     placeholder="Boy tələbini seçin"
-                                                                    isSearchable={options ? options.length > 5  : false}
+                                                                    isSearchable={options ? options.length > 5 : false}
                                                                     options={options}
                                                                     styles={customStyles}
                                                                 />
@@ -1055,7 +1024,7 @@ function CreateStaff() {
                                                                     placeholder="Sağlamlıq tələbini seçin"
                                                                     value={selectedHealth}
                                                                     onChange={setSelectedHealth}
-                                                                    isSearchable={options ? options.length > 5  : false}
+                                                                    isSearchable={options ? options.length > 5 : false}
                                                                     options={options}
                                                                     styles={customStyles}
                                                                 />
@@ -1078,11 +1047,13 @@ function CreateStaff() {
                                                     <div className="addition-content">
                                                         {
                                                             positionFunctionArr.map((item, index) =>
-                                                                <div key={index} className={index === 0 ? '' : 'add-item'}>
+                                                                <div key={index}
+                                                                     className={index === 0 ? '' : 'add-item'}>
                                                                     {
                                                                         index === 0 ? null :
                                                                             <div className="add-item-top">
-                                                                                <p className="m-0"> #{index + 1}. Digər </p>
+                                                                                <p className="m-0"> #{index + 1}.
+                                                                                    Digər </p>
                                                                                 <Button
                                                                                     className="btn-remove flex-center"
                                                                                     onClick={() => {
@@ -1130,11 +1101,13 @@ function CreateStaff() {
                                                             <Button className="btn-main-text"
                                                                     type="button"
                                                                     onClick={() => addPositionFunction()}>
-                                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                                <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none"
                                                                      xmlns="http://www.w3.org/2000/svg">
                                                                     <path
                                                                         d="M0.667969 6.00033H11.3346M6.0013 0.666992V11.3337V0.666992Z"
-                                                                        stroke="#3083DC" strokeWidth="1.3" strokeLinecap="round"
+                                                                        stroke="#3083DC" strokeWidth="1.3"
+                                                                        strokeLinecap="round"
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
@@ -1146,11 +1119,13 @@ function CreateStaff() {
                                             <div className="flex-vertical-center">
                                                 {
                                                     showButton ?
-                                                        <Button className="btn-effect w-200" onClick={() => sendGeneralUpdate()}>
+                                                        <Button className="btn-effect w-200"
+                                                                onClick={() => sendGeneralUpdate()}>
                                                             Davam et
                                                         </Button>
                                                         :
-                                                        <Button className="btn-effect w-200" onClick={() => sendGeneralData()}>
+                                                        <Button className="btn-effect w-200"
+                                                                onClick={() => sendGeneralData()}>
                                                             Davam et
                                                         </Button>
 
@@ -1175,7 +1150,8 @@ function CreateStaff() {
                                                                     {
                                                                         index === 0 ? null :
                                                                             <div className="add-item-top">
-                                                                                <p className="m-0"> #{index + 1}. Digər </p>
+                                                                                <p className="m-0"> #{index + 1}.
+                                                                                    Digər </p>
                                                                                 <Button
                                                                                     className="btn-remove flex-center"
                                                                                     onClick={() => {
@@ -1215,7 +1191,8 @@ function CreateStaff() {
                                                                                     getOptionLabel={(option) => (option.name)}
                                                                                     getOptionValue={(option) => (option.name)}
                                                                                     styles={customStyles}/>
-                                                                                <div className="validation-block flex-start">
+                                                                                <div
+                                                                                    className="validation-block flex-start">
                                                                                     {
                                                                                         errors['specialityKnowledge.computerKnowledgeSet[].computerId'] !== '' ?
                                                                                             <span
@@ -1235,7 +1212,7 @@ function CreateStaff() {
                                                                                         setSkillProgramArr([...skillProgramArr], skillProgramArr);
                                                                                     }}
                                                                                     placeholder="Bilik səviyyəsini seçin"
-                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5  : false}
+                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 : false}
                                                                                     options={evaluationOptions}
                                                                                     styles={customStyles}
                                                                                 />
@@ -1247,13 +1224,15 @@ function CreateStaff() {
                                                         }
                                                     </div>
                                                     <div className="flex-end">
-                                                        <Button className="btn-main-text" onClick={() => addProgramSkill()}
+                                                        <Button className="btn-main-text"
+                                                                onClick={() => addProgramSkill()}
                                                                 type="button">
                                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                  xmlns="http://www.w3.org/2000/svg">
                                                                 <path
                                                                     d="M0.667969 6.00033H11.3346M6.0013 0.666992V11.3337V0.666992Z"
-                                                                    stroke="#3083DC" strokeWidth="1.3" strokeLinecap="round"
+                                                                    stroke="#3083DC" strokeWidth="1.3"
+                                                                    strokeLinecap="round"
                                                                     strokeLinejoin="round"/>
                                                             </svg>
                                                             <span>əlavə et</span>
@@ -1274,7 +1253,8 @@ function CreateStaff() {
                                                                     {
                                                                         index === 0 ? null :
                                                                             <div className="add-item-top">
-                                                                                <p className="m-0"> #{index + 1}. Digər </p>
+                                                                                <p className="m-0"> #{index + 1}.
+                                                                                    Digər </p>
                                                                                 <Button
                                                                                     className="btn-remove flex-center"
                                                                                     onClick={() => {
@@ -1314,7 +1294,8 @@ function CreateStaff() {
                                                                                     getOptionLabel={(option) => (option.name)}
                                                                                     getOptionValue={(option) => (option.name)}
                                                                                     styles={customStyles}/>
-                                                                                <div className="validation-block flex-start">
+                                                                                <div
+                                                                                    className="validation-block flex-start">
                                                                                     {
                                                                                         errors['specialityKnowledge.languageKnowledgeSet[].languageId'] !== '' ?
                                                                                             <span
@@ -1334,7 +1315,7 @@ function CreateStaff() {
                                                                                         setSkillLanguageArr([...skillLanguageArr], skillLanguageArr);
                                                                                     }}
                                                                                     placeholder="Bilik səviyyəsini seçin"
-                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5  : false}
+                                                                                    isSearchable={evaluationOptions ? evaluationOptions.length > 5 : false}
                                                                                     options={evaluationOptions}
                                                                                     styles={customStyles}
                                                                                 />
@@ -1346,13 +1327,15 @@ function CreateStaff() {
                                                         }
                                                     </div>
                                                     <div className="flex-end">
-                                                        <Button className="btn-main-text" onClick={() => addLanguageSkill()}
+                                                        <Button className="btn-main-text"
+                                                                onClick={() => addLanguageSkill()}
                                                                 type="button">
                                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                                  xmlns="http://www.w3.org/2000/svg">
                                                                 <path
                                                                     d="M0.667969 6.00033H11.3346M6.0013 0.666992V11.3337V0.666992Z"
-                                                                    stroke="#3083DC" strokeWidth="1.3" strokeLinecap="round"
+                                                                    stroke="#3083DC" strokeWidth="1.3"
+                                                                    strokeLinecap="round"
                                                                     strokeLinejoin="round"/>
                                                             </svg>
                                                             <span>əlavə et</span>
@@ -1373,7 +1356,8 @@ function CreateStaff() {
                                                                     {
                                                                         index === 0 ? null :
                                                                             <div className="add-item-top">
-                                                                                <p className="m-0"> #{index + 1}. Digər </p>
+                                                                                <p className="m-0"> #{index + 1}.
+                                                                                    Digər </p>
                                                                                 <Button
                                                                                     className="btn-remove flex-center"
                                                                                     onClick={() => {
@@ -1408,13 +1392,14 @@ function CreateStaff() {
                                                                                         skillArr[index].requiredSkillId = val.id;
                                                                                         setSkillArr([...skillArr], skillArr);
                                                                                     }}
-                                                                                    isSearchable={skill ? skill.length > 5  : false}
+                                                                                    isSearchable={skill ? skill.length > 5 : false}
                                                                                     options={skill}
                                                                                     styles={customStyles}
                                                                                     getOptionLabel={(option) => (option.name)}
                                                                                     getOptionValue={(option) => (option.name)}
                                                                                 />
-                                                                                <div className="validation-block flex-start">
+                                                                                <div
+                                                                                    className="validation-block flex-start">
                                                                                     {
                                                                                         errors['specialityKnowledge.requiredKnowledgeSet[].requiredSkillId'] !== '' ?
                                                                                             <span
@@ -1446,11 +1431,13 @@ function CreateStaff() {
                                                         <div className="flex-end">
                                                             <Button type="button" className="btn-main-text"
                                                                     onClick={() => addSkill()}>
-                                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                                <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none"
                                                                      xmlns="http://www.w3.org/2000/svg">
                                                                     <path
                                                                         d="M0.667969 6.00033H11.3346M6.0013 0.666992V11.3337V0.666992Z"
-                                                                        stroke="#3083DC" strokeWidth="1.3" strokeLinecap="round"
+                                                                        stroke="#3083DC" strokeWidth="1.3"
+                                                                        strokeLinecap="round"
                                                                         strokeLinejoin="round"/>
                                                                 </svg>
                                                                 <span>əlavə et</span>
@@ -1466,9 +1453,11 @@ function CreateStaff() {
                                                             <Button className="btn-transparent" onClick={() => {
                                                                 setKey('general')
                                                             }}>
-                                                                <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
+                                                                <svg width="16" height="12" viewBox="0 0 16 12"
+                                                                     fill="none"
                                                                      xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M15 6H1.5M5.5 1.5L1 6L5.5 10.5" stroke="#193651"
+                                                                    <path d="M15 6H1.5M5.5 1.5L1 6L5.5 10.5"
+                                                                          stroke="#193651"
                                                                           strokeWidth="2" strokeLinecap="round"
                                                                           strokeLinejoin="round"/>
                                                                 </svg>
@@ -1476,7 +1465,8 @@ function CreateStaff() {
                                                             </Button>
                                                         </li>
                                                         <li>
-                                                            <Button className="btn-effect w-200" onClick={() => sendDataKnowledge()}>
+                                                            <Button className="btn-effect w-200"
+                                                                    onClick={() => sendDataKnowledge()}>
                                                                 Yadda saxla
                                                             </Button>
                                                         </li>
