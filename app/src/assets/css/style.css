@@ -582,6 +582,11 @@ button:focus {
     fill: #FFFFFF;
 }
 
+.nav-pills .nav-link.active.stroke svg path, .nav-pills .show > .nav-link.stroke svg path {
+    fill: none;
+    stroke: #FFFFFF;
+}
+
 .trapezium {
     position: absolute;
     right: -19px;
