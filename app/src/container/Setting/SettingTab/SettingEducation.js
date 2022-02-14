@@ -833,7 +833,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <Button type="button" className="btn-color"
+                                                <Button type="button" className="btn-main-text"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -966,7 +966,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <Button type="button" className="btn-color"
+                                                <Button type="button" className="btn-main-text"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1099,7 +1099,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <Button type="button" className="btn-color"
+                                                <Button type="button" className="btn-main-text"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1232,7 +1232,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <Button type="button" className="btn-color"
+                                                <Button type="button" className="btn-main-text"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1366,7 +1366,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <Button type="button" className="btn-color"
+                                                <Button type="button" className="btn-main-text"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1499,7 +1499,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <Button type="button" className="btn-color"
+                                                <Button type="button" className="btn-main-text"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1632,7 +1632,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <Button type="button" className="btn-color"
+                                                <Button type="button" className="btn-main-text"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1765,7 +1765,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <Button type="button" className="btn-color"
+                                                <Button type="button" className="btn-main-text"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1898,7 +1898,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <Button type="button" className="btn-color"
+                                                <Button type="button" className="btn-main-text"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -2031,7 +2031,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <Button type="button" className="btn-color"
+                                                <Button type="button" className="btn-main-text"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -2165,7 +2165,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <Button type="button" className="btn-color"
+                                                <Button type="button" className="btn-main-text"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -2298,7 +2298,7 @@ function SettingEducation() {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <div className="flex-end">
-                                                <Button type="button" className="btn-color"
+                                                <Button type="button" className="btn-main-text"
                                                         onClick={() => {setView(true); setCheckClick(false)}}>
                                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">

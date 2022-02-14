@@ -1760,7 +1760,7 @@ input::-webkit-inner-spin-button {
     text-align: left;
     font-size: 16px;
     position: relative;
-    padding: 6px;
+    padding: 6px 12px;
     cursor: pointer;
     height: 100px;
 }
@@ -1801,10 +1801,6 @@ input::-webkit-inner-spin-button {
 
 .table-weekly-calendar .date-month {
     margin: 0 20px 0 10px;
-}
-
-.table-weekly-calendar .filter-block .btn-color {
-    font-weight: 500;
 }
 
 .table-weekly-calendar .table-striped .td-name {

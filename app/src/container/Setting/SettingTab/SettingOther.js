@@ -563,7 +563,7 @@ function SettingOther() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <Button type="button" className="btn-color"
+                                            <Button type="button" className="btn-main-text"
                                                     onClick={() => {
                                                         setView(true);
                                                         setCheckClick(false)
@@ -703,7 +703,7 @@ function SettingOther() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <Button type="button" className="btn-color"
+                                            <Button type="button" className="btn-main-text"
                                                     onClick={() => {
                                                         setView(true);
                                                         setCheckClick(false)
@@ -860,7 +860,7 @@ function SettingOther() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <Button type="button" className="btn-color"
+                                            <Button type="button" className="btn-main-text"
                                                     onClick={() => {
                                                         setView(true);
                                                         setCheckClick(false)
@@ -998,7 +998,7 @@ function SettingOther() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <Button type="button" className="btn-color"
+                                            <Button type="button" className="btn-main-text"
                                                     onClick={() => {
                                                         setView(true);
                                                         setCheckClick(false);
@@ -1157,7 +1157,7 @@ function SettingOther() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <Button type="button" className="btn-color"
+                                            <Button type="button" className="btn-main-text"
                                                     onClick={() => {
                                                         setView(true);
                                                         setCheckClick(false)
@@ -1326,7 +1326,7 @@ function SettingOther() {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <div className="flex-end">
-                                            <Button type="button" className="btn-color"
+                                            <Button type="button" className="btn-main-text"
                                                     onClick={() => {
                                                         setView(true);
                                                         setCheckClick(false)
